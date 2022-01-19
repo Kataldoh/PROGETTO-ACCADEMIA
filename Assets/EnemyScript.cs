@@ -60,12 +60,13 @@ public class EnemyScript : MonoBehaviour
             transform.rotation = qrot;
 
 
-            if (IsInRayCastDireciton(transform.forward, 1, 1 << 6, Color.red))
+            if (IsInRayCastDireciton(transform.forward, 1, layer2, Color.red))
             {
                 anim.SetBool("jump", true);
                 isJump = true;
                 velocity = edata.jumpForce;
             }
+
             if (IsInRayCastDireciton(transform.forward, 0.45f, layer, Color.green))
             {
                 if (!isJump)
