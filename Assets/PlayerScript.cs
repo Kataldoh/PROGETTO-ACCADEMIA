@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-    public PlayerData pdata;
+    public PlayerData pdata; // SCRIPTABLE OBJECT che determina forza del salto,velocità della rotazione,lunghezza del raycast frontale
 
-    public PlayerState _state;
+    public PlayerState _state; // Stati del player
 
-    // Start is called before the first frame update
     Vector3 move;
     [SerializeField] float force;
     CharacterController controller;
-    [SerializeField] bool isGrounded;
+    [SerializeField] bool isGrounded; //bool che determina se il player è a terra oppure no
     bool isJump;
     [SerializeField] Transform foot;
     [SerializeField] Transform rayhead;
@@ -36,12 +35,21 @@ public class PlayerScript : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
+    
+
     void FixedUpdate()
     {
+      
+
 
         if (GameController.instance._state == GameState.play)
         {
+
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                GameController.instance._state = GameState.pause;
+            }
+
             //movimento
             move = new Vector3(
                    Input.GetAxis("Horizontal") * Time.deltaTime * 64,
@@ -86,7 +94,7 @@ public class PlayerScript : MonoBehaviour
             var direction = (transform.position - cursor.position).normalized;
             //print(transform.position - cursor.position);
             var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            print(angle);
+            //print(angle);
 
             //rotazione del player
             Quaternion qrot = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, rot, 0), Time.deltaTime * pdata.speedRot);

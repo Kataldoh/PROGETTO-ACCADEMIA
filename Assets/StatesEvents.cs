@@ -13,16 +13,25 @@ public class StatesEvents : MonoBehaviour
     public void _PLAY()
     {
         GameController.instance.pannelli[0].SetActive(false);
+        GameController.instance.pannelli[1].SetActive(false);
+        Time.timeScale = 1f;
+        GameController.instance.puntatore.SetActive(true);
+
     }
 
     public void _DEAD()
     {
         GameController.instance.pannelli[0].SetActive(true);
+        GameController.instance.pannelli[1].SetActive(false);
+
 
     }
 
     public void _PAUSE()
     {
+        GameController.instance.pannelli[1].SetActive(true);
+        Time.timeScale = 0f;
+        GameController.instance.puntatore.SetActive(false);
 
     }
 }

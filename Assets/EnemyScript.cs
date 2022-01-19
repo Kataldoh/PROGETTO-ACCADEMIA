@@ -35,6 +35,8 @@ public class EnemyScript : MonoBehaviour
 
         if (GameController.instance._state == GameState.play)
         {
+            
+
             move = new Vector3(
              direction,
              0,

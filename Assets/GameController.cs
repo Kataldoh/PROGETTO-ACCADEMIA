@@ -4,6 +4,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public static GameController instance;
+    public GameObject puntatore;
 
     public GameState _state;
     public GameObject[] pannelli;
@@ -12,6 +13,7 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
+        puntatore = GameObject.FindGameObjectWithTag("Puntatore");
         instance = this;
     }
 
@@ -25,7 +27,42 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+       
         States();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(GameController.instance._state == GameState.pause)
+            {
+                GameController.instance._state = GameState.play;
+                Debug.Log("RESUMING");
+
+            }
+            else
+            {
+                GameController.instance._state = GameState.pause;
+
+            }
+
+        }
+
+
+
+      
+    }
+
+    public void Resume()
+    {
+        Debug.Log("RESUMING");
+
+        GameController.instance._state = GameState.play;
+
+    }
+
+    public void Quit()
+    {
+        Debug.Log("QUITTING");
+        Application.Quit();
     }
 
 
