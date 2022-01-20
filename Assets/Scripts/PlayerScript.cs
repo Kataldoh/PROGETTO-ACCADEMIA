@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
+    public int maxHealth = 100;
+    public int CurrentHealth;
+    public Barra BarraVita;
+
     public PlayerData pdata; // SCRIPTABLE OBJECT che determina forza del salto,velocità della rotazione,lunghezza del raycast frontale
 
     public PlayerState _state; // Stati del player
@@ -33,9 +38,17 @@ public class PlayerScript : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+        CurrentHealth = maxHealth;
     }
 
-    
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            TakeDamage(20);
+        }
+    }
+
 
     void FixedUpdate()
     {
@@ -44,6 +57,9 @@ public class PlayerScript : MonoBehaviour
 
         if (GameController.instance._state == GameState.play)
         {
+
+            //Questo if serve solo per testare se il metodo TakeDamage funziona (Aldo)
+          
 
             if (Input.GetKeyDown(KeyCode.Escape))
             {
@@ -117,5 +133,11 @@ public class PlayerScript : MonoBehaviour
     bool IsGrounded()
     {
         return Physics.CheckSphere(foot.position, rayLenght, layer);
+    }
+
+    void TakeDamage(int damage)
+    {
+        CurrentHealth -= damage;
+        BarraVita.SetHealth(CurrentHealth);
     }
 }
