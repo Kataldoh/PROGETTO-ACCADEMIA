@@ -23,6 +23,8 @@ public class StatesEvents : MonoBehaviour
     {
         GameController.instance.pannelli[0].SetActive(true);
         GameController.instance.pannelli[1].SetActive(false);
+        GameController.instance.puntatore.SetActive(false);
+        Time.timeScale = 0f;
 
 
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
     public static GameController instance;
@@ -13,6 +14,7 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
+       
         puntatore = GameObject.FindGameObjectWithTag("Puntatore");
         instance = this;
     }
@@ -29,6 +31,8 @@ public class GameController : MonoBehaviour
     {
        
         States();
+
+        
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -50,7 +54,10 @@ public class GameController : MonoBehaviour
 
       
     }
-
+    public void Restart()
+    {
+        SceneManager.LoadScene("game");
+    }
     public void Resume()
     {
         Debug.Log("RESUMING");

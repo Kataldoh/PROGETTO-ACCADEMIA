@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class PlayerScript : MonoBehaviour
 {
+
+
     public int maxHealth = 100;
     public int CurrentHealth;
     public Barra BarraVita;
@@ -43,6 +45,12 @@ public class PlayerScript : MonoBehaviour
 
     private void Update()
     {
+
+        if (CurrentHealth == 0)
+        {
+            GameController.instance._state = GameState.dead;
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TakeDamage(20);
