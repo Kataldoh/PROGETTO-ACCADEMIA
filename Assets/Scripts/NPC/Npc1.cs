@@ -4,13 +4,16 @@ using UnityEngine;
 
 public class Npc1 : MonoBehaviour
 {
+    NpcAllDialogues dialoghi = new NpcAllDialogues(); //dichiaro una variabile di tipo NpcDialogues
+    string[] dialogo; //in questo array è dove andrà il dialogo
+
     void Start()
     {
-        
+        dialoghi.TypeDialogue(1, dialogo); //carico il dialogo nell'array
     }
 
     void Update()
     {
-        this.GetComponent<NpcAllDialogues>().TypeDialogue(1); //getComponent<script> per accedere ai metodi di quest'ultimo script
+
     }
 }
