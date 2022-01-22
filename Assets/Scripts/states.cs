@@ -12,6 +12,9 @@ public enum GameState
 
 public enum PlayerState
 {
+    idle,
+    groundMoving,
+    damage,
     dead,
     jump,
     defence,
