@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour
 {
@@ -17,8 +18,16 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] float gravity;
     [SerializeField] float Wheight;
 
+
+    public Transform target;
+    public float distanza;
+    public float movespeed;
+    public float area;
+
+   
     Vector3 move;
     float velocity;
+    // raccolta di elementi 
     [SerializeField] LayerMask layer;
     [SerializeField] LayerMask layer2;
     float direction;
@@ -28,6 +37,7 @@ public class EnemyScript : MonoBehaviour
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         direction = 1;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
     }
     // Update is called once per frame
     void Update()
@@ -80,6 +90,8 @@ public class EnemyScript : MonoBehaviour
             controller.Move(move * edata.force * Time.deltaTime);
             controller.Move(transform.up * velocity * Time.deltaTime);
         }
+
+        AttackEnemy();
     }
 
     bool IsInRayCastDireciton(Vector3 direction, float lenght, LayerMask layer, Color color)
@@ -87,7 +99,7 @@ public class EnemyScript : MonoBehaviour
         Debug.DrawRay(rayhead.position, direction * lenght, color);
         return Physics.Raycast(rayhead.position, direction, out RaycastHit hit, lenght, layer);
     }
-
+    
     bool IsGrounded()
     {
         return Physics.CheckSphere(foot.position, rayLenght, layer);
@@ -98,6 +110,19 @@ public class EnemyScript : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player") {
             GameController.instance._state = GameState.dead;
+        }
+    }
+
+
+    public void AttackEnemy()
+    {
+        distanza = Vector3.Distance(target.position, transform.position);
+
+        if (distanza <= area)
+        {
+            transform.LookAt(target);
+            GetComponent<Rigidbody>().AddForce(transform.forward * movespeed);
+            transform.position += Vector3.forward * Time.deltaTime;
         }
     }
 }

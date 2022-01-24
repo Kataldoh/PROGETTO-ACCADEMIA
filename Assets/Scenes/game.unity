@@ -8917,5 +8917,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nemico
       objectReference: {fileID: 0}
+    - target: {fileID: 8130875157784792719, guid: ea32f5dc7f7589a4fba52eb4ebca3549, type: 3}
+      propertyPath: area
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8130875157784792719, guid: ea32f5dc7f7589a4fba52eb4ebca3549, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1542454303}
+    - target: {fileID: 8130875157784792719, guid: ea32f5dc7f7589a4fba52eb4ebca3549, type: 3}
+      propertyPath: distanza
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8130875157784792719, guid: ea32f5dc7f7589a4fba52eb4ebca3549, type: 3}
+      propertyPath: movespeed
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea32f5dc7f7589a4fba52eb4ebca3549, type: 3}
