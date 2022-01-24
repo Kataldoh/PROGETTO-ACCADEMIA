@@ -9,7 +9,7 @@ public class PointerScript : MonoBehaviour
     public float slope;
     void Start()
     {
-      Cursor.visible = false;   
+        Cursor.visible = true;   
     }
 
     // Update is called once per frame

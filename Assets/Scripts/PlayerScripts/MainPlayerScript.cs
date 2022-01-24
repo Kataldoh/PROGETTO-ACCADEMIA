@@ -34,7 +34,9 @@ public class MainPlayerScript : MonoBehaviour
     [SerializeField] public float velocity;
     float rot=90;
     int dir;
+    LineRenderer laserRender;
     [SerializeField] float speedRot;
+    
     private void Awake()
     {
         pInstance = this;
@@ -45,6 +47,7 @@ public class MainPlayerScript : MonoBehaviour
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         CurrentHealth = maxHealth;
+        laserRender = GetComponent<LineRenderer>();
     }
 
     private void Update()
@@ -76,7 +79,29 @@ public class MainPlayerScript : MonoBehaviour
             StateIndipendentActions();
             AnimationHandler();
             States();
+
+            Vector3 direction = new Vector3(-(transform.position.x - cursor.position.x), -(transform.position.y - cursor.position.y), 0).normalized;
+            //(transform.position - cursor.position).normalized;
+            //print(transform.position - cursor.position);
             
+            laserRender.SetPosition(0, rayhead.position);
+            laserRender.SetPosition(1, new Vector3(direction.x, direction.y, rayhead.position.z));
+            if (Input.GetButton("Fire2"))
+            {
+                laserRender.enabled = true;
+                RaycastHit hit;
+                if (Physics.Raycast(rayhead.position, direction, out hit, 5))
+                {
+                    laserRender.SetPosition(1, hit.transform.position);
+                    print("Lmao");
+                }
+                
+            }
+            else
+            {
+                laserRender.enabled = false;
+            }
+
         }
     }
 
@@ -179,11 +204,11 @@ public class MainPlayerScript : MonoBehaviour
         }
     }
 
-    /*
-    public bool IsInRayCastDireciton(Vector3 direction, float lenght, LayerMask layer) {
+    
+    bool IsInRayCastDireciton(Vector3 direction, float lenght, LayerMask layer) {
         Debug.DrawRay(rayhead.position, direction * lenght, Color.red);
         return Physics.Raycast(rayhead.position, direction, out RaycastHit hit, lenght, layer);
     }
-    */
+    
 
 }
