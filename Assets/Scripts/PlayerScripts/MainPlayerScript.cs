@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class MainPlayerScript : MonoBehaviour
 {
-    public static MainPlayerScript pInstance;
+    public static MainPlayerScript pInstance;   //creo un'istanza del player
     public int maxHealth = 100;
     public int CurrentHealth;
     public Barra BarraVita;
@@ -16,30 +16,28 @@ public class MainPlayerScript : MonoBehaviour
     [SerializeField] PlayerStatesEvents _Estates;
 
     [SerializeField] public Vector3 move;
-    [SerializeField] float force;
     public CharacterController controller;
     [SerializeField] public bool isGrounded; //bool che determina se il player � a terra oppure no
     public bool isJump;
-    [SerializeField] Transform foot;
+    [SerializeField] Transform foot;    //posizione del "piede" del player, dove la sfera per trovare se si è a terra sarà situata
     [SerializeField] Transform rayhead;
     [SerializeField] public LayerMask layer;
     [SerializeField] public Animator anim;
 
     //*****************************************
-    [SerializeField] float JumpForce;
+    [SerializeField] float JumpForce;   //forza del salto
     [SerializeField] public float gravity;
-    [SerializeField] public float weight;
-    [SerializeField] float rayLenght;
-    [SerializeField] public Transform cursor;
+    [SerializeField] public float weight;   //peso a terra del player
+    [SerializeField] float radLenght;       //valore del raggio della sfera ai piedi del player per controllare se è a terra
+    [SerializeField] public Transform cursor;   //posizione del cursore
     [SerializeField] public float velocity;
     float rot=90;
-    int dir;
+    public int dir;     //direzione nella quale il character si gira
     LineRenderer laserRender;
-    [SerializeField] float speedRot;
     
     private void Awake()
     {
-        pInstance = this;
+        pInstance = this;   //Assegno l'istanza di questo player
     }
     void Start()
     {
@@ -52,9 +50,10 @@ public class MainPlayerScript : MonoBehaviour
 
     private void Update()
     {
-
+        //Se la vita del player è a 0
         if (CurrentHealth == 0)
         {
+            _state= PlayerState.dead;
             GameController.instance._state = GameState.dead;
         }
 
@@ -63,44 +62,58 @@ public class MainPlayerScript : MonoBehaviour
         {
             TakeDamage(20);
         }
-
-        //Shooting
-        Vector3 direction = new Vector3(-(transform.position.x - cursor.position.x), -(transform.position.y - cursor.position.y), 0).normalized;
-        //(transform.position - cursor.position).normalized;
-        //print(transform.position - cursor.position);
-        
-        laserRender.SetPosition(0, rayhead.position);
-        laserRender.SetPosition(1, new Vector3(direction.x, direction.y, rayhead.position.z));
-        if (Input.GetButton("Fire2"))
-        {
-            laserRender.enabled = true;
-            RaycastHit hit;
-            if (Physics.Raycast(rayhead.position, direction, out hit, 5))
-            {
-                laserRender.SetPosition(1, hit.transform.position);
-                print("Lmao");
-            }
-        }
-        else
-        {
-            laserRender.enabled = false;
-        }
     }
 
 
     void FixedUpdate()
     {
-      
+        //Il player non eseguirà alcuna azione se lo stato non è in play
         if (GameController.instance._state == GameState.play)
         {
-            if (Input.GetKey(KeyCode.Escape))
-            {
-                GameController.instance._state = GameState.pause;
-            }
 
-            StateIndipendentActions();
-            AnimationHandler();
-            States();
+            StateIndipendentActions();  //metodo per la gestione di azioni indipendenti dagli stati
+            AnimationHandler(); //metodo per la gestione delle animazioni
+            States();       //metodo per la gestione degli stati
+
+
+            //-----------------
+            //TEST PER LO SPARO
+            //-----------------
+
+            //calcolo della direzione dello sparo
+            Vector3 direction = new Vector3(-(transform.position.x - cursor.position.x), -(transform.position.y - cursor.position.y), 0).normalized;
+
+            //(transform.position - cursor.position).normalized;
+            //print(transform.position - cursor.position);
+            //var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            
+            Debug.DrawRay(rayhead.position, direction * 5, Color.red);  //disegno il raggio nella scena
+
+            //(Non funzionale/Chiedere a Fabrizio) Come disegno un raggio da punto A a punto B avendo calcolato la direzione del raggio 
+            laserRender.SetPosition(0, rayhead.position);
+            laserRender.SetPosition(1, direction);
+
+            //Se tengo premuto tasto destro del mouse, si inizierà a "sparare"
+            if (Input.GetButton("Fire2"))
+            {
+                laserRender.enabled = true;
+                RaycastHit hit;
+                if (Physics.Raycast(rayhead.position, direction, out hit, 5))   //Se il raycast colpisce qualcosa 
+                {
+                    laserRender.SetPosition(1, hit.point);         //Disegna la fine del raggio sul punto colpito
+                    print("Hit");
+                    if(hit.collider.tag == "Nemico")            //Se colpisce un nemico
+                    {
+                        print("Hit Enemy");
+                        Destroy(hit.collider.gameObject);
+                    }
+                        
+                }
+            }
+            else
+            {
+                laserRender.enabled = false;
+            }
 
         }
     }
@@ -108,10 +121,10 @@ public class MainPlayerScript : MonoBehaviour
     
     public bool IsGrounded()
     {
-        return Physics.CheckSphere(foot.position, rayLenght, layer);
+        return Physics.CheckSphere(foot.position, radLenght, layer);
     }
 
-    void TakeDamage(int damage)
+    public void TakeDamage(int damage)
     {
         CurrentHealth -= damage;
         BarraVita.SetHealth(CurrentHealth);
@@ -140,13 +153,21 @@ public class MainPlayerScript : MonoBehaviour
 
     public void StateIndipendentActions()
     {
+
+        //Registra il movimento sugli assi
         move = new Vector3(
                    Input.GetAxis("Horizontal") * Time.deltaTime * 64,
                    Input.GetAxis("Vertical"),
                    0
                 );
+        
+        //Mette a zero move.y per prevenire salti più alti ed errori d'animazione
+        if(move.y >0)
+        {
+            move.y=0;
+        }
             
-
+        //Assegno il metodo per controllare se si è a terra ad una variabile
         isGrounded = IsGrounded();
         
         //determino la direzione nel quale il player guarda
@@ -154,7 +175,6 @@ public class MainPlayerScript : MonoBehaviour
         {
             rot = 90;
             dir = 1;
-
         }
         else if (move.x < 0)
         {
@@ -167,14 +187,20 @@ public class MainPlayerScript : MonoBehaviour
         transform.rotation = qrot;
 
         //Applico Gravità
-        if (IsGrounded() && velocity <= 0)
+        if (IsGrounded() && velocity <= 0)  //Se a terra con velocity <= 0
         {
-            velocity = weight;
-            isJump = false;
+            velocity = weight;        //Resetta la velocity dandogli un peso (tipicamente 0)
+            isJump = false;         //mette a falso la variabile di salto per permettere di saltare sucessivamente
         }
         else
         {
             velocity += gravity * Time.deltaTime;
+        }
+
+        //Limita la velocità di caduta per prevenire gravità eccessiva
+        if(velocity <=-5)
+        {
+            velocity = -5;
         }
     }
 
@@ -184,6 +210,7 @@ public class MainPlayerScript : MonoBehaviour
         {
             case PlayerState.idle:
                 anim.SetBool("jump", false);
+                anim.SetBool("damaged", false);
                 anim.SetFloat("posx", 0, 0.05f, Time.deltaTime);
                 anim.SetFloat("posy", 0, 0.15f, Time.deltaTime);
                 break;
@@ -196,10 +223,10 @@ public class MainPlayerScript : MonoBehaviour
                 anim.SetBool("jump", true);
                 break;
             case PlayerState.damage:
-                _Estates.P_Damage();
+                anim.SetBool("damaged", true);
                 break;
             case PlayerState.dead:
-                _Estates.P_Death();
+                anim.SetBool("death", true);
                 break;
         }
     }
@@ -208,6 +235,14 @@ public class MainPlayerScript : MonoBehaviour
     bool IsInRayCastDireciton(Vector3 direction, float lenght, LayerMask layer) {
         Debug.DrawRay(rayhead.position, direction * lenght, Color.red);
         return Physics.Raycast(rayhead.position, direction, out RaycastHit hit, lenght, layer);
+    }
+
+    private void OnControllerColliderHit(ControllerColliderHit hit) 
+    {
+        if(hit.gameObject.tag == "Nemico")
+        {
+            _state = PlayerState.damage;
+        }
     }
     
 

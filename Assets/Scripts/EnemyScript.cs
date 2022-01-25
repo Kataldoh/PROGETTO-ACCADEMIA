@@ -121,7 +121,7 @@ public class EnemyScript : MonoBehaviour
         if (distanza <= area)
         {
             transform.LookAt(target);
-            GetComponent<Rigidbody>().AddForce(transform.forward * movespeed);
+            //GetComponent<Rigidbody>().AddForce(transform.forward * movespeed);
             transform.position += Vector3.forward * Time.deltaTime;
         }
     }
