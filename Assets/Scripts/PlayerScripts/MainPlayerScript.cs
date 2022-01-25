@@ -6,9 +6,6 @@ using UnityEngine.UI;
 public class MainPlayerScript : MonoBehaviour
 {
     public static MainPlayerScript pInstance;   //creo un'istanza del player
-    public int maxHealth = 100;
-    public int CurrentHealth;
-    public Barra BarraVita;
 
     public PlayerData pdata; // SCRIPTABLE OBJECT che determina forza del salto,velocit� della rotazione,lunghezza del raycast frontale
 
@@ -33,6 +30,7 @@ public class MainPlayerScript : MonoBehaviour
     [SerializeField] public float velocity;
     float rot=90;
     public int dir;     //direzione nella quale il character si gira
+    float startingZ;
     LineRenderer laserRender;
     
     private void Awake()
@@ -44,24 +42,32 @@ public class MainPlayerScript : MonoBehaviour
         _Estates = new PlayerStatesEvents();
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
-        CurrentHealth = maxHealth;
         laserRender = GetComponent<LineRenderer>();
+        startingZ = transform.position.z;
     }
 
     private void Update()
     {
+        //Mantiene la posizione della Z costante a quella iniziale
+        if(transform.position.z != startingZ)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, startingZ);
+        }
+
         //Se la vita del player è a 0
-        if (CurrentHealth == 0)
+        if (GameController.instance.CurrentHealth == 0)
         {
             _state= PlayerState.dead;
             GameController.instance._state = GameState.dead;
         }
 
         //Questo if serve solo per testare se il metodo TakeDamage funziona (Aldo)
+        /*
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            TakeDamage(20);
+            GameController.instance.TakeDamage(20);
         }
+        */
     }
 
 
@@ -124,11 +130,6 @@ public class MainPlayerScript : MonoBehaviour
         return Physics.CheckSphere(foot.position, radLenght, layer);
     }
 
-    public void TakeDamage(int damage)
-    {
-        CurrentHealth -= damage;
-        BarraVita.SetHealth(CurrentHealth);
-    }
 
     public void States() {
         switch (_state)

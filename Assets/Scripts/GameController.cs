@@ -7,6 +7,9 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     public GameObject puntatore;
 
+    public int maxHealth = 100;
+    public int CurrentHealth;
+    public Barra BarraVita;
     public GameState _state;
     public GameObject[] pannelli;
 
@@ -24,6 +27,7 @@ public class GameController : MonoBehaviour
     {
         _state = GameState.play;
         _estates = new StatesEvents();
+        CurrentHealth = maxHealth;
     }
 
     // Update is called once per frame
@@ -95,6 +99,16 @@ public class GameController : MonoBehaviour
 
 
         }
+    }
+
+    //---------------
+    //Metodi Generici
+    //---------------
+
+    public void TakeDamage(int damage)
+    {
+        CurrentHealth -= damage;
+        BarraVita.SetHealth(CurrentHealth);
     }
 
 }

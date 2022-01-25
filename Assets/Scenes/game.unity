@@ -6413,6 +6413,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   puntatore: {fileID: 0}
+  maxHealth: 100
+  CurrentHealth: 0
+  BarraVita: {fileID: 1097632617}
   _state: 0
   pannelli:
   - {fileID: 1510810168}
@@ -9153,6 +9156,10 @@ PrefabInstance:
     - target: {fileID: 8130875157784792719, guid: ea32f5dc7f7589a4fba52eb4ebca3549, type: 3}
       propertyPath: distanza
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8130875157784792719, guid: ea32f5dc7f7589a4fba52eb4ebca3549, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8130875157784792719, guid: ea32f5dc7f7589a4fba52eb4ebca3549, type: 3}
       propertyPath: movespeed
