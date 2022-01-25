@@ -6,13 +6,14 @@ public class NpcAllDialogues : MonoBehaviour
 {
     public string[] lineeDialogo;
 
-    public void TypeDialogue(int npcID)
+    public string TypeDialogue(int npcID)
     {
         switch (npcID)
         {
             case 1:
-                lineeDialogo[0] = "sono un npc di tipo 1";
-                break;
+                return "sono un npc di tipo 1";
+            default:
+                return "No Dialogue";
         }
     }
 }

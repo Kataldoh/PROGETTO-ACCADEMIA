@@ -8,11 +8,11 @@ public class Npc1 : MonoBehaviour
     public GameObject pannelloDialogo;
     public TextMeshProUGUI dialogueBox;
 
-    NpcAllDialogues dialoghi = new NpcAllDialogues(); //dichiaro una variabile di tipo NpcDialogues così da poter invocare il medodo in quello script
+    NpcAllDialogues dialoghi = new NpcAllDialogues(); //dichiaro una variabile di tipo NpcDialogues cosï¿½ da poter invocare il medodo in quello script
 
     void Start()
     {
-        dialoghi.TypeDialogue(1); //definisco che tipo di npc questo è e lo mando allo script con tutte le linee di dialogo
+        //dialoghi.TypeDialogue(1); //definisco che tipo di npc questo ï¿½ e lo mando allo script con tutte le linee di dialogo
         pannelloDialogo.SetActive(false);
     }
 
@@ -21,7 +21,7 @@ public class Npc1 : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.E))
         {
             pannelloDialogo.SetActive(true);
-            dialogueBox.text = "test non funziona con arrays"; //modifico il testo a schermo con quello del dialogo appropriato   dialoghi.lineeDialogo[0]
+            dialogueBox.text = dialoghi.TypeDialogue(1); //modifico il testo a schermo con quello del dialogo appropriato   dialoghi.lineeDialogo[0]
         }
         
     }

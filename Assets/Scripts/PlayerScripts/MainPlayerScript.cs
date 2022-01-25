@@ -63,6 +63,28 @@ public class MainPlayerScript : MonoBehaviour
         {
             TakeDamage(20);
         }
+
+        //Shooting
+        Vector3 direction = new Vector3(-(transform.position.x - cursor.position.x), -(transform.position.y - cursor.position.y), 0).normalized;
+        //(transform.position - cursor.position).normalized;
+        //print(transform.position - cursor.position);
+        
+        laserRender.SetPosition(0, rayhead.position);
+        laserRender.SetPosition(1, new Vector3(direction.x, direction.y, rayhead.position.z));
+        if (Input.GetButton("Fire2"))
+        {
+            laserRender.enabled = true;
+            RaycastHit hit;
+            if (Physics.Raycast(rayhead.position, direction, out hit, 5))
+            {
+                laserRender.SetPosition(1, hit.transform.position);
+                print("Lmao");
+            }
+        }
+        else
+        {
+            laserRender.enabled = false;
+        }
     }
 
 
@@ -79,28 +101,6 @@ public class MainPlayerScript : MonoBehaviour
             StateIndipendentActions();
             AnimationHandler();
             States();
-
-            Vector3 direction = new Vector3(-(transform.position.x - cursor.position.x), -(transform.position.y - cursor.position.y), 0).normalized;
-            //(transform.position - cursor.position).normalized;
-            //print(transform.position - cursor.position);
-            
-            laserRender.SetPosition(0, rayhead.position);
-            laserRender.SetPosition(1, new Vector3(direction.x, direction.y, rayhead.position.z));
-            if (Input.GetButton("Fire2"))
-            {
-                laserRender.enabled = true;
-                RaycastHit hit;
-                if (Physics.Raycast(rayhead.position, direction, out hit, 5))
-                {
-                    laserRender.SetPosition(1, hit.transform.position);
-                    print("Lmao");
-                }
-                
-            }
-            else
-            {
-                laserRender.enabled = false;
-            }
 
         }
     }
