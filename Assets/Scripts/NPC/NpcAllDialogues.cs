@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class NpcAllDialogues : MonoBehaviour
 {
-    
-    public void TypeDialogue(int npcID, string[] lineeDialogo)
+    public string[] lineeDialogo;
+
+    public void TypeDialogue(int npcID)
     {
         switch (npcID)
         {
             case 1:
-                lineeDialogo[1] = "sono un npc di tipo 1";
+                lineeDialogo[0] = "sono un npc di tipo 1";
                 break;
         }
     }
