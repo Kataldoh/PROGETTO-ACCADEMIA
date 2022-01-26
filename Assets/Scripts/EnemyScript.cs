@@ -87,11 +87,14 @@ public class EnemyScript : MonoBehaviour
 
             move.y = Mathf.Clamp(move.y, -1, 0);
             anim.SetFloat("posx", move.x, 0.05f, Time.deltaTime);
-            controller.Move(move * edata.force * Time.deltaTime);
+           // controller.Move(move * edata.force * Time.deltaTime);
             controller.Move(transform.up * velocity * Time.deltaTime);
         }
 
+
         AttackEnemy();
+
+        
     }
 
     bool IsInRayCastDireciton(Vector3 direction, float lenght, LayerMask layer, Color color)
@@ -118,11 +121,23 @@ public class EnemyScript : MonoBehaviour
     {
         distanza = Vector3.Distance(target.position, transform.position);
 
+
+
+        print(direction);
+
         if (distanza <= area)
         {
             transform.LookAt(target);
             //GetComponent<Rigidbody>().AddForce(transform.forward * movespeed);
-            transform.position += Vector3.forward * Time.deltaTime;
+            controller.Move(move * edata.force * Time.deltaTime * _vectorDir() );
+            // transform.position += Vector3.forward * Time.deltaTime * -1;
         }
+    }
+
+    float _vectorDir() {
+        var vettoredir = target.position - transform.position;
+        var dist = vettoredir.magnitude;
+        Vector3 direction = (vettoredir / dist).normalized;
+        return direction.x;
     }
 }
