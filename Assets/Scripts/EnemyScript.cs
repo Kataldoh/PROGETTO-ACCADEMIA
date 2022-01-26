@@ -31,6 +31,7 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] LayerMask layer;
     [SerializeField] LayerMask layer2;
     float direction;
+    Quaternion qrot;
 
     private void Start()
     {
@@ -67,11 +68,6 @@ public class EnemyScript : MonoBehaviour
             }
 
 
-            //rotazione del nemico
-            Quaternion qrot = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 90 * direction, 0), Time.deltaTime * edata.speedRot);
-            transform.rotation = qrot;
-
-
             if (IsInRayCastDireciton(transform.forward, 1, layer2, Color.red))
             {
                 anim.SetBool("jump", true);
@@ -94,7 +90,11 @@ public class EnemyScript : MonoBehaviour
 
         AttackEnemy();
 
-        
+        //rotazione del nemico
+
+        transform.rotation = qrot;
+
+
     }
 
     bool IsInRayCastDireciton(Vector3 direction, float lenght, LayerMask layer, Color color)
@@ -121,23 +121,27 @@ public class EnemyScript : MonoBehaviour
     {
         distanza = Vector3.Distance(target.position, transform.position);
 
-
-
-        print(direction);
-
-        if (distanza <= area)
+        if (distanza <= 3.5f)
         {
-            transform.LookAt(target);
-            //GetComponent<Rigidbody>().AddForce(transform.forward * movespeed);
-            controller.Move(move * edata.force * Time.deltaTime * _vectorDir() );
-            // transform.position += Vector3.forward * Time.deltaTime * -1;
+            print(_vectorDir());
+            qrot = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 90 * _vectorDir(), 0), Time.deltaTime * edata.speedRot);
+            controller.Move(move * edata.force * Time.deltaTime * _vectorDir());
+        }
+        else {
+            qrot = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 90 * direction, 0), Time.deltaTime * edata.speedRot);
+            controller.Move(move * edata.force * Time.deltaTime);
         }
     }
 
     float _vectorDir() {
-        var vettoredir = target.position - transform.position;
+        var vettoredir = (target.position - transform.position).normalized;
         var dist = vettoredir.magnitude;
-        Vector3 direction = (vettoredir / dist).normalized;
-        return direction.x;
+        Vector3 direction = (vettoredir / dist);
+        if (Mathf.Round(direction.x) == -1) {
+            return -1;
+        }
+        else {
+            return 1;
+        }
     }
 }
