@@ -107,7 +107,7 @@ public class MainPlayerScript : MonoBehaviour
 
             //(Non funzionale/Chiedere a Fabrizio) Come disegno un raggio da punto A a punto B avendo calcolato la direzione del raggio 
             laserRender.SetPosition(0, rayhead.position);
-            laserRender.SetPosition(1, direction);
+            laserRender.SetPosition(1, direction * rayhead.position.z);
 
             //Se tengo premuto tasto destro del mouse, si inizierà a "sparare"
             if (Input.GetButton("Fire2"))
@@ -257,7 +257,7 @@ public class MainPlayerScript : MonoBehaviour
     }
     
     Vector3 _vectorDir() {
-        var vettoredir = cursor.position - transform.position;
+        var vettoredir = new Vector3(Input.mousePosition.x - Screen.width/2, Input.mousePosition.y - Screen.height/2, Input.mousePosition.z);
         var dist = vettoredir.magnitude;
         Vector3 direction = (vettoredir / dist).normalized;
         direction.z = 0;

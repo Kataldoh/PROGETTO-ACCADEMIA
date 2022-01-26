@@ -17,7 +17,7 @@ public class PointerScript : MonoBehaviour
     {
 
         Vector3 mousePos = Input.mousePosition;
-        mousePos.z = 1;
+        //mousePos.z = 1;
         pointerPosition = Camera.main.ScreenToWorldPoint(mousePos* slope);
         transform.position = pointerPosition;
     }
