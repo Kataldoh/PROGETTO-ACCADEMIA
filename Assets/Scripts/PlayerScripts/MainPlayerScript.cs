@@ -13,6 +13,7 @@ public class MainPlayerScript : MonoBehaviour
     [SerializeField] PlayerStatesEvents _Estates;
 
     [SerializeField] public Vector3 move;
+    public float speed;
     public CharacterController controller;
     [SerializeField] public bool isGrounded; //bool che determina se il player � a terra oppure no
     public bool isJump;
@@ -87,7 +88,7 @@ public class MainPlayerScript : MonoBehaviour
             //-----------------
 
             //calcolo della direzione dello sparo
-            Vector3 direction = new Vector3(-(transform.position.x - cursor.position.x), -(transform.position.y - cursor.position.y), 0).normalized;
+            Vector3 direction = _vectorDir();
 
             //(transform.position - cursor.position).normalized;
             //print(transform.position - cursor.position);
@@ -157,7 +158,7 @@ public class MainPlayerScript : MonoBehaviour
 
         //Registra il movimento sugli assi
         move = new Vector3(
-                   Input.GetAxis("Horizontal") * Time.deltaTime * 64,
+                   Input.GetAxis("Horizontal") * Time.deltaTime * speed,
                    Input.GetAxis("Vertical"),
                    0
                 );
@@ -246,5 +247,12 @@ public class MainPlayerScript : MonoBehaviour
         }
     }
     
+    Vector3 _vectorDir() {
+        var vettoredir = cursor.position - transform.position;
+        var dist = vettoredir.magnitude;
+        Vector3 direction = (vettoredir / dist).normalized;
+        direction.z = 0;
+        return direction;
+    }
 
 }

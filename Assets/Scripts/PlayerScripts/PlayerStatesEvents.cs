@@ -10,7 +10,7 @@ public class PlayerStatesEvents : MonoBehaviour
     public void P_Idle()
     {
         //Controlla se si può saltare in questo stato
-        pInst.isJump = Input.GetButton("Fire1");
+        pInst.isJump = Input.GetButton("Jump");
 
         //Se vengono rilevati input e si è a terra con velocità minore-uguale a 0, si va al movimento base
         if(pInst.move != Vector3.zero && pInst.IsGrounded() && pInst.velocity <= 0)
@@ -24,7 +24,7 @@ public class PlayerStatesEvents : MonoBehaviour
     }
     public void P_Move()
     {
-        pInst.isJump = Input.GetButton("Fire1");
+        pInst.isJump = Input.GetButton("Jump");
 
         pInst.velocity = pInst.weight;                                                  //Applica il peso
         pInst.move.y = Mathf.Clamp(pInst.move.y, -1, 0);                                //Limita move.y a -1
@@ -44,7 +44,7 @@ public class PlayerStatesEvents : MonoBehaviour
     }
     public void P_Jump()
     {
-        pInst.isJump = Input.GetButton("Fire1");
+        pInst.isJump = Input.GetButton("Jump");
 
         //Se viene rilevato un salto e si è a terra, applica la forza di salto alla velocity
         if(pInst.isJump && pInst.IsGrounded())
