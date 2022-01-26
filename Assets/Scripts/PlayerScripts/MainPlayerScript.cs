@@ -30,6 +30,7 @@ public class MainPlayerScript : MonoBehaviour
     [SerializeField] public Transform cursor;   //posizione del cursore
     [SerializeField] public float velocity;
     float rot=90;
+    float dirX;
     public int dir;     //direzione nella quale il character si gira
     float startingZ;
     LineRenderer laserRender;
@@ -99,15 +100,16 @@ public class MainPlayerScript : MonoBehaviour
             //calcolo della direzione dello sparo
             Vector3 direction = _vectorDir();
 
+            dirX = Mathf.Round(direction.x);
             //(transform.position - cursor.position).normalized;
             //print(transform.position - cursor.position);
             //var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             
             Debug.DrawRay(rayhead.position, direction * 5, Color.red);  //disegno il raggio nella scena
 
-            //(Non funzionale/Chiedere a Fabrizio) Come disegno un raggio da punto A a punto B avendo calcolato la direzione del raggio 
             laserRender.SetPosition(0, rayhead.position);
-            laserRender.SetPosition(1, direction * rayhead.position.z);
+            laserRender.SetPosition(1, new Vector3(Input.mousePosition.x - Screen.width/2 -rayhead.position.x,
+                             Input.mousePosition.y - Screen.height/2 -rayhead.position.y, Input.mousePosition.z));
 
             //Se tengo premuto tasto destro del mouse, si inizierà a "sparare"
             if (Input.GetButton("Fire2"))
@@ -123,7 +125,6 @@ public class MainPlayerScript : MonoBehaviour
                         print("Hit Enemy");
                         Destroy(hit.collider.gameObject);
                     }
-                        
                 }
             }
             else
@@ -182,12 +183,12 @@ public class MainPlayerScript : MonoBehaviour
         isGrounded = IsGrounded();
         
         //determino la direzione nel quale il player guarda
-        if (move.x > 0)
+        if (move.x > 0 || dirX > 0)
         {
             rot = 90;
             dir = 1;
         }
-        else if (move.x < 0)
+        else if (move.x < 0 || dirX < 0)
         {
             rot = 270;
             dir = -1;
@@ -256,10 +257,12 @@ public class MainPlayerScript : MonoBehaviour
         }
     }
     
-    Vector3 _vectorDir() {
-        var vettoredir = new Vector3(Input.mousePosition.x - Screen.width/2, Input.mousePosition.y - Screen.height/2, Input.mousePosition.z);
+    Vector3 _vectorDir() 
+    {
+        var vettoredir = new Vector3(Input.mousePosition.x - Screen.width/2 -rayhead.position.x,
+                             Input.mousePosition.y - Screen.height/2 -rayhead.position.y, Input.mousePosition.z).normalized;
         var dist = vettoredir.magnitude;
-        Vector3 direction = (vettoredir / dist).normalized;
+        Vector3 direction = (vettoredir / dist);
         direction.z = 0;
         return direction;
     }
