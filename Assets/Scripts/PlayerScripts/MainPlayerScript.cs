@@ -13,7 +13,7 @@ public class MainPlayerScript : MonoBehaviour
     [SerializeField] PlayerStatesEvents _Estates;
 
     [SerializeField] public Vector3 move;
-    public float speed;
+    public float speed = 60;
     public CharacterController controller;
     [SerializeField] public bool isGrounded; //bool che determina se il player � a terra oppure no
     public bool isJump;
@@ -62,6 +62,15 @@ public class MainPlayerScript : MonoBehaviour
             GameController.instance._state = GameState.dead;
         }
 
+
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            speed = 110;
+        }
+        else
+        {
+            speed = 60;
+        }
         //Questo if serve solo per testare se il metodo TakeDamage funziona (Aldo)
         /*
         if (Input.GetKeyDown(KeyCode.Space))
