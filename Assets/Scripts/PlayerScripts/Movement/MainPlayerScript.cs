@@ -30,10 +30,11 @@ public class MainPlayerScript : MonoBehaviour
     [SerializeField] public Transform cursor;   //posizione del cursore
     [SerializeField] public float velocity;
     float rot=90;
-    float dirX;
+    public float dirX;
     public int dir;     //direzione nella quale il character si gira
     float startingZ;
-    LineRenderer laserRender;
+    public LineRenderer laserRender;
+    WeaponMethods aM;
     
     private void Awake()
     {
@@ -41,6 +42,7 @@ public class MainPlayerScript : MonoBehaviour
     }
     void Start()
     {
+        aM = new WeaponMethods();
         _Estates = new PlayerStatesEvents();
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
@@ -72,13 +74,6 @@ public class MainPlayerScript : MonoBehaviour
         {
             speed = 60;
         }
-        //Questo if serve solo per testare se il metodo TakeDamage funziona (Aldo)
-        /*
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            GameController.instance.TakeDamage(20);
-        }
-        */
     }
 
 
@@ -93,44 +88,10 @@ public class MainPlayerScript : MonoBehaviour
             States();       //metodo per la gestione degli stati
 
 
-            //-----------------
-            //TEST PER LO SPARO
-            //-----------------
-
-            //calcolo della direzione dello sparo
-            Vector3 direction = _vectorDir();
-
-            dirX = Mathf.Round(direction.x);
-            //(transform.position - cursor.position).normalized;
-            //print(transform.position - cursor.position);
-            //var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
             
-            Debug.DrawRay(rayhead.position, direction * 5, Color.red);  //disegno il raggio nella scena
+            aM.screenAiming(rayhead);
 
-            laserRender.SetPosition(0, rayhead.position);
-            laserRender.SetPosition(1, new Vector3(Input.mousePosition.x - Screen.width/2 -rayhead.position.x,
-                             Input.mousePosition.y - Screen.height/2 -rayhead.position.y, Input.mousePosition.z));
-
-            //Se tengo premuto tasto destro del mouse, si inizierà a "sparare"
-            if (Input.GetButton("Fire2"))
-            {
-                laserRender.enabled = true;
-                RaycastHit hit;
-                if (Physics.Raycast(rayhead.position, direction, out hit, 5))   //Se il raycast colpisce qualcosa 
-                {
-                    laserRender.SetPosition(1, hit.point);         //Disegna la fine del raggio sul punto colpito
-                    print("Hit");
-                    if(hit.collider.tag == "Nemico")            //Se colpisce un nemico
-                    {
-                        print("Hit Enemy");
-                        Destroy(hit.collider.gameObject);
-                    }
-                }
-            }
-            else
-            {
-                laserRender.enabled = false;
-            }
+            
 
         }
     }
@@ -255,16 +216,6 @@ public class MainPlayerScript : MonoBehaviour
         {
             _state = PlayerState.damage;
         }
-    }
-    
-    Vector3 _vectorDir() 
-    {
-        var vettoredir = new Vector3(Input.mousePosition.x - Screen.width/2 -rayhead.position.x,
-                             Input.mousePosition.y - Screen.height/2 -rayhead.position.y, Input.mousePosition.z).normalized;
-        var dist = vettoredir.magnitude;
-        Vector3 direction = (vettoredir / dist);
-        direction.z = 0;
-        return direction;
     }
 
 }
