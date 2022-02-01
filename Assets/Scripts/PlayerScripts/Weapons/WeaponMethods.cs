@@ -11,12 +11,21 @@ public class WeaponMethods : MonoBehaviour
         
     public void GeneralWeaponHandler(WeaponStats wS, Transform aimStart)
     {
-        
+        Vector3 direction = _vectorDir(aimStart);
+
+        if(Input.GetButton("Fire1"))
+        {
+            RaycastHit hit;
+            
+            if (Physics.Raycast(aimStart.position, direction, out hit, 5))   //Se il raycast colpisce qualcosa 
+                {
+                    if(hit.collider.tag == "Nemico")            //Se colpisce un nemico
+                    {
+                        
+                    }
+                }
+        }
     }
-
-
-
-
 
     public void ScreenAiming(Transform aimStart)
     {
