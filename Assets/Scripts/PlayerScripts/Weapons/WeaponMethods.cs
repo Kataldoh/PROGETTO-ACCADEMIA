@@ -23,7 +23,6 @@ public class WeaponMethods : MonoBehaviour
         //calcolo della direzione dello sparo
             Vector3 direction = _vectorDir(aimStart);
 
-            pInst.dirX = Mathf.Round(direction.x);
             //(transform.position - cursor.position).normalized;
             //print(transform.position - cursor.position);
             //var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
@@ -37,6 +36,7 @@ public class WeaponMethods : MonoBehaviour
             //Se tengo premuto tasto destro del mouse, si inizierà a "sparare"
             if (Input.GetButton("Fire2"))
             {
+                pInst.dirX = Mathf.Round(direction.x);
                 pInst.laserRender.enabled = true;
                 RaycastHit hit;
                 if (Physics.Raycast(aimStart.position, direction, out hit, 5))   //Se il raycast colpisce qualcosa 
