@@ -9,13 +9,16 @@ public class WeaponMethods : MonoBehaviour
     // Start is called before the first frame update
 
         
-    
+    public void GeneralWeaponHandler(WeaponStats wS, Transform aimStart)
+    {
+        
+    }
 
 
 
 
 
-    public void screenAiming(Transform aimStart)
+    public void ScreenAiming(Transform aimStart)
     {
         //calcolo della direzione dello sparo
             Vector3 direction = _vectorDir(aimStart);

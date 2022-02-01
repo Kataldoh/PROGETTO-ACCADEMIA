@@ -6,6 +6,7 @@ using UnityEngine;
 public class WeaponStats : ScriptableObject
 {
     public bool isRaycast;
+    public float damage;
     public float shootingInterval_inSeconds;
     public GameObject ProjectileOrTrailModel_Prefab;
     public float weaponRange;

@@ -89,7 +89,7 @@ public class MainPlayerScript : MonoBehaviour
 
 
             
-            aM.screenAiming(rayhead);
+            aM.ScreenAiming(rayhead);
 
             
 
