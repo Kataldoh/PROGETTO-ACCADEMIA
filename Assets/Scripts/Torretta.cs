@@ -10,7 +10,7 @@ public class Torretta : MonoBehaviour
     void Update()
     {
         transform.LookAt(target);
-        transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
+       
 
     }
 
