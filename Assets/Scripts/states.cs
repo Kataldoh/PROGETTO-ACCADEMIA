@@ -14,6 +14,7 @@ public enum PlayerState
 {
     idle,
     groundMoving,
+    dash,
     damage,
     dead,
     jump,

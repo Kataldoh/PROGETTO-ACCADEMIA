@@ -7,10 +7,16 @@ public class PlayerStatesEvents : MonoBehaviour
     MainPlayerScript pInst = MainPlayerScript.pInstance;
     float hangTime; //(da implementare) un hangtime per dare al giocatore una finestra per saltare dopo essere in aria
     bool dmgTook = false;   //bool usato per prevenire che il danno preso non venga ripetuto
+    float dashLifetime;
     public void P_Idle()
     {
         //Controlla se si può saltare in questo stato
         pInst.isJump = Input.GetButton("Jump");
+
+        if(pInst.isDash)
+        {
+            pInst._state = PlayerState.dash;
+        }
 
         //Se vengono rilevati input e si è a terra con velocità minore-uguale a 0, si va al movimento base
         if(pInst.move != Vector3.zero && pInst.IsGrounded() && pInst.velocity <= 0)
@@ -21,6 +27,8 @@ public class PlayerStatesEvents : MonoBehaviour
         {
             pInst._state = PlayerState.jump;
         }
+
+        
     }
     public void P_Move()
     {
@@ -31,6 +39,10 @@ public class PlayerStatesEvents : MonoBehaviour
         pInst.controller.Move(pInst.move * pInst.pdata.force * Time.deltaTime);         //Applica forza dagli input ricevuti
         pInst.controller.Move(pInst.transform.up * pInst.velocity * Time.deltaTime);    //Applica la velocity sull'asse y (Che sia gravità o salto)
         
+        if(pInst.isDash)
+        {
+            pInst._state = PlayerState.dash;
+        }
         //Se non vengono rilevati input e si è a terra con velocità minore-uguale a 0, si va ad idle
         if(pInst.move == Vector3.zero && pInst.IsGrounded() && pInst.velocity <= 0)
         {
@@ -45,6 +57,11 @@ public class PlayerStatesEvents : MonoBehaviour
     public void P_Jump()
     {
         pInst.isJump = Input.GetButton("Jump");
+
+        if(pInst.isDash)
+        {
+            pInst._state = PlayerState.dash;
+        }
 
         //Se viene rilevato un salto e si è a terra, applica la forza di salto alla velocity
         if(pInst.isJump && pInst.IsGrounded())
@@ -70,7 +87,43 @@ public class PlayerStatesEvents : MonoBehaviour
         
         pInst.controller.Move(pInst.transform.up * pInst.velocity * Time.deltaTime);    //Applica la velocity sull'asse y (Che sia gravità o salto)
         pInst.controller.Move(pInst.move * pInst.pdata.force * Time.deltaTime);         //Applica forza dagli input ricevuti
+
         
+        
+    }
+
+    public void P_Dash()
+    {
+        Vector3 dir = new Vector3(pInst.dir, 0, 0);
+        dashLifetime += Time.deltaTime;
+
+        if(dashLifetime <=0.25f)
+        {
+            if(pInst.move.y == 0)
+            {
+                pInst.controller.Move(dir * pInst.pdata.force * 4 * Time.deltaTime);         //Applica forza dagli input ricevuti
+            }
+            else if(!pInst.IsGrounded())
+            {
+                pInst.controller.Move(-pInst.transform.up * pInst.pdata.force * 4 * Time.deltaTime);
+            }
+
+            pInst.velocity = 0;
+        }
+        else
+        {
+            if(!pInst.IsGrounded())
+                pInst._state = PlayerState.jump;
+            else
+                pInst._state = PlayerState.idle;
+
+            dashLifetime = 0;
+            pInst.dashTimer = 0;
+            pInst.isDash = false;
+            
+        }
+           
+
     }
     public void P_Damage()
     {
@@ -94,6 +147,7 @@ public class PlayerStatesEvents : MonoBehaviour
             pInst._state = PlayerState.idle;
         }
     }   
+
     public void P_Death()
     {
         

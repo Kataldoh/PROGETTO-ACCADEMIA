@@ -635,6 +635,7 @@ MonoBehaviour:
   controller: {fileID: 0}
   isGrounded: 0
   isJump: 0
+  isDash: 0
   foot: {fileID: 9009861900537670282}
   rayhead: {fileID: 8229782521810080168}
   layer:
@@ -643,13 +644,15 @@ MonoBehaviour:
   anim: {fileID: 0}
   JumpForce: 4
   gravity: -9.81
-  weight: 0
+  weight: -1
   radLenght: 0.05
   cursor: {fileID: 0}
   velocity: 0
   dirX: 0
   dir: 0
   laserRender: {fileID: 0}
+  dashRechargeTime: 1
+  dashTimer: 0
 --- !u!1 &1261804499409134
 GameObject:
   m_ObjectHideFlags: 0
