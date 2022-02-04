@@ -27,41 +27,46 @@ public class WeaponMethods : MonoBehaviour
         }
     }
 
-    public void ScreenAiming(Transform aimStart)
+    public Vector3 ScreenAiming(Transform aimStart)
     {
         //calcolo della direzione dello sparo
-            Vector3 direction = _vectorDir(aimStart);
+        Vector3 direction = _vectorDir(aimStart);
+        Vector3 mousePos = new Vector3(Input.mousePosition.x - Screen.width/2 -aimStart.position.x,
+                            Input.mousePosition.y - Screen.height/2 -aimStart.position.y, Input.mousePosition.z);
 
-            //(transform.position - cursor.position).normalized;
-            //print(transform.position - cursor.position);
-            //var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            
-            Debug.DrawRay(aimStart.position, direction * 5, Color.red);  //disegno il raggio nella scena
+        //(transform.position - cursor.position).normalized;
+        //print(transform.position - cursor.position);
+        //var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        
+        Debug.DrawRay(aimStart.position, direction * 5, Color.red);  //disegno il raggio nella scena
 
-            pInst.laserRender.SetPosition(0, aimStart.position);
-            pInst.laserRender.SetPosition(1, new Vector3(Input.mousePosition.x - Screen.width/2 -aimStart.position.x,
-                             Input.mousePosition.y - Screen.height/2 -aimStart.position.y, Input.mousePosition.z));
+        pInst.laserRender.SetPosition(0, aimStart.position);
+        pInst.laserRender.SetPosition(1, mousePos);
 
-            //Se tengo premuto tasto destro del mouse, si inizierà a "sparare"
-            if (Input.GetButton("Fire2"))
+        //Se tengo premuto tasto destro del mouse, si inizierà a "sparare"
+        if (Input.GetButton("Fire2"))
+        {
+            pInst.dirX = Mathf.Round(direction.x);
+            pInst.laserRender.enabled = true;
+            RaycastHit hit;
+            if (Physics.Raycast(aimStart.position, direction, out hit, 5))   //Se il raycast colpisce qualcosa 
             {
-                pInst.dirX = Mathf.Round(direction.x);
-                pInst.laserRender.enabled = true;
-                RaycastHit hit;
-                if (Physics.Raycast(aimStart.position, direction, out hit, 5))   //Se il raycast colpisce qualcosa 
+                pInst.laserRender.SetPosition(1, hit.point);         //Disegna la fine del raggio sul punto colpito
+                //print("Hit");
+                if(hit.collider.tag == "Nemico")            //Se colpisce un nemico
                 {
-                    pInst.laserRender.SetPosition(1, hit.point);         //Disegna la fine del raggio sul punto colpito
-                    print("Hit");
-                    if(hit.collider.tag == "Nemico")            //Se colpisce un nemico
-                    {
-                        print("Hit Enemy");
-                    }
+                    print("Hit Enemy");
                 }
+                return hit.point;
             }
-            else
-            {
-                pInst.laserRender.enabled = false;
-            }
+            
+        }
+        else
+        {
+            pInst.laserRender.enabled = false;
+        }
+
+        return mousePos;
     }
 
     Vector3 _vectorDir(Transform aimStart) 

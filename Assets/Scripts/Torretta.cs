@@ -5,12 +5,13 @@ using UnityEngine;
 public class Torretta : MonoBehaviour
 {
     public Transform target;
-    public float speed;
+    public GameObject parteDaRuotare;
 
     void Update()
     {
-        transform.LookAt(target);
-       
+        
+        parteDaRuotare.transform.LookAt(target);
+        print(target.position);
 
     }
 

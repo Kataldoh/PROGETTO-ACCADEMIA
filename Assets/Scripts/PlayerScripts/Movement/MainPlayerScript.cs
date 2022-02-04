@@ -13,7 +13,7 @@ public class MainPlayerScript : MonoBehaviour
     [SerializeField] PlayerStatesEvents _Estates;
 
     [SerializeField] public Vector3 move;
-    public float speed = 60;
+    public float speed;
     public CharacterController controller;
     [SerializeField] public bool isGrounded; //bool che determina se il player � a terra oppure no
     public bool isJump;
@@ -38,6 +38,9 @@ public class MainPlayerScript : MonoBehaviour
     WeaponMethods aM;
     public float dashRechargeTime;
     public float dashTimer;
+
+    public GameObject trailObject;
+    TrailRenderer tR;
     
     private void Awake()
     {
@@ -51,6 +54,7 @@ public class MainPlayerScript : MonoBehaviour
         anim = GetComponent<Animator>();
         laserRender = GetComponent<LineRenderer>();
         startingZ = transform.position.z;
+        tR = trailObject.GetComponent<TrailRenderer>();
     }
 
     private void Update()
@@ -93,6 +97,7 @@ public class MainPlayerScript : MonoBehaviour
 
             
             aM.ScreenAiming(rayhead);
+
         }
     }
 
@@ -145,7 +150,8 @@ public class MainPlayerScript : MonoBehaviour
             
         //Assegno il metodo per controllare se si è a terra ad una variabile
         isGrounded = IsGrounded();
-        
+
+        print(dirX);
         //determino la direzione nel quale il player guarda
         if (move.x > 0 || dirX > 0)
         {
