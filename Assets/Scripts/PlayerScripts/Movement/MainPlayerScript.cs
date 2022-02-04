@@ -9,6 +9,8 @@ public class MainPlayerScript : MonoBehaviour
 
     public TrailRenderer[] trails;
 
+    public WeaponStats[] weapons_SO;
+
     public PlayerData pdata; // SCRIPTABLE OBJECT che determina forza del salto,velocit� della rotazione,lunghezza del raycast frontale
 
     public PlayerState _state; // Stati del player
@@ -40,6 +42,7 @@ public class MainPlayerScript : MonoBehaviour
     WeaponMethods aM;
     public float dashRechargeTime;
     public float dashTimer;
+    public Vector3 lastShotPosition;
     
     private void Awake()
     {
@@ -79,7 +82,7 @@ public class MainPlayerScript : MonoBehaviour
             isDash = true;
             
         aM.ScreenAiming(rayhead);
-        aM.GeneralWeaponHandler(rayhead, trails[0]);
+        aM.GeneralWeaponHandler(weapons_SO[0], rayhead, trails[0]);
     }
 
 

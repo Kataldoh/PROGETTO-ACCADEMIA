@@ -7,20 +7,23 @@ public class WeaponMethods : MonoBehaviour
 
     MainPlayerScript pInst = MainPlayerScript.pInstance;
     // Start is called before the first frame update
-
+    bool isShoot;
+    float shootingInterval;
         
-    public void GeneralWeaponHandler(Transform aimStart, TrailRenderer trailR)
+    public void GeneralWeaponHandler(WeaponStats wS, Transform aimStart, TrailRenderer trailR)
     {
         Vector3 direction = _vectorDir(aimStart);
         
-        if(Input.GetButtonDown("Fire1"))
+        if(Input.GetButton("Fire1") && !isShoot)
         {
+            isShoot = true;
+            shootingInterval = 0;
             trailR.gameObject.SetActive(true);
             RaycastHit hit;
             print("In here");
             if (Physics.Raycast(aimStart.position, direction, out hit, 5))   //Se il raycast colpisce qualcosa 
             {
-                trailR.transform.position = Vector3.Lerp(aimStart.position, hit.point, Time.deltaTime/2);
+                pInst.lastShotPosition = hit.point;
                 if(hit.collider.tag == "Nemico")            //Se colpisce un nemico
                 {
                     Destroy(hit.collider.gameObject);
@@ -28,8 +31,19 @@ public class WeaponMethods : MonoBehaviour
             }
             else
             {
-                trailR.transform.position = Vector3.Lerp(aimStart.position, new Vector3(Input.mousePosition.x - Screen.width/2 -aimStart.position.x,
-                            Input.mousePosition.y - Screen.height/2 -aimStart.position.y, Input.mousePosition.z), Time.deltaTime/2);
+                pInst.lastShotPosition = new Vector3(Input.mousePosition.x - Screen.width/2 -aimStart.position.x,
+                            Input.mousePosition.y - Screen.height/2 -aimStart.position.y, Input.mousePosition.z);
+            }
+        }
+        print(isShoot);
+        if(isShoot)
+        {
+            trailR.transform.position = Vector3.Lerp(aimStart.position, pInst.lastShotPosition, Time.deltaTime / trailR.time);
+            shootingInterval += Time.deltaTime;
+            if (shootingInterval >= wS.shootingInterval_inSeconds)
+            {
+                trailR.gameObject.SetActive(false);
+                isShoot= false;
             }
         }
     }
