@@ -8,7 +8,6 @@ public class WeaponStats : ScriptableObject
     public bool isRaycast;
     public float damage;
     public float shootingInterval_inSeconds;
-    public GameObject projectileOrTrailModel_Prefab;
     public float weaponRange;
     public Vector2 knockbackToPlayer;
     public Vector2 knockbackToEnemy;
