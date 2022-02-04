@@ -7,6 +7,8 @@ public class MainPlayerScript : MonoBehaviour
 {
     public static MainPlayerScript pInstance;   //creo un'istanza del player
 
+    public TrailRenderer[] trails;
+
     public PlayerData pdata; // SCRIPTABLE OBJECT che determina forza del salto,velocit� della rotazione,lunghezza del raycast frontale
 
     public PlayerState _state; // Stati del player
@@ -38,9 +40,6 @@ public class MainPlayerScript : MonoBehaviour
     WeaponMethods aM;
     public float dashRechargeTime;
     public float dashTimer;
-
-    public GameObject trailObject;
-    TrailRenderer tR;
     
     private void Awake()
     {
@@ -54,7 +53,6 @@ public class MainPlayerScript : MonoBehaviour
         anim = GetComponent<Animator>();
         laserRender = GetComponent<LineRenderer>();
         startingZ = transform.position.z;
-        tR = trailObject.GetComponent<TrailRenderer>();
     }
 
     private void Update()
@@ -80,7 +78,8 @@ public class MainPlayerScript : MonoBehaviour
         if(Input.GetButtonDown("Fire3") && dashTimer >= dashRechargeTime)
             isDash = true;
             
-
+        aM.ScreenAiming(rayhead);
+        aM.GeneralWeaponHandler(rayhead, trails[0]);
     }
 
 
@@ -96,7 +95,7 @@ public class MainPlayerScript : MonoBehaviour
 
 
             
-            aM.ScreenAiming(rayhead);
+            
 
         }
     }

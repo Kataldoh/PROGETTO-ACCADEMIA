@@ -11,7 +11,6 @@ public class Torretta : MonoBehaviour
     {
         
         parteDaRuotare.transform.LookAt(target);
-        print(target.position);
 
     }
 

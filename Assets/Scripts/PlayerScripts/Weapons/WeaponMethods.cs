@@ -9,21 +9,28 @@ public class WeaponMethods : MonoBehaviour
     // Start is called before the first frame update
 
         
-    public void GeneralWeaponHandler(WeaponStats wS, Transform aimStart)
+    public void GeneralWeaponHandler(Transform aimStart, TrailRenderer trailR)
     {
         Vector3 direction = _vectorDir(aimStart);
-
-        if(Input.GetButton("Fire1"))
+        
+        if(Input.GetButtonDown("Fire1"))
         {
+            trailR.gameObject.SetActive(true);
             RaycastHit hit;
-            
+            print("In here");
             if (Physics.Raycast(aimStart.position, direction, out hit, 5))   //Se il raycast colpisce qualcosa 
+            {
+                trailR.transform.position = Vector3.Lerp(aimStart.position, hit.point, Time.deltaTime/2);
+                if(hit.collider.tag == "Nemico")            //Se colpisce un nemico
                 {
-                    if(hit.collider.tag == "Nemico")            //Se colpisce un nemico
-                    {
-                        
-                    }
+                    Destroy(hit.collider.gameObject);
                 }
+            }
+            else
+            {
+                trailR.transform.position = Vector3.Lerp(aimStart.position, new Vector3(Input.mousePosition.x - Screen.width/2 -aimStart.position.x,
+                            Input.mousePosition.y - Screen.height/2 -aimStart.position.y, Input.mousePosition.z), Time.deltaTime/2);
+            }
         }
     }
 
@@ -59,10 +66,10 @@ public class WeaponMethods : MonoBehaviour
                 }
                 return hit.point;
             }
-            
         }
         else
         {
+            pInst.dirX = 0;
             pInst.laserRender.enabled = false;
         }
 
