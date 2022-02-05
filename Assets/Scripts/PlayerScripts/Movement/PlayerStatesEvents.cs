@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerStatesEvents : MonoBehaviour
 {
     MainPlayerScript pInst = MainPlayerScript.pInstance;
-    float hangTime; //(da implementare) un hangtime per dare al giocatore una finestra per saltare dopo essere in aria
     bool dmgTook = false;   //bool usato per prevenire che il danno preso non venga ripetuto
     float dashLifetime;
     public void P_Idle()
@@ -38,6 +37,18 @@ public class PlayerStatesEvents : MonoBehaviour
         pInst.move.y = Mathf.Clamp(pInst.move.y, -1, 0);                                //Limita move.y a -1
         pInst.controller.Move(pInst.move * pInst.pdata.force * Time.deltaTime);         //Applica forza dagli input ricevuti
         pInst.controller.Move(pInst.transform.up * pInst.velocity * Time.deltaTime);    //Applica la velocity sull'asse y (Che sia gravità o salto)
+
+        if(pInst.move.y < 0)
+        {
+            pInst.controller.height = pInst.height/3;
+            pInst.controller.center = new Vector3(0, 0.4f, 0);
+        } 
+        else
+        {
+            pInst.controller.height = pInst.height;
+            pInst.controller.center = new Vector3(0,0.9f, 0);
+        }
+            
         
         if(pInst.isDash)
         {

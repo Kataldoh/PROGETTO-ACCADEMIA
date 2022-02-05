@@ -592,10 +592,10 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.37
-  m_Radius: 0.15
+  m_Height: 1.5
+  m_Radius: 0.2
   m_SlopeLimit: 45
-  m_StepOffset: 0.25
+  m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.9, z: 0}
@@ -627,6 +627,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba7350b577b126488ebd02b7db11fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trails: []
+  weapons_SO: []
   pdata: {fileID: 11400000, guid: eb636e45b20f78141aaae774ced92eb6, type: 2}
   _state: 0
   _Estates: {fileID: 0}
@@ -653,6 +655,9 @@ MonoBehaviour:
   laserRender: {fileID: 0}
   dashRechargeTime: 1
   dashTimer: 0
+  lastShotPosition: {x: 0, y: 0, z: 0}
+  height: 0
+  hangTime: 0
 --- !u!1 &1261804499409134
 GameObject:
   m_ObjectHideFlags: 0

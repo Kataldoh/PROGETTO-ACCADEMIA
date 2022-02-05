@@ -43,6 +43,8 @@ public class MainPlayerScript : MonoBehaviour
     public float dashRechargeTime;
     public float dashTimer;
     public Vector3 lastShotPosition;
+    public float height;
+    public float hangTime;    //(da implementare) un hangtime per dare al giocatore una finestra per saltare dopo essere in aria
     
     private void Awake()
     {
@@ -50,12 +52,14 @@ public class MainPlayerScript : MonoBehaviour
     }
     void Start()
     {
+        
         aM = new WeaponMethods();
         _Estates = new PlayerStatesEvents();
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         laserRender = GetComponent<LineRenderer>();
         startingZ = transform.position.z;
+        height = controller.height;
     }
 
     private void Update()
@@ -82,7 +86,7 @@ public class MainPlayerScript : MonoBehaviour
             isDash = true;
             
         aM.ScreenAiming(rayhead);
-        aM.GeneralWeaponHandler(weapons_SO[0], rayhead, trails[0]);
+        //aM.GeneralWeaponHandler(weapons_SO[0], rayhead, trails[0]);
     }
 
 
@@ -95,18 +99,31 @@ public class MainPlayerScript : MonoBehaviour
             StateIndipendentActions();  //metodo per la gestione di azioni indipendenti dagli stati
             AnimationHandler(); //metodo per la gestione delle animazioni
             States();       //metodo per la gestione degli stati
-
-
-            
-            
-
         }
     }
 
     
     public bool IsGrounded()
     {
-        return Physics.CheckSphere(foot.position, radLenght, layer);
+        if(!Physics.CheckSphere(foot.position, radLenght, layer))
+        {
+            hangTime += Time.deltaTime;
+            if(hangTime >= 0.25f)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }  
+        }
+        else
+        {
+            hangTime=0;
+            return true;
+        }
+            
+            
     }
 
 
@@ -215,11 +232,6 @@ public class MainPlayerScript : MonoBehaviour
         }
     }
 
-    
-    bool IsInRayCastDireciton(Vector3 direction, float lenght, LayerMask layer) {
-        Debug.DrawRay(rayhead.position, direction * lenght, Color.red);
-        return Physics.Raycast(rayhead.position, direction, out RaycastHit hit, lenght, layer);
-    }
 
     private void OnControllerColliderHit(ControllerColliderHit hit) 
     {
