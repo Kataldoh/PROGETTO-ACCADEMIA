@@ -8,6 +8,7 @@ public class WeaponMethods : MonoBehaviour
     MainPlayerScript pInst = MainPlayerScript.pInstance;
     // Start is called before the first frame update
     bool isShoot;
+    public bool isAiming;
     int i;  //projectile Index
     float shootingInterval;
         
@@ -71,11 +72,12 @@ public class WeaponMethods : MonoBehaviour
         Debug.DrawRay(aimStart.position, direction * 5, Color.red);  //disegno il raggio nella scena
 
         pInst.laserRender.SetPosition(0, aimStart.position);
-        pInst.laserRender.SetPosition(1, mousePos);
+        pInst.laserRender.SetPosition(1, aimStart.position + direction * 5);
 
         //Se tengo premuto tasto destro del mouse, si inizierà a "sparare"
         if (Input.GetButton("Fire2"))
         {
+            isAiming=true;
             pInst.dirX = Mathf.Round(direction.x);
             pInst.laserRender.enabled = true;
             RaycastHit hit;
@@ -92,6 +94,7 @@ public class WeaponMethods : MonoBehaviour
         }
         else
         {
+            isAiming=false;
             pInst.dirX = 0;
             pInst.laserRender.enabled = false;
         }
