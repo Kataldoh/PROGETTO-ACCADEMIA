@@ -7,6 +7,14 @@ public class MainMenù : MonoBehaviour
 {
     public void StartPlay()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    public void QuitGame()
+    {
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
+        }
     }
 }
