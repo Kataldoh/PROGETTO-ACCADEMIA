@@ -8,17 +8,24 @@ public class WeaponMethods : MonoBehaviour
     MainPlayerScript pInst = MainPlayerScript.pInstance;
     // Start is called before the first frame update
     bool isShoot;
+    int i;  //projectile Index
     float shootingInterval;
         
-    public void GeneralWeaponHandler(WeaponStats wS, Transform aimStart, TrailRenderer trailR)
+    public void GeneralWeaponHandler(WeaponStats wS, Transform aimStart, GameObject[] trailGO)
     {
         Vector3 direction = _vectorDir(aimStart);
         
+        if(i >= trailGO.Length)
+        {
+            i=0;
+        }
+
         if(Input.GetButton("Fire1") && !isShoot)
         {
             isShoot = true;
             shootingInterval = 0;
-            trailR.gameObject.SetActive(true);
+            trailGO[i].SetActive(true);
+            trailGO[i].transform.position = aimStart.position;
             RaycastHit hit;
             print("In here");
             if (Physics.Raycast(aimStart.position, direction, out hit, 5))   //Se il raycast colpisce qualcosa 
@@ -31,19 +38,21 @@ public class WeaponMethods : MonoBehaviour
             }
             else
             {
-                pInst.lastShotPosition = new Vector3(Input.mousePosition.x - Screen.width/2 -aimStart.position.x,
-                            Input.mousePosition.y - Screen.height/2 -aimStart.position.y, Input.mousePosition.z);
+                pInst.lastShotPosition = aimStart.position + direction * 5;
             }
         }
+
         print(isShoot);
+
         if(isShoot)
         {
-            trailR.transform.position = Vector3.Lerp(aimStart.position, pInst.lastShotPosition, Time.deltaTime / trailR.time);
+            trailGO[i].transform.position = Vector3.Lerp(trailGO[i].transform.position, pInst.lastShotPosition, Time.deltaTime * 4);
             shootingInterval += Time.deltaTime;
             if (shootingInterval >= wS.shootingInterval_inSeconds)
             {
-                trailR.gameObject.SetActive(false);
+                trailGO[i].gameObject.SetActive(false);
                 isShoot= false;
+                i++;
             }
         }
     }
@@ -52,8 +61,8 @@ public class WeaponMethods : MonoBehaviour
     {
         //calcolo della direzione dello sparo
         Vector3 direction = _vectorDir(aimStart);
-        Vector3 mousePos = new Vector3(Input.mousePosition.x - Screen.width/2 -aimStart.position.x,
-                            Input.mousePosition.y - Screen.height/2 -aimStart.position.y, Input.mousePosition.z);
+        Vector3 mousePos = new Vector3(Input.mousePosition.x - Screen.width/2,
+                            Input.mousePosition.y - Screen.height/2, Input.mousePosition.z);
 
         //(transform.position - cursor.position).normalized;
         //print(transform.position - cursor.position);

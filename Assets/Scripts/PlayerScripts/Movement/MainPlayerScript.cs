@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class MainPlayerScript : MonoBehaviour
 {
     public static MainPlayerScript pInstance;   //creo un'istanza del player
-
-
     public WeaponStats[] weapons_SO;
+
+    [SerializeField] GameObject[] projectiles;
 
     public PlayerData pdata; // SCRIPTABLE OBJECT che determina forza del salto,velocit� della rotazione,lunghezza del raycast frontale
 
@@ -84,7 +84,7 @@ public class MainPlayerScript : MonoBehaviour
             isDash = true;
             
         aM.ScreenAiming(rayhead);
-        //aM.GeneralWeaponHandler(weapons_SO[0], rayhead, trails[0]);
+        aM.GeneralWeaponHandler(weapons_SO[0], rayhead, projectiles);
     }
 
 
