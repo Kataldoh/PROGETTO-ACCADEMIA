@@ -7,7 +7,6 @@ public class MainPlayerScript : MonoBehaviour
 {
     public static MainPlayerScript pInstance;   //creo un'istanza del player
 
-    public TrailRenderer[] trails;
 
     public WeaponStats[] weapons_SO;
 
@@ -15,8 +14,8 @@ public class MainPlayerScript : MonoBehaviour
 
     public PlayerState _state; // Stati del player
     [SerializeField] PlayerStatesEvents _Estates;
-
     [SerializeField] public Vector3 move;
+    [SerializeField] TrailRenderer dashTrail;
     public float speed;
     public CharacterController controller;
     [SerializeField] public bool isGrounded; //bool che determina se il player � a terra oppure no
@@ -32,7 +31,6 @@ public class MainPlayerScript : MonoBehaviour
     [SerializeField] public float gravity;
     [SerializeField] public float weight;   //peso a terra del player
     [SerializeField] float radLenght;       //valore del raggio della sfera ai piedi del player per controllare se è a terra
-    [SerializeField] public Transform cursor;   //posizione del cursore
     [SerializeField] public float velocity;
     float rot=90;
     public float dirX;
@@ -203,6 +201,12 @@ public class MainPlayerScript : MonoBehaviour
         {
             velocity = -5;
         }
+
+        //Attiva il trail se il dash è attivo
+        if(_state == PlayerState.dash)
+            dashTrail.enabled = true;
+        else
+            dashTrail.enabled = false;
     }
 
     void AnimationHandler()

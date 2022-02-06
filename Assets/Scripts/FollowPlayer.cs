@@ -10,7 +10,7 @@ public class FollowPlayer : MonoBehaviour
     [SerializeField] float smoothdamp;
 
     // Update is called once per frame
-    void LateUpdate()
+    void FixedUpdate()
     {
         Vector3 newoffset = target.position - offset;
         Vector3 newpos = Vector3.Lerp(transform.position, newoffset, Time.deltaTime * smoothdamp);
