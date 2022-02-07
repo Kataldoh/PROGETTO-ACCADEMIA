@@ -52,11 +52,12 @@ public class PlayerStatesEvents : MonoBehaviour
             pInst.controller.center = new Vector3(0,0.9f, 0);
         }
 
+        /*
         if (pInst.isSprinting)
         {
             pInst._state = PlayerState.sprinting;
         }
-
+        */
        
 
             
@@ -172,7 +173,7 @@ public class PlayerStatesEvents : MonoBehaviour
         }
     }   
 
-
+    /*
     public void P_Sprinting()
     {
         pInst.speed = 100;
@@ -205,6 +206,7 @@ public class PlayerStatesEvents : MonoBehaviour
         }
 
     }
+    */
 
     public void P_Death()
     {

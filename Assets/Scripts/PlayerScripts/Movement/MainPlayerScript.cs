@@ -82,14 +82,14 @@ public class MainPlayerScript : MonoBehaviour
         else
             dashTimer = dashRechargeTime;
 
-        if(Input.GetKeyDown(KeyCode.Mouse2) && dashTimer >= dashRechargeTime)
+        if(Input.GetButtonDown("Fire3") && dashTimer >= dashRechargeTime)
             isDash = true;
             
         aM.ScreenAiming(rayhead);
         aM.GeneralWeaponHandler(weapons_SO[0], rayhead, projectiles);
 
         
-
+        /*
         if (!isSprinting)
         {
             GameController.instance.RegenStamina();
@@ -100,8 +100,7 @@ public class MainPlayerScript : MonoBehaviour
         {
             GameController.instance.TakeStamina();
         }
-
-       
+        */
     }
 
 
@@ -163,9 +162,11 @@ public class MainPlayerScript : MonoBehaviour
             case PlayerState.dead:
                 _Estates.P_Death();
                 break;
+            /*
             case PlayerState.sprinting:
                 _Estates.P_Sprinting();
                 break;
+            */
         }
     }
 
@@ -253,11 +254,13 @@ public class MainPlayerScript : MonoBehaviour
             case PlayerState.dead:
                 anim.SetBool("death", true);
                 break;
+                /*
             case PlayerState.sprinting:
                 anim.SetBool("jump", false);
                 anim.SetFloat("posx", move.x, 0.05f, Time.deltaTime);
                 anim.SetFloat("posy", move.y, 0.15f, Time.deltaTime);
                 break;
+                */
         }
     }
 
