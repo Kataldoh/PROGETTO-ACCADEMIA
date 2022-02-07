@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Barra : MonoBehaviour
+public class BarraStamina : MonoBehaviour
 {
     public Slider slider;
 
@@ -13,16 +13,16 @@ public class Barra : MonoBehaviour
         slider = GetComponent<Slider>();
     }
 
-    public void SetMaxHealth(int Health)
+    public void SetMaxStamina(float Stamina)
     {
-        slider.maxValue = Health;
-        slider.value = Health;
+        slider.maxValue = Stamina;
+        slider.value = Stamina;
 
     }
 
-    public void SetHealth(int Health)
+    public void SetStamina(float Stamina)
     {
-        slider.value = Health;
+        slider.value = Stamina;
 
     }
 }

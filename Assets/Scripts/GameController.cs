@@ -4,12 +4,23 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
+    public MainPlayerScript MainPlayerScript;
     public static GameController instance;
     public GameObject puntatore;
 
     public int maxHealth = 100;
     public int CurrentHealth;
-    public Barra BarraVita;
+
+
+    public float maxStamina = 100;
+    public float CurrentStamina;
+    public float staminaRegen = 5f;
+    public float staminaDrain = 2f;
+
+
+    public BarraVita BarraVita;
+    public BarraStamina BarraStamina;
+
     public GameState _state;
     public GameObject[] pannelli;
 
@@ -28,6 +39,7 @@ public class GameController : MonoBehaviour
         _state = GameState.play;
         _estates = new StatesEvents();
         CurrentHealth = maxHealth;
+        CurrentStamina = maxStamina;
     }
 
     // Update is called once per frame
@@ -109,6 +121,34 @@ public class GameController : MonoBehaviour
     {
         CurrentHealth -= damage;
         BarraVita.SetHealth(CurrentHealth);
+    }
+
+    public void TakeStamina()
+    {
+        //Debug.Log("La stamina scende");
+        
+            CurrentStamina -= staminaDrain * Time.deltaTime;
+            BarraStamina.SetStamina(CurrentStamina);
+
+        if (CurrentStamina < 0)
+        {
+            CurrentStamina = 0;
+        }
+        
+    }
+
+    public void RegenStamina()
+    {
+
+        //Debug.Log("La stamina si rigenera");
+
+        if (CurrentStamina <= maxStamina - 0.01)
+        {
+            CurrentStamina += staminaRegen * Time.deltaTime;
+            BarraStamina.SetStamina(CurrentStamina);
+        }
+
+      
     }
 
 }

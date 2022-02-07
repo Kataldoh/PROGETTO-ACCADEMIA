@@ -11,7 +11,6 @@ public class PlayerStatesEvents : MonoBehaviour
     {
         //Controlla se si può saltare in questo stato
         pInst.isJump = Input.GetButton("Jump");
-        pInst.isSprinting = Input.GetKey(KeyCode.LeftShift);
 
 
         if (pInst.isDash)

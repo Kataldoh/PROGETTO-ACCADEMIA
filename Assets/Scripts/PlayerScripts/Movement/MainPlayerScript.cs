@@ -44,7 +44,8 @@ public class MainPlayerScript : MonoBehaviour
     public Vector3 lastShotPosition;
     public float height;
     public float hangTime;    //(da implementare) un hangtime per dare al giocatore una finestra per saltare dopo essere in aria
-    
+
+
     private void Awake()
     {
         pInstance = this;   //Assegno l'istanza di questo player
@@ -88,6 +89,21 @@ public class MainPlayerScript : MonoBehaviour
         
         if(aM.isAiming)
             aM.GeneralWeaponHandler(weapons_SO[0], rayhead, projectiles);
+
+        
+
+        if (!isSprinting)
+        {
+            GameController.instance.RegenStamina();
+          
+        }
+
+        if (isSprinting)
+        {
+            GameController.instance.TakeStamina();
+        }
+
+       
     }
 
 
@@ -241,8 +257,8 @@ public class MainPlayerScript : MonoBehaviour
                 break;
             case PlayerState.sprinting:
                 anim.SetBool("jump", false);
-                anim.SetFloat("posx", move.x, 0.25f, Time.deltaTime);
-                anim.SetFloat("posy", move.y, 0.35f, Time.deltaTime);
+                anim.SetFloat("posx", move.x, 0.05f, Time.deltaTime);
+                anim.SetFloat("posy", move.y, 0.15f, Time.deltaTime);
                 break;
         }
     }
