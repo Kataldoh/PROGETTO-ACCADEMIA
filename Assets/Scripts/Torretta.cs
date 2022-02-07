@@ -26,7 +26,16 @@ public class Torretta : MonoBehaviour
         if (Vector3.Distance(transform.position, target.position) < attackarea)
         {
             parteDaRuotare.transform.LookAt(target);
-            
+            if (timebeetweenshots <= 0)
+            {
+                Instantiate(meshproiettile, transform.position, Quaternion.identity);
+                timebeetweenshots = starttimebetweenshots;
+            }
+            else
+            {
+                timebeetweenshots -= Time.deltaTime;
+            }
+
         }
         else
         {
@@ -34,15 +43,7 @@ public class Torretta : MonoBehaviour
             transform.rotation = Quaternion.Euler(rotazioneIniziale);
         }
         
-        if(timebeetweenshots <= 0)
-        {
-            Instantiate(meshproiettile, transform.position, Quaternion.identity);
-            timebeetweenshots = starttimebetweenshots;
-        }
-        else
-        {
-            timebeetweenshots -= Time.deltaTime;
-        }
+        
     }
 
 }

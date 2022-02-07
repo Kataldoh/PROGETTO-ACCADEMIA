@@ -8,6 +8,9 @@ public class Proiettile : MonoBehaviour
 
     private Transform player;
     private Vector3 target;
+    
+
+    
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -18,11 +21,14 @@ public class Proiettile : MonoBehaviour
     
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
-        if (transform.position.x == target.x && transform.position.y == target.y && transform.position.z == target.z)
-        {
-            Distruggiproiettile();
-        }
+        
+        
+            transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+            if (transform.position.x == target.x && transform.position.y == target.y && transform.position.z == target.z)
+            {
+                Distruggiproiettile();
+            }
+        
     }
 
     private void OnTriggerEnter(Collider other)
