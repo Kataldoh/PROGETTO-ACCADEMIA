@@ -25,6 +25,7 @@ public class Torretta : MonoBehaviour
         }
         else
         {
+            //Quaternion(Quaternione) e' un sistema  usato per rappresentare le rotazioni  ,,,  Quaternion.Euler= restituisce una rotazione lungo gli assi x,y,z 
             transform.rotation = Quaternion.Euler(rotazioneIniziale);
         }
         
