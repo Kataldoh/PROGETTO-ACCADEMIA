@@ -21,6 +21,7 @@ public class MainPlayerScript : MonoBehaviour
     [SerializeField] public bool isGrounded; //bool che determina se il player � a terra oppure no
     public bool isJump;
     public bool isDash;
+    public bool isSprinting;
     [SerializeField] Transform foot;    //posizione del "piede" del player, dove la sfera per trovare se si è a terra sarà situata
     [SerializeField] Transform rayhead;
     [SerializeField] public LayerMask layer;
@@ -80,7 +81,7 @@ public class MainPlayerScript : MonoBehaviour
         else
             dashTimer = dashRechargeTime;
 
-        if(Input.GetButtonDown("Fire3") && dashTimer >= dashRechargeTime)
+        if(Input.GetKeyDown(KeyCode.Mouse2) && dashTimer >= dashRechargeTime)
             isDash = true;
             
         aM.ScreenAiming(rayhead);
@@ -147,6 +148,9 @@ public class MainPlayerScript : MonoBehaviour
                 break;
             case PlayerState.dead:
                 _Estates.P_Death();
+                break;
+            case PlayerState.sprinting:
+                _Estates.P_Sprinting();
                 break;
         }
     }
@@ -234,6 +238,11 @@ public class MainPlayerScript : MonoBehaviour
                 break;
             case PlayerState.dead:
                 anim.SetBool("death", true);
+                break;
+            case PlayerState.sprinting:
+                anim.SetBool("jump", false);
+                anim.SetFloat("posx", move.x, 0.25f, Time.deltaTime);
+                anim.SetFloat("posy", move.y, 0.35f, Time.deltaTime);
                 break;
         }
     }

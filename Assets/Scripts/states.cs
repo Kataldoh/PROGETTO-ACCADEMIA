@@ -19,6 +19,7 @@ public enum PlayerState
     dead,
     jump,
     defence,
+    sprinting,
 }
 
 

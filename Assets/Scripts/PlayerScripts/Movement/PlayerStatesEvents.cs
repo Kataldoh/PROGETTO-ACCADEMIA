@@ -11,8 +11,10 @@ public class PlayerStatesEvents : MonoBehaviour
     {
         //Controlla se si può saltare in questo stato
         pInst.isJump = Input.GetButton("Jump");
+        pInst.isSprinting = Input.GetKey(KeyCode.LeftShift);
 
-        if(pInst.isDash)
+
+        if (pInst.isDash)
         {
             pInst._state = PlayerState.dash;
         }
@@ -32,6 +34,8 @@ public class PlayerStatesEvents : MonoBehaviour
     public void P_Move()
     {
         pInst.isJump = Input.GetButton("Jump");
+        pInst.isSprinting = Input.GetKey(KeyCode.LeftShift);
+        pInst.speed = 60;
 
         pInst.velocity = pInst.weight;                                                  //Applica il peso
         pInst.move.y = Mathf.Clamp(pInst.move.y, -1, 0);                                //Limita move.y a -1
@@ -48,6 +52,14 @@ public class PlayerStatesEvents : MonoBehaviour
             pInst.controller.height = pInst.height;
             pInst.controller.center = new Vector3(0,0.9f, 0);
         }
+
+        if (pInst.isSprinting)
+        {
+            pInst._state = PlayerState.sprinting;
+        }
+
+       
+
             
         
         if(pInst.isDash)
@@ -65,6 +77,8 @@ public class PlayerStatesEvents : MonoBehaviour
         }
         
     }
+
+
     public void P_Jump()
     {
         pInst.isJump = Input.GetButton("Jump");
@@ -158,6 +172,40 @@ public class PlayerStatesEvents : MonoBehaviour
             pInst._state = PlayerState.idle;
         }
     }   
+
+
+    public void P_Sprinting()
+    {
+        pInst.speed = 100;
+
+        pInst.velocity = pInst.weight;                                                  //Applica il peso
+        pInst.move.y = Mathf.Clamp(pInst.move.y, -1, 0);                                //Limita move.y a -1
+        pInst.controller.Move(pInst.move * pInst.pdata.force * Time.deltaTime);         //Applica forza dagli input ricevuti
+        pInst.controller.Move(pInst.transform.up * pInst.velocity * Time.deltaTime);    //Applica la velocity sull'asse y (Che sia gravità o salto)
+
+        if (!Input.GetKey(KeyCode.LeftShift))
+        {
+            pInst.isSprinting = false;
+        }
+
+        if (pInst.isSprinting == false)
+        {
+            pInst._state = PlayerState.groundMoving;
+            
+        }
+
+        pInst.isJump = Input.GetButton("Jump");
+
+        if (pInst.move == Vector3.zero && pInst.IsGrounded() && pInst.velocity <= 0)
+        {
+            pInst._state = PlayerState.idle;
+        }
+        else if ((pInst.isJump && pInst.IsGrounded()) || !pInst.IsGrounded())   //Se viene rilevato un salto e si è a terra oppure si sta cadendo
+        {
+            pInst._state = PlayerState.jump;
+        }
+
+    }
 
     public void P_Death()
     {
