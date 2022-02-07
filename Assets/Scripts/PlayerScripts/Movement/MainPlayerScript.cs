@@ -86,9 +86,7 @@ public class MainPlayerScript : MonoBehaviour
             isDash = true;
             
         aM.ScreenAiming(rayhead);
-        
-        if(aM.isAiming)
-            aM.GeneralWeaponHandler(weapons_SO[0], rayhead, projectiles);
+        aM.GeneralWeaponHandler(weapons_SO[0], rayhead, projectiles);
 
         
 

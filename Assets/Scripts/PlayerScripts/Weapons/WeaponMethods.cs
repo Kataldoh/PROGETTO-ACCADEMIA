@@ -8,7 +8,8 @@ public class WeaponMethods : MonoBehaviour
     MainPlayerScript pInst = MainPlayerScript.pInstance;
     // Start is called before the first frame update
     bool isShoot;
-    public bool isAiming;
+    bool isAiming;
+    GameObject enemy;
     int i;  //projectile Index
     float shootingInterval;
         
@@ -21,7 +22,7 @@ public class WeaponMethods : MonoBehaviour
             i=0;
         }
 
-        if(Input.GetButton("Fire1") && !isShoot)
+        if(Input.GetButton("Fire1") && !isShoot && isAiming)
         {
             isShoot = true;
             shootingInterval = 0;
@@ -34,7 +35,7 @@ public class WeaponMethods : MonoBehaviour
                 pInst.lastShotPosition = hit.point;
                 if(hit.collider.tag == "Nemico")            //Se colpisce un nemico
                 {
-                    Destroy(hit.collider.gameObject);
+                    enemy=hit.collider.gameObject;
                 }
             }
             else
@@ -47,10 +48,12 @@ public class WeaponMethods : MonoBehaviour
 
         if(isShoot)
         {
-            trailGO[i].transform.position = Vector3.Lerp(trailGO[i].transform.position, pInst.lastShotPosition, Time.deltaTime * 4);
+            trailGO[i].transform.position = Vector3.Lerp(trailGO[i].transform.position, pInst.lastShotPosition, Time.deltaTime * 10);
             shootingInterval += Time.deltaTime;
             if (shootingInterval >= wS.shootingInterval_inSeconds)
             {
+                Destroy(enemy);
+                trailGO[i].transform.position = Vector3.zero;
                 trailGO[i].gameObject.SetActive(false);
                 isShoot= false;
                 i++;
