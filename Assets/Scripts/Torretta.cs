@@ -11,9 +11,14 @@ public class Torretta : MonoBehaviour
     public float attackarea;
     Vector3 rotazioneIniziale;
 
+    private float timebeetweenshots;
+    public float starttimebetweenshots;
+    public GameObject meshproiettile;
+
     private void Start()
     {
         rotazioneIniziale = new Vector3(0, 180, 0);
+        timebeetweenshots = starttimebetweenshots;
     }
     void Update()
     {
@@ -29,7 +34,15 @@ public class Torretta : MonoBehaviour
             transform.rotation = Quaternion.Euler(rotazioneIniziale);
         }
         
-
+        if(timebeetweenshots <= 0)
+        {
+            Instantiate(meshproiettile, transform.position, Quaternion.identity);
+            timebeetweenshots = starttimebetweenshots;
+        }
+        else
+        {
+            timebeetweenshots -= Time.deltaTime;
+        }
     }
 
 }
