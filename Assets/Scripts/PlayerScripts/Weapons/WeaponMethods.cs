@@ -7,21 +7,24 @@ public class WeaponMethods : MonoBehaviour
 
     MainPlayerScript pInst = MainPlayerScript.pInstance;
     // Start is called before the first frame update
-    bool isShoot;
-    bool isAiming;
-    GameObject enemy;
+    bool isShoot;   //controlla se è stato sparato un colpo
+    bool isAiming;  //controlla se si sta mirando
+    GameObject enemy;   //salva il nemico colpito
     int i;  //projectile Index
-    float shootingInterval;
+    float shootingInterval; //usato per controllare l'intervallo di sparo
         
     public void GeneralWeaponHandler(WeaponStats wS, Transform aimStart, GameObject[] trailGO)
     {
+        //da la posizione del mouse rispetto al punto iniziale dato
         Vector3 direction = _vectorDir(aimStart);
         
+        //controllo se l'indice non va oltre la lunghezza dell'array dei proiettili
         if(i >= trailGO.Length)
         {
             i=0;
         }
 
+        //metodo di sparo
         if(Input.GetButton("Fire1") && !isShoot && isAiming)
         {
             isShoot = true;
@@ -29,13 +32,12 @@ public class WeaponMethods : MonoBehaviour
             trailGO[i].SetActive(true);
             trailGO[i].transform.position = aimStart.position;
             RaycastHit hit;
-            print("In here");
             if (Physics.Raycast(aimStart.position, direction, out hit, 5))   //Se il raycast colpisce qualcosa 
             {
-                pInst.lastShotPosition = hit.point;
+                pInst.lastShotPosition = hit.point; 
                 if(hit.collider.tag == "Nemico")            //Se colpisce un nemico
                 {
-                    enemy=hit.collider.gameObject;
+                    enemy=hit.collider.gameObject;          //Assegno a enemy il nemico da uccidere a fine del delay
                 }
             }
             else
@@ -46,15 +48,16 @@ public class WeaponMethods : MonoBehaviour
 
         print(isShoot);
 
+        //se si spara
         if(isShoot)
         {
-            trailGO[i].transform.position = Vector3.Lerp(trailGO[i].transform.position, pInst.lastShotPosition, Time.deltaTime * 10);
+            trailGO[i].transform.position = Vector3.Lerp(trailGO[i].transform.position, pInst.lastShotPosition, Time.deltaTime * 10);   //imposta la posizione del trailGO puntato
             shootingInterval += Time.deltaTime;
-            if (shootingInterval >= wS.shootingInterval_inSeconds)
+            if (shootingInterval >= wS.shootingInterval_inSeconds)      //se l'intervallo di sparo è maggiore o uguale a quello dell'arma
             {
                 Destroy(enemy);
-                trailGO[i].transform.position = Vector3.zero;
-                trailGO[i].gameObject.SetActive(false);
+                trailGO[i].transform.position = Vector3.zero;           //Resetta la posizione del trailGO/Proiettile
+                trailGO[i].gameObject.SetActive(false);                 //lo porta a falso
                 isShoot= false;
                 i++;
             }
@@ -74,15 +77,16 @@ public class WeaponMethods : MonoBehaviour
         
         Debug.DrawRay(aimStart.position, direction * 5, Color.red);  //disegno il raggio nella scena
 
+        //posizionamento del laser di mira
         pInst.laserRender.SetPosition(0, aimStart.position);
         pInst.laserRender.SetPosition(1, aimStart.position + direction * 5);
 
         //Se tengo premuto tasto destro del mouse, si inizierà a "sparare"
         if (Input.GetButton("Fire2"))
         {
-            isAiming=true;
-            pInst.dirX = Mathf.Round(direction.x);
-            pInst.laserRender.enabled = true;
+            isAiming=true;                              //mette se si sta mirando a vero
+            pInst.dirX = Mathf.Round(direction.x);      //cambia la direzione del player
+            pInst.laserRender.enabled = true;           //rende il laser di mira visibile
             RaycastHit hit;
             if (Physics.Raycast(aimStart.position, direction, out hit, 5))   //Se il raycast colpisce qualcosa 
             {
@@ -97,9 +101,9 @@ public class WeaponMethods : MonoBehaviour
         }
         else
         {
-            isAiming=false;
-            pInst.dirX = 0;
-            pInst.laserRender.enabled = false;
+            isAiming=false;                     
+            pInst.dirX = 0;                     //resetta la rotazione del player
+            pInst.laserRender.enabled = false;  //disattiva il laser
         }
 
         return mousePos;

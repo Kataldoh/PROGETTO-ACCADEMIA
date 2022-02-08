@@ -6,50 +6,63 @@ using UnityEngine.UI;
 public class MainPlayerScript : MonoBehaviour
 {
     public static MainPlayerScript pInstance;   //creo un'istanza del player
-    public WeaponStats[] weapons_SO;
+    
 
-    [SerializeField] GameObject[] projectiles;
-
+    [Header("Player Data")]
+    //*****************************************
     public PlayerData pdata; // SCRIPTABLE OBJECT che determina forza del salto,velocit� della rotazione,lunghezza del raycast frontale
-
-    public PlayerState _state; // Stati del player
+    public WeaponStats[] weapons_SO;            //contiene gli stats delle armi (SCRIPTABLE OBJECTS)
+    [SerializeField] GameObject[] projectiles;  //contiene i proiettili da sparare
+    public PlayerState _state;              // Stati del player
     [SerializeField] PlayerStatesEvents _Estates;
     [SerializeField] public Vector3 move;
     [SerializeField] TrailRenderer dashTrail;
     public float speed;
     public CharacterController controller;
-    [SerializeField] public bool isGrounded; //bool che determina se il player � a terra oppure no
+    public float dirX;
+    public int dir;                     //direzione nella quale il character si gira
+    public float height;                //altezza del CharacterController
+    public float hangTime;              //(da implementare) un hangtime per dare al giocatore una finestra per saltare dopo essere in aria
+    public float dashRechargeTime;      //variabile utilizzata per il controllo del tempo di ricarica del dash
+    public float dashTimer;             //variabile contenente il timer del dash
+    
+    
+    [Header("Various Checks")]
+    [SerializeField] public bool isGrounded; //bool che determina se il player è a terra oppure no
     public bool isJump;
     public bool isDash;
     public bool isSprinting;
-    [SerializeField] Transform foot;    //posizione del "piede" del player, dove la sfera per trovare se si è a terra sarà situata
-    [SerializeField] Transform rayhead;
-    [SerializeField] public LayerMask layer;
-    [SerializeField] public Animator anim;
 
-    //*****************************************
-    [SerializeField] float JumpForce;   //forza del salto
+    [Header("Assigned Variables")]
+    [SerializeField] Transform foot;        //posizione del "piede" del player, dove la sfera per trovare se si è a terra sarà situata
+    [SerializeField] Transform rayhead;     
+    [SerializeField] public LayerMask layer;
+    public Animator anim;
+    public LineRenderer laserRender;    
+
+    [Header("Jump Physics variables")]
+    [SerializeField] float JumpForce;       //forza del salto
     [SerializeField] public float gravity;
     [SerializeField] public float weight;   //peso a terra del player
     [SerializeField] float radLenght;       //valore del raggio della sfera ai piedi del player per controllare se è a terra
     [SerializeField] public float velocity;
-    float rot=90;
-    public float dirX;
-    public int dir;     //direzione nella quale il character si gira
-    float startingZ;
-    public LineRenderer laserRender;
-    WeaponMethods aM;
-    public float dashRechargeTime;
-    public float dashTimer;
-    public Vector3 lastShotPosition;
-    public float height;
-    public float hangTime;    //(da implementare) un hangtime per dare al giocatore una finestra per saltare dopo essere in aria
 
+    //*****************************************
+
+    [Header("Jump Physics variables")]
+    float rot=90;
+    float startingZ;
+    WeaponMethods aM;                   //variabile usata per utilizzare i metodi delle armi
+    
+    public Vector3 lastShotPosition;    //contiene l'ultima posizione sparata dal player
+    
 
     private void Awake()
     {
         pInstance = this;   //Assegno l'istanza di questo player
     }
+
+
     void Start()
     {
         
@@ -61,6 +74,7 @@ public class MainPlayerScript : MonoBehaviour
         startingZ = transform.position.z;
         height = controller.height;
     }
+
 
     private void Update()
     {
@@ -77,14 +91,17 @@ public class MainPlayerScript : MonoBehaviour
             GameController.instance._state = GameState.dead;
         }
 
+        //impostazione del timer del dash
         if(dashTimer < dashRechargeTime)
             dashTimer += Time.deltaTime;
         else
             dashTimer = dashRechargeTime;
 
+        //esegue il dash se il timer è maggiore/uguale a quello presentato in dashRechrgeTime
         if(Input.GetButtonDown("Fire3") && dashTimer >= dashRechargeTime)
             isDash = true;
-            
+        
+        GameController.instance.BarraStamina.SetStamina(dashTimer * 100);
         aM.ScreenAiming(rayhead);
         aM.GeneralWeaponHandler(weapons_SO[0], rayhead, projectiles);
 
@@ -116,30 +133,9 @@ public class MainPlayerScript : MonoBehaviour
         }
     }
 
-    
-    public bool IsGrounded()
-    {
-        if(!Physics.CheckSphere(foot.position, radLenght, layer))
-        {
-            hangTime += Time.deltaTime;
-            if(hangTime >= 0.25f)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }  
-        }
-        else
-        {
-            hangTime=0;
-            return true;
-        }
-            
-            
-    }
-
+    //***************************//
+    //          METODI
+    //***************************//
 
     public void States() {
         switch (_state)
@@ -230,6 +226,7 @@ public class MainPlayerScript : MonoBehaviour
             dashTrail.enabled = false;
     }
 
+    //metodo di controllo delle animazioni
     void AnimationHandler()
     {
         switch (_state)
@@ -261,6 +258,28 @@ public class MainPlayerScript : MonoBehaviour
                 anim.SetFloat("posy", move.y, 0.15f, Time.deltaTime);
                 break;
                 */
+        }
+    }
+
+    //metodo di controllo del terreno
+    public bool IsGrounded()
+    {
+        if(!Physics.CheckSphere(foot.position, radLenght, layer))
+        {
+            hangTime += Time.deltaTime;
+            if(hangTime >= 0.25f)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }  
+        }
+        else
+        {
+            hangTime=0;
+            return true;
         }
     }
 

@@ -628,37 +628,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bba7350b577b126488ebd02b7db11fe0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons_SO: []
   pdata: {fileID: 11400000, guid: eb636e45b20f78141aaae774ced92eb6, type: 2}
+  weapons_SO: []
+  projectiles: []
   _state: 0
   _Estates: {fileID: 0}
   move: {x: 0, y: 0, z: 0}
   dashTrail: {fileID: 659762813765109083}
   speed: 60
   controller: {fileID: 0}
+  dirX: 0
+  dir: 0
+  height: 0
+  hangTime: 0
+  dashRechargeTime: 1
+  dashTimer: 0
   isGrounded: 0
   isJump: 0
   isDash: 0
+  isSprinting: 0
   foot: {fileID: 9009861900537670282}
   rayhead: {fileID: 8229782521810080168}
   layer:
     serializedVersion: 2
     m_Bits: 8
   anim: {fileID: 0}
+  laserRender: {fileID: 0}
   JumpForce: 4
   gravity: -9.81
   weight: -1
   radLenght: 0.05
-  cursor: {fileID: 0}
   velocity: 0
-  dirX: 0
-  dir: 0
-  laserRender: {fileID: 0}
-  dashRechargeTime: 1
-  dashTimer: 0
   lastShotPosition: {x: 0, y: 0, z: 0}
-  height: 0
-  hangTime: 0
 --- !u!1 &1261804499409134
 GameObject:
   m_ObjectHideFlags: 0

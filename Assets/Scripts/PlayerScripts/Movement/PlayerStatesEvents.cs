@@ -30,23 +30,24 @@ public class PlayerStatesEvents : MonoBehaviour
 
         
     }
+
     public void P_Move()
     {
         pInst.isJump = Input.GetButton("Jump");
-        pInst.isSprinting = Input.GetKey(KeyCode.LeftShift);
-        pInst.speed = 60;
+        //pInst.isSprinting = Input.GetKey(KeyCode.LeftShift);
+        //pInst.speed = 60;
 
         pInst.velocity = pInst.weight;                                                  //Applica il peso
         pInst.move.y = Mathf.Clamp(pInst.move.y, -1, 0);                                //Limita move.y a -1
         pInst.controller.Move(pInst.move * pInst.pdata.force * Time.deltaTime);         //Applica forza dagli input ricevuti
         pInst.controller.Move(pInst.transform.up * pInst.velocity * Time.deltaTime);    //Applica la velocity sull'asse y (Che sia gravità o salto)
 
-        if(pInst.move.y < 0)
+        if(pInst.move.y < 0)        //controlla l'altezza del player quando si alza e abbassa
         {
             pInst.controller.height = pInst.height/3;
             pInst.controller.center = new Vector3(0, 0.4f, 0);
         } 
-        else
+        else                        //resetta l'altezza del player
         {
             pInst.controller.height = pInst.height;
             pInst.controller.center = new Vector3(0,0.9f, 0);
@@ -59,8 +60,6 @@ public class PlayerStatesEvents : MonoBehaviour
         }
         */
        
-
-            
         
         if(pInst.isDash)
         {
@@ -113,8 +112,6 @@ public class PlayerStatesEvents : MonoBehaviour
         pInst.controller.Move(pInst.transform.up * pInst.velocity * Time.deltaTime);    //Applica la velocity sull'asse y (Che sia gravità o salto)
         pInst.controller.Move(pInst.move * pInst.pdata.force * Time.deltaTime);         //Applica forza dagli input ricevuti
 
-        
-        
     }
 
     public void P_Dash()
@@ -132,7 +129,8 @@ public class PlayerStatesEvents : MonoBehaviour
             {
                 pInst.controller.Move(-pInst.transform.up * pInst.pdata.force * 4 * Time.deltaTime);
             }
-
+            
+            GameController.instance.BarraStamina.SetStamina(0);
             pInst.velocity = 0;
         }
         else
