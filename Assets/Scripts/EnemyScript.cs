@@ -32,6 +32,7 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] LayerMask layer2;
     float direction;
     Quaternion qrot;
+    float startingZ;
 
     private void Start()
     {
@@ -39,10 +40,16 @@ public class EnemyScript : MonoBehaviour
         anim = GetComponent<Animator>();
         direction = 1;
         target = GameObject.FindGameObjectWithTag("Player").transform;
+        startingZ = transform.position.z;
     }
     // Update is called once per frame
     void Update()
     {
+        
+        if(transform.position.z != startingZ)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, startingZ);
+        }
 
         if (GameController.instance._state == GameState.play)
         {
@@ -88,7 +95,7 @@ public class EnemyScript : MonoBehaviour
         }
 
 
-        //AttackEnemy();
+        AttackEnemy();
 
         //rotazione del nemico
 
