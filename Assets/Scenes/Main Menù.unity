@@ -208,10 +208,10 @@ RectTransform:
   m_Father: {fileID: 1341872562}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 376.329, y: 126}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &89716792
 MonoBehaviour:
@@ -406,10 +406,10 @@ RectTransform:
   m_Father: {fileID: 1720354214}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 380.384, y: 156}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &184523263
 MonoBehaviour:
@@ -616,6 +616,7 @@ GameObject:
   - component: {fileID: 295661019}
   - component: {fileID: 295661018}
   - component: {fileID: 295661017}
+  - component: {fileID: 295661020}
   m_Layer: 5
   m_Name: PulsanteESC_OPTION
   m_TagString: Untagged
@@ -749,6 +750,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 295661015}
   m_CullTransparentMesh: 1
+--- !u!114 &295661020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295661015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 471baf9ba9626bb468c9c95ea1a01978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
 --- !u!1 &329669894
 GameObject:
   m_ObjectHideFlags: 0
@@ -1303,10 +1317,10 @@ RectTransform:
   m_Father: {fileID: 1051010927}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 691.592, y: 136}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1041080604
 MonoBehaviour:
@@ -1419,6 +1433,7 @@ GameObject:
   - component: {fileID: 1051010930}
   - component: {fileID: 1051010929}
   - component: {fileID: 1051010928}
+  - component: {fileID: 1051010931}
   m_Layer: 5
   m_Name: PulsanteCREDITS
   m_TagString: Untagged
@@ -1528,6 +1543,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1051010926}
   m_CullTransparentMesh: 1
+--- !u!114 &1051010931
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1051010926}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 471baf9ba9626bb468c9c95ea1a01978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
 --- !u!1 &1161529232
 GameObject:
   m_ObjectHideFlags: 0
@@ -2034,6 +2062,7 @@ GameObject:
   - component: {fileID: 1341872565}
   - component: {fileID: 1341872564}
   - component: {fileID: 1341872563}
+  - component: {fileID: 1341872566}
   m_Layer: 5
   m_Name: PulsantePLAY
   m_TagString: Untagged
@@ -2155,6 +2184,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1341872561}
   m_CullTransparentMesh: 1
+--- !u!114 &1341872566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341872561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 471baf9ba9626bb468c9c95ea1a01978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
 --- !u!1 &1389899148
 GameObject:
   m_ObjectHideFlags: 0
@@ -2339,6 +2381,7 @@ GameObject:
   - component: {fileID: 1549327305}
   - component: {fileID: 1549327304}
   - component: {fileID: 1549327303}
+  - component: {fileID: 1549327306}
   m_Layer: 5
   m_Name: Pulsante_BackControls
   m_TagString: Untagged
@@ -2472,6 +2515,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1549327301}
   m_CullTransparentMesh: 1
+--- !u!114 &1549327306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1549327301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 471baf9ba9626bb468c9c95ea1a01978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
 --- !u!1 &1562298504
 GameObject:
   m_ObjectHideFlags: 0
@@ -2665,7 +2721,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 79eb35cd912f74c4dbbcdcb6ec5513e3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 63ca96cf7a3350b46965180b50a92ff9, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2831,6 +2887,7 @@ GameObject:
   - component: {fileID: 1613784251}
   - component: {fileID: 1613784250}
   - component: {fileID: 1613784249}
+  - component: {fileID: 1613784252}
   m_Layer: 5
   m_Name: PulsanteOPTION
   m_TagString: Untagged
@@ -2856,7 +2913,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -262.755}
-  m_SizeDelta: {x: 605.583, y: 135.984}
+  m_SizeDelta: {x: 629.912, y: 135.984}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1613784249
 MonoBehaviour:
@@ -2964,6 +3021,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1613784247}
   m_CullTransparentMesh: 1
+--- !u!114 &1613784252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1613784247}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 471baf9ba9626bb468c9c95ea1a01978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
 --- !u!1 &1628333951
 GameObject:
   m_ObjectHideFlags: 0
@@ -3185,6 +3255,7 @@ GameObject:
   - component: {fileID: 1720354217}
   - component: {fileID: 1720354216}
   - component: {fileID: 1720354215}
+  - component: {fileID: 1720354218}
   m_Layer: 5
   m_Name: PulsanteQUIT
   m_TagString: Untagged
@@ -3306,6 +3377,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1720354213}
   m_CullTransparentMesh: 1
+--- !u!114 &1720354218
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720354213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 471baf9ba9626bb468c9c95ea1a01978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
 --- !u!1 &1764537650
 GameObject:
   m_ObjectHideFlags: 0
@@ -3960,10 +4044,10 @@ RectTransform:
   m_Father: {fileID: 1613784248}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 674.604, y: 136}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2061715435
 MonoBehaviour:
@@ -4142,6 +4226,7 @@ GameObject:
   - component: {fileID: 2094461732}
   - component: {fileID: 2094461731}
   - component: {fileID: 2094461730}
+  - component: {fileID: 2094461733}
   m_Layer: 5
   m_Name: Pulsante_Control
   m_TagString: Untagged
@@ -4275,6 +4360,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2094461728}
   m_CullTransparentMesh: 1
+--- !u!114 &2094461733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094461728}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 471baf9ba9626bb468c9c95ea1a01978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text: {fileID: 0}
 --- !u!1 &2096700035
 GameObject:
   m_ObjectHideFlags: 0
