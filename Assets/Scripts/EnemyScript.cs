@@ -88,7 +88,7 @@ public class EnemyScript : MonoBehaviour
         }
 
 
-        AttackEnemy();
+        //AttackEnemy();
 
         //rotazione del nemico
 
