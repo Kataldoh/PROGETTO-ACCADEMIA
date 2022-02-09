@@ -9,6 +9,7 @@ public class Torretta : MonoBehaviour
     public GameObject parteDaRuotare;// distanza dall'area di attacco della torretta
     public float attackarea;
     Vector3 rotazioneIniziale;
+    public float smooth;
 
     private float timebeetweenshots;
     public float starttimebetweenshots;// e' il tempo tra un proiettile e l'altro
@@ -24,13 +25,15 @@ public class Torretta : MonoBehaviour
         // se la distanza tra il player e la torretta supera la distanza di attacco allora la torretta comincia a ruotare e sparare  individuando la posizione del player
         if (Vector3.Distance(transform.position, target.position) < attackarea)
         {
-            parteDaRuotare.transform.LookAt(target);
+            //parteDaRuotare.transform.LookAt(target);
+
+            smoothRotation();
 
             // se il tempo tra uno sparo e l'aktro e' minore o uguale a zero allora la torreta genera un proiettile
             if (timebeetweenshots <= 0)
             {
                 //istanzio quello che devo generare( ovvero il proiettile), la sua posizione e rotazione nello spazio(in questo caso non ruota)
-                Instantiate(meshproiettile, transform.position, Quaternion.identity);
+                Instantiate(meshproiettile, transform.position, transform.rotation);
                 timebeetweenshots = starttimebetweenshots;// se non faccio cosi, la torretta sparerebbe un proiettile ad ogni frame
             }
             else 
@@ -47,6 +50,14 @@ public class Torretta : MonoBehaviour
         }
         
         
+    }
+
+
+    void smoothRotation() {
+        Quaternion target_rot = Quaternion.LookRotation(target.transform.position - transform.position);
+        //target_rot.x = 0;
+        //target_rot.z = 0;
+        transform.rotation = Quaternion.Lerp(transform.rotation, target_rot, Time.deltaTime * smooth);
     }
 
 }

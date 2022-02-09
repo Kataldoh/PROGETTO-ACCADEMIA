@@ -8,11 +8,12 @@ public class Proiettile : MonoBehaviour
 
     private Transform player;
     private Vector3 target;
-    
+    Rigidbody rb;
 
     
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player").transform;//altrimenti i proiettili andrebbero in un'unica direzione
 
         target = new Vector3(player.position.x, player.position.y, player.position.z);// target = posizione del player
@@ -21,7 +22,10 @@ public class Proiettile : MonoBehaviour
     
     void Update()
     {
-        
+
+        rb.AddForce(transform.forward * 1000 * Time.deltaTime);
+
+        /*
         // il p. si muove verso il player
             transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
         //se le coordinate del proiettile sono uguali a quelle del player, allora il proiettile si degenera
@@ -29,7 +33,7 @@ public class Proiettile : MonoBehaviour
             {
                 Distruggiproiettile();
             }
-        
+        */
     }
 
     private void OnTriggerEnter(Collider other)// se collide con il player allora si degenera
