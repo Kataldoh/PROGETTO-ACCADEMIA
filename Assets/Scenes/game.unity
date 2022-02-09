@@ -8,8 +8,8 @@ OcclusionCullingSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
-  m_SceneGUID: 00000000000000000000000000000000
-  m_OcclusionCullingData: {fileID: 0}
+  m_SceneGUID: acd07d08bdd182343bc573222028a54c
+  m_OcclusionCullingData: {fileID: 36300000, guid: 92c331d05b720534f9132ffed6201822, type: 2}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -3568,7 +3568,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 125824634}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Torretta
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29504,7 +29504,7 @@ GameObject:
   m_Component:
   - component: {fileID: 855087655}
   - component: {fileID: 855087656}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Point Light (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34840,7 +34840,7 @@ GameObject:
   - component: {fileID: 992831644}
   - component: {fileID: 992831643}
   - component: {fileID: 992831642}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -40617,7 +40617,7 @@ GameObject:
   - component: {fileID: 1164839453}
   - component: {fileID: 1164839452}
   - component: {fileID: 1164839451}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sphere (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -49723,7 +49723,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1451201451}
   - component: {fileID: 1451201452}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: partecheruota
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -53447,6 +53447,7 @@ GameObject:
   - component: {fileID: 1572735493}
   - component: {fileID: 1572735496}
   - component: {fileID: 1572735497}
+  - component: {fileID: 1572735498}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -53513,7 +53514,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1572735492}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 48.97, y: 3.79, z: -13.36}
+  m_LocalPosition: {x: 53.7, y: 3.79, z: -13.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -53539,7 +53540,7 @@ MonoBehaviour:
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
-    m_Bits: 1
+    m_Bits: 383
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
   m_RenderPostProcessing: 1
@@ -53565,8 +53566,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1542454303}
-  offset: {x: 0, y: -1.45, z: 6.5}
+  offset: {x: 0, y: -1.11, z: 3.27}
   smoothdamp: 10
+--- !u!192 &1572735498
+OcclusionArea:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1572735492}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+  m_IsViewVolume: 1
 --- !u!1 &1576775411
 GameObject:
   m_ObjectHideFlags: 0
@@ -61049,7 +61061,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1881601641}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: luce
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -62478,6 +62490,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1951593523}
   - component: {fileID: 1951593522}
+  - component: {fileID: 1951593524}
   m_Layer: 0
   m_Name: Post-process Volume
   m_TagString: Untagged
@@ -62516,6 +62529,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &1951593524
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951593521}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!43 &1952352845
 Mesh:
   m_ObjectHideFlags: 0
@@ -64510,7 +64536,7 @@ GameObject:
   - component: {fileID: 2068877704}
   - component: {fileID: 2068877703}
   - component: {fileID: 2068877702}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71367,7 +71393,7 @@ GameObject:
   - component: {fileID: 6710841295500399158}
   - component: {fileID: 6710841295500399156}
   - component: {fileID: 6710841295500399157}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Palo luce
   m_TagString: Untagged
   m_Icon: {fileID: 0}

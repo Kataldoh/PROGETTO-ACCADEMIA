@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour
     public MainPlayerScript MainPlayerScript;
     public static GameController instance;
     public GameObject puntatore;
+    public GameObject post_processing;
 
     public int maxHealth = 100;
     public int CurrentHealth;
@@ -31,7 +32,13 @@ public class GameController : MonoBehaviour
        
         puntatore = GameObject.FindGameObjectWithTag("Puntatore");
         instance = this;
+
+
+        //**************** SAVE DATA TO PLAYER PREFS;
+        //PlayerPrefs.SetInt("quality", 3);
+
     }
+
 
     // Start is called before the first frame update
     void Start()
@@ -40,6 +47,23 @@ public class GameController : MonoBehaviour
         _estates = new StatesEvents();
         CurrentHealth = maxHealth;
         CurrentStamina = maxStamina;
+
+
+        //***************** LOAD DATA FROM PlayerPrefs;
+        /*
+        int q=PlayerPrefs.GetInt("quality");
+
+        if (q == 3) {
+            post_processing.SetActive(false);
+        }
+        else
+        {
+            post_processing.SetActive(true);
+        }
+
+        QualitySettings.SetQualityLevel(q);
+        */
+
     }
 
     // Update is called once per frame
