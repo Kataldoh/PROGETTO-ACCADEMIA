@@ -159,7 +159,7 @@ public class PlayerStatesEvents : MonoBehaviour
         }
 
         //Applica un knockback e gravità quando viene preso del danno
-        float knockback = 3.5f;
+        float knockback = 1.5f;
         pInst.controller.Move(((pInst.transform.up * knockback) + (-pInst.transform.forward * knockback * pInst.dir)) * Time.deltaTime);
         pInst.controller.Move(pInst.transform.up * pInst.velocity * Time.deltaTime);
 
