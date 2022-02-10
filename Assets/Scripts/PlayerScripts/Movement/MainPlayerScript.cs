@@ -33,6 +33,10 @@ public class MainPlayerScript : MonoBehaviour
     public bool isDash;
     public bool isSprinting;
 
+    [Header("Unlocked Abilities")]
+    public bool dashUnlocked;
+    public bool rollUnlocked;
+
     [Header("Assigned Variables")]
     [SerializeField] Transform foot;        //posizione del "piede" del player, dove la sfera per trovare se si è a terra sarà situata
     [SerializeField] Transform rayhead;     
@@ -289,6 +293,24 @@ public class MainPlayerScript : MonoBehaviour
         if(hit.gameObject.tag == "Nemico" && _state != PlayerState.damage)
         {
             _state = PlayerState.damage;
+        }
+
+        if(hit.gameObject.tag == "Pickup")
+        {
+            int unlockAbilityN = hit.gameObject.GetComponent<UpgradePickups>().powerUpValue;
+
+            switch(unlockAbilityN)
+            {
+                case 0:
+                    dashUnlocked = true;
+                    break;
+                case 1:
+                    rollUnlocked = true;
+                    break;
+            }
+
+
+            Destroy(hit.gameObject);
         }
     }
 

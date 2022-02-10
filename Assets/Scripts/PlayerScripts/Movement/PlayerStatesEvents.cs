@@ -13,7 +13,7 @@ public class PlayerStatesEvents : MonoBehaviour
         pInst.isJump = Input.GetButton("Jump");
 
 
-        if (pInst.isDash)
+        if (pInst.isDash && pInst.dashUnlocked)
         {
             pInst._state = PlayerState.dash;
         }
@@ -42,16 +42,20 @@ public class PlayerStatesEvents : MonoBehaviour
         pInst.controller.Move(pInst.move * pInst.pdata.force * Time.deltaTime);         //Applica forza dagli input ricevuti
         pInst.controller.Move(pInst.transform.up * pInst.velocity * Time.deltaTime);    //Applica la velocity sull'asse y (Che sia gravità o salto)
 
-        if(pInst.move.y < 0)        //controlla l'altezza del player quando si alza e abbassa
+        if(pInst.rollUnlocked)
         {
-            pInst.controller.height = pInst.height/3;
-            pInst.controller.center = new Vector3(0, 0.4f, 0);
-        } 
-        else                        //resetta l'altezza del player
-        {
-            pInst.controller.height = pInst.height;
-            pInst.controller.center = new Vector3(0,0.9f, 0);
+            if(pInst.move.y < 0)        //controlla l'altezza del player quando si alza e abbassa
+            {
+                pInst.controller.height = pInst.height/3;
+                pInst.controller.center = new Vector3(0, 0.4f, 0);
+            } 
+            else                        //resetta l'altezza del player
+            {
+                pInst.controller.height = pInst.height;
+                pInst.controller.center = new Vector3(0,0.9f, 0);
+            }
         }
+        
 
         /*
         if (pInst.isSprinting)
@@ -61,7 +65,7 @@ public class PlayerStatesEvents : MonoBehaviour
         */
        
         
-        if(pInst.isDash)
+        if(pInst.isDash && pInst.dashUnlocked)
         {
             pInst._state = PlayerState.dash;
         }
@@ -82,7 +86,7 @@ public class PlayerStatesEvents : MonoBehaviour
     {
         pInst.isJump = Input.GetButton("Jump");
 
-        if(pInst.isDash)
+        if(pInst.isDash && pInst.dashUnlocked)
         {
             pInst._state = PlayerState.dash;
         }
