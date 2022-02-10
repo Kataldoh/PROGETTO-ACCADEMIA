@@ -56,7 +56,7 @@ public class WeaponMethods : MonoBehaviour
             if (shootingInterval >= wS.shootingInterval_inSeconds)      //se l'intervallo di sparo è maggiore o uguale a quello dell'arma
             {
                 Destroy(enemy);
-                trailGO[i].transform.position = Vector3.zero;           //Resetta la posizione del trailGO/Proiettile
+                trailGO[i].transform.position = aimStart.position;      //Resetta la posizione del trailGO/Proiettile
                 trailGO[i].gameObject.SetActive(false);                 //lo porta a falso
                 isShoot= false;
                 i++;
