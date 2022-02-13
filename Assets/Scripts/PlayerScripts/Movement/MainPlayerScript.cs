@@ -290,7 +290,7 @@ public class MainPlayerScript : MonoBehaviour
 
     private void OnControllerColliderHit(ControllerColliderHit hit) 
     {
-        if(hit.gameObject.tag == "Nemico" && _state != PlayerState.damage)
+        if(hit.gameObject.tag == "Nemico" || hit.gameObject.tag == "DamageDealer" && _state != PlayerState.damage)
         {
             _state = PlayerState.damage;
         }

@@ -30,6 +30,16 @@ public enum EnemyState
     defence,
 }
 
+public enum BossState
+{
+    idle,
+    attack,
+    jump,
+    bump,
+    dead
+}
+
+
 
 public enum LevelState
 {
