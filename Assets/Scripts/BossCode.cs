@@ -20,6 +20,7 @@ public class BossCode : MonoBehaviour
     public bool jumped;
     public GameObject weakPoint;
     public float health;
+    public float distanceOfActivation;
 
     // Start is called before the first frame update
     void Start()
@@ -33,28 +34,32 @@ public class BossCode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (health <= 0)
+        if(Vector3.Distance(transform.position, target.transform.position) <= distanceOfActivation) 
         {
-            bState=BossState.dead;
-        }
+            if (health <= 0)
+            {
+                bState = BossState.dead;
+            }
 
-        move = new Vector3(moveDir, 0, 0);
+            move = new Vector3(moveDir, 0, 0);
 
-        switch (bState)
-        {
-            case BossState.idle:
-                Idle();
-                break;
-            case BossState.attack:
-                Attack();
-                break;
-            case BossState.jump:
-                Jump();
-                break;
-            case BossState.dead:
-                Death();
-                break;
+            switch (bState)
+            {
+                case BossState.idle:
+                    Idle();
+                    break;
+                case BossState.attack:
+                    Attack();
+                    break;
+                case BossState.jump:
+                    Jump();
+                    break;
+                case BossState.dead:
+                    Death();
+                    break;
+            }
         }
+        
     }
 
     void Idle()

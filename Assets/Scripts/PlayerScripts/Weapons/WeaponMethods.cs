@@ -9,7 +9,7 @@ public class WeaponMethods : MonoBehaviour
     // Start is called before the first frame update
     bool isShoot;   //controlla se è stato sparato un colpo
     bool isAiming;  //controlla se si sta mirando
-    GameObject enemy;   //salva il nemico colpito
+    GameObject enemy, oneShot;   //salva il nemico colpito
     int i;  //projectile Index
     float shootingInterval; //usato per controllare l'intervallo di sparo
         
@@ -39,6 +39,11 @@ public class WeaponMethods : MonoBehaviour
                 {
                     enemy=hit.collider.gameObject;          //Assegno a enemy il nemico da uccidere a fine del delay
                 }
+
+                if (hit.collider.tag == "OneShot")            //Se colpisce un nemico
+                {
+                    oneShot = hit.collider.gameObject;          
+                }
             }
             else
             {
@@ -64,7 +69,10 @@ public class WeaponMethods : MonoBehaviour
                     }
                 }
                 
-
+                if(oneShot != null)
+                {
+                    Destroy(oneShot);
+                }
 
 
                 trailGO[i].transform.position = aimStart.position;      //Resetta la posizione del trailGO/Proiettile

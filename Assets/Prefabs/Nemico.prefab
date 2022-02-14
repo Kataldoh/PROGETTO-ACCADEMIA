@@ -1479,7 +1479,7 @@ GameObject:
   - component: {fileID: 8130875157784792719}
   m_Layer: 0
   m_Name: Nemico
-  m_TagString: Untagged
+  m_TagString: OneShot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1580,6 +1580,10 @@ MonoBehaviour:
   isJump: 0
   gravity: -9.81
   Wheight: -2
+  target: {fileID: 0}
+  distanza: 0
+  movespeed: 0
+  area: 0
   layer:
     serializedVersion: 2
     m_Bits: 8
