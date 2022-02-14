@@ -9,6 +9,7 @@ public class Proiettile : MonoBehaviour
     private Transform player;
     private Vector3 target;
     Rigidbody rb;
+    float timer;
 
     
     void Start()
@@ -25,6 +26,12 @@ public class Proiettile : MonoBehaviour
 
         rb.AddForce(transform.forward * 1000 * Time.deltaTime);
 
+        timer += Time.deltaTime;
+
+        if (timer >= 3)
+        {
+            Distruggiproiettile();
+        }
         /*
         // il p. si muove verso il player
             transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
