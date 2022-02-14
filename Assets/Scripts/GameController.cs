@@ -33,10 +33,9 @@ public class GameController : MonoBehaviour
         puntatore = GameObject.FindGameObjectWithTag("Puntatore");
         instance = this;
 
-
         //**************** SAVE DATA TO PLAYER PREFS;
         //PlayerPrefs.SetInt("quality", 3);
-
+        DontDestroyOnLoad(this.gameObject);
 
     }
 
