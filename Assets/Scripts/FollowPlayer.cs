@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class FollowPlayer : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //https://www.youtube.com/watch?v=OD-awL_4G3E
+
     [SerializeField] Transform target;
     [SerializeField] Vector3 offset;
     [SerializeField] float smoothdamp;
 
-    // Update is called once per frame
+    
     void FixedUpdate()
     {
         Vector3 newoffset = target.position - offset;
@@ -17,4 +18,20 @@ public class FollowPlayer : MonoBehaviour
       //  transform.LookAt(target);
         transform.position = newpos;
     }
+
+    //altro modo telecamera
+    /*
+    void FixedUpdate()
+    {
+        if(target.transform.position.x >= transform.position.x + 9)
+        {
+            transform.position = new Vector3(transform.position.x + 18, 0, -10);
+        }
+
+        if (target.transform.position.x <= transform.position.x - 9)
+        {
+            transform.position = new Vector3(transform.position.x - 18, 0, -10);
+        }
+    }
+    */
 }
