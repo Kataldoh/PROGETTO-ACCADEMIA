@@ -6,6 +6,7 @@ public class BossCode : MonoBehaviour
 {
 
     [SerializeField] BossState bState;
+    [SerializeField] EnemyData bossStats;
     public Transform groundCheck, bumpCheck;
     public float radLenght;
     public LayerMask layer;
@@ -18,10 +19,12 @@ public class BossCode : MonoBehaviour
     float velocity;
     public bool jumped;
     public GameObject weakPoint;
+    public float health;
 
     // Start is called before the first frame update
     void Start()
     {
+        health = bossStats.health;
         target = GameObject.FindGameObjectWithTag("Player");
         controller= GetComponent<CharacterController>();
         anim = GetComponentInChildren<Animator>();
@@ -30,7 +33,7 @@ public class BossCode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(weakPoint == null)
+        if (health <= 0)
         {
             bState=BossState.dead;
         }
