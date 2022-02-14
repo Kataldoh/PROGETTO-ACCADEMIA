@@ -10,18 +10,23 @@ public class FollowPlayer : MonoBehaviour
     [SerializeField] Vector3 offset;
     [SerializeField] float smoothdamp;
 
+
     
-    void FixedUpdate()
+    void FixedUpdate() // camera che segue il player
+    {
+        cameraFollow();
+    }
+
+    public void cameraFollow() //camera che segue il player in modo smooth
     {
         Vector3 newoffset = target.position - offset;
         Vector3 newpos = Vector3.Lerp(transform.position, newoffset, Time.deltaTime * smoothdamp);
-      //  transform.LookAt(target);
+        //  transform.LookAt(target);
         transform.position = newpos;
     }
 
-    //altro modo telecamera
     /*
-    void FixedUpdate()
+    public void cameraScatto() //camera che non segue il player - in stile metroid classico
     {
         if(target.transform.position.x >= transform.position.x + 9)
         {
