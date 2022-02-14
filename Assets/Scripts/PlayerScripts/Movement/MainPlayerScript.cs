@@ -38,7 +38,7 @@ public class MainPlayerScript : MonoBehaviour
     public bool rollUnlocked;
 
     [Header("Assigned Variables")]
-    [SerializeField] Transform foot;        //posizione del "piede" del player, dove la sfera per trovare se si è a terra sarà situata
+    [SerializeField] Transform[] foot;        //posizione del "piede" del player, dove la sfera per trovare se si è a terra sarà situata
     [SerializeField] Transform rayhead;     
     [SerializeField] public LayerMask layer;
     public Animator anim;
@@ -268,7 +268,7 @@ public class MainPlayerScript : MonoBehaviour
     //metodo di controllo del terreno
     public bool IsGrounded()
     {
-        if(!Physics.CheckSphere(foot.position, radLenght, layer))
+        if(!Physics.CheckSphere(foot[0].position, radLenght, layer) && !Physics.CheckSphere(foot[1].position, radLenght, layer))
         {
             hangTime += Time.deltaTime;
             if(hangTime >= 0.25f)
