@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    public GameController gamecontroller;
+    public ScriptableObject savedata;
     public void StartPlay()
     {
         //carica scensa successiva in elenco (gioco)
@@ -18,8 +20,9 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void BacktoMenu()
+    public void BacktoMenuandSave()
     {
         SceneManager.LoadScene("Main Menu");
+        //savedata.player_health = gamecontroller.CurrentHealth; 
     }
 }

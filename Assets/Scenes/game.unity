@@ -49098,6 +49098,7 @@ GameObject:
   - component: {fileID: 1521856592}
   - component: {fileID: 1521856594}
   - component: {fileID: 1521856593}
+  - component: {fileID: 1521856595}
   m_Layer: 5
   m_Name: Pausa
   m_TagString: Untagged
@@ -49165,6 +49166,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1521856591}
   m_CullTransparentMesh: 1
+--- !u!114 &1521856595
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1521856591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f484bc735b39d5843840f50480d459b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gamecontroller: {fileID: 0}
+  savedata: {fileID: 0}
 --- !u!43 &1531579322
 Mesh:
   m_ObjectHideFlags: 0
@@ -50521,9 +50536,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 11500000, guid: f484bc735b39d5843840f50480d459b2, type: 3}
-        m_TargetAssemblyTypeName: UnityEngine.Object, UnityEngine
-        m_MethodName: 
+      - m_Target: {fileID: 1521856595}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: BacktoMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
