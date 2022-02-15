@@ -29,9 +29,10 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-       
+        post_processing = GameObject.FindGameObjectWithTag("P.Process");
         puntatore = GameObject.FindGameObjectWithTag("Puntatore");
         instance = this;
+
 
         //**************** SAVE DATA TO PLAYER PREFS;
         //PlayerPrefs.SetInt("quality", 3);
@@ -47,6 +48,11 @@ public class GameController : MonoBehaviour
         _estates = new StatesEvents();
         CurrentHealth = maxHealth;
         CurrentStamina = maxStamina;
+
+        if(BarraStamina && BarraVita == null)
+        {
+
+        }
 
 
         //***************** LOAD DATA FROM PlayerPrefs;
