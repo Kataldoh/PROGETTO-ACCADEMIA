@@ -7,7 +7,7 @@ public class EnemyScript : MonoBehaviour
 {
     public EnemyData edata;
     public EnemyState _state;
-
+    [SerializeField] HealthPlaceholder hp;
     CharacterController controller;
     [SerializeField] Animator anim;
     [SerializeField] Transform foot, turnAroundPoint;
@@ -43,6 +43,10 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(hp.health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
 
         if (GameController.instance._state == GameState.play)
         {

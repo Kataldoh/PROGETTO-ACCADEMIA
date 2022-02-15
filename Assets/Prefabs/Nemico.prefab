@@ -1507,6 +1507,7 @@ GameObject:
   - component: {fileID: 5213225777122586623}
   - component: {fileID: 8130875157784792716}
   - component: {fileID: 8130875157784792719}
+  - component: {fileID: 9082237592151641632}
   m_Layer: 0
   m_Name: Nemico
   m_TagString: OneShot
@@ -1583,7 +1584,7 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 1.37
-  m_Radius: 0.15
+  m_Radius: 0.35
   m_SlopeLimit: 45
   m_StepOffset: 0.25
   m_SkinWidth: 0.08
@@ -1603,6 +1604,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   edata: {fileID: 11400000, guid: afc9aacab1c35be46b3e0f2889e49cf1, type: 2}
   _state: 1
+  hp: {fileID: 9082237592151641632}
   anim: {fileID: 0}
   foot: {fileID: 8130875157387019667}
   turnAroundPoint: {fileID: 2164956677662641799}
@@ -1613,15 +1615,31 @@ MonoBehaviour:
   gravity: -9.81
   Wheight: -2
   target: {fileID: 0}
-  distanza: 0
-  movespeed: 0
-  area: 0
+  distanza: 5
+  movespeed: 5
+  area: 5
   layer:
     serializedVersion: 2
     m_Bits: 8
   layer2:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &9082237592151641632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8129790494713064075}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32715fa65ef83684fb3c061940f2bdf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hit: 0
+  damage: 0
+  eData: {fileID: 11400000, guid: afc9aacab1c35be46b3e0f2889e49cf1, type: 2}
+  health: 0
 --- !u!1 &8129807583774559725
 GameObject:
   m_ObjectHideFlags: 0
