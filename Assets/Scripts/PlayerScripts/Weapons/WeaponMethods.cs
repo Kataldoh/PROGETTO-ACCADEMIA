@@ -66,6 +66,7 @@ public class WeaponMethods : MonoBehaviour
                     {
                         enemy.GetComponent<HealthPlaceholder>().hit = true;
                         enemy.GetComponent<HealthPlaceholder>().damage = wS.damage;
+                        enemy = null;
                     }
                 }
                 
@@ -87,8 +88,6 @@ public class WeaponMethods : MonoBehaviour
     {
         //calcolo della direzione dello sparo
         Vector3 direction = _vectorDir(aimStart);
-        Vector3 mousePos = new Vector3(Input.mousePosition.x - Screen.width/2,
-                            Input.mousePosition.y - Screen.height/2, Input.mousePosition.z);
 
         //(transform.position - cursor.position).normalized;
         //print(transform.position - cursor.position);
@@ -125,7 +124,7 @@ public class WeaponMethods : MonoBehaviour
             pInst.laserRender.enabled = false;  //disattiva il laser
         }
 
-        return mousePos;
+        return direction;
     }
 
     Vector3 _vectorDir(Transform aimStart) 

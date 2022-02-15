@@ -7,10 +7,10 @@ public class EnemyScript : MonoBehaviour
 {
     public EnemyData edata;
     public EnemyState _state;
-
+    [SerializeField] HealthPlaceholder hp;
     CharacterController controller;
     [SerializeField] Animator anim;
-    [SerializeField] Transform foot;
+    [SerializeField] Transform foot, turnAroundPoint;
     [SerializeField] Transform rayhead;
     [SerializeField] float rayLenght;
     [SerializeField] bool isGrounded;
@@ -43,7 +43,10 @@ public class EnemyScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(hp.health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
 
         if (GameController.instance._state == GameState.play)
         {
@@ -82,6 +85,14 @@ public class EnemyScript : MonoBehaviour
                     direction = direction * -1;
             }
 
+            if(!Physics.CheckSphere(turnAroundPoint.position, 0.5f, layer))
+            {
+                
+                print("OutOfPlatform");
+                if (!isJump)
+                    direction = direction * -1;
+            }
+
             move.y = Mathf.Clamp(move.y, -1, 0);
             anim.SetFloat("posx", move.x, 0.05f, Time.deltaTime);
            // controller.Move(move * edata.force * Time.deltaTime);
@@ -89,7 +100,9 @@ public class EnemyScript : MonoBehaviour
         }
 
 
-        AttackEnemy();
+        //AttackEnemy();
+        qrot = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 90 * direction, 0), Time.deltaTime * edata.speedRot);
+        controller.Move(move * edata.force * Time.deltaTime);
 
         //rotazione del nemico
 
