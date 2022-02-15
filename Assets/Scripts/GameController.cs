@@ -14,6 +14,9 @@ public class GameController : MonoBehaviour
     public int maxHealth = 100;
     public int CurrentHealth;
 
+    public int maxHealthBoss = 100;
+    public int CurrentHealthBoss;
+
 
     public float maxStamina = 100;
     public float CurrentStamina;
@@ -23,6 +26,7 @@ public class GameController : MonoBehaviour
 
     public BarraVita BarraVita;
     public BarraStamina BarraStamina;
+    public BarraBoss barraBoss;
 
     public GameState _state;
     public GameObject[] pannelli;
@@ -169,6 +173,13 @@ public class GameController : MonoBehaviour
     {
         CurrentHealth -= damage;
         BarraVita.SetHealth(CurrentHealth);
+    }
+
+    public void TakeDamageBoss(int damage)
+    {
+        CurrentHealthBoss -= damage;
+        barraBoss.SetHealthBoss(CurrentHealthBoss);
+
     }
 
     public void TakeStamina()
