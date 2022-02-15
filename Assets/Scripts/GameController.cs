@@ -8,6 +8,8 @@ public class GameController : MonoBehaviour
     public static GameController instance;
     public GameObject puntatore;
     public GameObject post_processing;
+    public GameObject Player;
+    public GameObject BarraBoss;
 
     public int maxHealth = 100;
     public int CurrentHealth;
@@ -29,6 +31,8 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
+        Player = GameObject.FindGameObjectWithTag("Player");
+        BarraBoss = GameObject.FindGameObjectWithTag("Boss UI");
         post_processing = GameObject.FindGameObjectWithTag("P.Process");
         puntatore = GameObject.FindGameObjectWithTag("Puntatore");
         instance = this;
@@ -100,6 +104,20 @@ public class GameController : MonoBehaviour
 
       
     }
+
+    public void EnableBossBar()
+    {
+        if (BarraBoss.activeInHierarchy)
+        {
+            BarraBoss.SetActive(false);
+        }
+        else
+        {
+            BarraBoss.SetActive(true);
+
+        }
+    }
+
     public void Restart()
     {
         SceneManager.LoadScene("game");
