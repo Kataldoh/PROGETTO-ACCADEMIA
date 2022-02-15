@@ -154,6 +154,7 @@ public class PlayerStatesEvents : MonoBehaviour
     }
     public void P_Damage()
     {
+        pInst.controller.detectCollisions = false;
         //prendi danno solo se hai non hai preso del danno in questo stato
         //previene il ricevere danno continuo ogni ciclo
         if(!dmgTook)

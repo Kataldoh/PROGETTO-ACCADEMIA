@@ -79,7 +79,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bState: 0
-  bossStats: {fileID: 11400000, guid: 2bd1ca035ff1bc24ea0837bbbc140c27, type: 2}
+  hp: {fileID: 7849935191349602975}
   groundCheck: {fileID: 7849935191675060163}
   bumpCheck: {fileID: 7849935190339409799}
   radLenght: 0.8
@@ -90,7 +90,6 @@ MonoBehaviour:
   jumpForce: 0
   jumped: 0
   weakPoint: {fileID: 7849935191349602970}
-  health: 0
   distanceOfActivation: 10
 --- !u!143 &7849935191020691953
 CharacterController:
@@ -262,7 +261,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hit: 0
   damage: 0
-  b: {fileID: 7849935191020691952}
+  eData: {fileID: 11400000, guid: 2bd1ca035ff1bc24ea0837bbbc140c27, type: 2}
+  health: 0
 --- !u!1 &7849935191675060160
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,13 +6,18 @@ public class HealthPlaceholder : MonoBehaviour
 {
     public bool hit;
     public float damage;
-    [SerializeField] BossCode b;
+    [SerializeField] EnemyData eData;
+    public float health;
 
+    private void Start() 
+    {
+        health = eData.health;
+    }
     private void Update()
     {
         if (hit)
         {
-            b.health -= damage;
+            health -= damage;
             hit = false;
         }
     }

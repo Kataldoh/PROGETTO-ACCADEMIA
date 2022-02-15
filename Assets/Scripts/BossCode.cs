@@ -6,7 +6,8 @@ public class BossCode : MonoBehaviour
 {
 
     [SerializeField] BossState bState;
-    [SerializeField] EnemyData bossStats;
+
+    [SerializeField] HealthPlaceholder hp;
     public Transform groundCheck, bumpCheck;
     public float radLenght;
     public LayerMask layer;
@@ -19,13 +20,13 @@ public class BossCode : MonoBehaviour
     float velocity;
     public bool jumped;
     public GameObject weakPoint;
-    public float health;
+    
     public float distanceOfActivation;
 
     // Start is called before the first frame update
     void Start()
     {
-        health = bossStats.health;
+        
         target = GameObject.FindGameObjectWithTag("Player");
         controller= GetComponent<CharacterController>();
         anim = GetComponentInChildren<Animator>();
@@ -34,12 +35,13 @@ public class BossCode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(hp.health <= 0)
+        {
+            bState = BossState.dead;
+        }
+
         if(Vector3.Distance(transform.position, target.transform.position) <= distanceOfActivation) 
         {
-            if (health <= 0)
-            {
-                bState = BossState.dead;
-            }
 
             move = new Vector3(moveDir, 0, 0);
 

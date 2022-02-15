@@ -228,6 +228,9 @@ public class MainPlayerScript : MonoBehaviour
             dashTrail.enabled = true;
         else
             dashTrail.enabled = false;
+
+        if(_state != PlayerState.damage)
+            controller.detectCollisions = true;
     }
 
     //metodo di controllo delle animazioni
