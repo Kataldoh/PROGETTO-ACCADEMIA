@@ -7,11 +7,18 @@ public class enemyCRAWL : MonoBehaviour
     public float movespeed;
     public GameObject[] nodi;
 
+    [SerializeField] HealthPlaceholder hp;
+
     int nodosuccessivo = 1;
     float distanzanodi;
 
      void Update()
     {
+        if(hp.health <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+        
         Move();
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MainPlayerScript : MonoBehaviour
 {
@@ -296,6 +297,11 @@ public class MainPlayerScript : MonoBehaviour
         if(hit.gameObject.tag == "Nemico" || hit.gameObject.tag == "DamageDealer" && _state != PlayerState.damage)
         {
             _state = PlayerState.damage;
+        }
+
+        if(hit.gameObject.tag == "Gateway")
+        {
+            SceneManager.LoadScene(2);
         }
 
         if(hit.gameObject.tag == "Pickup")
