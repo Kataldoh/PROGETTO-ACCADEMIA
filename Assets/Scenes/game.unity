@@ -12824,6 +12824,17 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
+--- !u!114 &435417489 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1652063536287087352, guid: 1f67b39ea9f04da4d9854ead0d26d8c0, type: 3}
+  m_PrefabInstance: {fileID: 6425425367830835453}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8fdfce6de401554c9de864e52ad594b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &440823759 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8126256319904951761, guid: ea32f5dc7f7589a4fba52eb4ebca3549, type: 3}
@@ -35228,17 +35239,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 9009861900537670282, guid: d6d06c887a1aae94f8c6e8cc2c0c557b, type: 3}
   m_PrefabInstance: {fileID: 1764257603}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1097632617 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4823425701537224683, guid: 1f67b39ea9f04da4d9854ead0d26d8c0, type: 3}
-  m_PrefabInstance: {fileID: 6425425367830835453}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de04d40c2d672fe4fbc8cd6f772123a3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!43 &1103144494
 Mesh:
   m_ObjectHideFlags: 0
@@ -54358,7 +54358,7 @@ PrefabInstance:
     - target: {fileID: 3973553468289719758, guid: d6d06c887a1aae94f8c6e8cc2c0c557b, type: 3}
       propertyPath: BarraVita
       value: 
-      objectReference: {fileID: 1097632617}
+      objectReference: {fileID: 0}
     - target: {fileID: 4075672834401231214, guid: d6d06c887a1aae94f8c6e8cc2c0c557b, type: 3}
       propertyPath: m_RigLayers.Array.data[0].m_Rig
       value: 
@@ -54394,7 +54394,7 @@ PrefabInstance:
     - target: {fileID: 8495937049330856807, guid: d6d06c887a1aae94f8c6e8cc2c0c557b, type: 3}
       propertyPath: BarraVita
       value: 
-      objectReference: {fileID: 1097632617}
+      objectReference: {fileID: 0}
     - target: {fileID: 8495937049330856807, guid: d6d06c887a1aae94f8c6e8cc2c0c557b, type: 3}
       propertyPath: foot.Array.size
       value: 2
@@ -57679,6 +57679,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85a8f6f8dca77df4e9c05f21b5e8ed87, type: 3}
+--- !u!114 &1922473065 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3450759820360438979, guid: 1f67b39ea9f04da4d9854ead0d26d8c0, type: 3}
+  m_PrefabInstance: {fileID: 6425425367830835453}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de04d40c2d672fe4fbc8cd6f772123a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1924582285
 Mesh:
   m_ObjectHideFlags: 0
@@ -68614,7 +68625,11 @@ PrefabInstance:
     - target: {fileID: 6785884721319458517, guid: a489b4754ab49ed49a56d7df935dd167, type: 3}
       propertyPath: BarraVita
       value: 
-      objectReference: {fileID: 1097632617}
+      objectReference: {fileID: 1922473065}
+    - target: {fileID: 6785884721319458517, guid: a489b4754ab49ed49a56d7df935dd167, type: 3}
+      propertyPath: barraBoss
+      value: 
+      objectReference: {fileID: 435417489}
     - target: {fileID: 6785884721319458517, guid: a489b4754ab49ed49a56d7df935dd167, type: 3}
       propertyPath: BarraStamina
       value: 
