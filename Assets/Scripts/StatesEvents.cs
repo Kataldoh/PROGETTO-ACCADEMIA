@@ -15,7 +15,7 @@ public class StatesEvents : MonoBehaviour
         GameController.instance.pannelli[0].SetActive(false);
         GameController.instance.pannelli[1].SetActive(false);
         Time.timeScale = 1f;
-        GameController.instance.puntatore.SetActive(true);
+        //GameController.instance.puntatore.SetActive(true);
 
     }
 
@@ -23,7 +23,7 @@ public class StatesEvents : MonoBehaviour
     {
         GameController.instance.pannelli[0].SetActive(true);
         GameController.instance.pannelli[1].SetActive(false);
-        GameController.instance.puntatore.SetActive(false); //In alcuni stati il puntatore va disattivato altrimenti, pur essendo il timescale a 0, il player guarda in direzione del mouse muovendosi.
+        //GameController.instance.puntatore.SetActive(false); //In alcuni stati il puntatore va disattivato altrimenti, pur essendo il timescale a 0, il player guarda in direzione del mouse muovendosi.
         Time.timeScale = 0f;
 
 
@@ -33,7 +33,7 @@ public class StatesEvents : MonoBehaviour
     {
         GameController.instance.pannelli[1].SetActive(true);
         Time.timeScale = 0f;
-        GameController.instance.puntatore.SetActive(false);
+        //GameController.instance.puntatore.SetActive(false);
 
     }
 }

@@ -37,7 +37,7 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         Player = GameObject.FindGameObjectWithTag("Player");
-        BarraBoss = GameObject.FindGameObjectWithTag("Boss UI");
+        //BarraBoss = GameObject.FindGameObjectWithTag("Boss UI");
         post_processing = GameObject.FindGameObjectWithTag("P.Process");
         puntatore = GameObject.FindGameObjectWithTag("Puntatore");
         instance = this;
@@ -57,6 +57,7 @@ public class GameController : MonoBehaviour
         _estates = new StatesEvents();
         CurrentHealth = maxHealth;
         CurrentStamina = maxStamina;
+        CurrentHealthBoss = maxHealthBoss;
 
         if(BarraStamina && BarraVita == null)
         {
@@ -110,17 +111,9 @@ public class GameController : MonoBehaviour
       
     }
 
-    public void EnableBossBar()
+    public void EnableBossBar(bool a)
     {
-        if (BarraBoss.activeInHierarchy)
-        {
-            BarraBoss.SetActive(false);
-        }
-        else
-        {
-            BarraBoss.SetActive(true);
-
-        }
+        BarraBoss.SetActive(a);
     }
 
     public void Restart()
@@ -176,11 +169,13 @@ public class GameController : MonoBehaviour
         BarraVita.SetHealth(CurrentHealth);
     }
 
-    public void TakeDamageBoss(int damage)
+    public void SetMaxBossHealth(int hp)
     {
-        CurrentHealthBoss -= damage;
-        barraBoss.SetHealthBoss(CurrentHealthBoss);
-
+        barraBoss.SetMaxHealthBoss(hp);
+    }
+    public void SetBossHealth(float health)
+    {
+        barraBoss.SetHealthBoss(health);
     }
 
     public void TakeStamina()

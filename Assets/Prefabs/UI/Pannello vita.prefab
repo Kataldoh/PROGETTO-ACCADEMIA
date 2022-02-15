@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2007464461297830722}
   - component: {fileID: 2007464461297830723}
   - component: {fileID: 8000807279642802103}
-  - component: {fileID: 1097632617}
+  - component: {fileID: 7859854305140361281}
   m_Layer: 5
   m_Name: Pannello vita
   m_TagString: Untagged
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1097632617
+--- !u!114 &7859854305140361281
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -142,7 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de04d40c2d672fe4fbc8cd6f772123a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slider: {fileID: 0}
+  slider: {fileID: 8000807279642802103}
 --- !u!1 &2007464461692635248
 GameObject:
   m_ObjectHideFlags: 0
@@ -177,7 +177,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 1.7563019, y: -0}
+  m_AnchoredPosition: {x: 1.7563171, y: 0}
   m_SizeDelta: {x: 17.5627, y: 20.2162}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2007464461692635245

@@ -20,7 +20,7 @@ public class BarraBoss : MonoBehaviour
 
     }
 
-    public void SetHealthBoss(int HealthBoss)
+    public void SetHealthBoss(float HealthBoss)
     {
         slider.value = HealthBoss;
 
