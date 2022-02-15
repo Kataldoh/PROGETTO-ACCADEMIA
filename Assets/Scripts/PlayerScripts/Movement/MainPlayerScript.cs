@@ -26,6 +26,7 @@ public class MainPlayerScript : MonoBehaviour
     public float hangTime;              //(da implementare) un hangtime per dare al giocatore una finestra per saltare dopo essere in aria
     public float dashRechargeTime;      //variabile utilizzata per il controllo del tempo di ricarica del dash
     public float dashTimer;             //variabile contenente il timer del dash
+
     
     
     [Header("Various Checks")]
@@ -110,7 +111,7 @@ public class MainPlayerScript : MonoBehaviour
         aM.ScreenAiming(rayhead);
         aM.GeneralWeaponHandler(weapons_SO[0], rayhead, projectiles);
 
-        
+
         /*
         if (!isSprinting)
         {
@@ -123,6 +124,15 @@ public class MainPlayerScript : MonoBehaviour
             GameController.instance.TakeStamina();
         }
         */
+        if(Input.GetKey(KeyCode.O))
+        {
+            SavePlayer();
+        }
+        if (Input.GetKey(KeyCode.L))
+        {
+            LoadPlayer();
+        }
+
     }
 
 
@@ -321,6 +331,22 @@ public class MainPlayerScript : MonoBehaviour
 
             Destroy(hit.gameObject);
         }
+    }
+
+    //Loadand Save System
+    public void SavePlayer()
+    {
+        SaveSystem.SaveDataPlayer(this);
+    }
+
+    public void LoadPlayer()
+    {
+        PlayerDataforSave data = SaveSystem.LoadPlayer();
+        Vector3 playerposition;
+        playerposition.x = data.playerposition[0];
+        playerposition.y = data.playerposition[1];
+        playerposition.z = data.playerposition[2];
+        transform.position = playerposition;
     }
 
 }

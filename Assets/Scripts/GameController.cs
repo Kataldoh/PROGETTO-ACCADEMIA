@@ -13,13 +13,14 @@ public class GameController : MonoBehaviour
 
     public int maxHealth = 100;
     public int CurrentHealth;
+    public float CurrentStamina;
+    public float[] playerposition;
 
     public int maxHealthBoss = 100;
     public int CurrentHealthBoss;
 
 
     public float maxStamina = 100;
-    public float CurrentStamina;
     public float staminaRegen = 5f;
     public float staminaDrain = 2f;
 
@@ -206,9 +207,25 @@ public class GameController : MonoBehaviour
             CurrentStamina += staminaRegen * Time.deltaTime;
             BarraStamina.SetStamina(CurrentStamina);
         }
-
-      
     }
+
+    /*public void SavePlayer()
+    {
+        SaveSystem.SaveDataPlayer(this);
+    }
+
+    public void LoadPlayer()
+    {
+        PlayerDataforSave data = SaveSystem.LoadPlayer();
+
+        Player.position.x = playerposition.x;
+        Vector3 playerposition;
+        playerposition.x = data.playerposition[0];
+        playerposition.y = data.playerposition[1];
+        playerposition.z = data.playerposition[2];
+        transform.position = playerposition;
+    }*/
+
 
 }
 

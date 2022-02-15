@@ -5,7 +5,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public class SaveManager : MonoBehaviour
 {
-    //Istanzia questo codice 
+    /*//Istanzia questo codice 
     public static SaveManager instance { get; private set; }
 
     //variabili da salvare
@@ -22,13 +22,31 @@ public class SaveManager : MonoBehaviour
         {
             instance = this;
         }
+
+        DontDestroyOnLoad(gameObject);
          
     }
 
     //Metodo per caricare la partita
     public void LoadGame()
     {
+        //controlla se li percorso file esiste
+        if (File.Exists(Application.persistentDataPath + "/infogiocatore"))
+        {
+            //Ricarica le informazioni dal file
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream savefile = File.Open(Application.persistentDataPath + "/infogiocatore", FileMode.Open);
 
+            //converte i data in PlayerData_Storage in codice leggibile da Unity
+            PlayerData_Storage data = (PlayerData_Storage)bf.Deserialize(savefile);
+            //info da caricare
+            playerposition = data.playerposition;
+
+            //...altre info da caricare da inserire
+
+            savefile.Close();
+
+        }
     }
 
     
@@ -44,9 +62,12 @@ public class SaveManager : MonoBehaviour
 
         //Serializza il dato e chiude il file
         data.playerposition = playerposition;
+
+        //...altre info da salvare da inserire
+
         bf.Serialize(savefile, data);
         savefile.Close();
-    }
+    }*/
 
 }
 
