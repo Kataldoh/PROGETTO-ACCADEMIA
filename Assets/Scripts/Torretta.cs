@@ -42,7 +42,7 @@ public class Torretta : MonoBehaviour
                     //istanzio quello che devo generare( ovvero il proiettile), la sua posizione e rotazione nello spazio(in questo caso non ruota)
                      Instantiate(meshproiettile, foro.position, foro.rotation);
                     
-                   // timebeetweenshots = starttimebetweenshots;// se non faccio cosi, la torretta sparerebbe un proiettile ad ogni frame
+                    timebeetweenshots = starttimebetweenshots;// se non faccio cosi, la torretta sparerebbe un proiettile ad ogni frame
                 }
             }
             else 
