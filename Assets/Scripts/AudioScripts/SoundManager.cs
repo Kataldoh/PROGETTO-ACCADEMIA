@@ -38,6 +38,26 @@ namespace UnityCore
                 public AudioObject[] audio;
             }
 
+            private class AudioFunction
+            {
+                public AudioAction action;
+                public AudioType type;
+
+                public AudioFunction(AudioAction _action,AudioType _type)
+                {
+                    action = _action;
+                    type = _type;
+                }
+            }
+
+            private enum AudioAction
+            {
+                START,
+                STOP,
+                RESTART,
+
+            }
+
             #region Metodi Unity
 
             ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -66,14 +86,16 @@ namespace UnityCore
 
             public void PlayAudio(AudioType type)
             {
-
+                AddFunction(new AudioFunction(AudioAction.START,type));
             }
             public void StopAudio(AudioType type)
             {
+                AddFunction(new AudioFunction(AudioAction.STOP, type));
 
             }
             public void RestartAudio(AudioType type)
             {
+                AddFunction(new AudioFunction(AudioAction.RESTART, type));
 
             }
 
@@ -93,6 +115,7 @@ namespace UnityCore
 
                 AudioTable = new Hashtable();
                 JobTable = new Hashtable();
+                GenerateAudioTable();
             }
 
             private void Dispose()
@@ -102,7 +125,22 @@ namespace UnityCore
 
             private void GenerateAudioTable()
             {
-
+                foreach(AudioTrack track in tracks)
+                {
+                    foreach(AudioObject Aobj in track.audio)
+                    {
+                        // non duplicare keys
+                        if (AudioTable.ContainsKey(Aobj.type))
+                        {
+                            LogWarning("Stai cercando di registrare l'audio [" + Aobj.type + "] che è già stato registrato");
+                        }
+                        else
+                        {
+                            AudioTable.Add(Aobj.type, track);
+                            Log("Registrazione audio in corso [" + Aobj.type + "].");
+                        }
+                    }
+                }
             }
 
             private void Log(string _message)
@@ -123,6 +161,17 @@ namespace UnityCore
                 }
 
                 Debug.LogWarning("[Audio Controller]: " + _message);
+            }
+
+
+            private void AddFunction(AudioFunction _function)
+            {
+                // rimozione funzione conflittuale
+
+               // RemoveConflictingFunctions(-_function.type);
+
+                // avvio funzione
+               // IEnumerator FunctionRunner = RunAudioFunction (_function)
             }
 
             #endregion
