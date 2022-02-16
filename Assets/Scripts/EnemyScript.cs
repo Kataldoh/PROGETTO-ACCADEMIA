@@ -94,8 +94,13 @@ public class EnemyScript : MonoBehaviour
             }
 
             move.y = Mathf.Clamp(move.y, -1, 0);
-            anim.SetFloat("posx", move.x, 0.05f, Time.deltaTime);
-           // controller.Move(move * edata.force * Time.deltaTime);
+
+            float speedx = Vector3.Dot(move*edata.force, transform.forward);
+
+            //anim.SetFloat("posx", move.x, 0.05f, Time.deltaTime);
+            anim.SetFloat("posx", speedx, 0.2f, Time.deltaTime);
+
+            // controller.Move(move * edata.force * Time.deltaTime);
             controller.Move(transform.up * velocity * Time.deltaTime);
         }
 
