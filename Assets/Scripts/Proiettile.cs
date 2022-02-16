@@ -27,7 +27,7 @@ public class Proiettile : MonoBehaviour
         rb.AddForce(transform.forward * 1000 * Time.deltaTime);
 
         timer += Time.deltaTime;
-
+        // ricicla le mesh proiettile
         if (timer >= 3)
         {
             Distruggiproiettile();

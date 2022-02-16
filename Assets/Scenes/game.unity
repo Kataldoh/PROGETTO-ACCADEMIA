@@ -45439,9 +45439,10 @@ MonoBehaviour:
   parteDaRuotare: {fileID: 1451201450}
   attackarea: 10
   smooth: 2
-  starttimebetweenshots: 1
+  starttimebetweenshots: 2
   meshproiettile: {fileID: 3808427423739522295, guid: 4fe962194d73c824ca056fa4cfc35484, type: 3}
   foro: {fileID: 1612876117}
+  rafficacolpi: 3
 --- !u!4 &1454338900 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000012973412514, guid: 7664aa771caa1ce42965283fa24dbbd2, type: 3}
@@ -47208,6 +47209,7 @@ MonoBehaviour:
   starttimebetweenshots: 1
   meshproiettile: {fileID: 3808427423739522295, guid: 4fe962194d73c824ca056fa4cfc35484, type: 3}
   foro: {fileID: 1068086928}
+  rafficacolpi: 0
 --- !u!1 &1510810168 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6425425369340973765, guid: 1f67b39ea9f04da4d9854ead0d26d8c0, type: 3}
