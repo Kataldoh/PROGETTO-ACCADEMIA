@@ -11,13 +11,14 @@ public class Torretta : MonoBehaviour
     Vector3 rotazioneIniziale;
     public float smooth;
 
-    private float timebeetweenshots;
+    float timebeetweenshots;
     public float starttimebetweenshots;// e' il tempo tra un proiettile e l'altro
     public GameObject meshproiettile;
     public Transform foro;
 
     
     public int rafficacolpi;
+    int contacolpi = 0;
 
     private void Start()
     {
@@ -37,17 +38,18 @@ public class Torretta : MonoBehaviour
             // se il tempo tra uno sparo e l'aktro e' minore o uguale a zero allora la torreta genera un proiettile
             if (timebeetweenshots <= 0)
             {
-                for (int i = 0; i < rafficacolpi; i++)
+                if (contacolpi <= rafficacolpi)
                 {
                     //istanzio quello che devo generare( ovvero il proiettile), la sua posizione e rotazione nello spazio(in questo caso non ruota)
-                     Instantiate(meshproiettile, foro.position, foro.rotation);
-                    
-                   // timebeetweenshots = starttimebetweenshots;// se non faccio cosi, la torretta sparerebbe un proiettile ad ogni frame
+                    Instantiate(meshproiettile, foro.position, foro.rotation);
+                    contacolpi++;
+                    timebeetweenshots = starttimebetweenshots;// se non faccio cosi, la torretta sparerebbe un proiettile ad ogni frame
+
                 }
             }
             else 
             {
-                
+                contacolpi = 0;
                 timebeetweenshots -= Time.deltaTime;
             }
 
@@ -69,5 +71,9 @@ public class Torretta : MonoBehaviour
         //target_rot.z = 0;
         transform.rotation = Quaternion.Lerp(transform.rotation, target_rot, Time.deltaTime * smooth);
     }
+
+
+
+
 
 }
