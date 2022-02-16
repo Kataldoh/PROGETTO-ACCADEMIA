@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class PlayerDataforSave : MonoBehaviour
+public class PlayerDataforSave 
 {
     public float[] playerposition;
 
+    //classe per contenere data del player
     public PlayerDataforSave(MainPlayerScript player)
     {
         playerposition = new float[3];
