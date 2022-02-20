@@ -560,7 +560,6 @@ Transform:
   - {fileID: 4408529143413816531}
   - {fileID: 4408529143413817129}
   - {fileID: 9009861900537670282}
-  - {fileID: 3485154084410563170}
   - {fileID: 6580722612111210976}
   - {fileID: 3616844845562259981}
   m_Father: {fileID: 0}
@@ -656,8 +655,7 @@ MonoBehaviour:
   isInvincible: 0
   dashUnlocked: 0
   rollUnlocked: 0
-  foot:
-  - {fileID: 0}
+  foot: {fileID: 9009861900537670282}
   rayhead: {fileID: 8229782521810080168}
   layer:
     serializedVersion: 2
@@ -2166,7 +2164,7 @@ Transform:
   m_Children:
   - {fileID: 1756340941646089112}
   m_Father: {fileID: 4759721911903040}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5341505277372368956
 MonoBehaviour:
@@ -2679,7 +2677,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4759721911903040}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!96 &659762813765109083
 TrailRenderer:
@@ -2817,34 +2815,4 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4631778649626708}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &8785390955934386784
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3485154084410563170}
-  m_Layer: 0
-  m_Name: checkground.R
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3485154084410563170
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8785390955934386784}
-  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0.3}
-  m_LocalScale: {x: 0.49999988, y: 0.8, z: 0.49999988}
-  m_Children: []
-  m_Father: {fileID: 4759721911903040}
-  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
