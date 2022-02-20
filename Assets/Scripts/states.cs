@@ -25,6 +25,7 @@ public enum PlayerState
 
 public enum EnemyState
 {
+    idle,
     attack,
     patrol,
     defence,

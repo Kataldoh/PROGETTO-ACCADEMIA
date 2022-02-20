@@ -7,6 +7,7 @@ public class PlayerStatesEvents : MonoBehaviour
     MainPlayerScript pInst = MainPlayerScript.pInstance;
     bool dmgTook = false;   //bool usato per prevenire che il danno preso non venga ripetuto
     float dashLifetime;
+    float damageTimer;
     public void P_Idle()
     {
         //Controlla se si può saltare in questo stato
@@ -163,14 +164,20 @@ public class PlayerStatesEvents : MonoBehaviour
             dmgTook = true;
         }
 
+        pInst.move.x = 0;
+        
+        damageTimer += Time.deltaTime;
+        
         //Applica un knockback e gravità quando viene preso del danno
         float knockback = 1.5f;
-        pInst.controller.Move(((pInst.transform.up * knockback) + (-pInst.transform.forward * knockback * pInst.dir)) * Time.deltaTime);
+        pInst.controller.Move(((pInst.transform.up * knockback) + (-pInst.transform.forward * knockback)) * Time.deltaTime);
         pInst.controller.Move(pInst.transform.up * pInst.velocity * Time.deltaTime);
 
         //Se a terra, torna in idle e resetta il danno
-        if(pInst.IsGrounded())
+        if(pInst.IsGrounded() && damageTimer >= 0.15f)
         {
+            damageTimer = 0;
+            pInst.isInvincible = true;
             dmgTook = false;
             pInst._state = PlayerState.idle;
         }

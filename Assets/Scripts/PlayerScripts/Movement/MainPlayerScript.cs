@@ -26,14 +26,17 @@ public class MainPlayerScript : MonoBehaviour
     public float hangTime;              //(da implementare) un hangtime per dare al giocatore una finestra per saltare dopo essere in aria
     public float dashRechargeTime;      //variabile utilizzata per il controllo del tempo di ricarica del dash
     public float dashTimer;             //variabile contenente il timer del dash
+    public float invincibilityTimer;             //variabile contenente il timer del dash
+    public float invincibilityDuration;             //variabile contenente il timer del dash
 
-    
+    [SerializeField] GameObject mesh;
     
     [Header("Various Checks")]
     [SerializeField] public bool isGrounded; //bool che determina se il player è a terra oppure no
     public bool isJump;
     public bool isDash;
     public bool isSprinting;
+    public bool isInvincible;
 
     [Header("Unlocked Abilities")]
     public bool dashUnlocked;
@@ -84,6 +87,16 @@ public class MainPlayerScript : MonoBehaviour
 
     private void Update()
     {
+        if(isInvincible)
+        {
+            invincibilityTimer += Time.deltaTime;
+            if(invincibilityTimer >= invincibilityDuration)
+            {
+                invincibilityTimer = 0;
+                isInvincible = false;
+            }
+        }
+
         //Mantiene la posizione della Z costante a quella iniziale
         if(transform.position.z != startingZ)
         {
@@ -141,10 +154,25 @@ public class MainPlayerScript : MonoBehaviour
         //Il player non eseguirà alcuna azione se lo stato non è in play
         if (GameController.instance._state == GameState.play)
         {
-
             StateIndipendentActions();  //metodo per la gestione di azioni indipendenti dagli stati
             AnimationHandler(); //metodo per la gestione delle animazioni
             States();       //metodo per la gestione degli stati
+        }
+
+        if(isInvincible)
+        {
+            if(mesh.activeSelf)
+            {
+                mesh.SetActive(false);
+            }
+            else
+            {
+                mesh.SetActive(true);
+            }
+        }
+        else
+        {
+            mesh.SetActive(true);
         }
     }
 
@@ -220,8 +248,11 @@ public class MainPlayerScript : MonoBehaviour
         //Applico Gravità
         if (IsGrounded() && velocity <= 0)  //Se a terra con velocity <= 0
         {
-            velocity = weight;        //Resetta la velocity dandogli un peso (tipicamente 0)
-            isJump = false;         //mette a falso la variabile di salto per permettere di saltare sucessivamente
+            if(_state == PlayerState.damage)
+                velocity = 0;
+            else
+                velocity = weight;        //Resetta la velocity dandogli un peso
+            isJump = false;               //mette a falso la variabile di salto per permettere di saltare sucessivamente
         }
         else
         {
@@ -301,12 +332,14 @@ public class MainPlayerScript : MonoBehaviour
         }
     }
 
-
+    //Collisioni
     private void OnControllerColliderHit(ControllerColliderHit hit) 
     {
-        if(hit.gameObject.tag == "Nemico" || hit.gameObject.tag == "DamageDealer" && _state != PlayerState.damage)
+        if(hit.gameObject.tag == "Nemico" || hit.gameObject.tag == "DamageDealer" 
+                        && _state != PlayerState.damage)
         {
-            _state = PlayerState.damage;
+            if(!isInvincible)
+                _state = PlayerState.damage;
         }
 
         if(hit.gameObject.tag == "Gateway")
@@ -330,6 +363,15 @@ public class MainPlayerScript : MonoBehaviour
 
 
             Destroy(hit.gameObject);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other) 
+    {
+        if(other.gameObject.tag == "Nemico" || other.gameObject.tag == "DamageDealer" && _state != PlayerState.damage && !isInvincible)
+        {
+            if(!isInvincible)
+                _state = PlayerState.damage;
         }
     }
 
