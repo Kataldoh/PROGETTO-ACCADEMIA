@@ -137,7 +137,7 @@ public class EnemyScript : MonoBehaviour
             attackHitbox.SetActive(false);
         }
 
-        controller.Move(move * edata.force * speedMultiplier * direction * Time.deltaTime);
+        controller.Move(move * edata.force * speedMultiplier * Time.deltaTime);
 
         if(playerEnemyDistance > targetDistance)
         {
