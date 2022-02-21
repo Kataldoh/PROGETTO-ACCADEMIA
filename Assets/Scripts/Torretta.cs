@@ -11,7 +11,7 @@ public class Torretta : MonoBehaviour
     Vector3 rotazioneIniziale;
     public float smooth;
 
-    float timebeetweenshots;
+    float timebeetweenshots; //tempo totale dell'intervallo totale
     public float starttimebetweenshots;// e' il tempo tra un proiettile e l'altro
     public GameObject meshproiettile;
     public Transform foro;
@@ -19,7 +19,10 @@ public class Torretta : MonoBehaviour
     
     public int rafficacolpi;
     int contacolpi = 0;
-
+    
+    float timer;
+    bool reload;
+    public float tempo;
     private void Start()
     {
         
@@ -28,38 +31,25 @@ public class Torretta : MonoBehaviour
     }
     void Update()
     {
-        // se la distanza tra il player e la torretta supera la distanza di attacco allora la torretta comincia a ruotare e sparare  individuando la posizione del player
-        if (Vector3.Distance(transform.position, target.position) < attackarea)
+        // verifico se il tempo è 0 e la booleana è vera
+        if(timer<=0 && reload)
         {
-            //parteDaRuotare.transform.LookAt(target);
-
-            smoothRotation();
-
-            // se il tempo tra uno sparo e l'aktro e' minore o uguale a zero allora la torreta genera un proiettile
-            if (timebeetweenshots <= 0)
-            {
-                if (contacolpi <= rafficacolpi)
-                {
-                    //istanzio quello che devo generare( ovvero il proiettile), la sua posizione e rotazione nello spazio(in questo caso non ruota)
-                    Instantiate(meshproiettile, foro.position, foro.rotation);
-                    contacolpi++;
-                    timebeetweenshots = starttimebetweenshots;// se non faccio cosi, la torretta sparerebbe un proiettile ad ogni frame
-
-                }
-            }
-            else 
-            {
-                contacolpi = 0;
-                timebeetweenshots -= Time.deltaTime;
-            }
-
+            //falso perche l'impedisce di entrare nel metodo sparo prima del timer
+            reload = false;
         }
-        else
+        // timer minore di 3 e booleana è falsa
+        if (timer<=tempo && !reload)
         {
-            //Quaternion(Quaternione) e' un sistema  usato per rappresentare le rotazioni  ,,,  Quaternion.Euler= restituisce una rotazione lungo gli assi x,y,z 
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 180, 0), Time.deltaTime * smooth);
+            sparo();
+            timer += Time.deltaTime;// incremento la variabile timer
         }
-        
+        else //se reload=true 
+        {
+            //attendo tot secondi prima del prossimo intervallo di colpi
+           new WaitForSeconds(tempo);
+            timer -= Time.deltaTime;
+            reload = true;
+        }
         
     }
 
@@ -73,7 +63,42 @@ public class Torretta : MonoBehaviour
     }
 
 
+    void sparo()
+    {
+        // se la distanza tra il player e la torretta supera la distanza di attacco allora la torretta comincia a ruotare e sparare  individuando la posizione del player
+        if (Vector3.Distance(transform.position, target.position) < attackarea)
+        {
+            //parteDaRuotare.transform.LookAt(target);
 
+            smoothRotation();
+
+            // se il tempo tra uno sparo e l'altro e' minore o uguale a zero allora la torreta genera un proiettile
+            if (timebeetweenshots <= 0)
+            {
+                if (contacolpi <= rafficacolpi)
+                {
+                    //istanzio quello che devo generare( ovvero il proiettile), la sua posizione e rotazione nello spazio(in questo caso non ruota)
+                    Instantiate(meshproiettile, foro.position, foro.rotation);
+                    contacolpi++;
+                   
+                    timebeetweenshots = starttimebetweenshots;// se non faccio cosi, la torretta sparerebbe un proiettile ad ogni frame
+
+                }
+            }
+            else
+            {
+                contacolpi = 0;
+                timebeetweenshots -= Time.deltaTime;
+            }
+
+        }
+        else
+        {
+            //Quaternion(Quaternione) e' un sistema  usato per rappresentare le rotazioni  ,,,  Quaternion.Euler= restituisce una rotazione lungo gli assi x,y,z 
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 180, 0), Time.deltaTime * smooth);
+        }
+
+    }
 
 
 }
