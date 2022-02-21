@@ -373,6 +373,16 @@ public class MainPlayerScript : MonoBehaviour
             if(!isInvincible)
                 _state = PlayerState.damage;
         }
+
+        if(other.gameObject.layer == 10)
+        {
+            GameController g = GameController.instance;
+
+            g.cameraOffset = other.GetComponent<CameraSettingsTrigger>().offset;
+            g.followPlayerX = other.GetComponent<CameraSettingsTrigger>().followPlayerX;
+            g.followPlayerY = other.GetComponent<CameraSettingsTrigger>().followPlayerY;
+            g.cameraSmoothing = other.GetComponent<CameraSettingsTrigger>().smoothDamp;
+        }
     }
 
     //Loadand Save System

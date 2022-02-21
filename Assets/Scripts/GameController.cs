@@ -4,12 +4,18 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class GameController : MonoBehaviour
 {
-    public MainPlayerScript MainPlayerScript;
+    public MainPlayerScript mainPlayerScript;
     public static GameController instance;
     public GameObject puntatore;
     public GameObject post_processing;
-    public GameObject Player;
+    public GameObject player;
     public GameObject BarraBoss;
+
+    
+    public Vector3 cameraOffset;
+    public bool followPlayerX;
+    public bool followPlayerY;
+    public float cameraSmoothing;
 
     public int maxHealth = 100;
     public int CurrentHealth;
@@ -36,7 +42,7 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-        Player = GameObject.FindGameObjectWithTag("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         //BarraBoss = GameObject.FindGameObjectWithTag("Boss UI");
         post_processing = GameObject.FindGameObjectWithTag("P.Process");
         puntatore = GameObject.FindGameObjectWithTag("Puntatore");
