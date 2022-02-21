@@ -16,6 +16,7 @@ public class GameController : MonoBehaviour
     public bool followPlayerX;
     public bool followPlayerY;
     public float cameraSmoothing;
+    public Vector3 triggerPos;
 
     public int maxHealth = 100;
     public int CurrentHealth;

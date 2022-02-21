@@ -43,17 +43,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb23561626704f845a6afe88d66b8cd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MainPlayerScript: {fileID: 0}
+  mainPlayerScript: {fileID: 0}
   puntatore: {fileID: 0}
   post_processing: {fileID: 0}
+  player: {fileID: 0}
+  BarraBoss: {fileID: 0}
+  cameraOffset: {x: 0, y: -1, z: 3}
+  followPlayerX: 1
+  followPlayerY: 1
+  cameraSmoothing: 10
+  triggerPos: {x: 0, y: 0, z: 0}
   maxHealth: 100
   CurrentHealth: 0
-  maxStamina: 100
   CurrentStamina: 0
+  playerposition: []
+  maxHealthBoss: 100
+  CurrentHealthBoss: 0
+  maxStamina: 100
   staminaRegen: 15
   staminaDrain: 15
   BarraVita: {fileID: 0}
   BarraStamina: {fileID: 0}
+  barraBoss: {fileID: 0}
   _state: 0
   pannelli:
   - {fileID: 0}

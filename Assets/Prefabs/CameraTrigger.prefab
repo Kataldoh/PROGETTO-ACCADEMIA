@@ -58,6 +58,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0, z: 0}
-  followPlayerX: 0
-  followPlayerY: 0
-  smoothDamp: 0
+  followPlayerX: 1
+  followPlayerY: 1
+  smoothDamp: 10

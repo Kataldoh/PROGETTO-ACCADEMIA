@@ -382,6 +382,7 @@ public class MainPlayerScript : MonoBehaviour
             g.followPlayerX = other.GetComponent<CameraSettingsTrigger>().followPlayerX;
             g.followPlayerY = other.GetComponent<CameraSettingsTrigger>().followPlayerY;
             g.cameraSmoothing = other.GetComponent<CameraSettingsTrigger>().smoothDamp;
+            g.triggerPos = other.transform.position;
         }
     }
 

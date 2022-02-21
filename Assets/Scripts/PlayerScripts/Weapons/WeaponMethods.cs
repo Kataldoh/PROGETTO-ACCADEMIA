@@ -51,7 +51,7 @@ public class WeaponMethods : MonoBehaviour
             }
         }
 
-        print(isShoot);
+        //print(isShoot);
 
         //se si spara
         if(isShoot)
