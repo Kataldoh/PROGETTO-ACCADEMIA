@@ -662,9 +662,10 @@ MonoBehaviour:
     m_Bits: 8
   shootingIgnoreLayer:
     serializedVersion: 2
-    m_Bits: 1024
+    m_Bits: 1152
   anim: {fileID: 0}
   laserRender: {fileID: 0}
+  endSpark: {fileID: 0}
   JumpForce: 4
   gravity: -9.81
   weight: -2.5
