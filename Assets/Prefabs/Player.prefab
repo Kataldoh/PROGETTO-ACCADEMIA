@@ -1254,19 +1254,24 @@ MonoBehaviour:
   hangTime: 0
   dashRechargeTime: 1
   dashTimer: 0
+  invincibilityTimer: 0
+  invincibilityDuration: 0
+  mesh: {fileID: 2739222042706643346}
   isGrounded: 0
   isJump: 0
   isDash: 0
   isSprinting: 0
+  isInvincible: 0
   dashUnlocked: 0
   rollUnlocked: 0
-  foot:
-  - {fileID: 7360257971114739753}
-  - {fileID: 3130097561266600129}
+  foot: {fileID: 7360257971114739753}
   rayhead: {fileID: 7573816046275195659}
   layer:
     serializedVersion: 2
     m_Bits: 8
+  shootingIgnoreLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   anim: {fileID: 0}
   laserRender: {fileID: 0}
   JumpForce: 4

@@ -48,6 +48,7 @@ public class MainPlayerScript : MonoBehaviour
     [SerializeField] public LayerMask layer,shootingIgnoreLayer;
     public Animator anim;
     public LineRenderer laserRender;    
+    public GameObject endSpark;
 
     [Header("Jump Physics variables")]
     [SerializeField] float JumpForce;       //forza del salto

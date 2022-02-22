@@ -115,6 +115,7 @@ public class WeaponMethods : MonoBehaviour
                 {
                     print("Hit Enemy");
                 }
+                
                 return hit.point;
             }
         }

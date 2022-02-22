@@ -29,6 +29,7 @@ public enum EnemyState
     attack,
     patrol,
     defence,
+    dead
 }
 
 public enum BossState

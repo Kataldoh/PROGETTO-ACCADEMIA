@@ -42,14 +42,6 @@ public class EnemyScript : MonoBehaviour
         direction = 1;
         target = GameObject.FindGameObjectWithTag("Player").transform;
     }
-    // Update is called once per frame
-    void Update()
-    {
-        if(hp.health <= 0)
-        {
-            Destroy(this.gameObject);
-        }
-    }
 
     private void FixedUpdate() 
     {
@@ -72,6 +64,9 @@ public class EnemyScript : MonoBehaviour
                 break;
             case EnemyState.patrol:
                 Patrol();
+                break; 
+            case EnemyState.dead:
+                Dead();
                 break; 
         }
     }
@@ -146,12 +141,18 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
+    void Dead()
+    {
+        anim.SetBool("death", true);
+        controller.enabled = false;
+    }
+
     void StatelessChecks()
     {
         playerEnemyDistance = Vector3.Distance(transform.position, target.transform.position);
         isGrounded = IsGrounded();
         
-        //anim.SetFloat("posx", move.x, 0.05f, Time.deltaTime);
+        //controllo la velocità dell'animazione;
         anim.SetFloat("posx", speedx, 0.2f, Time.deltaTime);
 
         //controllo della gravità
@@ -165,14 +166,16 @@ public class EnemyScript : MonoBehaviour
         }
 
         controller.Move(transform.up * velocity * Time.deltaTime);
+        /**/
 
-
+        //controlla se il nemico arriva ad un muro, per poi girarsi
         if (IsInRayCastDireciton(transform.forward, 0.45f, layer, Color.green))
         {
             if (_state != EnemyState.attack)
                 direction = direction * -1;
         }
 
+        //controlla se il nemico arriva ad una sporgenza, per poi girarsi
         if(!Physics.CheckSphere(turnAroundPoint.position, 0.5f, layer))
         {
             if (_state != EnemyState.attack)
@@ -184,6 +187,11 @@ public class EnemyScript : MonoBehaviour
         //rotazione del nemico
         qrot = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 90 * direction, 0), Time.deltaTime * edata.speedRot);
         transform.rotation = qrot;
+
+        if(hp.health <= 0)
+        {
+            _state = EnemyState.dead;
+        }
     }
 
     bool IsInRayCastDireciton(Vector3 direction, float lenght, LayerMask layer, Color color)
