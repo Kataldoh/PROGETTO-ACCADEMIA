@@ -52554,7 +52554,7 @@ GameObject:
   - component: {fileID: 1515799977}
   - component: {fileID: 1515799976}
   - component: {fileID: 1515799975}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -59902,6 +59902,10 @@ PrefabInstance:
       propertyPath: projectiles.Array.data[4]
       value: 
       objectReference: {fileID: 269190903}
+    - target: {fileID: 8495937049330856807, guid: d6d06c887a1aae94f8c6e8cc2c0c557b, type: 3}
+      propertyPath: shootingIgnoreLayer.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
     - target: {fileID: 8816482072968255654, guid: d6d06c887a1aae94f8c6e8cc2c0c557b, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -60333,7 +60337,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh50332
+  m_Name: pb_Mesh26530
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2

@@ -45,7 +45,7 @@ public class MainPlayerScript : MonoBehaviour
     [Header("Assigned Variables")]
     [SerializeField] Transform foot;        //posizione del "piede" del player, dove la sfera per trovare se si è a terra sarà situata
     [SerializeField] Transform rayhead;     
-    [SerializeField] public LayerMask layer;
+    [SerializeField] public LayerMask layer,shootingIgnoreLayer;
     public Animator anim;
     public LineRenderer laserRender;    
 
@@ -121,8 +121,8 @@ public class MainPlayerScript : MonoBehaviour
             isDash = true;
         
         GameController.instance.BarraStamina.SetStamina(dashTimer * 100);
-        aM.ScreenAiming(rayhead);
-        aM.GeneralWeaponHandler(weapons_SO[0], rayhead, projectiles);
+        aM.ScreenAiming(rayhead, shootingIgnoreLayer);
+        aM.GeneralWeaponHandler(weapons_SO[0], rayhead, projectiles, shootingIgnoreLayer);
 
 
         /*
@@ -230,12 +230,12 @@ public class MainPlayerScript : MonoBehaviour
 
         print(dirX);
         //determino la direzione nel quale il player guarda
-        if (move.x > 0 || dirX > 0)
+        if (move.x > 0 || (move.x == 0 && dirX > 0))
         {
             rot = 90;
             dir = 1;
         }
-        else if (move.x < 0 || dirX < 0)
+        else if (move.x < 0 || (move.x == 0 && dirX < 0))
         {
             rot = 270;
             dir = -1;

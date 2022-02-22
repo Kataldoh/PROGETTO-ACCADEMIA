@@ -13,7 +13,7 @@ public class WeaponMethods : MonoBehaviour
     int i;  //projectile Index
     float shootingInterval; //usato per controllare l'intervallo di sparo
         
-    public void GeneralWeaponHandler(WeaponStats wS, Transform aimStart, GameObject[] trailGO)
+    public void GeneralWeaponHandler(WeaponStats wS, Transform aimStart, GameObject[] trailGO,LayerMask ignoreLayer)
     {
         //da la posizione del mouse rispetto al punto iniziale dato
         Vector3 direction = _vectorDir(aimStart);
@@ -32,7 +32,7 @@ public class WeaponMethods : MonoBehaviour
             trailGO[i].SetActive(true);
             trailGO[i].transform.position = aimStart.position;
             RaycastHit hit;
-            if (Physics.Raycast(aimStart.position, direction, out hit, 5))   //Se il raycast colpisce qualcosa 
+            if (Physics.Raycast(aimStart.position, direction, out hit, 5, ~ignoreLayer))   //Se il raycast colpisce qualcosa 
             {
                 pInst.lastShotPosition = hit.point; 
                 if(hit.collider.tag == "Nemico")            //Se colpisce un nemico
@@ -84,7 +84,7 @@ public class WeaponMethods : MonoBehaviour
         }
     }
 
-    public Vector3 ScreenAiming(Transform aimStart)
+    public Vector3 ScreenAiming(Transform aimStart, LayerMask ignoreLayer)
     {
         //calcolo della direzione dello sparo
         Vector3 direction = _vectorDir(aimStart);
@@ -106,7 +106,7 @@ public class WeaponMethods : MonoBehaviour
             pInst.dirX = Mathf.Round(direction.x);      //cambia la direzione del player
             pInst.laserRender.enabled = true;           //rende il laser di mira visibile
             RaycastHit hit;
-            if (Physics.Raycast(aimStart.position, direction, out hit, 5))   //Se il raycast colpisce qualcosa 
+            if (Physics.Raycast(aimStart.position, direction, out hit, 5, ~ignoreLayer))   //Se il raycast colpisce qualcosa 
             {
                 pInst.laserRender.SetPosition(1, hit.point);         //Disegna la fine del raggio sul punto colpito
                 //print("Hit");
