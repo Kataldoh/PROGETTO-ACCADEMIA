@@ -660,6 +660,9 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 8
+  shootingIgnoreLayer:
+    serializedVersion: 2
+    m_Bits: 1024
   anim: {fileID: 0}
   laserRender: {fileID: 0}
   JumpForce: 4

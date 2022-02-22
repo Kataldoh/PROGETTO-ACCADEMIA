@@ -31,6 +31,7 @@ public class WeaponMethods : MonoBehaviour
             shootingInterval = 0;
             trailGO[i].SetActive(true);
             trailGO[i].transform.position = aimStart.position;
+            trailGO[i].GetComponent<TrailRenderer>().Clear();
             RaycastHit hit;
             if (Physics.Raycast(aimStart.position, direction, out hit, 5, ~ignoreLayer))   //Se il raycast colpisce qualcosa 
             {
@@ -74,7 +75,7 @@ public class WeaponMethods : MonoBehaviour
                 {
                     Destroy(oneShot);
                 }
-
+                
 
                 trailGO[i].transform.position = aimStart.position;      //Resetta la posizione del trailGO/Proiettile
                 trailGO[i].gameObject.SetActive(false);                 //lo porta a falso
@@ -129,8 +130,8 @@ public class WeaponMethods : MonoBehaviour
 
     Vector3 _vectorDir(Transform aimStart) 
     {
-        var vettoredir = new Vector3(Input.mousePosition.x - Screen.width/2 -aimStart.position.x,
-                             Input.mousePosition.y - Screen.height/2 -aimStart.position.y, Input.mousePosition.z).normalized;
+        var vettoredir = new Vector3(Input.mousePosition.x -Camera.main.WorldToScreenPoint(aimStart.position).x,
+                             Input.mousePosition.y -Camera.main.WorldToScreenPoint(aimStart.position).y, Input.mousePosition.z).normalized;
         var dist = vettoredir.magnitude;
         Vector3 direction = (vettoredir / dist);
         direction.z = 0;
