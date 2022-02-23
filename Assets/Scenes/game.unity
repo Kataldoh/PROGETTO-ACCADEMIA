@@ -39499,11 +39499,6 @@ MonoBehaviour:
   m_SelectedFaces: 
   m_SelectedEdges: []
   m_SelectedVertices: 
---- !u!4 &1086038411 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9009861900537670282, guid: d6d06c887a1aae94f8c6e8cc2c0c557b, type: 3}
-  m_PrefabInstance: {fileID: 1764257603}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1109161745
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -61112,18 +61107,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8495937049330856807, guid: d6d06c887a1aae94f8c6e8cc2c0c557b, type: 3}
-      propertyPath: foot.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8495937049330856807, guid: d6d06c887a1aae94f8c6e8cc2c0c557b, type: 3}
-      propertyPath: foot.Array.data[0]
-      value: 
-      objectReference: {fileID: 1086038411}
-    - target: {fileID: 8495937049330856807, guid: d6d06c887a1aae94f8c6e8cc2c0c557b, type: 3}
-      propertyPath: foot.Array.data[1]
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8495937049330856807, guid: d6d06c887a1aae94f8c6e8cc2c0c557b, type: 3}
       propertyPath: weapons_SO.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -61155,10 +61138,6 @@ PrefabInstance:
       propertyPath: projectiles.Array.data[4]
       value: 
       objectReference: {fileID: 269190903}
-    - target: {fileID: 8495937049330856807, guid: d6d06c887a1aae94f8c6e8cc2c0c557b, type: 3}
-      propertyPath: shootingIgnoreLayer.m_Bits
-      value: 1024
-      objectReference: {fileID: 0}
     - target: {fileID: 8816482072968255654, guid: d6d06c887a1aae94f8c6e8cc2c0c557b, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -61166,10 +61145,6 @@ PrefabInstance:
     - target: {fileID: 8816482072968255654, guid: d6d06c887a1aae94f8c6e8cc2c0c557b, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 9009861900537670282, guid: d6d06c887a1aae94f8c6e8cc2c0c557b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6d06c887a1aae94f8c6e8cc2c0c557b, type: 3}
