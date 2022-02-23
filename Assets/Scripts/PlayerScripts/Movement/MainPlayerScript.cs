@@ -1,4 +1,4 @@
-using System.Collections;
+  using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -36,7 +36,7 @@ public class MainPlayerScript : MonoBehaviour
     public bool isJump;
     public bool isDash;
     public bool isSprinting;
-    public bool isInvincible;
+    public bool isInvincible;  
 
     [Header("Unlocked Abilities")]
     public bool dashUnlocked;
@@ -44,7 +44,8 @@ public class MainPlayerScript : MonoBehaviour
 
     [Header("Assigned Variables")]
     [SerializeField] Transform foot;        //posizione del "piede" del player, dove la sfera per trovare se si è a terra sarà situata
-    [SerializeField] Transform rayhead;     
+    [SerializeField] Transform rayhead;
+    [SerializeField] Transform rollCheck;
     [SerializeField] public LayerMask layer,shootingIgnoreLayer;
     public Animator anim;
     public LineRenderer laserRender;    
@@ -221,9 +222,16 @@ public class MainPlayerScript : MonoBehaviour
                 );
         
         //Mette a zero move.y per prevenire salti più alti ed errori d'animazione
-        if(move.y >0)
+        if(move.y > 0 || !rollUnlocked)
         {
             move.y=0;
+        }
+
+        bool isStuck = RollCheck();
+
+        if (isStuck)
+        {
+            move.y = -1;
         }
             
         //Assegno il metodo per controllare se si è a terra ad una variabile
@@ -309,6 +317,11 @@ public class MainPlayerScript : MonoBehaviour
                 break;
                 */
         }
+    }
+
+    bool RollCheck()
+    {
+        return Physics.CheckSphere(rollCheck.position, radLenght, layer);
     }
 
     //metodo di controllo del terreno
