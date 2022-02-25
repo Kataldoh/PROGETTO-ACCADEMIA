@@ -19,6 +19,7 @@ namespace UnityCore
             ST_02,
             SFX_01,
             SFX_02,
+            None,
 
 
 
