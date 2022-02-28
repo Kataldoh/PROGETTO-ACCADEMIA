@@ -330,7 +330,7 @@ public class MainPlayerScript : MonoBehaviour
         if(!Physics.CheckSphere(foot.position, radLenght, layer))
         {
             hangTime += Time.deltaTime;
-            if(hangTime >= 0.25f)
+            if(hangTime >= 0.3f)
             {
                 return false;
             }
