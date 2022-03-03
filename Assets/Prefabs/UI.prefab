@@ -1782,6 +1782,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8000807279642802103, guid: 1b6b70a3f2b76884685191d1a26621f6, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b6b70a3f2b76884685191d1a26621f6, type: 3}
 --- !u!224 &6425425368681928646 stripped
@@ -2194,6 +2198,10 @@ PrefabInstance:
       propertyPath: m_Value
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 8000807279642802103, guid: 1b6b70a3f2b76884685191d1a26621f6, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 1b6b70a3f2b76884685191d1a26621f6, type: 3}
@@ -2354,6 +2362,10 @@ PrefabInstance:
     - target: {fileID: 8000807279642802103, guid: 1b6b70a3f2b76884685191d1a26621f6, type: 3}
       propertyPath: m_Value
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 8000807279642802103, guid: 1b6b70a3f2b76884685191d1a26621f6, type: 3}
+      propertyPath: m_Interactable
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
