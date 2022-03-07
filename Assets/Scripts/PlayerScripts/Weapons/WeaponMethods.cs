@@ -39,7 +39,7 @@ public class WeaponMethods : MonoBehaviour
 
             if (!isAiming) 
             {
-                direction = aimStart.parent.forward;
+                direction = aimStart.forward;
                 direction.z = 0;
             }
 
