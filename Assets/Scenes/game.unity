@@ -48744,7 +48744,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   debug: 0
-  tracks: []
+  tracks:
+  - source: {fileID: 1520446509}
+    audio:
+    - type: 0
+      clip: {fileID: 8300000, guid: e2eb85366e481854ba84ffb046cf43dc, type: 3}
 --- !u!4 &1228717395
 Transform:
   m_ObjectHideFlags: 0
