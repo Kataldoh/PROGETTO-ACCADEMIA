@@ -123,7 +123,6 @@ public class MainPlayerScript : MonoBehaviour
             isDash = true;
         
         GameController.instance.BarraStamina.SetStamina(dashTimer * 100);
-        aM.ScreenAiming(rayhead, shootingIgnoreLayer);
         aM.GeneralWeaponHandler(weapons_SO[0], rayhead, projectiles, shootingIgnoreLayer);
 
 

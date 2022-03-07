@@ -24,8 +24,11 @@ public class WeaponMethods : MonoBehaviour
             i=0;
         }
 
+        //metodo di mira al quale servono 
+        ScreenAiming(aimStart, ignoreLayer);
+
         //metodo di sparo
-        if(Input.GetButton("Fire1") && !isShoot && isAiming)
+        if (Input.GetButton("Fire1") && !isShoot)
         {
             isShoot = true;
             shootingInterval = 0;
@@ -33,6 +36,13 @@ public class WeaponMethods : MonoBehaviour
             trailGO[i].transform.position = aimStart.position;
             trailGO[i].GetComponent<TrailRenderer>().Clear();
             RaycastHit hit;
+
+            if (!isAiming) 
+            {
+                direction = aimStart.parent.forward;
+                direction.z = 0;
+            }
+
             if (Physics.Raycast(aimStart.position, direction, out hit, 5, ~ignoreLayer))   //Se il raycast colpisce qualcosa 
             {
                 pInst.lastShotPosition = hit.point; 
