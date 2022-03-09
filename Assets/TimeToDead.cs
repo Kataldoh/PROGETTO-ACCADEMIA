@@ -5,6 +5,7 @@ using UnityEngine;
 public class TimeToDead : MonoBehaviour
 {
     // Start is called before the first frame update
+
     [SerializeField] float dead;
     void Start()
     {
