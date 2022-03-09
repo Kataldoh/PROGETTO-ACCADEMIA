@@ -43,13 +43,12 @@ public class Proiettile : MonoBehaviour
         */
     }
 
-    private void OnTriggerEnter(Collider other)// se collide con il player allora si degenera
+
+    private void OnCollisionEnter(Collision collision)
     {
-        if (other.CompareTag("Player"))
-        {
-            Distruggiproiettile();
-        }
+        Distruggiproiettile();
     }
+
 
     void Distruggiproiettile()//distruggo il proiettile
     {
