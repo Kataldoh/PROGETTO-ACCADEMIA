@@ -6,6 +6,8 @@ public class Proiettile : MonoBehaviour
 {
     public float speed;
 
+    [SerializeField] GameObject hit;
+
     private Transform player;
     private Vector3 target;
     Rigidbody rb;
@@ -46,13 +48,16 @@ public class Proiettile : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        //var emission = hit.emission; 
+        //emission.enabled = true; 
+        GameObject go = Instantiate(hit, transform.position, transform.rotation);
         Distruggiproiettile();
     }
 
 
     void Distruggiproiettile()//distruggo il proiettile
     {
-        Destroy(gameObject);
+        Destroy(gameObject,0.1f);
     }
 
 

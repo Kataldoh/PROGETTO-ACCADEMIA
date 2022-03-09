@@ -561,6 +561,7 @@ Transform:
   - {fileID: 4408529143413816531}
   - {fileID: 4408529143413817129}
   - {fileID: 9009861900537670282}
+  - {fileID: 4325915905541906710}
   - {fileID: 6580722612111210976}
   - {fileID: 3616844845562259981}
   - {fileID: 9172078082053703250}
@@ -653,11 +654,12 @@ MonoBehaviour:
   isGrounded: 0
   isJump: 0
   isDash: 0
-  isSprinting: 0
   isInvincible: 0
   dashUnlocked: 0
   rollUnlocked: 0
-  foot: {fileID: 9009861900537670282}
+  groundCheck:
+  - {fileID: 9009861900537670282}
+  - {fileID: 4325915905541906710}
   rayhead: {fileID: 8229782521810080168}
   rollCheck: {fileID: 9172078082053703250}
   layer:
@@ -672,7 +674,7 @@ MonoBehaviour:
   JumpForce: 4
   gravity: -9.81
   weight: -2.5
-  radLenght: 0.05
+  radLenght: 0.16
   velocity: 0
   lastShotPosition: {x: 0, y: 0, z: 0}
 --- !u!120 &4126119521126577026
@@ -2170,7 +2172,7 @@ Transform:
   m_Children:
   - {fileID: 1756340941646089112}
   m_Father: {fileID: 4759721911903040}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5341505277372368956
 MonoBehaviour:
@@ -2196,7 +2198,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9009861900537670282}
   m_Layer: 0
-  m_Name: checkground
+  m_Name: checkground.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2210,7 +2212,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1009397522705456231}
   m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.3, z: -0.2}
   m_LocalScale: {x: 0.49999988, y: 0.8, z: 0.49999988}
   m_Children: []
   m_Father: {fileID: 4759721911903040}
@@ -2331,7 +2333,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4759721911903040}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4408529143413910281
 GameObject:
@@ -2713,7 +2715,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4759721911903040}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!96 &659762813765109083
 TrailRenderer:
@@ -2822,6 +2824,36 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!1 &6283088168697072571
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4325915905541906710}
+  m_Layer: 0
+  m_Name: checkground.R
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4325915905541906710
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6283088168697072571}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0.3, z: 0.2}
+  m_LocalScale: {x: 0.49999988, y: 0.8, z: 0.49999988}
+  m_Children: []
+  m_Father: {fileID: 4759721911903040}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8253649573453087644
 GameObject:
   m_ObjectHideFlags: 0
@@ -2865,7 +2897,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: 0, y: 1.698, z: 0.176}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: -0.037511826, y: 0, z: 0.102371216}
+  - {x: -0.037511587, y: 0, z: 0.10237312}
   m_RotationOffsets:
   - {x: 0, y: -3.1326077, z: 90.000015}
   m_AffectTranslationX: 0

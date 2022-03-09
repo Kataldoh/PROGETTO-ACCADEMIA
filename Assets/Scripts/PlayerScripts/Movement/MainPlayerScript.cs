@@ -12,18 +12,18 @@ public class MainPlayerScript : MonoBehaviour
     [Header("Player Data")]
     //*****************************************
     public PlayerData pdata; // SCRIPTABLE OBJECT che determina forza del salto,velocit� della rotazione,lunghezza del raycast frontale
-    public WeaponStats[] weapons_SO;            //contiene gli stats delle armi (SCRIPTABLE OBJECTS)
-    [SerializeField] GameObject[] projectiles;  //contiene i proiettili da sparare
-    public PlayerState _state;              // Stati del player
-    [SerializeField] PlayerStatesEvents _Estates;
-    [SerializeField] public Vector3 move;
-    [SerializeField] TrailRenderer dashTrail;
-    public float speed;
+    public WeaponStats[] weapons_SO;                //contiene gli stats delle armi (SCRIPTABLE OBJECTS)
+    [SerializeField] GameObject[] projectiles;      //contiene i proiettili da sparare
+    public PlayerState _state;                      // Stati del player
+    [SerializeField] PlayerStatesEvents _Estates;   
+    [SerializeField] public Vector3 move;           //Vector3 che contiene gli input di movimento
+    [SerializeField] TrailRenderer dashTrail;       
+    public float speed;                             //velocità del player
     public CharacterController controller;
-    public float dirX;
+    public float dirX;                  
     public int dir;                     //direzione nella quale il character si gira
     public float height;                //altezza del CharacterController
-    public float hangTime;              //(da implementare) un hangtime per dare al giocatore una finestra per saltare dopo essere in aria
+    public float hangTime;              //un timer per dare al giocatore una finestra di tempo per saltare dopo essere in aria
     public float dashRechargeTime;      //variabile utilizzata per il controllo del tempo di ricarica del dash
     public float dashTimer;             //variabile contenente il timer del dash
     public float invincibilityTimer;             //variabile contenente il timer del dash
@@ -32,28 +32,27 @@ public class MainPlayerScript : MonoBehaviour
     [SerializeField] GameObject mesh;
     
     [Header("Various Checks")]
-    [SerializeField] public bool isGrounded; //bool che determina se il player è a terra oppure no
-    public bool isJump;
-    public bool isDash;
-    public bool isSprinting;
-    public bool isInvincible;  
+    [SerializeField] public bool isGrounded;    //bool che determina se il player è a terra oppure no
+    public bool isJump;                         //se il player salta
+    public bool isDash;                         //se il player esegue il dash
+    public bool isInvincible;                   //se il player è invincibile
 
     [Header("Unlocked Abilities")]
-    public bool dashUnlocked;
-    public bool rollUnlocked;
+    public bool dashUnlocked;                   //bool che determina che il dash sia sbloccato
+    public bool rollUnlocked;                   //se il roll/crouch sia sbloccato
 
     [Header("Assigned Variables")]
-    [SerializeField] Transform foot;        //posizione del "piede" del player, dove la sfera per trovare se si è a terra sarà situata
-    [SerializeField] Transform rayhead;
-    [SerializeField] Transform rollCheck;
-    [SerializeField] public LayerMask layer,shootingIgnoreLayer;
+    [SerializeField] Transform[] groundCheck;        //posizione del "piede" del player, dove la sfera per trovare se si è a terra sarà situata
+    [SerializeField] Transform rayhead;              //posizione dal quale la mira e lo sparo parte, messo
+    [SerializeField] Transform rollCheck;            //posizione dalla quale si controlla se il player rimane abbassato
+    [SerializeField] public LayerMask layer,shootingIgnoreLayer;    //
     public Animator anim;
     public LineRenderer laserRender;    
     public GameObject endSpark;
 
     [Header("Jump Physics variables")]
     [SerializeField] float JumpForce;       //forza del salto
-    [SerializeField] public float gravity;
+    [SerializeField] public float gravity;  //variabile della gravità
     [SerializeField] public float weight;   //peso a terra del player
     [SerializeField] float radLenght;       //valore del raggio della sfera ai piedi del player per controllare se è a terra
     [SerializeField] public float velocity;
@@ -89,6 +88,7 @@ public class MainPlayerScript : MonoBehaviour
 
     private void Update()
     {
+        //controlla il tempo di invincibilità
         if(isInvincible)
         {
             invincibilityTimer += Time.deltaTime;
@@ -112,32 +112,29 @@ public class MainPlayerScript : MonoBehaviour
             GameController.instance._state = GameState.dead;
         }
 
+        //--------------------
+        //GESTIONE DEL DASH
+        //--------------------
         //impostazione del timer del dash
-        if(dashTimer < dashRechargeTime)
+        if (dashTimer < dashRechargeTime)
             dashTimer += Time.deltaTime;
         else
             dashTimer = dashRechargeTime;
 
-        //esegue il dash se il timer è maggiore/uguale a quello presentato in dashRechrgeTime
-        if(Input.GetButtonDown("Fire3") && dashTimer >= dashRechargeTime)
+        //esegue il dash se il timer è maggiore/uguale a quello presentato in dashRechrgeTime (se sbloccato)
+        if (Input.GetButtonDown("Fire3") && dashUnlocked && dashTimer >= dashRechargeTime)
             isDash = true;
         
+        //Setta la barra della stamina tramite il timer del dash
         GameController.instance.BarraStamina.SetStamina(dashTimer * 100);
+
+        //---------------------------
+        //GESTIONE DELLA MIRA E SPARO
+        //---------------------------
         aM.GeneralWeaponHandler(weapons_SO[0], rayhead, projectiles, shootingIgnoreLayer);
 
 
-        /*
-        if (!isSprinting)
-        {
-            GameController.instance.RegenStamina();
-          
-        }
-
-        if (isSprinting)
-        {
-            GameController.instance.TakeStamina();
-        }
-        */
+        //Sistema di salvataggio
         if(Input.GetKey(KeyCode.O))
         {
             SavePlayer();
@@ -160,6 +157,7 @@ public class MainPlayerScript : MonoBehaviour
             States();       //metodo per la gestione degli stati
         }
 
+        //Fà sfarfallare la texture quando si è invincibili
         if(isInvincible)
         {
             if(mesh.activeSelf)
@@ -171,7 +169,7 @@ public class MainPlayerScript : MonoBehaviour
                 mesh.SetActive(true);
             }
         }
-        else
+        else    //al termine dell'invincibilità si riattiva la mesh
         {
             mesh.SetActive(true);
         }
@@ -181,6 +179,9 @@ public class MainPlayerScript : MonoBehaviour
     //          METODI
     //***************************//
 
+    //--------------------
+    //GESTIONE DEGLI STATI
+    //--------------------
     public void States() {
         switch (_state)
         {
@@ -202,41 +203,47 @@ public class MainPlayerScript : MonoBehaviour
             case PlayerState.dead:
                 _Estates.P_Death();
                 break;
-            /*
-            case PlayerState.sprinting:
-                _Estates.P_Sprinting();
-                break;
-            */
         }
     }
 
+    //---------------------------------------------
+    //GESTIONE DI ELEMENTI INDIPENDENTI DAGLI STATI
+    //---------------------------------------------
     public void StateIndipendentActions()
     {
-
+        //--------------------
         //Registra il movimento sugli assi
         move = new Vector3(
                    Input.GetAxis("Horizontal") * Time.deltaTime * speed,
                    Input.GetAxis("Vertical"),
                    0
                 );
-        
+        //--------------------
+
+        //--------------------
         //Mette a zero move.y per prevenire salti più alti ed errori d'animazione
-        if(move.y > 0 || !rollUnlocked)
+        if (move.y > 0 || !rollUnlocked)
         {
             move.y=0;
         }
+        //--------------------
 
+        //--------------------
+        //Controlla se il player ha qualcosa sopra di sè
         bool isStuck = RollCheck();
-
+        //E lo forza ad abbassarsi
         if (isStuck)
         {
             move.y = -1;
         }
-            
+        //--------------------
+
+        //--------------------
         //Assegno il metodo per controllare se si è a terra ad una variabile
         isGrounded = IsGrounded();
+        //--------------------
 
-        print(dirX);
+        //--------------------
         //determino la direzione nel quale il player guarda
         if (move.x > 0 || (move.x == 0 && dirX > 0))
         {
@@ -248,11 +255,15 @@ public class MainPlayerScript : MonoBehaviour
             rot = 270;
             dir = -1;
         }
+        //--------------------
 
+        //--------------------
         //rotazione del player
         Quaternion qrot = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, rot, 0), Time.deltaTime * pdata.speedRot);
         transform.rotation = qrot;
+        //--------------------
 
+        //--------------------
         //Applico Gravità
         if (IsGrounded() && velocity <= 0)  //Se a terra con velocity <= 0
         {
@@ -267,23 +278,29 @@ public class MainPlayerScript : MonoBehaviour
             velocity += gravity * Time.deltaTime;
         }
 
+
         //Limita la velocità di caduta per prevenire gravità eccessiva
         if(velocity <=-5)
         {
             velocity = -5;
         }
+        //--------------------
 
+        //--------------------
         //Attiva il trail se il dash è attivo
-        if(_state == PlayerState.dash)
+        if (_state == PlayerState.dash)
             dashTrail.enabled = true;
         else
             dashTrail.enabled = false;
 
         if(_state != PlayerState.damage)
             controller.detectCollisions = true;
+        //--------------------
     }
 
-    //metodo di controllo delle animazioni
+    //-------------------------------------------------------
+    //METODO DI CONTROLLO DELLE ANIMAZIONI IN BASE AGLI STATI
+    //-------------------------------------------------------
     void AnimationHandler()
     {
         switch (_state)
@@ -308,37 +325,40 @@ public class MainPlayerScript : MonoBehaviour
             case PlayerState.dead:
                 anim.SetBool("death", true);
                 break;
-                /*
-            case PlayerState.sprinting:
-                anim.SetBool("jump", false);
-                anim.SetFloat("posx", move.x, 0.05f, Time.deltaTime);
-                anim.SetFloat("posy", move.y, 0.15f, Time.deltaTime);
-                break;
-                */
         }
     }
 
+    //Controlla se il player ha qualcosa al disopra di se
     bool RollCheck()
     {
-        return Physics.CheckSphere(rollCheck.position, radLenght, layer);
+        return Physics.Raycast(rollCheck.position, transform.up, 0.1f, layer);
     }
 
     //metodo di controllo del terreno
     public bool IsGrounded()
     {
-        if(!Physics.CheckSphere(foot.position, radLenght, layer))
+        //debugging dei raycast per capire se si è a terra
+        Debug.DrawRay(groundCheck[0].position, -transform.up * radLenght, Color.yellow);
+        Debug.DrawRay(groundCheck[1].position, -transform.up * radLenght, Color.yellow);
+
+        //Se i 2 raycast posti a destra e a sinistra del player non trovano un oggetto nel layer Ground
+        if (!Physics.Raycast(groundCheck[0].position,-transform.up, radLenght, layer) && 
+            !Physics.Raycast(groundCheck[1].position, -transform.up, radLenght, layer))
         {
-            hangTime += Time.deltaTime;
-            if(hangTime >= 0.3f)
+            //inizio ad aggiungere tempo all'hangTime
+            //un timer per dare al giocatore una finestra di tempo per saltare dopo essere in aria
+            hangTime += Time.deltaTime; 
+
+            if(hangTime >= 0.3f)    //se l'hangtime è maggiore del valore dato ritorna falso, quindi il player non è a terra
             {
                 return false;
             }
-            else
+            else                    //altrimenti è a terra
             {
                 return true;
             }  
         }
-        else
+        else                        //altrimenti è a terra e l'hangtime è messo a 0
         {
             hangTime=0;
             return true;
@@ -348,22 +368,33 @@ public class MainPlayerScript : MonoBehaviour
     //Collisioni
     private void OnControllerColliderHit(ControllerColliderHit hit) 
     {
+        //Se si entra in contatto con un gameobject con tag "Nemico" o "Damage" quando il player non è già nello stato di danno
         if(hit.gameObject.tag == "Nemico" || hit.gameObject.tag == "DamageDealer" 
                         && _state != PlayerState.damage)
         {
-            if(!isInvincible)
-                _state = PlayerState.damage;
+            if(!isInvincible)                   //ed eseguendo un'ultimo controllo per vedere se ha ancora invincibile
+                _state = PlayerState.damage;    //setta lo stato di danno
         }
 
-        if(hit.gameObject.tag == "Gateway")
+        //(PROVVISORIO)
+        //Se si entra in contatto con un gameobject con tag "Gateway" si accede alla scena del Boss
+        if (hit.gameObject.tag == "Gateway")
         {
             SceneManager.LoadScene(2);
         }
 
+        //--------------------
+        //Gestione dei pickup 
         if(hit.gameObject.tag == "Pickup")
         {
+            //Prende dal codice assegnato ai pickup il valore assegnato che indica il tipo
             int unlockAbilityN = hit.gameObject.GetComponent<UpgradePickups>().powerUpValue;
 
+            //Switch che controlla cosa sbloccare dato il valore del pickup
+            //------------------------
+            // 0: Dash
+            // 1: Roll/Crouch
+            //------------------------
             switch(unlockAbilityN)
             {
                 case 0:
@@ -374,22 +405,25 @@ public class MainPlayerScript : MonoBehaviour
                     break;
             }
 
-
+            //Distruggi il powerup una volta preso
             Destroy(hit.gameObject);
         }
     }
 
     private void OnTriggerEnter(Collider other) 
     {
-        if(other.gameObject.tag == "Nemico" || other.gameObject.tag == "DamageDealer" && _state != PlayerState.damage && !isInvincible)
+        //Se si entra in contatto con un trigger con tag "Nemico" o "Damage" quando il player non è già nello stato di danno
+        if (other.gameObject.tag == "Nemico" || other.gameObject.tag == "DamageDealer" && _state != PlayerState.damage && !isInvincible)
         {
-            if(!isInvincible)
-                _state = PlayerState.damage;
+            if(!isInvincible)                   //ed eseguendo un'ultimo controllo per vedere se ha ancora invincibile
+                _state = PlayerState.damage;    //setta lo stato di danno
         }
 
-        if(other.gameObject.layer == 10)
+        //Se si entra in contatto con un trigger presente del layer 10, designato ai SETTAGGI DELLA CAMERA
+        //Assegna i vari valori della telecamera alle rispettive variabili presenti nel GameController
+        if (other.gameObject.layer == 10)
         {
-            GameController g = GameController.instance;
+            GameController g = GameController.instance;     
 
             g.cameraOffset = other.GetComponent<CameraSettingsTrigger>().offset;
             g.followPlayerX = other.GetComponent<CameraSettingsTrigger>().followPlayerX;
