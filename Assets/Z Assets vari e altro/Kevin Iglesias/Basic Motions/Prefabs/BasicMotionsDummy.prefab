@@ -654,7 +654,6 @@ MonoBehaviour:
   isGrounded: 0
   isJump: 0
   isDash: 0
-  isSprinting: 0
   isInvincible: 0
   dashUnlocked: 0
   rollUnlocked: 0
@@ -675,7 +674,7 @@ MonoBehaviour:
   JumpForce: 4
   gravity: -9.81
   weight: -2.5
-  radLenght: 0.35
+  radLenght: 0.16
   velocity: 0
   lastShotPosition: {x: 0, y: 0, z: 0}
 --- !u!120 &4126119521126577026
@@ -2898,7 +2897,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: 0, y: 1.698, z: 0.176}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: -0.037511826, y: 0, z: 0.10237408}
+  - {x: -0.037511587, y: 0, z: 0.10237312}
   m_RotationOffsets:
   - {x: 0, y: -3.1326077, z: 90.000015}
   m_AffectTranslationX: 0
