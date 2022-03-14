@@ -72,7 +72,12 @@ public class BossCode : MonoBehaviour
         {
             GameController.instance.EnableBossBar(false);
         }
-        
+
+        if (IsGrounded())
+        {
+            
+        }
+
     }
 
     void Idle()
@@ -83,8 +88,9 @@ public class BossCode : MonoBehaviour
         anim.SetBool("Running", false);
         jumped= false;
         velocity = 0;
+        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
 
-        if(transform.position.x < target.transform.position.x)
+        if (transform.position.x < target.transform.position.x)
         {
             rot = 90;
             moveDir = 1;
@@ -122,6 +128,7 @@ public class BossCode : MonoBehaviour
             bState = BossState.idle;
             anim.SetBool("HasBumped", true);
         }
+        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
     }
 
     void Jump()
