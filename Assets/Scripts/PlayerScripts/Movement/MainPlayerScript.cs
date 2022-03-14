@@ -15,7 +15,7 @@ public class MainPlayerScript : MonoBehaviour
     public WeaponStats[] weapons_SO;                //contiene gli stats delle armi (SCRIPTABLE OBJECTS)
     [SerializeField] GameObject[] projectiles;      //contiene i proiettili da sparare
     public PlayerState _state;                      // Stati del player
-    [SerializeField] PlayerStatesEvents _Estates;   
+    [SerializeField] PlayerStatesEvents _Estates;
     [SerializeField] public Vector3 move;           //Vector3 che contiene gli input di movimento
     [SerializeField] TrailRenderer dashTrail;       
     public float speed;                             //velocità del player
@@ -34,6 +34,7 @@ public class MainPlayerScript : MonoBehaviour
     [Header("Various Checks")]
     [SerializeField] public bool isGrounded;    //bool che determina se il player è a terra oppure no
     public bool isJump;                         //se il player salta
+    public bool isSliding;                      //se il player fa lo slide
     public bool isDash;                         //se il player esegue il dash
     public bool isInvincible;                   //se il player è invincibile
 
@@ -128,6 +129,12 @@ public class MainPlayerScript : MonoBehaviour
         //Setta la barra della stamina tramite il timer del dash
         GameController.instance.BarraStamina.SetStamina(dashTimer * 100);
 
+        //(PROVVISORIO)
+        //Controlla se si può fare il dash, quando si è a terra e ci si può muovere
+        if(_state == PlayerState.groundMoving)
+            if (Input.GetButtonDown("SlideButton"))
+                _state = PlayerState.sliding;
+
         //---------------------------
         //GESTIONE DELLA MIRA E SPARO
         //---------------------------
@@ -196,6 +203,9 @@ public class MainPlayerScript : MonoBehaviour
                 break;
             case PlayerState.dash:
                 _Estates.P_Dash();
+                break;
+            case PlayerState.sliding:
+                _Estates.P_Slide();
                 break;
             case PlayerState.damage:
                 _Estates.P_Damage();
@@ -316,6 +326,10 @@ public class MainPlayerScript : MonoBehaviour
                 anim.SetFloat("posx", move.x, 0.05f, Time.deltaTime);
                 anim.SetFloat("posy", move.y, 0.15f, Time.deltaTime);
                 break;
+            case PlayerState.sliding:
+                anim.SetBool("jump", false);
+                anim.SetFloat("posy", -1, 0, Time.deltaTime);
+                break;
             case PlayerState.jump:
                 anim.SetBool("jump", true);
                 break;
@@ -326,6 +340,8 @@ public class MainPlayerScript : MonoBehaviour
                 anim.SetBool("death", true);
                 break;
         }
+
+        
     }
 
     //Controlla se il player ha qualcosa al disopra di se
