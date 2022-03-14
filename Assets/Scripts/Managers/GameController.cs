@@ -43,6 +43,8 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
+
+        BarraBoss = GameObject.FindGameObjectWithTag("Boss UI");
         player = GameObject.FindGameObjectWithTag("Player");
         //BarraBoss = GameObject.FindGameObjectWithTag("Boss UI");
         post_processing = GameObject.FindGameObjectWithTag("P.Process");
