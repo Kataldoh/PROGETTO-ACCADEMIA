@@ -185,7 +185,8 @@ public class EnemyScript : MonoBehaviour
         move.y = Mathf.Clamp(move.y, -1, 0);
 
         //rotazione del nemico
-        qrot = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 90 * direction, 0), Time.deltaTime * edata.speedRot);
+        if(_state != EnemyState.dead)
+            qrot = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 90 * direction, 0), Time.deltaTime * edata.speedRot);
         transform.rotation = qrot;
 
         if(hp.health <= 0)

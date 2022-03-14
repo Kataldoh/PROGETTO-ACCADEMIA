@@ -7,7 +7,7 @@ public class PlayerStatesEvents : MonoBehaviour
     MainPlayerScript pInst = MainPlayerScript.pInstance;
     bool dmgTook = false;   //bool usato per prevenire che il danno preso non venga ripetuto
     float dashLifetime;
-    float damageTimer;
+    float damageTimer, slideTimer;
     public void P_Idle()
     {
         //Controlla se si può saltare in questo stato
@@ -56,7 +56,9 @@ public class PlayerStatesEvents : MonoBehaviour
                 pInst.controller.center = new Vector3(0,0.9f, 0);
             }
         }
-        
+
+       
+
 
         /*
         if (pInst.isSprinting)
@@ -64,9 +66,9 @@ public class PlayerStatesEvents : MonoBehaviour
             pInst._state = PlayerState.sprinting;
         }
         */
-       
-        
-        if(pInst.isDash && pInst.dashUnlocked)
+
+
+        if (pInst.isDash && pInst.dashUnlocked)
         {
             pInst._state = PlayerState.dash;
         }
@@ -80,6 +82,41 @@ public class PlayerStatesEvents : MonoBehaviour
             pInst._state = PlayerState.jump;
         }
         
+    }
+
+    public void P_Slide()
+    {
+        pInst.isJump = Input.GetButton("Jump");
+        Vector3 dir = new Vector3(pInst.dir, 0, 0);
+        slideTimer += Time.deltaTime;
+
+        if (slideTimer <= 0.5f)
+        {
+            pInst.controller.height = pInst.height / 3;
+            pInst.controller.center = new Vector3(0, 0.4f, 0);
+
+            pInst.controller.Move(dir * pInst.pdata.force * 2 * Time.deltaTime);         //Applica forza dagli input ricevuti
+
+            if ((pInst.isJump && pInst.IsGrounded()) || !pInst.IsGrounded())
+            {
+                pInst._state = PlayerState.jump;
+                pInst.controller.height = pInst.height;
+                pInst.controller.center = new Vector3(0, 0.9f, 0);
+            }
+                
+        }
+        else
+        {
+            pInst.controller.height = pInst.height;
+            pInst.controller.center = new Vector3(0, 0.9f, 0);
+
+            if ((pInst.isJump && pInst.IsGrounded()) || !pInst.IsGrounded())
+                pInst._state = PlayerState.jump;
+            else
+                pInst._state = PlayerState.idle;
+
+            slideTimer = 0;
+        }
     }
 
 
@@ -222,5 +259,7 @@ public class PlayerStatesEvents : MonoBehaviour
     {
         
     }
+
+    
  
 }

@@ -19,8 +19,7 @@ public enum PlayerState
     damage,
     dead,
     jump,
-    defence,
-    sprinting,
+    sliding
 }
 
 
