@@ -13,7 +13,7 @@ public class WeaponMethods : MonoBehaviour
     int i;  //projectile Index
     float shootingInterval; //usato per controllare l'intervallo di sparo
         
-    public void GeneralWeaponHandler(WeaponStats wS, Transform aimStart, GameObject[] trailGO,LayerMask ignoreLayer)
+    public void GeneralWeaponHandler(WeaponStats wS, Transform aimStart, GameObject shootHit, GameObject[] trailGO,LayerMask ignoreLayer)
     {
         //da la posizione del mouse rispetto al punto iniziale dato
         Vector3 direction = _vectorDir(aimStart);
@@ -85,8 +85,8 @@ public class WeaponMethods : MonoBehaviour
                 {
                     Destroy(oneShot);
                 }
-                
 
+                GameObject go = Instantiate(shootHit, trailGO[i].transform.position, trailGO[i].transform.rotation);
                 trailGO[i].transform.position = aimStart.position;      //Resetta la posizione del trailGO/Proiettile
                 trailGO[i].gameObject.SetActive(false);                 //lo porta a falso
                 isShoot= false;

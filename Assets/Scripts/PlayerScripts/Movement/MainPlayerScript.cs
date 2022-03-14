@@ -131,7 +131,7 @@ public class MainPlayerScript : MonoBehaviour
         //---------------------------
         //GESTIONE DELLA MIRA E SPARO
         //---------------------------
-        aM.GeneralWeaponHandler(weapons_SO[0], rayhead, projectiles, shootingIgnoreLayer);
+        aM.GeneralWeaponHandler(weapons_SO[0], rayhead, endSpark, projectiles, shootingIgnoreLayer);
 
 
         //Sistema di salvataggio

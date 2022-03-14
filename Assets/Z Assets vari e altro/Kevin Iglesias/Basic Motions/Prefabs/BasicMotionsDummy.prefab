@@ -640,7 +640,7 @@ MonoBehaviour:
   _Estates: {fileID: 0}
   move: {x: 0, y: 0, z: 0}
   dashTrail: {fileID: 659762813765109083}
-  speed: 60
+  speed: 85
   controller: {fileID: 0}
   dirX: 0
   dir: 0
@@ -670,7 +670,7 @@ MonoBehaviour:
     m_Bits: 1152
   anim: {fileID: 0}
   laserRender: {fileID: 0}
-  endSpark: {fileID: 0}
+  endSpark: {fileID: 3357014892148384219, guid: cb650988ba0eeb74eb5718d0845cde35, type: 3}
   JumpForce: 4
   gravity: -9.81
   weight: -2.5
