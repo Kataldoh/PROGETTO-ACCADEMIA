@@ -36,4 +36,6 @@ public class StatesEvents : MonoBehaviour
         //GameController.instance.puntatore.SetActive(false);
 
     }
+
+   
 }

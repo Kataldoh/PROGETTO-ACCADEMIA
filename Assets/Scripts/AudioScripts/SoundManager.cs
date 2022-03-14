@@ -244,6 +244,7 @@ namespace UnityCore
                 FunctionTable.Remove(_type);
             }
 
+
             private void RemoveConflictingFunctions(AudioType _type)
             {
                 if (FunctionTable.ContainsKey(_type))

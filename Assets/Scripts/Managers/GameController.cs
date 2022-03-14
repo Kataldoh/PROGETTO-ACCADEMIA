@@ -54,7 +54,7 @@ public class GameController : MonoBehaviour
 
         //**************** SAVE DATA TO PLAYER PREFS;
         //PlayerPrefs.SetInt("quality", 3);
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
 
     }
 
@@ -68,10 +68,7 @@ public class GameController : MonoBehaviour
         CurrentStamina = maxStamina;
         CurrentHealthBoss = maxHealthBoss;
 
-        if(BarraStamina && BarraVita == null)
-        {
-
-        }
+       
 
 
         //***************** LOAD DATA FROM PlayerPrefs;
@@ -94,7 +91,13 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       
+
+        if (puntatore = null)
+        {
+            puntatore = GameObject.FindGameObjectWithTag("Puntatore");
+
+        }
+
         States();
 
         
