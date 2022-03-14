@@ -130,9 +130,9 @@ public class MainPlayerScript : MonoBehaviour
         GameController.instance.BarraStamina.SetStamina(dashTimer * 100);
 
         //(PROVVISORIO)
-        //Controlla se si può fare il dash, quando si è a terra e ci si può muovere
-        if(_state == PlayerState.groundMoving)
-            if (Input.GetButtonDown("SlideButton"))
+        //Controlla se si può fare il dash, quando si è a terra e ci si può muovere se il roll è sbloccato
+        if (Input.GetButtonDown("SlideButton"))
+            if (_state == PlayerState.groundMoving && rollUnlocked)
                 _state = PlayerState.sliding;
 
         //---------------------------
