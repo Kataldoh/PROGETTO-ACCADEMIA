@@ -365,7 +365,7 @@ public class MainPlayerScript : MonoBehaviour
             //un timer per dare al giocatore una finestra di tempo per saltare dopo essere in aria
             hangTime += Time.deltaTime; 
 
-            if(hangTime >= 0.3f)    //se l'hangtime è maggiore del valore dato ritorna falso, quindi il player non è a terra
+            if(hangTime >= 0.35f)    //se l'hangtime è maggiore del valore dato ritorna falso, quindi il player non è a terra
             {
                 return false;
             }
