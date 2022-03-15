@@ -26,8 +26,8 @@ public class CatenaMontaggio : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        print("Ho colliso");
-        if (col.transform.gameObject==fineCatena)
+        
+        if (col.transform.gameObject==fineCatena) //quando il manichino tocca la fine, viene respawnato all'inizio
         {
             manichino.position = spawnPoint.position;
         }

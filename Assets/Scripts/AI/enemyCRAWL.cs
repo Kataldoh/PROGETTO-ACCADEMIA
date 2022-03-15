@@ -12,14 +12,23 @@ public class enemyCRAWL : MonoBehaviour
     int nodosuccessivo = 1;
     float distanzanodi;
 
-     void Update()
+    //parte per animazioni
+    public Animator anim;
+
+    private void Start()
     {
-        if(hp.health <= 0)
+        anim = GetComponent<Animator>();
+    }
+
+    void Update()
+    {
+        if(hp.health <= 0) // se la sua vita si azzera, l'oggetto attiva l'animazione di distruzione
         {
             Destroy(this.gameObject);
         }
         
         Move();
+        anim.Play("Idle");
     }
 
      void Move()
