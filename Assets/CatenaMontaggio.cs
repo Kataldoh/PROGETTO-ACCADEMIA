@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class CatenaMontaggio : MonoBehaviour
 {
-    public Transform fineCatena;
-    public Transform inizioCatena;
+    public GameObject fineCatena;
+    public Transform spawnPoint;
+
+    public Transform manichino;
 
 
     // Start is called before the first frame update
@@ -22,11 +24,14 @@ public class CatenaMontaggio : MonoBehaviour
     }
     
 
-
-
-    void OnTriggerEnter()
+    void OnTriggerEnter(Collider col)
     {
-
+        print("Ho colliso");
+        if (col.transform.gameObject==fineCatena)
+        {
+            manichino.position = spawnPoint.position;
+        }
     }
+    
     
 }
