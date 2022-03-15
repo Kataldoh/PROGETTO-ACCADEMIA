@@ -37,5 +37,15 @@ public class StatesEvents : MonoBehaviour
 
     }
 
-   
+    public void _EVENTPAUSE()
+    {
+        Time.timeScale = 0f;
+        if (Input.GetKeyDown("space"))
+        {
+            GameController.instance._state = GameState.play;
+        }
+        //GameController.instance.puntatore.SetActive(false);
+
+    }
+
 }

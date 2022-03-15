@@ -42,6 +42,7 @@ public class MainPlayerScript : MonoBehaviour
     public bool dashUnlocked;                   //bool che determina che il dash sia sbloccato
     public bool rollUnlocked;                   //se il roll/crouch sia sbloccato
 
+    public GameObject pw1, pw2;                 //Testi che compaiono entrato nell'evento
     [Header("Assigned Variables")]
     [SerializeField] Transform[] groundCheck;        //posizione del "piede" del player, dove la sfera per trovare se si è a terra sarà situata
     [SerializeField] Transform rayhead;              //posizione dal quale la mira e lo sparo parte, messo
@@ -415,9 +416,11 @@ public class MainPlayerScript : MonoBehaviour
             {
                 case 0:
                     dashUnlocked = true;
+                    pw1.SetActive(true);
                     break;
                 case 1:
                     rollUnlocked = true;
+                    pw2.SetActive(true);
                     break;
             }
 

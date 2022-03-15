@@ -38,6 +38,7 @@ public class GameController : MonoBehaviour
 
     public GameState _state;
     public GameObject[] pannelli;
+    public GameObject[] testievento;
 
     StatesEvents _estates;
 
@@ -167,6 +168,9 @@ public class GameController : MonoBehaviour
                 _estates._PAUSE();
                 break;
 
+            case GameState.eventpausa:
+                _estates._EVENTPAUSE();
+                break;
 
         }
     }
