@@ -39,6 +39,7 @@ public class StatesEvents : MonoBehaviour
 
     public void _EVENTPAUSE()
     {
+        GameController.instance.testievento[MainPlayerScript.pInstance.n].SetActive(true);
         Time.timeScale = 0f;
         if (Input.GetKeyDown("space"))
         {

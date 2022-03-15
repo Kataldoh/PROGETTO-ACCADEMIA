@@ -42,7 +42,9 @@ public class MainPlayerScript : MonoBehaviour
     public bool dashUnlocked;                   //bool che determina che il dash sia sbloccato
     public bool rollUnlocked;                   //se il roll/crouch sia sbloccato
 
-    public GameObject pw1, pw2;                 //Testi che compaiono entrato nell'evento
+    public GameObject[] powerups;                 //Testi che compaiono entrato nell'evento
+    public int n=0;                                        //valore array
+
     [Header("Assigned Variables")]
     [SerializeField] Transform[] groundCheck;        //posizione del "piede" del player, dove la sfera per trovare se si è a terra sarà situata
     [SerializeField] Transform rayhead;              //posizione dal quale la mira e lo sparo parte, messo
@@ -163,6 +165,10 @@ public class MainPlayerScript : MonoBehaviour
             StateIndipendentActions();  //metodo per la gestione di azioni indipendenti dagli stati
             AnimationHandler(); //metodo per la gestione delle animazioni
             States();       //metodo per la gestione degli stati
+            if(powerups[n]==true)
+            {
+                powerups[n].SetActive(false);
+            }
         }
 
         //Fà sfarfallare la texture quando si è invincibili
@@ -416,11 +422,17 @@ public class MainPlayerScript : MonoBehaviour
             {
                 case 0:
                     dashUnlocked = true;
-                    pw1.SetActive(true);
+                    //compaiono i testi evento 1 
+                    GameController.instance._state = GameState.eventpausa;
+                    //powerups[0].SetActive(true);
+                    n = 0;
                     break;
                 case 1:
                     rollUnlocked = true;
-                    pw2.SetActive(true);
+                    //compaiono i testi evento 2
+                    GameController.instance._state = GameState.eventpausa;
+                    //powerups[1].SetActive(true);
+                    n = 1;
                     break;
             }
 
