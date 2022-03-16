@@ -87,6 +87,8 @@ public class PlayerStatesEvents : MonoBehaviour
     public void P_Slide()
     {
         Vector3 dir = new Vector3(pInst.dir, 0, 0);
+
+
         slideTimer += Time.deltaTime;
 
         if (slideTimer <= 0.5f)
@@ -220,40 +222,6 @@ public class PlayerStatesEvents : MonoBehaviour
         }
     }   
 
-    /*
-    public void P_Sprinting()
-    {
-        pInst.speed = 100;
-
-        pInst.velocity = pInst.weight;                                                  //Applica il peso
-        pInst.move.y = Mathf.Clamp(pInst.move.y, -1, 0);                                //Limita move.y a -1
-        pInst.controller.Move(pInst.move * pInst.pdata.force * Time.deltaTime);         //Applica forza dagli input ricevuti
-        pInst.controller.Move(pInst.transform.up * pInst.velocity * Time.deltaTime);    //Applica la velocity sull'asse y (Che sia gravità o salto)
-
-        if (!Input.GetKey(KeyCode.LeftShift))
-        {
-            pInst.isSprinting = false;
-        }
-
-        if (pInst.isSprinting == false)
-        {
-            pInst._state = PlayerState.groundMoving;
-            
-        }
-
-        pInst.isJump = Input.GetButton("Jump");
-
-        if (pInst.move == Vector3.zero && pInst.IsGrounded() && pInst.velocity <= 0)
-        {
-            pInst._state = PlayerState.idle;
-        }
-        else if ((pInst.isJump && pInst.IsGrounded()) || !pInst.IsGrounded())   //Se viene rilevato un salto e si è a terra oppure si sta cadendo
-        {
-            pInst._state = PlayerState.jump;
-        }
-
-    }
-    */
 
     public void P_Death()
     {

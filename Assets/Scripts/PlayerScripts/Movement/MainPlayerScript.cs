@@ -324,20 +324,22 @@ public class MainPlayerScript : MonoBehaviour
             case PlayerState.idle:
                 anim.SetBool("jump", false);
                 anim.SetBool("damaged", false);
+                anim.SetBool("sliding", false);
                 anim.SetFloat("posx", 0, 0.05f, Time.deltaTime);
                 anim.SetFloat("posy", 0, 0.15f, Time.deltaTime);
                 break;
             case PlayerState.groundMoving:
                 anim.SetBool("jump", false);
+                anim.SetBool("sliding", false);
                 anim.SetFloat("posx", move.x, 0.05f, Time.deltaTime);
                 anim.SetFloat("posy", move.y, 0.15f, Time.deltaTime);
                 break;
             case PlayerState.sliding:
-                anim.SetBool("jump", false);
-                anim.SetFloat("posy", -1, 0, Time.deltaTime);
+                anim.SetBool("sliding", true);
                 break;
             case PlayerState.jump:
                 anim.SetBool("jump", true);
+                anim.SetBool("sliding", false);
                 break;
             case PlayerState.damage:
                 anim.SetBool("damaged", true);
