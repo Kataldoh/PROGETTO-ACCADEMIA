@@ -935,6 +935,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3997090057274740559, guid: 0bc1628cd6bd32f48b5f1ddea978de47, type: 3}
+      propertyPath: dashUnlocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997090057274740559, guid: 0bc1628cd6bd32f48b5f1ddea978de47, type: 3}
+      propertyPath: rollUnlocked
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3997090057274740559, guid: 0bc1628cd6bd32f48b5f1ddea978de47, type: 3}
       propertyPath: projectiles.Array.data[0]
       value: 
       objectReference: {fileID: 895665034}
