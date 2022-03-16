@@ -307,7 +307,11 @@ public class MainPlayerScript : MonoBehaviour
         if (_state == PlayerState.dash)
             dashTrail.enabled = true;
         else
+        {
+            dashTrail.GetComponent<TrailRenderer>().Clear();
             dashTrail.enabled = false;
+        }
+            
 
         if(_state != PlayerState.damage)
             controller.detectCollisions = true;
