@@ -39,13 +39,14 @@ public class StatesEvents : MonoBehaviour
 
     public void _EVENTPAUSE()
     {
+        //rende attivo il testo evento definito in MainPlayerScript come n
         GameController.instance.testievento[MainPlayerScript.pInstance.n].SetActive(true);
         Time.timeScale = 0f;
+        //quando premo space ritorna in play
         if (Input.GetKeyDown("space"))
         {
             GameController.instance._state = GameState.play;
         }
-        //GameController.instance.puntatore.SetActive(false);
 
     }
 

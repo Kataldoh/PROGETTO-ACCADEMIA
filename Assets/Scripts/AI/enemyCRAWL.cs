@@ -28,7 +28,7 @@ public class enemyCRAWL : MonoBehaviour
         }
         
         Move();
-        anim.Play("Idle");
+        //anim.Play("Idle");
     }
 
      void Move()

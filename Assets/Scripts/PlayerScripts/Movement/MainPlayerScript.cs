@@ -165,10 +165,7 @@ public class MainPlayerScript : MonoBehaviour
             StateIndipendentActions();  //metodo per la gestione di azioni indipendenti dagli stati
             AnimationHandler(); //metodo per la gestione delle animazioni
             States();       //metodo per la gestione degli stati
-            if(powerups[n]==true)
-            {
-                powerups[n].SetActive(false);
-            }
+            powerups[n].SetActive(false);       //Disattiva i powerup text
         }
 
         //Fà sfarfallare la texture quando si è invincibili
