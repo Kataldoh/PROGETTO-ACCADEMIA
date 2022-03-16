@@ -653,10 +653,61 @@ MonoBehaviour:
   mesh: {fileID: 4408529143413910321}
   isGrounded: 0
   isJump: 0
+  isSliding: 0
   isDash: 0
   isInvincible: 0
   dashUnlocked: 0
   rollUnlocked: 0
+  powerups: []
+  n: 0
+  jumpArc:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  gravityArc:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   groundCheck:
   - {fileID: 9009861900537670282}
   - {fileID: 4325915905541906710}
@@ -672,7 +723,7 @@ MonoBehaviour:
   laserRender: {fileID: 0}
   endSpark: {fileID: 3357014892148384219, guid: cb650988ba0eeb74eb5718d0845cde35, type: 3}
   JumpForce: 4
-  gravity: -9.81
+  gravity: -4
   weight: -2.5
   radLenght: 0.16
   velocity: 0

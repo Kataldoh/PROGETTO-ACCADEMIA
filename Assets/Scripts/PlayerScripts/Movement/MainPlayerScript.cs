@@ -46,6 +46,8 @@ public class MainPlayerScript : MonoBehaviour
     public int n=0;                                        //valore array
 
     [Header("Assigned Variables")]
+    public AnimationCurve jumpArc;
+    public AnimationCurve gravityArc;
     [SerializeField] Transform[] groundCheck;        //posizione del "piede" del player, dove la sfera per trovare se si è a terra sarà situata
     [SerializeField] Transform rayhead;              //posizione dal quale la mira e lo sparo parte, messo
     [SerializeField] Transform rollCheck;            //posizione dalla quale si controlla se il player rimane abbassato

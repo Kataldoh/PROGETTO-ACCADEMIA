@@ -7,7 +7,7 @@ public class PlayerStatesEvents : MonoBehaviour
     MainPlayerScript pInst = MainPlayerScript.pInstance;
     bool dmgTook = false;   //bool usato per prevenire che il danno preso non venga ripetuto
     float dashLifetime;
-    float damageTimer, slideTimer;
+    float damageTimer, slideTimer, jumpTimer;
     public void P_Idle()
     {
         //Controlla se si può saltare in questo stato
@@ -86,7 +86,6 @@ public class PlayerStatesEvents : MonoBehaviour
 
     public void P_Slide()
     {
-        pInst.isJump = Input.GetButton("Jump");
         Vector3 dir = new Vector3(pInst.dir, 0, 0);
         slideTimer += Time.deltaTime;
 
@@ -97,7 +96,7 @@ public class PlayerStatesEvents : MonoBehaviour
 
             pInst.controller.Move(dir * pInst.pdata.force * 2 * Time.deltaTime);         //Applica forza dagli input ricevuti
 
-            if ((pInst.isJump && pInst.IsGrounded()) || !pInst.IsGrounded())
+            if (!pInst.IsGrounded())
             {
                 pInst._state = PlayerState.jump;
                 pInst.controller.height = pInst.height;
@@ -132,7 +131,8 @@ public class PlayerStatesEvents : MonoBehaviour
         //Se viene rilevato un salto e si è a terra, applica la forza di salto alla velocity
         if(pInst.isJump && pInst.IsGrounded())
         {
-            pInst.velocity = pInst.pdata.jumpForce;
+            
+            pInst.velocity = pInst.pdata.jumpForce * pInst.jumpArc.Evaluate(Time.deltaTime * pInst.pdata.jumpForce);
         }
         
         //Se si è a terra con velocità minore-uguale a 0, metto la velocity al valore di peso, e torna in Idle
@@ -147,7 +147,7 @@ public class PlayerStatesEvents : MonoBehaviour
         //Permette salti di altezza variabile
         if(!pInst.isJump && pInst.velocity > 0)
         {
-            pInst.velocity += pInst.gravity * Time.deltaTime;
+            pInst.velocity += pInst.gravity * pInst.gravityArc.Evaluate(-Time.deltaTime * pInst.gravity / 2);
         }
 
         
