@@ -18,17 +18,18 @@ public class enemyCRAWL : MonoBehaviour
     private void Start()
     {
         anim = GetComponent<Animator>();
+        //anim.Play("Idle");
     }
 
     void Update()
     {
-        if(hp.health <= 0) // se la sua vita si azzera, l'oggetto attiva l'animazione di distruzione
+        if(hp.health <= 0) // se la sua vita si azzera, l'oggetto si distrugge
         {
             Destroy(this.gameObject);
         }
         
         Move();
-        //anim.Play("Idle");
+       
     }
 
      void Move()
