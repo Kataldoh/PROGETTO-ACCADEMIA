@@ -291,7 +291,7 @@ public class MainPlayerScript : MonoBehaviour
         }
         else
         {
-            velocity += gravity * Time.deltaTime;
+            velocity += gravity * gravityArc.Evaluate(-Time.deltaTime * gravity / 2);
         }
 
 
