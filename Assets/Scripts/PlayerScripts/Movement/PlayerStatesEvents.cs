@@ -8,10 +8,12 @@ public class PlayerStatesEvents : MonoBehaviour
     bool dmgTook = false;   //bool usato per prevenire che il danno preso non venga ripetuto
     float dashLifetime;
     float damageTimer, slideTimer, jumpTimer;
+    int lockedDir = 0;
+    float jumpDelay;
     public void P_Idle()
     {
         //Controlla se si può saltare in questo stato
-        pInst.isJump = Input.GetButton("Jump");
+        CanJump();
 
 
         if (pInst.isDash && pInst.dashUnlocked)
@@ -34,9 +36,7 @@ public class PlayerStatesEvents : MonoBehaviour
 
     public void P_Move()
     {
-        pInst.isJump = Input.GetButton("Jump");
-        //pInst.isSprinting = Input.GetKey(KeyCode.LeftShift);
-        //pInst.speed = 60;
+        CanJump();
 
         pInst.velocity = pInst.weight;                                                  //Applica il peso
         pInst.move.y = Mathf.Clamp(pInst.move.y, -1, 0);                                //Limita move.y a -1
@@ -86,8 +86,10 @@ public class PlayerStatesEvents : MonoBehaviour
 
     public void P_Slide()
     {
-        Vector3 dir = new Vector3(pInst.dir, 0, 0);
+        if (lockedDir == 0)
+            lockedDir = pInst.dir;
 
+        Vector3 dir = new Vector3(lockedDir, 0, 0);
 
         slideTimer += Time.deltaTime;
 
@@ -100,6 +102,7 @@ public class PlayerStatesEvents : MonoBehaviour
 
             if (!pInst.IsGrounded())
             {
+                lockedDir = 0;
                 pInst._state = PlayerState.jump;
                 pInst.controller.height = pInst.height;
                 pInst.controller.center = new Vector3(0, 0.9f, 0);
@@ -116,6 +119,7 @@ public class PlayerStatesEvents : MonoBehaviour
             else
                 pInst._state = PlayerState.idle;
 
+            lockedDir = 0;
             slideTimer = 0;
         }
     }
@@ -123,17 +127,16 @@ public class PlayerStatesEvents : MonoBehaviour
 
     public void P_Jump()
     {
-        pInst.isJump = Input.GetButton("Jump");
+        CanJump();
 
-        if(pInst.isDash && pInst.dashUnlocked)
+        if (pInst.isDash && pInst.dashUnlocked)
         {
             pInst._state = PlayerState.dash;
         }
 
         //Se viene rilevato un salto e si è a terra, applica la forza di salto alla velocity
-        if(pInst.isJump && pInst.IsGrounded())
+        if(Input.GetButton("Jump") && pInst.IsGrounded() && pInst.isJump)
         {
-            
             pInst.velocity = pInst.pdata.jumpForce * pInst.jumpArc.Evaluate(Time.deltaTime * pInst.pdata.jumpForce);
         }
         
@@ -147,7 +150,7 @@ public class PlayerStatesEvents : MonoBehaviour
 
         //Se il salto viene rilasciato in aria (Velocity>0), applica in anticipo la gravità
         //Permette salti di altezza variabile
-        if(!pInst.isJump && pInst.velocity > 0)
+        if(!Input.GetButton("Jump") && pInst.velocity > 0)
         {
             pInst.velocity += pInst.gravity * pInst.gravityArc.Evaluate(-Time.deltaTime * pInst.gravity / 2);
         }
@@ -160,7 +163,11 @@ public class PlayerStatesEvents : MonoBehaviour
 
     public void P_Dash()
     {
-        Vector3 dir = new Vector3(pInst.dir, 0, 0);
+        if (lockedDir == 0)
+            lockedDir = pInst.dir;
+
+        Vector3 dir = new Vector3(lockedDir, 0, 0);
+
         dashLifetime += Time.deltaTime;
 
         if(dashLifetime <=0.25f)
@@ -184,6 +191,7 @@ public class PlayerStatesEvents : MonoBehaviour
             else
                 pInst._state = PlayerState.idle;
 
+            lockedDir = 0;
             dashLifetime = 0;
             pInst.dashTimer = 0;
             pInst.isDash = false;
@@ -228,6 +236,29 @@ public class PlayerStatesEvents : MonoBehaviour
         
     }
 
+    public void CanJump()
+    {
+        //Uso un delay per fare in modo che il salto non sia costantemente attivato tenendo premuto il pulsante e garantendo che venga eseguito per più di un frame
+        //Così da non rimanere a terra
+        pInst.isJump = Input.GetButton("Jump");
+
+        if (pInst.isJump)
+        {
+            jumpDelay += Time.deltaTime;
+            if (jumpDelay < 0.1f)
+            {
+                pInst.isJump = true;
+            }
+            else
+            {
+                pInst.isJump = false;
+            }
+        }
+        else
+        {
+            jumpDelay = 0;
+        }
+    }
     
  
 }

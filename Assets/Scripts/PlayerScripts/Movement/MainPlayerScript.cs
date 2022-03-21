@@ -65,7 +65,8 @@ public class MainPlayerScript : MonoBehaviour
 
     //*****************************************
 
-    [Header("Jump Physics variables")]
+    [Header("Misc checks")]
+    
     float rot=90;
     float startingZ;
     WeaponMethods aM;                   //variabile usata per utilizzare i metodi delle armi
@@ -94,8 +95,9 @@ public class MainPlayerScript : MonoBehaviour
 
     private void Update()
     {
+
         //controlla il tempo di invincibilità
-        if(isInvincible)
+        if (isInvincible)
         {
             invincibilityTimer += Time.deltaTime;
             if(invincibilityTimer >= invincibilityDuration)
@@ -236,6 +238,8 @@ public class MainPlayerScript : MonoBehaviour
                 );
         //--------------------
 
+        
+
         //--------------------
         //Mette a zero move.y per prevenire salti più alti ed errori d'animazione
         if (move.y > 0 || !rollUnlocked)
@@ -283,7 +287,8 @@ public class MainPlayerScript : MonoBehaviour
         //Applico Gravità
         if (IsGrounded() && velocity <= 0)  //Se a terra con velocity <= 0
         {
-            if(_state == PlayerState.damage)
+
+            if (_state == PlayerState.damage)
                 velocity = 0;
             else
                 velocity = weight;        //Resetta la velocity dandogli un peso
@@ -294,11 +299,10 @@ public class MainPlayerScript : MonoBehaviour
             velocity += gravity * gravityArc.Evaluate(-Time.deltaTime * gravity / 2);
         }
 
-
         //Limita la velocità di caduta per prevenire gravità eccessiva
-        if(velocity <=-5)
+        if (velocity <=-10)
         {
-            velocity = -5;
+            velocity = -10;
         }
         //--------------------
 
