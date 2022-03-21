@@ -121,6 +121,7 @@ public class PlayerStatesEvents : MonoBehaviour
 
             lockedDir = 0;
             slideTimer = 0;
+            pInst.move.y = -1;
         }
     }
 
