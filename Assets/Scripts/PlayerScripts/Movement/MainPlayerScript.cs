@@ -43,8 +43,9 @@ public class MainPlayerScript : MonoBehaviour
     public bool dashUnlocked;                   //bool che determina che il dash sia sbloccato
     public bool rollUnlocked;                   //se il roll/crouch sia sbloccato
 
-    public GameObject[] powerups;                 //Testi che compaiono entrato nell'evento
+    [SerializeField] GameObject[] powerups;                 //Testi che compaiono entrato nell'evento
     public int n=0;                                        //valore array
+    bool sceneschange;
 
     [Header("Assigned Variables")]
     public AnimationCurve jumpArc;
@@ -159,9 +160,6 @@ public class MainPlayerScript : MonoBehaviour
         {
             LoadPlayer();
         }
-
-
-
     }
 
 
@@ -173,7 +171,12 @@ public class MainPlayerScript : MonoBehaviour
             StateIndipendentActions();  //metodo per la gestione di azioni indipendenti dagli stati
             AnimationHandler(); //metodo per la gestione delle animazioni
             States();       //metodo per la gestione degli stati
-            powerups[n].SetActive(false);       //Disattiva i powerup text
+
+            if (GameObject.Find("Powerups"))
+            {
+                Powerups();     //metodo per far comparire i power UP, disattivato se non ce ne sono
+            }
+            
         }
 
         //Fà sfarfallare la texture quando si è invincibili
@@ -426,7 +429,7 @@ public class MainPlayerScript : MonoBehaviour
         //Se si entra in contatto con un gameobject con tag "Gateway" si accede alla scena del Boss
         if (hit.gameObject.tag == "Gateway")
         {
-            SceneManager.LoadScene(2);
+            SceneManager.LoadScene(2);  
         }
 
         //--------------------
@@ -503,4 +506,13 @@ public class MainPlayerScript : MonoBehaviour
         transform.position = playerposition;
     }
 
+    public void Powerups()
+    { 
+        powerups[n].SetActive(false);       //Disattiva i powerup text
+
+        if (n > 1) //check per non farlo andare oltre l' array 1 è da modificare nel caso in cui il valore massimo di array cambi
+        {
+            n = 0;
+        }
+    }
 }
