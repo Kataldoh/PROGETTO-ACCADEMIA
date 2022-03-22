@@ -8,4 +8,5 @@ public class UpgradePickups : MonoBehaviour
     //0:Dash
     //1:Roll
     public int powerUpValue;
+
 }
