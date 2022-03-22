@@ -26,7 +26,7 @@ public class PlayerStatesEvents : MonoBehaviour
         {
             pInst._state = PlayerState.groundMoving;
         }
-        else if ((pInst.isJump && pInst.IsGrounded())|| !pInst.IsGrounded())    //Se viene rilevato un salto e si è a terra oppure si sta cadendo
+        else if ((pInst.isJump && pInst.IsGrounded() && !pInst.hasSomethingAbove) || !pInst.IsGrounded())    //Se viene rilevato un salto e si è a terra oppure si sta cadendo
         {
             pInst._state = PlayerState.jump;
         }
@@ -77,7 +77,7 @@ public class PlayerStatesEvents : MonoBehaviour
         {
             pInst._state = PlayerState.idle;
         }
-        else if ((pInst.isJump && pInst.IsGrounded()) || !pInst.IsGrounded())   //Se viene rilevato un salto e si è a terra oppure si sta cadendo
+        else if ((pInst.isJump && pInst.IsGrounded() && !pInst.hasSomethingAbove) || !pInst.IsGrounded())   //Se viene rilevato un salto e si è a terra oppure si sta cadendo
         {
             pInst._state = PlayerState.jump;
         }
@@ -114,7 +114,7 @@ public class PlayerStatesEvents : MonoBehaviour
             pInst.controller.height = pInst.height;
             pInst.controller.center = new Vector3(0, 0.9f, 0);
 
-            if ((pInst.isJump && pInst.IsGrounded()) || !pInst.IsGrounded())
+            if (!pInst.IsGrounded())
                 pInst._state = PlayerState.jump;
             else
                 pInst._state = PlayerState.idle;
@@ -135,12 +135,27 @@ public class PlayerStatesEvents : MonoBehaviour
             pInst._state = PlayerState.dash;
         }
 
-        //Se viene rilevato un salto e si è a terra, applica la forza di salto alla velocity
-        if(Input.GetButton("Jump") && pInst.IsGrounded() && pInst.isJump)
+        if (!pInst.hasSomethingAbove)
         {
-            pInst.velocity = pInst.pdata.jumpForce * pInst.jumpArc.Evaluate(Time.deltaTime * pInst.pdata.jumpForce);
+            //Se viene rilevato un salto e si è a terra, applica la forza di salto alla velocity
+            if (Input.GetButton("Jump") && pInst.IsGrounded() && pInst.isJump)
+            {
+                pInst.velocity = pInst.pdata.jumpForce * pInst.jumpArc.Evaluate(Time.deltaTime * pInst.pdata.jumpForce);
+            }
+            //Se il salto viene rilasciato in aria (Velocity>0), applica in anticipo la gravità
+            //Permette salti di altezza variabile
+            else if (!Input.GetButton("Jump") && pInst.velocity > 0)    
+            {
+                pInst.velocity += pInst.gravity * pInst.gravityArc.Evaluate(-Time.deltaTime * pInst.gravity / 2);
+            }
         }
-        
+        else
+        {
+            pInst.velocity += pInst.gravity * pInst.gravityArc.Evaluate(-Time.deltaTime * pInst.gravity / 2);
+        }
+
+
+
         //Se si è a terra con velocità minore-uguale a 0, metto la velocity al valore di peso, e torna in Idle
         if (pInst.IsGrounded() && pInst.velocity <= 0)
         {
