@@ -12,7 +12,9 @@ public class WeaponMethods : MonoBehaviour
     GameObject enemy, oneShot;   //salva il nemico colpito
     int i;  //projectile Index
     float shootingInterval; //usato per controllare l'intervallo di sparo
-        
+    Vector3 shotStartPosition, maxShotPosition;
+    GameObject shotParticle = null;
+
     public void GeneralWeaponHandler(WeaponStats wS, Transform aimStart, GameObject shootHit, GameObject[] trailGO,LayerMask ignoreLayer)
     {
         //da la posizione del mouse rispetto al punto iniziale dato
@@ -36,6 +38,8 @@ public class WeaponMethods : MonoBehaviour
             trailGO[i].transform.position = aimStart.position;
             trailGO[i].GetComponent<TrailRenderer>().Clear();
             RaycastHit hit;
+            shotStartPosition = aimStart.position;
+            
 
             if (!isAiming) 
             {
@@ -43,7 +47,9 @@ public class WeaponMethods : MonoBehaviour
                 direction.z = 0;
             }
 
-            if (Physics.Raycast(aimStart.position, direction, out hit, 5, ~ignoreLayer))   //Se il raycast colpisce qualcosa 
+            maxShotPosition = aimStart.position + direction * wS.weaponRange;
+
+            if (Physics.Raycast(aimStart.position, direction, out hit, wS.weaponRange, ~ignoreLayer))   //Se il raycast colpisce qualcosa 
             {
                 pInst.lastShotPosition = hit.point; 
                 if(hit.collider.tag == "Nemico")            //Se colpisce un nemico
@@ -58,8 +64,10 @@ public class WeaponMethods : MonoBehaviour
             }
             else
             {
-                pInst.lastShotPosition = aimStart.position + direction * 5;
+                pInst.lastShotPosition = maxShotPosition;
             }
+
+            
         }
 
         //print(isShoot);
@@ -67,11 +75,12 @@ public class WeaponMethods : MonoBehaviour
         //se si spara
         if(isShoot)
         {
-            trailGO[i].transform.position = Vector3.Lerp(trailGO[i].transform.position, pInst.lastShotPosition, Time.deltaTime * 10);   //imposta la posizione del trailGO puntato
+            trailGO[i].transform.position = Vector3.Lerp(trailGO[i].transform.position, maxShotPosition, Time.deltaTime * wS.weaponRange * wS.shootingInterval_inSeconds * 10);   //imposta la posizione del trailGO puntato
             shootingInterval += Time.deltaTime;
-            if (shootingInterval >= wS.shootingInterval_inSeconds)      //se l'intervallo di sparo è maggiore o uguale a quello dell'arma
+
+            if(Vector3.Distance(trailGO[i].transform.position, pInst.lastShotPosition) <= 0.1f || shootingInterval >= wS.shootingInterval_inSeconds)
             {
-                if(enemy != null)
+                if (enemy != null)
                 {
                     if (!enemy.GetComponent<HealthPlaceholder>().hit)
                     {
@@ -80,16 +89,24 @@ public class WeaponMethods : MonoBehaviour
                         enemy = null;
                     }
                 }
-                
-                if(oneShot != null)
+
+                if (oneShot != null)
                 {
                     Destroy(oneShot);
                 }
 
-                GameObject go = Instantiate(shootHit, trailGO[i].transform.position, trailGO[i].transform.rotation);
+                if(shotParticle == null)
+                    shotParticle = Instantiate(shootHit, trailGO[i].transform.position, trailGO[i].transform.rotation);
+
                 trailGO[i].transform.position = aimStart.position;      //Resetta la posizione del trailGO/Proiettile
                 trailGO[i].gameObject.SetActive(false);                 //lo porta a falso
-                isShoot= false;
+            }
+                
+
+            if (shootingInterval >= wS.shootingInterval_inSeconds)      //se l'intervallo di sparo è maggiore o uguale a quello dell'arma
+            {
+                shotParticle = null;
+                isShoot = false;
                 i++;
             }
         }
