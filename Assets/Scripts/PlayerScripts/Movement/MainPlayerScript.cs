@@ -37,6 +37,7 @@ public class MainPlayerScript : MonoBehaviour
     public bool isSliding;                      //se il player fa lo slide
     public bool isDash;                         //se il player esegue il dash
     public bool isInvincible;                   //se il player è invincibile
+    public bool hasSomethingAbove;
 
     [Header("Unlocked Abilities")]
     public bool dashUnlocked;                   //bool che determina che il dash sia sbloccato
@@ -60,7 +61,8 @@ public class MainPlayerScript : MonoBehaviour
     [SerializeField] float JumpForce;       //forza del salto
     [SerializeField] public float gravity;  //variabile della gravità
     [SerializeField] public float weight;   //peso a terra del player
-    [SerializeField] float radLenght;       //valore del raggio della sfera ai piedi del player per controllare se è a terra
+    [SerializeField] float radLenght;       //valore della lunghezza dei raycast ai piedi del player per controllare se è a terra
+    [SerializeField] float rollCheckLenght; //valore della lunghezza del raycast per controllare se ha qualcosa sopra di se
     [SerializeField] public float velocity;
 
     //*****************************************
@@ -158,6 +160,8 @@ public class MainPlayerScript : MonoBehaviour
             LoadPlayer();
         }
 
+
+
     }
 
 
@@ -250,9 +254,10 @@ public class MainPlayerScript : MonoBehaviour
 
         //--------------------
         //Controlla se il player ha qualcosa sopra di sè
-        bool isStuck = RollCheck();
+        hasSomethingAbove = RollCheck();
+        Debug.DrawRay(rollCheck.position, transform.up * rollCheckLenght, Color.red);
         //E lo forza ad abbassarsi
-        if (isStuck)
+        if (hasSomethingAbove)
         {
             move.y = -1;
         }
@@ -363,7 +368,7 @@ public class MainPlayerScript : MonoBehaviour
     //Controlla se il player ha qualcosa al disopra di se
     bool RollCheck()
     {
-        return Physics.Raycast(rollCheck.position, transform.up, 0.1f, layer);
+        return Physics.Raycast(rollCheck.position, transform.up, rollCheckLenght, layer);
     }
 
     //metodo di controllo del terreno
