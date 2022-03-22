@@ -640,8 +640,8 @@ MonoBehaviour:
   _Estates: {fileID: 0}
   move: {x: 0, y: 0, z: 0}
   dashTrail: {fileID: 659762813765109083}
-  speed: 85
-  controller: {fileID: 0}
+  speed: 80
+  controller: {fileID: 7710950240493196346}
   dirX: 0
   dir: 0
   height: 0
@@ -656,6 +656,7 @@ MonoBehaviour:
   isSliding: 0
   isDash: 0
   isInvincible: 0
+  hasSomethingAbove: 0
   dashUnlocked: 0
   rollUnlocked: 0
   powerups: []
@@ -726,7 +727,7 @@ MonoBehaviour:
   gravity: -4
   weight: -2.5
   radLenght: 0.16
-  rollCheckLenght: 0.2
+  rollCheckLenght: 0.35
   velocity: 0
   lastShotPosition: {x: 0, y: 0, z: 0}
 --- !u!120 &4126119521126577026
@@ -2381,7 +2382,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2729358664790517535}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.42, z: 0}
+  m_LocalPosition: {x: 0, y: 1.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4759721911903040}
