@@ -6,6 +6,11 @@ public class Teleportdevtool : MonoBehaviour
 {
     public GameObject player;
     [SerializeField] Transform[] checkpoint;
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
     void Update()
     {
         //teletrasporto all'inizio del livello
