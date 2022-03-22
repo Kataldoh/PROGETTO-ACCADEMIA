@@ -12,6 +12,7 @@ public class StatesEvents : MonoBehaviour
 
     public void _PLAY()
     {
+        GameController.instance.testievento[MainPlayerScript.pInstance.n].SetActive(false);
         GameController.instance.pannelli[0].SetActive(false);
         GameController.instance.pannelli[1].SetActive(false);
         Time.timeScale = 1f;
