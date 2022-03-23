@@ -153,15 +153,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tile:
-  - {fileID: 6631781844698132486, guid: 764f605b963d9fa4eaa3353518934293, type: 3}
-  - {fileID: 3901981336871087907, guid: 1882f9885826c4d42b1f414ff70e074c, type: 3}
-  - {fileID: 121346608745375423, guid: 621b28dda7ad0c645aefa3d1dd1d5e99, type: 3}
-  - {fileID: 4063679944138663405, guid: 4abc272f1252ed245aca9ee543582b26, type: 3}
-  - {fileID: 1757574502885753244, guid: 095f172219db7ce40aa2915e33718b1b, type: 3}
-  - {fileID: 877787278340228578, guid: 582eeae3681a6a04fbb352175105be12, type: 3}
-  - {fileID: 1917525890253115887, guid: e7a809d387d206e418b7da9183fb5257, type: 3}
-  - {fileID: 2868997040141898498, guid: 644b8fb5a40c3014a92178d7de5ef09c, type: 3}
-  - {fileID: 3978548061822390804, guid: 103fe8371d616ff40830d75df84b32e3, type: 3}
+  - tile: {fileID: 6631781844698132486, guid: 764f605b963d9fa4eaa3353518934293, type: 3}
+    dimx: 20
+    dimy: 20
+    start: 1
+    end: 0
+  - tile: {fileID: 3901981336871087907, guid: 1882f9885826c4d42b1f414ff70e074c, type: 3}
+    dimx: 20
+    dimy: 20
+    start: 0
+    end: 1
+  - tile: {fileID: 121346608745375423, guid: 621b28dda7ad0c645aefa3d1dd1d5e99, type: 3}
+    dimx: 20
+    dimy: 20
+    start: 0
+    end: 0
+  - tile: {fileID: 4063679944138663405, guid: 4abc272f1252ed245aca9ee543582b26, type: 3}
+    dimx: 20
+    dimy: 20
+    start: 0
+    end: 0
+  - tile: {fileID: 1757574502885753244, guid: 095f172219db7ce40aa2915e33718b1b, type: 3}
+    dimx: 20
+    dimy: 20
+    start: 0
+    end: 0
+  - tile: {fileID: 877787278340228578, guid: 582eeae3681a6a04fbb352175105be12, type: 3}
+    dimx: 20
+    dimy: 20
+    start: 0
+    end: 0
+  - tile: {fileID: 1917525890253115887, guid: e7a809d387d206e418b7da9183fb5257, type: 3}
+    dimx: 20
+    dimy: 20
+    start: 0
+    end: 0
+  - tile: {fileID: 2868997040141898498, guid: 644b8fb5a40c3014a92178d7de5ef09c, type: 3}
+    dimx: 20
+    dimy: 20
+    start: 0
+    end: 0
+  - tile: {fileID: 3978548061822390804, guid: 103fe8371d616ff40830d75df84b32e3, type: 3}
+    dimx: 20
+    dimy: 20
+    start: 0
+    end: 0
   dimTile: 20
 --- !u!4 &27629667
 Transform:
@@ -193,6 +229,7 @@ GameObject:
   - component: {fileID: 140687205}
   - component: {fileID: 140687204}
   - component: {fileID: 140687203}
+  - component: {fileID: 140687206}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -265,6 +302,39 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &140687206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 140687202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
 --- !u!4 &160364802 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6631781844698132485, guid: 764f605b963d9fa4eaa3353518934293, type: 3}
