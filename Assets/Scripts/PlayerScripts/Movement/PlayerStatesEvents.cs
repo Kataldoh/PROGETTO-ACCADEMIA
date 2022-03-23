@@ -57,16 +57,6 @@ public class PlayerStatesEvents : MonoBehaviour
             }
         }
 
-       
-
-
-        /*
-        if (pInst.isSprinting)
-        {
-            pInst._state = PlayerState.sprinting;
-        }
-        */
-
 
         if (pInst.isDash && pInst.dashUnlocked)
         {
@@ -93,7 +83,7 @@ public class PlayerStatesEvents : MonoBehaviour
 
         slideTimer += Time.deltaTime;
 
-        if (slideTimer <= 0.5f)
+        if (slideTimer <= 0.5f && !pInst.hasSomethingInFront)
         {
             pInst.controller.height = pInst.height / 3;
             pInst.controller.center = new Vector3(0, 0.4f, 0);
@@ -186,7 +176,7 @@ public class PlayerStatesEvents : MonoBehaviour
 
         dashLifetime += Time.deltaTime;
 
-        if(dashLifetime <=0.25f)
+        if(dashLifetime <=0.25f && !pInst.hasSomethingInFront)
         {
             if(pInst.move.y == 0)
             {

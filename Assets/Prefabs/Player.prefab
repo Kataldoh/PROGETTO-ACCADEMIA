@@ -565,6 +565,7 @@ Transform:
   - {fileID: 6580722612111210976}
   - {fileID: 3616844845562259981}
   - {fileID: 9172078082053703250}
+  - {fileID: 8148373329719332244}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
@@ -600,7 +601,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 1.5
   m_Radius: 0.2
-  m_SlopeLimit: 45
+  m_SlopeLimit: 35
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -634,7 +635,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pdata: {fileID: 11400000, guid: eb636e45b20f78141aaae774ced92eb6, type: 2}
-  weapons_SO: []
+  weapons_SO:
+  - {fileID: 11400000, guid: 487f823b7f7c8c546b7e6b7bd296da67, type: 2}
   projectiles: []
   _state: 0
   _Estates: {fileID: 0}
@@ -657,6 +659,7 @@ MonoBehaviour:
   isDash: 0
   isInvincible: 0
   hasSomethingAbove: 0
+  hasSomethingInFront: 0
   dashUnlocked: 0
   rollUnlocked: 0
   powerups: []
@@ -714,6 +717,7 @@ MonoBehaviour:
   - {fileID: 4325915905541906710}
   rayhead: {fileID: 8229782521810080168}
   rollCheck: {fileID: 9172078082053703250}
+  wallCheck: {fileID: 8148373329719332244}
   layer:
     serializedVersion: 2
     m_Bits: 8
@@ -726,9 +730,10 @@ MonoBehaviour:
   JumpForce: 4
   gravity: -4
   weight: -2.5
+  velocity: 0
   radLenght: 0.16
   rollCheckLenght: 0.35
-  velocity: 0
+  wallCheckLenght: 0.22
   lastShotPosition: {x: 0, y: 0, z: 0}
 --- !u!120 &4126119521126577026
 LineRenderer:
@@ -2916,6 +2921,36 @@ Transform:
   m_Father: {fileID: 4759721911903040}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7226524882149917267
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8148373329719332244}
+  m_Layer: 0
+  m_Name: WallCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8148373329719332244
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7226524882149917267}
+  m_LocalRotation: {x: -0, y: -0.7071068, z: -0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 1.1, z: 0}
+  m_LocalScale: {x: 1.9999995, y: 2, z: 1.9999995}
+  m_Children: []
+  m_Father: {fileID: 4759721911903040}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8253649573453087644
 GameObject:
   m_ObjectHideFlags: 0
@@ -2959,7 +2994,7 @@ ParentConstraint:
   m_TranslationAtRest: {x: 0, y: 1.6980004, z: 0.17600252}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: -0.037511826, y: 0, z: 0.10237503}
+  - {x: -0.037511826, y: 0, z: 0.10237408}
   m_RotationOffsets:
   - {x: 0, y: -3.1326077, z: 90.000015}
   m_AffectTranslationX: 1
