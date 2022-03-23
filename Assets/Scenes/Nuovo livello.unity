@@ -198,7 +198,7 @@ MonoBehaviour:
     dimy: 20
     start: 0
     end: 0
-  dimTile: 20
+  LevelID: 0
 --- !u!4 &27629667
 Transform:
   m_ObjectHideFlags: 0
@@ -355,6 +355,61 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1757574502885753245, guid: 095f172219db7ce40aa2915e33718b1b, type: 3}
   m_PrefabInstance: {fileID: 1757574503817008926}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1019723108
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1019723110}
+  - component: {fileID: 1019723109}
+  m_Layer: 0
+  m_Name: MappaQuadrante
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1019723109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019723108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64e8a221a2c775443b8a88cfe442a34d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tile:
+  - tile: {fileID: 3084763054405638075, guid: 84d2acba6dcbc6848b7a00ac0eb3afd1, type: 3}
+    dimx: 1
+    dimy: 1
+    start: 0
+    end: 0
+  - tile: {fileID: 4589928318195350813, guid: b69e9b6e21fc25f4ea00eeec45076efe, type: 3}
+    dimx: 1
+    dimy: 1
+    start: 0
+    end: 0
+  LevelID: 1
+--- !u!4 &1019723110
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1019723108}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 17.28265, y: -4.826553, z: -1.4685287}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1032928124 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3901981336871087908, guid: 1882f9885826c4d42b1f414ff70e074c, type: 3}

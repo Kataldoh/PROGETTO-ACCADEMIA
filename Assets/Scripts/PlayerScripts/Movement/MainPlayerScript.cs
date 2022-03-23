@@ -413,7 +413,6 @@ public class MainPlayerScript : MonoBehaviour
     public bool IsGrounded()
     {
      
-
         //Se i 2 raycast posti a destra e a sinistra del player non trovano un oggetto nel layer Ground
         if (!Physics.Raycast(groundCheck[0].position,-transform.up, radLenght, layer) && 
                 !Physics.Raycast(groundCheck[1].position, -transform.up, radLenght, layer))
