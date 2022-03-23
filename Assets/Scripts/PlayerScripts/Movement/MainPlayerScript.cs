@@ -38,6 +38,7 @@ public class MainPlayerScript : MonoBehaviour
     public bool isDash;                         //se il player esegue il dash
     public bool isInvincible;                   //se il player è invincibile
     public bool hasSomethingAbove;
+    public bool hasSomethingInFront;
 
     [Header("Unlocked Abilities")]
     public bool dashUnlocked;                   //bool che determina che il dash sia sbloccato
@@ -53,7 +54,8 @@ public class MainPlayerScript : MonoBehaviour
     [SerializeField] Transform[] groundCheck;        //posizione del "piede" del player, dove la sfera per trovare se si è a terra sarà situata
     [SerializeField] Transform rayhead;              //posizione dal quale la mira e lo sparo parte, messo
     [SerializeField] Transform rollCheck;            //posizione dalla quale si controlla se il player rimane abbassato
-    [SerializeField] public LayerMask layer,shootingIgnoreLayer;    //
+    [SerializeField] Transform wallCheck;            //posizione dalla quale si controlla se il player è contro un muro
+    [SerializeField] public LayerMask layer,shootingIgnoreLayer;    
     public Animator anim;
     public LineRenderer laserRender;    
     public GameObject endSpark;
@@ -62,9 +64,13 @@ public class MainPlayerScript : MonoBehaviour
     [SerializeField] float JumpForce;       //forza del salto
     [SerializeField] public float gravity;  //variabile della gravità
     [SerializeField] public float weight;   //peso a terra del player
+    [SerializeField] public float velocity;
+
+    [Header("Ray Lenghts variables")]
     [SerializeField] float radLenght;       //valore della lunghezza dei raycast ai piedi del player per controllare se è a terra
     [SerializeField] float rollCheckLenght; //valore della lunghezza del raycast per controllare se ha qualcosa sopra di se
-    [SerializeField] public float velocity;
+    [SerializeField] float wallCheckLenght; //valore della lunghezza del raycast per controllare se ha qualcosa sopra di se
+
 
     //*****************************************
 
@@ -286,6 +292,8 @@ public class MainPlayerScript : MonoBehaviour
             }
         }
 
+        hasSomethingInFront = WallCheck();
+
         //Mantiene la posizione della Z costante a quella iniziale
         if (transform.position.z != startingZ)
         {
@@ -309,7 +317,7 @@ public class MainPlayerScript : MonoBehaviour
             dashTimer = dashRechargeTime;
 
         //esegue il dash se il timer è maggiore/uguale a quello presentato in dashRechrgeTime (se sbloccato)
-        if (Input.GetButtonDown("Fire3") && dashUnlocked && dashTimer >= dashRechargeTime)
+        if (Input.GetButtonDown("Fire3") && dashUnlocked && dashTimer >= dashRechargeTime && !hasSomethingInFront)
             isDash = true;
 
         //Setta la barra della stamina tramite il timer del dash
@@ -318,7 +326,7 @@ public class MainPlayerScript : MonoBehaviour
         //(PROVVISORIO)
         //Controlla se si può fare il dash, quando si è a terra e ci si può muovere se il roll è sbloccato
         if (Input.GetButtonDown("SlideButton"))
-            if (_state == PlayerState.groundMoving && rollUnlocked)
+            if (_state == PlayerState.groundMoving && rollUnlocked && !hasSomethingInFront)
                 _state = PlayerState.sliding;
 
         //---------------------------
@@ -338,11 +346,15 @@ public class MainPlayerScript : MonoBehaviour
         }
     }
 
-        //-------------------------------------------------------
-        //METODO DI CONTROLLO DELLE ANIMAZIONI IN BASE AGLI STATI
-        //-------------------------------------------------------
-        void AnimationHandler()
+    //-------------------------------------------------------
+    //METODO DI CONTROLLO DELLE ANIMAZIONI IN BASE AGLI STATI
+    //-------------------------------------------------------
+    void AnimationHandler()
     {
+        float x_MovementFloat = move.x;
+        if (hasSomethingInFront)
+            x_MovementFloat = 0;
+
         switch (_state)
         {
             case PlayerState.idle:
@@ -358,7 +370,7 @@ public class MainPlayerScript : MonoBehaviour
                 anim.SetBool("jump", false);
                 anim.SetBool("sliding", false);
                 anim.SetBool("dash", false);
-                anim.SetFloat("posx", move.x, 0.05f, Time.deltaTime);
+                anim.SetFloat("posx", x_MovementFloat, 0.05f, Time.deltaTime);
                 anim.SetFloat("posy", move.y, 0.15f, Time.deltaTime);
                 anim.SetFloat("velocity", 0, 0, Time.deltaTime);
                 break;
@@ -391,16 +403,22 @@ public class MainPlayerScript : MonoBehaviour
         return Physics.Raycast(rollCheck.position, transform.up, rollCheckLenght, layer);
     }
 
+    //Controlla se il player ha qualcosa al disopra di se
+    bool WallCheck()
+    {
+        return Physics.Raycast(wallCheck.position, transform.forward, wallCheckLenght, layer);
+    }
+
     //metodo di controllo del terreno
     public bool IsGrounded()
     {
         //debugging dei raycast per capire se si è a terra
-        Debug.DrawRay(groundCheck[0].position, -transform.up * radLenght, Color.yellow);
-        Debug.DrawRay(groundCheck[1].position, -transform.up * radLenght, Color.yellow);
+        Debug.DrawRay(groundCheck[2].position, -transform.forward * radLenght/2, Color.yellow);
+        Debug.DrawRay(groundCheck[3].position, transform.forward * radLenght/2, Color.yellow);
 
         //Se i 2 raycast posti a destra e a sinistra del player non trovano un oggetto nel layer Ground
         if (!Physics.Raycast(groundCheck[0].position,-transform.up, radLenght, layer) && 
-            !Physics.Raycast(groundCheck[1].position, -transform.up, radLenght, layer))
+                !Physics.Raycast(groundCheck[1].position, -transform.up, radLenght, layer))
         {
             //inizio ad aggiungere tempo all'hangTime
             //un timer per dare al giocatore una finestra di tempo per saltare dopo essere in aria
@@ -417,9 +435,12 @@ public class MainPlayerScript : MonoBehaviour
         }
         else                        //altrimenti è a terra e l'hangtime è messo a 0
         {
-            hangTime=0;
+
+            hangTime = 0;
             return true;
         }
+
+        
     }
 
     //Collisioni
