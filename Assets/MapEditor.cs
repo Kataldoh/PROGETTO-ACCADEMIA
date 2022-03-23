@@ -18,7 +18,6 @@ public class MapEditor : MonoBehaviour
 
 
     public List<TileStruct> tile = new List<TileStruct>();
-    [SerializeField] int dimTile;
 
     // int[livello,x,y]
     int[,,] map = 
