@@ -49,8 +49,8 @@ public class MapEditor : MonoBehaviour
                 int _tile = map[0, y, x];
                 if (_tile > -1)
                 {
-                    GameObject go = Instantiate(tile[_tile].tile, transform.position, transform.rotation);
-                    go.transform.position = new Vector3(x * tile[_tile].dimx, -y * tile[_tile].dimy, 0);
+                    Vector3 pos= new Vector3(x * tile[_tile].dimx, -y * tile[_tile].dimy, 0);
+                    GameObject go = Instantiate(tile[_tile].tile, pos, transform.rotation);
                     go.transform.parent = transform;
                 }
             }
