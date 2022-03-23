@@ -3,14 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[System.Serializable]
-public class TileStruct {
-    public GameObject tile;
-    public int dimx = 20;
-    public int dimy = 20;
-    public bool start;
-    public bool end;
-}
 
 public class MapEditor : MonoBehaviour
 {
