@@ -18,6 +18,7 @@ public class MapEditor : MonoBehaviour
 
 
     public List<TileStruct> tile = new List<TileStruct>();
+    [SerializeField] int LevelID;
 
     // int[livello,x,y]
     int[,,] map = 
@@ -29,10 +30,10 @@ public class MapEditor : MonoBehaviour
             { 0,0,0,0}
         },
         {
-            { 0,3,3,3},
-            { 1,1,1,1},
-            { 0,0,0,0},
-            { 0,0,0,0}
+            { 0,-1,0,0},
+            { 0,1,-1,0},
+            { 0,0,-1,0},
+            { 0,-1,-1,1}
         }
      };
 
@@ -45,7 +46,7 @@ public class MapEditor : MonoBehaviour
         {
             for (int y = 0; y < map.GetLength(1); y++)
             {
-                int _tile = map[0, y, x];
+                int _tile = map[LevelID, y, x];
                 if (_tile > -1)
                 {
                     Vector3 pos= new Vector3(x * tile[_tile].dimx, -y * tile[_tile].dimy, 0);
