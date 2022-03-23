@@ -412,9 +412,7 @@ public class MainPlayerScript : MonoBehaviour
     //metodo di controllo del terreno
     public bool IsGrounded()
     {
-        //debugging dei raycast per capire se si è a terra
-        Debug.DrawRay(groundCheck[2].position, -transform.forward * radLenght/2, Color.yellow);
-        Debug.DrawRay(groundCheck[3].position, transform.forward * radLenght/2, Color.yellow);
+     
 
         //Se i 2 raycast posti a destra e a sinistra del player non trovano un oggetto nel layer Ground
         if (!Physics.Raycast(groundCheck[0].position,-transform.up, radLenght, layer) && 
