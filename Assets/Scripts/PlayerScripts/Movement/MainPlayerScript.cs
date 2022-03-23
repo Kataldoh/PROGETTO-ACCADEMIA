@@ -98,68 +98,11 @@ public class MainPlayerScript : MonoBehaviour
 
     private void Update()
     {
-
-        //controlla il tempo di invincibilità
-        if (isInvincible)
+        if (GameController.instance._state == GameState.play)
         {
-            invincibilityTimer += Time.deltaTime;
-            if(invincibilityTimer >= invincibilityDuration)
-            {
-                invincibilityTimer = 0;
-                isInvincible = false;
-            }
+            StateIndipendentActionsUPDATE();
         }
-
-        //Mantiene la posizione della Z costante a quella iniziale
-        if(transform.position.z != startingZ)
-        {
-            transform.position = new Vector3(transform.position.x, transform.position.y, startingZ);
-        }
-
-        //Se la vita del player è a 0
-        if (GameController.instance.CurrentHealth == 0)
-        {
-            _state= PlayerState.dead;
-            GameController.instance._state = GameState.dead;
-        }
-
-        //--------------------
-        //GESTIONE DEL DASH
-        //--------------------
-        //impostazione del timer del dash
-        if (dashTimer < dashRechargeTime)
-            dashTimer += Time.deltaTime;
-        else
-            dashTimer = dashRechargeTime;
-
-        //esegue il dash se il timer è maggiore/uguale a quello presentato in dashRechrgeTime (se sbloccato)
-        if (Input.GetButtonDown("Fire3") && dashUnlocked && dashTimer >= dashRechargeTime)
-            isDash = true;
-        
-        //Setta la barra della stamina tramite il timer del dash
-        GameController.instance.BarraStamina.SetStamina(dashTimer * 100);
-
-        //(PROVVISORIO)
-        //Controlla se si può fare il dash, quando si è a terra e ci si può muovere se il roll è sbloccato
-        if (Input.GetButtonDown("SlideButton"))
-            if (_state == PlayerState.groundMoving && rollUnlocked)
-                _state = PlayerState.sliding;
-
-        //---------------------------
-        //GESTIONE DELLA MIRA E SPARO
-        //---------------------------
-        aM.GeneralWeaponHandler(weapons_SO[0], rayhead, endSpark, projectiles, shootingIgnoreLayer);
-
-
-        //Sistema di salvataggio
-        if(Input.GetKey(KeyCode.O))
-        {
-            SavePlayer();
-        }
-        if (Input.GetKey(KeyCode.L))
-        {
-            LoadPlayer();
-        }
+            
     }
 
 
@@ -168,7 +111,7 @@ public class MainPlayerScript : MonoBehaviour
         //Il player non eseguirà alcuna azione se lo stato non è in play
         if (GameController.instance._state == GameState.play)
         {
-            StateIndipendentActions();  //metodo per la gestione di azioni indipendenti dagli stati
+            StateIndipendentActionsFIXED_UPDATE();  //metodo per la gestione di azioni indipendenti dagli stati
             AnimationHandler(); //metodo per la gestione delle animazioni
             States();       //metodo per la gestione degli stati
 
@@ -234,7 +177,7 @@ public class MainPlayerScript : MonoBehaviour
     //---------------------------------------------
     //GESTIONE DI ELEMENTI INDIPENDENTI DAGLI STATI
     //---------------------------------------------
-    public void StateIndipendentActions()
+    public void StateIndipendentActionsFIXED_UPDATE()
     {
         //--------------------
         //Registra il movimento sugli assi
@@ -330,10 +273,75 @@ public class MainPlayerScript : MonoBehaviour
         //--------------------
     }
 
-    //-------------------------------------------------------
-    //METODO DI CONTROLLO DELLE ANIMAZIONI IN BASE AGLI STATI
-    //-------------------------------------------------------
-    void AnimationHandler()
+    public void StateIndipendentActionsUPDATE()
+    {
+        //controlla il tempo di invincibilità
+        if (isInvincible)
+        {
+            invincibilityTimer += Time.deltaTime;
+            if (invincibilityTimer >= invincibilityDuration)
+            {
+                invincibilityTimer = 0;
+                isInvincible = false;
+            }
+        }
+
+        //Mantiene la posizione della Z costante a quella iniziale
+        if (transform.position.z != startingZ)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y, startingZ);
+        }
+
+        //Se la vita del player è a 0
+        if (GameController.instance.CurrentHealth == 0)
+        {
+            _state = PlayerState.dead;
+            GameController.instance._state = GameState.dead;
+        }
+
+        //--------------------
+        //GESTIONE DEL DASH
+        //--------------------
+        //impostazione del timer del dash
+        if (dashTimer < dashRechargeTime)
+            dashTimer += Time.deltaTime;
+        else
+            dashTimer = dashRechargeTime;
+
+        //esegue il dash se il timer è maggiore/uguale a quello presentato in dashRechrgeTime (se sbloccato)
+        if (Input.GetButtonDown("Fire3") && dashUnlocked && dashTimer >= dashRechargeTime)
+            isDash = true;
+
+        //Setta la barra della stamina tramite il timer del dash
+        GameController.instance.BarraStamina.SetStamina(dashTimer * 100);
+
+        //(PROVVISORIO)
+        //Controlla se si può fare il dash, quando si è a terra e ci si può muovere se il roll è sbloccato
+        if (Input.GetButtonDown("SlideButton"))
+            if (_state == PlayerState.groundMoving && rollUnlocked)
+                _state = PlayerState.sliding;
+
+        //---------------------------
+        //GESTIONE DELLA MIRA E SPARO
+        //---------------------------
+        aM.GeneralWeaponHandler(weapons_SO[0], rayhead, endSpark, projectiles, shootingIgnoreLayer);
+
+
+        //Sistema di salvataggio
+        if (Input.GetKey(KeyCode.O))
+        {
+            SavePlayer();
+        }
+        if (Input.GetKey(KeyCode.L))
+        {
+            LoadPlayer();
+        }
+    }
+
+        //-------------------------------------------------------
+        //METODO DI CONTROLLO DELLE ANIMAZIONI IN BASE AGLI STATI
+        //-------------------------------------------------------
+        void AnimationHandler()
     {
         switch (_state)
         {
