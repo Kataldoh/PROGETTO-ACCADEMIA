@@ -76,36 +76,6 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: 0
     min: 0
---- !u!114 &-261760873431286724
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ccf1aba9553839d41ae37dd52e9ebcce, type: 3}
-  m_Name: MotionBlur
-  m_EditorClassIdentifier: 
-  active: 1
-  m_AdvancedMode: 0
-  mode:
-    m_OverrideState: 0
-    m_Value: 0
-  quality:
-    m_OverrideState: 0
-    m_Value: 0
-  intensity:
-    m_OverrideState: 0
-    m_Value: 0
-    min: 0
-    max: 1
-  clamp:
-    m_OverrideState: 0
-    m_Value: 0.05
-    min: 0
-    max: 0.2
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -124,7 +94,6 @@ MonoBehaviour:
   - {fileID: 5903430662319800753}
   - {fileID: 1506387403382484177}
   - {fileID: -6771869567572740261}
-  - {fileID: -261760873431286724}
 --- !u!114 &1506387403382484177
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -159,10 +128,10 @@ MonoBehaviour:
           inWeight: 0
           outWeight: 0
         - serializedVersion: 3
-          time: 0.9741196
-          value: 0.92711115
-          inSlope: 1.1523117
-          outSlope: 1.1523117
+          time: 0.7329975
+          value: 0.7659575
+          inSlope: 2.1644948
+          outSlope: 2.1644948
           tangentMode: 0
           weightedMode: 0
           inWeight: 0
