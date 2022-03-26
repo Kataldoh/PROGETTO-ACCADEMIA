@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -149,56 +149,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 27629665}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 64e8a221a2c775443b8a88cfe442a34d, type: 3}
+  m_Script: {fileID: 11500000, guid: fea283375564d5a488a6a725d8054eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tile:
-  - tile: {fileID: 6631781844698132486, guid: 764f605b963d9fa4eaa3353518934293, type: 3}
-    dimx: 20
-    dimy: 20
-    start: 1
-    end: 0
-  - tile: {fileID: 3901981336871087907, guid: 1882f9885826c4d42b1f414ff70e074c, type: 3}
-    dimx: 20
-    dimy: 20
-    start: 0
-    end: 1
-  - tile: {fileID: 121346608745375423, guid: 621b28dda7ad0c645aefa3d1dd1d5e99, type: 3}
-    dimx: 20
-    dimy: 20
+  tiles:
+  - prefab: {fileID: 8445694987224639780, guid: c60aa57ad74000f4e9cc53b56901c066, type: 3}
     start: 0
     end: 0
-  - tile: {fileID: 4063679944138663405, guid: 4abc272f1252ed245aca9ee543582b26, type: 3}
-    dimx: 20
-    dimy: 20
+  - prefab: {fileID: 8445694987224639780, guid: 4406c7bdcce0e5b41abb9348afa0af03, type: 3}
     start: 0
     end: 0
-  - tile: {fileID: 1757574502885753244, guid: 095f172219db7ce40aa2915e33718b1b, type: 3}
-    dimx: 20
-    dimy: 20
+  - prefab: {fileID: 8445694987224639780, guid: 94ebbce4f9406704aa4f697798914d6c, type: 3}
     start: 0
     end: 0
-  - tile: {fileID: 877787278340228578, guid: 582eeae3681a6a04fbb352175105be12, type: 3}
-    dimx: 20
-    dimy: 20
+  - prefab: {fileID: 8445694987224639780, guid: 94ebbce4f9406704aa4f697798914d6c, type: 3}
     start: 0
     end: 0
-  - tile: {fileID: 1917525890253115887, guid: e7a809d387d206e418b7da9183fb5257, type: 3}
-    dimx: 20
-    dimy: 20
-    start: 0
-    end: 0
-  - tile: {fileID: 2868997040141898498, guid: 644b8fb5a40c3014a92178d7de5ef09c, type: 3}
-    dimx: 20
-    dimy: 20
-    start: 0
-    end: 0
-  - tile: {fileID: 3978548061822390804, guid: 103fe8371d616ff40830d75df84b32e3, type: 3}
-    dimx: 20
-    dimy: 20
-    start: 0
-    end: 0
-  LevelID: 0
+  TiledJsonData: {fileID: 4900000, guid: 439e69432f18e394a9fab7b4101e0eca, type: 3}
+  LayerID: 0
 --- !u!4 &27629667
 Transform:
   m_ObjectHideFlags: 0
@@ -384,18 +352,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64e8a221a2c775443b8a88cfe442a34d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tile:
-  - tile: {fileID: 3084763054405638075, guid: 84d2acba6dcbc6848b7a00ac0eb3afd1, type: 3}
-    dimx: 1
-    dimy: 1
-    start: 0
-    end: 0
-  - tile: {fileID: 4589928318195350813, guid: b69e9b6e21fc25f4ea00eeec45076efe, type: 3}
-    dimx: 1
-    dimy: 1
-    start: 0
-    end: 0
-  LevelID: 1
+  tiles: []
+  TiledJsonData: {fileID: 0}
+  tdata:
+    layers: []
+    type: 
+    tiledversion: 
+    tileheight: 0
+    tilewidth: 0
+  LayerID: 0
+  MapData: 
 --- !u!4 &1019723110
 Transform:
   m_ObjectHideFlags: 0
