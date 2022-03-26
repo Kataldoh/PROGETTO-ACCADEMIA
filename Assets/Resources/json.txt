@@ -1,0 +1,53 @@
+{ "compressionlevel":-1,
+ "height":7,
+ "infinite":false,
+ "layers":[
+        {
+         "data":[3, 3, 3, 3, 3, 3, 3, 3, 0, 3, 0, 0, 0, 3, 3, 0, 0, 0, 3, 0, 3, 3, 0, 0, 0, 3, 3, 3, 3, 3, 3, 0, 3, 0, 3, 3, 0, 0, 0, 0, 0, 3, 3, 3, 3, 3, 3, 3, 3],
+         "height":7,
+         "id":1,
+         "name":"Livello tile 1",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":false,
+         "width":7,
+         "x":0,
+         "y":0
+        }, 
+        {
+         "data":[3, 0, 0, 0, 0, 3, 3, 0, 0, 3, 3, 3, 3, 3, 0, 0, 0, 0, 0, 3, 3, 0, 3, 3, 3, 0, 0, 3, 0, 0, 0, 0, 0, 0, 3, 3, 0, 3, 3, 3, 3, 3, 0, 0, 0, 0, 3, 3, 3],
+         "height":7,
+         "id":2,
+         "name":"Livello tile 2",
+         "opacity":1,
+         "type":"tilelayer",
+         "visible":true,
+         "width":7,
+         "x":0,
+         "y":0
+        }],
+ "nextlayerid":3,
+ "nextobjectid":1,
+ "orientation":"orthogonal",
+ "renderorder":"left-down",
+ "tiledversion":"1.8.2",
+ "tileheight":32,
+ "tilesets":[
+        {
+         "columns":28,
+         "firstgid":1,
+         "image":"C:\/Users\/ROG-G713\/Desktop\/tiles1_2.png",
+         "imageheight":896,
+         "imagewidth":896,
+         "margin":0,
+         "name":"tiles1_2",
+         "spacing":0,
+         "tilecount":784,
+         "tileheight":32,
+         "tilewidth":32
+        }],
+ "tilewidth":32,
+ "type":"map",
+ "version":"1.8",
+ "width":7
+}
