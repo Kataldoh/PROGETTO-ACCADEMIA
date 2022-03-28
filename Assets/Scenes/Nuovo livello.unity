@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.2257134, b: 0.30692226, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -152,20 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fea283375564d5a488a6a725d8054eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiles:
-  - prefab: {fileID: 8445694987224639780, guid: c60aa57ad74000f4e9cc53b56901c066, type: 3}
-    start: 0
-    end: 0
-  - prefab: {fileID: 8445694987224639780, guid: 4406c7bdcce0e5b41abb9348afa0af03, type: 3}
-    start: 0
-    end: 0
-  - prefab: {fileID: 8445694987224639780, guid: 94ebbce4f9406704aa4f697798914d6c, type: 3}
-    start: 0
-    end: 0
-  - prefab: {fileID: 8445694987224639780, guid: 94ebbce4f9406704aa4f697798914d6c, type: 3}
-    start: 0
-    end: 0
-  TiledJsonData: {fileID: 4900000, guid: 439e69432f18e394a9fab7b4101e0eca, type: 3}
+  tiles: {fileID: 11400000, guid: ec2c6a6957941e34bb1a3f84bfc414ac, type: 2}
+  TiledJsonData: {fileID: 4900000, guid: f5e9b8d685f6cee47a6664ad45709b5f, type: 3}
   LayerID: 0
 --- !u!4 &27629667
 Transform:
@@ -352,16 +340,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64e8a221a2c775443b8a88cfe442a34d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tiles: []
-  TiledJsonData: {fileID: 0}
-  tdata:
-    layers: []
-    type: 
-    tiledversion: 
-    tileheight: 0
-    tilewidth: 0
-  LayerID: 0
-  MapData: 
 --- !u!4 &1019723110
 Transform:
   m_ObjectHideFlags: 0
