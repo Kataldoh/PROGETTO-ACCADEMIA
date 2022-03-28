@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameAssets : MonoBehaviour
 {
+
+
     private static GameAssets _i;
 
     public static GameAssets istanza
@@ -17,4 +19,13 @@ public class GameAssets : MonoBehaviour
     }
 
     public GameObject gameController;
+    public SoundAudioClip[] soundAudioClipsArray;
+
+
+    [System.Serializable]
+    public class SoundAudioClip
+    {
+        public SoundManager.Sound sound;
+        public AudioClip audioClip;
+    }
 }

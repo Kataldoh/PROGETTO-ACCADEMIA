@@ -33,6 +33,7 @@ public class WeaponMethods : MonoBehaviour
         if (Input.GetButton("Fire1") && !isShoot)
         {
             isShoot = true;
+            SoundManager.PlaySound(SoundManager.Sound.LaserAttack);
             shootingInterval = 0;
             trailGO[i].SetActive(true);
             trailGO[i].transform.position = aimStart.position;

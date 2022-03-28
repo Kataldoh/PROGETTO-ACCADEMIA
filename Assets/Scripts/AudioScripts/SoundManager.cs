@@ -4,280 +4,88 @@ using UnityEngine;
 
 
 
-
-namespace UnityCore
+public static class SoundManager
 {
-    namespace Audio
+
+    public enum Sound
     {
-         public class SoundManager : MonoBehaviour
-         {
+        PlayerSteps,
+        LaserAttack,
+        EnemyDie,
+        Music,
+        Ambience,
+        Dashing,
+        Jumping,
+        PowerUp,
+    }
 
+    public static void PlaySound( Sound sound)
+    {
 
-            public static SoundManager instance;
+        if (CanPlaySound(sound))
+        {
+            GameObject soundGameObject = new GameObject("Sound");
+            soundGameObject.AddComponent<AudioSource>();
+            AudioSource audioSource = soundGameObject.AddComponent<AudioSource>();
+            audioSource.PlayOneShot(GetAudioClip(sound));
+        }
 
+    
+    }
 
-            public bool debug;
-            public AudioTrack[] tracks;
+    private static Dictionary<Sound, float> soundTimerDictionary;
 
+    public static void Initialize()
+    {
+        soundTimerDictionary = new Dictionary<Sound, float>();
+        soundTimerDictionary[Sound.Music] = 0f;
+    }
 
-            private Hashtable AudioTable; // relazione tra tipi di audio e traccie audio
-            private Hashtable FunctionTable;
-
-
-            [System.Serializable]
-            public class AudioObject
+    private static AudioClip GetAudioClip(Sound sound)
+    {
+        foreach(GameAssets.SoundAudioClip soundAudioClip in GameAssets.istanza.soundAudioClipsArray)
+        {
+            if (soundAudioClip.sound == sound)
             {
-                public AudioType type;
-                public AudioClip clip;
+                return soundAudioClip.audioClip;
             }
+        }
 
-            [System.Serializable]
-            public class AudioTrack
-            {
-                public AudioSource source;
-                public AudioObject[] audio;
-            }
+        Debug.LogError("Sound" + sound + " not found ");
+        return null;
 
-            private class AudioFunction
-            {
-                public AudioAction action;
-                public AudioType type;
+    }
 
-                public AudioFunction(AudioAction _action,AudioType _type)
+    private static bool CanPlaySound(Sound sound)
+    {
+        switch (sound)
+        {
+            default:
+                return true;
+            case Sound.Music:
+                if (soundTimerDictionary.ContainsKey(sound))
                 {
-                    action = _action;
-                    type = _type;
-                }
-            }
+                    float lastTimePlayed = soundTimerDictionary[sound];
+                    float MusicTimerMax = 1f;
 
-            private enum AudioAction
-            {
-                START,
-                STOP,
-                RESTART,
-
-            }
-
-            #region Metodi Unity
-
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            private void Awake()
-            {
-                if (!instance)
-                {
-                    Configure();
-                }
-            }
-
-
-            private void OnDisable()
-            {
-                Dispose();
-            }
-            #endregion
-
-            #region Metodi Pubblici
-
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-            public void PlayAudio(AudioType type)
-            {
-                AddFunction(new AudioFunction(AudioAction.START,type));
-            }
-            public void StopAudio(AudioType type)
-            {
-                AddFunction(new AudioFunction(AudioAction.STOP, type));
-
-            }
-            public void RestartAudio(AudioType type)
-            {
-                AddFunction(new AudioFunction(AudioAction.RESTART, type));
-
-            }
-
-
-            #endregion
-
-            #region Metodi Privati
-
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-            ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-            private void Configure()
-            {
-                instance = this;
-
-                AudioTable = new Hashtable();
-                FunctionTable = new Hashtable();
-                GenerateAudioTable();
-            }
-
-            private void Dispose()
-            {
-                foreach(DictionaryEntry _entry in FunctionTable)
-                {
-                    IEnumerator _function = (IEnumerator)_entry.Value;
-                    StopCoroutine(_function);
-                }
-            }
-
-            private void GenerateAudioTable()
-            {
-                foreach(AudioTrack track in tracks)
-                {
-                    foreach(AudioObject Aobj in track.audio)
+                    if(lastTimePlayed + MusicTimerMax < Time.time)
                     {
-                        // non duplicare keys
-                        if (AudioTable.ContainsKey(Aobj.type))
-                        {
-                            LogWarning("Stai cercando di registrare l'audio [" + Aobj.type + "] che è già stato registrato");
-                        }
-                        else
-                        {
-                            AudioTable.Add(Aobj.type, track);
-                            Log("Registrazione audio in corso [" + Aobj.type + "].");
-                        }
+                        soundTimerDictionary[sound] = Time.time;
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
                     }
                 }
-            }
-
-            private void Log(string _message)
-            {
-                if (!debug)
+                else
                 {
-                    return;
+                    return true;
                 }
-
-                Debug.Log("[Audio Controller]: " + _message);
-            }
-
-            private void LogWarning(string _message)
-            {
-                if (!debug)
-                {
-                    return;
-                }
-
-                Debug.LogWarning("[Audio Controller]: " + _message);
-            }
-
-
-            private IEnumerator RunAudioFunction(AudioFunction _function)
-            {
-                AudioTrack track = (AudioTrack) AudioTable [_function.type];
-                track.source.clip = GetAudioClipFromAudioTrack(_function.type, track);
-
-                switch (_function.action)
-                {
-                    case AudioAction.START:
-
-                        track.source.Play();
-
-                        break;
-
-                    case AudioAction.STOP:
-
-                        track.source.Stop();
-
-                        break;
-
-                    case AudioAction.RESTART:
-
-                        track.source.Stop();
-                        track.source.Play();
-
-                        break;
-
-                }
-
-                FunctionTable.Remove(_function.type);
-
-                Log("Function count: " + FunctionTable.Count);
-
-                yield return null;
-
-            }
-
-            public AudioClip GetAudioClipFromAudioTrack(AudioType type,AudioTrack track)
-            {
-                foreach (AudioObject _obj in track.audio)
-                {
-                    if(_obj.type == type)
-                    {
-                        return _obj.clip;
-                    }
-                }
-                return null;
-            }
-
-            private void AddFunction(AudioFunction _function)
-            {
-                // rimozione funzione conflittuale
-
-                RemoveConflictingFunctions(_function.type);
-
-                // avvio funzione
-                IEnumerator FunctionRunner = RunAudioFunction(_function);
-                FunctionTable.Add(_function.type, FunctionRunner);
-                StartCoroutine(FunctionRunner);
-                Log("Starting function on [" + _function.type +"] with operation" + _function.action);
-                    
-
-            }
-
-            private void RemoveFunction(AudioType _type)
-            {
-                if (!FunctionTable.ContainsKey(_type))
-                {
-                    LogWarning("Trying to stop a job [" + _type + "] that is not running");
-                    return;
-                }
-
-                IEnumerator runningfuntion = (IEnumerator)FunctionTable[_type];
-                StopCoroutine(runningfuntion);
-                FunctionTable.Remove(_type);
-            }
-
-
-            private void RemoveConflictingFunctions(AudioType _type)
-            {
-                if (FunctionTable.ContainsKey(_type))
-                {
-                    RemoveFunction(_type);
-                } 
-
-                AudioType _conflictAudio = AudioType.None;
-
-                foreach(DictionaryEntry _entry in FunctionTable)
-                {
-                        AudioType _audioType = (AudioType)_entry.Key;
-                        AudioTrack _audiotrackinuse = (AudioTrack)AudioTable[_audioType];
-                        AudioTrack _audiotrackneeded = (AudioTrack)AudioTable[_type];
-                        if (_audiotrackneeded.source == _audiotrackinuse.source)
-                        {
-                            //conflict
-                            _conflictAudio = _audioType;
-                        }
-                }
-
-                if (_conflictAudio != AudioType.None)
-                {
-                    RemoveFunction(_conflictAudio);
-                }
-            }
-
-            #endregion
-
-
-
-
+                //break;
         }
     }
-}
 
+
+
+}
