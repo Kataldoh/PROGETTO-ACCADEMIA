@@ -601,7 +601,7 @@ CharacterController:
   serializedVersion: 2
   m_Height: 1.5
   m_Radius: 0.2
-  m_SlopeLimit: 35
+  m_SlopeLimit: 45
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
@@ -729,7 +729,7 @@ MonoBehaviour:
   endSpark: {fileID: 3357014892148384219, guid: cb650988ba0eeb74eb5718d0845cde35, type: 3}
   JumpForce: 4
   gravity: -4
-  weight: -2.5
+  weight: -3
   velocity: 0
   radLenght: 0.16
   rollCheckLenght: 0.35
@@ -2994,9 +2994,9 @@ ParentConstraint:
   m_TranslationAtRest: {x: 0, y: 1.6980004, z: 0.17600252}
   m_RotationAtRest: {x: 0, y: 0, z: 0}
   m_TranslationOffsets:
-  - {x: -0.037511826, y: 0, z: 0.10237408}
+  - {x: -0.037513733, y: 0, z: 0.10237384}
   m_RotationOffsets:
-  - {x: 0, y: -3.1326077, z: 90.000015}
+  - {x: 0, y: -3.1326082, z: 90.000015}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 1

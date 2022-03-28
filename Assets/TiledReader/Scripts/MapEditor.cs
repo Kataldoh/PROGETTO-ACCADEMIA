@@ -6,14 +6,8 @@ using FabTiledJsonReader; // mia lib :)
 public class MapEditor : MonoBehaviour
 {
     //****** Struttura del singolo Tile
-    [System.Serializable]
-    public class TileStruct
-    {
-        public GameObject prefab;
-        public bool start;
-        public bool end;
-    }
-    public List<TileStruct> tiles = new List<TileStruct>();
+    
+    public TileSetSO tiles;
     // *********************************
 
     //File da caricare in /Assets/Resources
@@ -56,7 +50,7 @@ public class MapEditor : MonoBehaviour
                     float posy = -y+tdata.layers[ID].height/2;
 
                     Vector2 tilePosition = new Vector3(posx, posy);
-                    GameObject go = Instantiate(tiles[t].prefab, tilePosition, Quaternion.identity);
+                    GameObject go = Instantiate(tiles.tileset[t].prefab, tilePosition, Quaternion.identity);
                     go.transform.parent = transform;
                 }
             }
