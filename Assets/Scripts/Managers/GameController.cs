@@ -44,7 +44,7 @@ public class GameController : MonoBehaviour
 
     private void Awake()
     {
-
+        SoundManager.Initialize();
         BarraBoss = GameObject.FindGameObjectWithTag("Boss UI");
         player = GameObject.FindGameObjectWithTag("Player");
         //BarraBoss = GameObject.FindGameObjectWithTag("Boss UI");

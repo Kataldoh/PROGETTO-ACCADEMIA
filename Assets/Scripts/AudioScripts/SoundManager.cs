@@ -38,7 +38,7 @@ public static class SoundManager
     public static void Initialize()
     {
         soundTimerDictionary = new Dictionary<Sound, float>();
-        soundTimerDictionary[Sound.Music] = 0f;
+        soundTimerDictionary[Sound.Music] = -167f;
     }
 
     private static AudioClip GetAudioClip(Sound sound)
@@ -66,7 +66,7 @@ public static class SoundManager
                 if (soundTimerDictionary.ContainsKey(sound))
                 {
                     float lastTimePlayed = soundTimerDictionary[sound];
-                    float MusicTimerMax = 1f;
+                    float MusicTimerMax = 167f;
 
                     if(lastTimePlayed + MusicTimerMax < Time.time)
                     {
