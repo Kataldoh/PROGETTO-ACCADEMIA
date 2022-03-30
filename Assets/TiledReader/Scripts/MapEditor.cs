@@ -51,6 +51,7 @@ public class MapEditor : MonoBehaviour
 
                     Vector2 tilePosition = new Vector3(posx, posy);
                     GameObject go = Instantiate(tiles.tileset[t].prefab, tilePosition, Quaternion.identity);
+                    go.layer = 1 << tiles.tileset[t].layer;
                     go.transform.parent = transform;
                 }
             }
