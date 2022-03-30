@@ -53,7 +53,7 @@ public class PlayerStatesEvents : MonoBehaviour
             else                        //resetta l'altezza del player
             {
                 pInst.controller.height = pInst.height;
-                pInst.controller.center = new Vector3(0,0.9f, 0);
+                pInst.controller.center = new Vector3(0, 0.8f, 0);
             }
         }
 
@@ -95,14 +95,14 @@ public class PlayerStatesEvents : MonoBehaviour
                 lockedDir = 0;
                 pInst._state = PlayerState.jump;
                 pInst.controller.height = pInst.height;
-                pInst.controller.center = new Vector3(0, 0.9f, 0);
+                pInst.controller.center = new Vector3(0, 0.8f, 0);
             }
                 
         }
         else
         {
             pInst.controller.height = pInst.height;
-            pInst.controller.center = new Vector3(0, 0.9f, 0);
+            pInst.controller.center = new Vector3(0, 0.8f, 0);
 
             if (!pInst.IsGrounded())
                 pInst._state = PlayerState.jump;
