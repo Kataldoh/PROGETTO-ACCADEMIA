@@ -28,6 +28,18 @@ namespace FabTiledJsonReader
         public int width;  // ... e in X
         public int x; // posizione X
         public int y; // posizione Y
+        public objects[] objects;
+    }
+
+    [System.Serializable]
+    public class objects
+    {
+        public int height;
+        public int id;
+        public string name;
+        public int x;
+        public int y;
+        public int width;
     }
 }
 // *********************************************

@@ -7,7 +7,7 @@ using UnityEngine;
 public class TileStruct
 {
     public GameObject prefab;
-    public LayerMask layer;
+    //public LayerMask layer;
     public bool start;
     public bool end;
 }
