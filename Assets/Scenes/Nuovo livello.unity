@@ -277,7 +277,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &27629666
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tiles: {fileID: 11400000, guid: ec2c6a6957941e34bb1a3f84bfc414ac, type: 2}
-  TiledJsonData: {fileID: 4900000, guid: 4558b4fd44dd3084b9e232388d28bea9, type: 3}
+  TiledJsonData: {fileID: 4900000, guid: d14e5a0cf0cb34e429a74e4103e5ac40, type: 3}
 --- !u!4 &27629667
 Transform:
   m_ObjectHideFlags: 0
@@ -889,6 +889,10 @@ PrefabInstance:
     - target: {fileID: 200916613223987839, guid: 25df2be7781b3fd4db0876476fe1dc36, type: 3}
       propertyPath: m_Name
       value: MappaLivello (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 200916613223987839, guid: 25df2be7781b3fd4db0876476fe1dc36, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 200916613223987839, guid: 25df2be7781b3fd4db0876476fe1dc36, type: 3}
       propertyPath: m_StaticEditorFlags
