@@ -17,6 +17,7 @@ public static class SoundManager
         Dashing,
         Jumping,
         PowerUp,
+        PlayerHit,
     }
 
     private static Dictionary<Sound, float> soundTimerDictionary; //Contiene i timer
