@@ -143,6 +143,7 @@ public class EnemyScript : MonoBehaviour
 
     void Dead()
     {
+        SoundManager.PlaySound(SoundManager.Sound.EnemyDie);
         anim.SetBool("death", true);
         controller.enabled = false;
     }
