@@ -67,6 +67,8 @@ public static class SoundManager
         soundTimerDictionary[Sound.PlayerSteps] = 0f;
         soundTimerDictionary[Sound.Dashing] = 0f;
         soundTimerDictionary[Sound.PlayerHit] = 0f;
+        soundTimerDictionary[Sound.EnemyDie] = 0f;
+
 
 
     }
