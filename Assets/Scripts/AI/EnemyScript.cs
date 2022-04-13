@@ -20,6 +20,7 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] GameObject attackHitbox;
     float idleTimer, patrolTimer, attackTimer;
     float speedx;
+    bool isDead;
 
 
     public Transform target;
@@ -37,6 +38,7 @@ public class EnemyScript : MonoBehaviour
 
     private void Start()
     {
+        isDead = false;
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
         direction = 1;
@@ -66,7 +68,8 @@ public class EnemyScript : MonoBehaviour
                 Patrol();
                 break; 
             case EnemyState.dead:
-                Dead();
+                if(!isDead)
+                    Dead();
                 break; 
         }
     }
@@ -143,6 +146,7 @@ public class EnemyScript : MonoBehaviour
 
     void Dead()
     {
+        isDead = true;
         SoundManager.PlaySound(SoundManager.Sound.EnemyDie);
         anim.SetBool("death", true);
         controller.enabled = false;
