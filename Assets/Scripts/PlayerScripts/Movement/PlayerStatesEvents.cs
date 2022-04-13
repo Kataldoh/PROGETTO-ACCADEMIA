@@ -22,7 +22,7 @@ public class PlayerStatesEvents : MonoBehaviour
         }
 
         //Se vengono rilevati input e si è a terra con velocità minore-uguale a 0, si va al movimento base
-        if(pInst.move != Vector3.zero && pInst.IsGrounded() && pInst.velocity <= 0)
+        if(pInst.move.x != 0 && pInst.IsGrounded() && pInst.velocity <= 0)
         {
             pInst._state = PlayerState.groundMoving;
         }

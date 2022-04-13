@@ -383,7 +383,7 @@ public class MainPlayerScript : MonoBehaviour
                 anim.SetBool("sliding", false);
                 anim.SetBool("dash", false);
                 anim.SetFloat("posx", 0, 0.05f, Time.deltaTime);
-                anim.SetFloat("posy", 0, 0.15f, Time.deltaTime);
+                anim.SetFloat("posy", move.y, 0.15f, Time.deltaTime);
                 anim.SetFloat("velocity", 0, 0, Time.deltaTime);
                 break;
             case PlayerState.groundMoving:
