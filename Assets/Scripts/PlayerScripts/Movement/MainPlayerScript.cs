@@ -160,6 +160,7 @@ public class MainPlayerScript : MonoBehaviour
                 _Estates.P_Idle();
                 break;
             case PlayerState.groundMoving:
+                SoundManager.PlaySound(SoundManager.Sound.PlayerSteps);
                 _Estates.P_Move();
                 break;
             case PlayerState.jump:

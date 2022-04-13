@@ -130,6 +130,8 @@ public class PlayerStatesEvents : MonoBehaviour
             //Se viene rilevato un salto e si è a terra, applica la forza di salto alla velocity
             if (Input.GetButton("Jump") && pInst.IsGrounded() && pInst.isJump)
             {
+                SoundManager.PlaySound(SoundManager.Sound.Jumping);
+
                 pInst.velocity = pInst.pdata.jumpForce * pInst.jumpArc.Evaluate(Time.deltaTime * pInst.pdata.jumpForce);
             }
             //Se il salto viene rilasciato in aria (Velocity>0), applica in anticipo la gravità
