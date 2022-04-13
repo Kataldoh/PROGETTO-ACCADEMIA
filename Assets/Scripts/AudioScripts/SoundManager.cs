@@ -65,6 +65,10 @@ public static class SoundManager
         soundTimerDictionary[Sound.Music] = -167f;
         soundTimerDictionary[Sound.Jumping] = 0f;
         soundTimerDictionary[Sound.PlayerSteps] = 0f;
+        soundTimerDictionary[Sound.Dashing] = 0f;
+        soundTimerDictionary[Sound.PlayerHit] = 0f;
+
+
     }
 
     private static AudioClip GetAudioClip(Sound sound)
@@ -138,6 +142,91 @@ public static class SoundManager
                     float JumpSoundTimerMax = 0.3f;
 
                     if (lastTimePlayed + JumpSoundTimerMax < Time.time) //Se il tempo trascorso dall'ultima volta che il suono è stato riprodotto + il valore MusicTimerMax è minore di Time.time
+                    {
+                        soundTimerDictionary[sound] = Time.time;// si può far ripartire il sound
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+
+
+            case Sound.Dashing:
+                if (soundTimerDictionary.ContainsKey(sound))
+                {
+                    float lastTimePlayed = soundTimerDictionary[sound];
+                    float DashSoundTimerMax = 1f;
+
+                    if (lastTimePlayed + DashSoundTimerMax < Time.time) //Se il tempo trascorso dall'ultima volta che il suono è stato riprodotto + il valore MusicTimerMax è minore di Time.time
+                    {
+                        soundTimerDictionary[sound] = Time.time;// si può far ripartire il sound
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+
+            case Sound.PlayerHit:
+                if (soundTimerDictionary.ContainsKey(sound))
+                {
+                    float lastTimePlayed = soundTimerDictionary[sound];
+                    float PlayerHitSoundTimerMax = 2f;
+
+                    if (lastTimePlayed + PlayerHitSoundTimerMax < Time.time) //Se il tempo trascorso dall'ultima volta che il suono è stato riprodotto + il valore MusicTimerMax è minore di Time.time
+                    {
+                        soundTimerDictionary[sound] = Time.time;// si può far ripartire il sound
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+
+            case Sound.PowerUp:
+                if (soundTimerDictionary.ContainsKey(sound))
+                {
+                    float lastTimePlayed = soundTimerDictionary[sound];
+                    float PowerSoundTimerMax = 5f;
+
+                    if (lastTimePlayed + PowerSoundTimerMax < Time.time) //Se il tempo trascorso dall'ultima volta che il suono è stato riprodotto + il valore MusicTimerMax è minore di Time.time
+                    {
+                        soundTimerDictionary[sound] = Time.time;// si può far ripartire il sound
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                else
+                {
+                    return true;
+                }
+
+            case Sound.EnemyDie:
+                if (soundTimerDictionary.ContainsKey(sound))
+                {
+                    float lastTimePlayed = soundTimerDictionary[sound];
+                    float PowerSoundTimerMax = 5f;
+
+                    if (lastTimePlayed + PowerSoundTimerMax < Time.time) //Se il tempo trascorso dall'ultima volta che il suono è stato riprodotto + il valore MusicTimerMax è minore di Time.time
                     {
                         soundTimerDictionary[sound] = Time.time;// si può far ripartire il sound
                         return true;

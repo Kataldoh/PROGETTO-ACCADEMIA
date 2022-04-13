@@ -165,19 +165,31 @@ public class MainPlayerScript : MonoBehaviour
                 _Estates.P_Idle();
                 break;
             case PlayerState.groundMoving:
-                SoundManager.PlaySound(SoundManager.Sound.PlayerSteps);
+                if (!hasSomethingInFront)
+                {
+                    SoundManager.PlaySound(SoundManager.Sound.PlayerSteps);
+
+                }
                 _Estates.P_Move();
                 break;
             case PlayerState.jump:
                 _Estates.P_Jump();
                 break;
             case PlayerState.dash:
+
+                SoundManager.PlaySound(SoundManager.Sound.Dashing);
+
+
                 _Estates.P_Dash();
                 break;
             case PlayerState.sliding:
                 _Estates.P_Slide();
                 break;
             case PlayerState.damage:
+
+                SoundManager.PlaySound(SoundManager.Sound.PlayerHit);
+
+
                 _Estates.P_Damage();
                 break;
             case PlayerState.dead:
@@ -468,6 +480,8 @@ public class MainPlayerScript : MonoBehaviour
         //Gestione dei pickup 
         if(hit.gameObject.tag == "Pickup")
         {
+            SoundManager.PlaySound(SoundManager.Sound.PowerUp);
+
             //Prende dal codice assegnato ai pickup il valore assegnato che indica il tipo
             int unlockAbilityN = hit.gameObject.GetComponent<UpgradePickups>().powerUpValue;
 
