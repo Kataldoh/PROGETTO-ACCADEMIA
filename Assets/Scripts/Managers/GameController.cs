@@ -37,6 +37,7 @@ public class GameController : MonoBehaviour
     public BarraBoss barraBoss;
 
     public GameState _state;
+    public bool eventpowerup;
     public GameObject[] pannelli;
     public GameObject[] testievento;
 

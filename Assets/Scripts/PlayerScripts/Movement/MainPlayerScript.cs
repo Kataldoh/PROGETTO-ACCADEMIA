@@ -124,6 +124,11 @@ public class MainPlayerScript : MonoBehaviour
             if (GameObject.Find("Powerups"))
             {
                 Powerups();     //metodo per far comparire i power UP, disattivato se non ce ne sono
+                GameController.instance.eventpowerup = true;
+            }
+            else
+            {
+                GameController.instance.eventpowerup = false;
             }
             
         }

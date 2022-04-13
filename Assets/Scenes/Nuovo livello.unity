@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tiles: {fileID: 11400000, guid: ec2c6a6957941e34bb1a3f84bfc414ac, type: 2}
-  TiledJsonData: {fileID: 4900000, guid: d14e5a0cf0cb34e429a74e4103e5ac40, type: 3}
+  TiledJsonData: {fileID: 4900000, guid: d123b2a81fdc64e45af9c7c5c02e6dc0, type: 3}
 --- !u!4 &27629667
 Transform:
   m_ObjectHideFlags: 0
@@ -399,7 +399,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &140687206
 MonoBehaviour:
@@ -441,7 +441,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 140687202}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97c9226813e9d9445a64672c8bb5d5a5, type: 3}
   m_Name: 
@@ -19945,8 +19945,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 110.796326, y: -98.32532}
-  m_SizeDelta: {x: 252.7702, y: 223.6712}
+  m_AnchoredPosition: {x: 117.01, y: -98.32532}
+  m_SizeDelta: {x: 265.2, y: 223.6712}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2028289178
 MonoBehaviour:
@@ -20129,7 +20129,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5468938065231360366, guid: 21bd7cb24400ad64eb855a505c0f09ec, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6209653392523320038, guid: 21bd7cb24400ad64eb855a505c0f09ec, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -22332,7 +22332,7 @@ RectTransform:
   - {fileID: 6425425369352085148}
   - {fileID: 841782958}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
