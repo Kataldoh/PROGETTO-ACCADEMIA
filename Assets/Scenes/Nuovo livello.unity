@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -291,7 +291,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   tiles: {fileID: 11400000, guid: ec2c6a6957941e34bb1a3f84bfc414ac, type: 2}
-  TiledJsonData: {fileID: 4900000, guid: d14e5a0cf0cb34e429a74e4103e5ac40, type: 3}
+  TiledJsonData: {fileID: 4900000, guid: 04270eb0bb258df4a9f1917ab670408e, type: 3}
 --- !u!4 &27629667
 Transform:
   m_ObjectHideFlags: 0
@@ -20129,7 +20129,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5468938065231360366, guid: 21bd7cb24400ad64eb855a505c0f09ec, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6209653392523320038, guid: 21bd7cb24400ad64eb855a505c0f09ec, type: 3}
       propertyPath: m_Materials.Array.data[0]
