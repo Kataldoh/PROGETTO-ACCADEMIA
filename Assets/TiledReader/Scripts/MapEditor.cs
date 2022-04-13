@@ -91,14 +91,20 @@ public class MapEditor : MonoBehaviour
                     float posx = x-tdata.layers[ID].width * 0.5f;
                     float posy = -y+tdata.layers[ID].height * 0.5f;
 
-                    Vector2 tilePosition = new Vector3(posx, posy);
-                    GameObject go = Instantiate(tiles.tileset[t].prefab, tilePosition, Quaternion.identity);
+
+                        Vector2 tilePosition = new Vector3(posx, posy);
+                        GameObject go = Instantiate(tiles.tileset[t].prefab, tilePosition, Quaternion.identity);
 
                     //Buggato
                     //go.layer = 1 << tiles.tileset[t].layer;
 
                     //metto il prefab creato dentro al gameobject precedentemente creato, con il nome del layer attuale.
+                    if (t == 9)
+                    {
+                        Destroy(go.GetComponent<BoxCollider>());
+                    }
                     go.transform.parent = _layer.transform;
+                        
                 }
             }
         }
