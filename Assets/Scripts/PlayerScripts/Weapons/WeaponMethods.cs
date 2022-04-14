@@ -159,8 +159,18 @@ public class WeaponMethods : MonoBehaviour
 
     Vector3 _vectorDir(Transform aimStart) 
     {
-        var vettoredir = new Vector3(Input.mousePosition.x -Camera.main.WorldToScreenPoint(aimStart.position).x,
-                             Input.mousePosition.y -Camera.main.WorldToScreenPoint(aimStart.position).y, Input.mousePosition.z).normalized;
+        Vector3 vettoredir;
+        if (Input.GetAxisRaw("AimJoystickX") == 0 && Input.GetAxisRaw("AimJoystickY") == 0)
+        {
+            vettoredir = new Vector3(Input.mousePosition.x - Camera.main.WorldToScreenPoint(aimStart.position).x,
+                                Input.mousePosition.y - Camera.main.WorldToScreenPoint(aimStart.position).y, 0).normalized;
+        }
+        else
+        {
+            vettoredir = new Vector3(Input.GetAxisRaw("AimJoystickX"),
+                             Input.GetAxisRaw("AimJoystickY"), 0).normalized;
+        }
+            
         var dist = vettoredir.magnitude;
         Vector3 direction = (vettoredir / dist);
         direction.z = 0;
