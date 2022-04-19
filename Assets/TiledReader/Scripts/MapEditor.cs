@@ -84,7 +84,7 @@ public class MapEditor : MonoBehaviour
         {
             for (int y = 0; y < tdata.layers[ID].height; y++)
             {
-                var t = MapData[x + (y * tdata.layers[ID].height)]-1;
+                var t = MapData[x + y * tdata.layers[ID].width]-1;
                 if (t > -1)
                 {
                     //centra la mappa
