@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<tileset version="1.5" tiledversion="1.7.0" name="corto" tilewidth="16" tileheight="16" tilecount="16" columns="0">
+<tileset version="1.5" tiledversion="1.7.0" name="corto" tilewidth="16" tileheight="16" tilecount="22" columns="0">
  <grid orientation="orthogonal" width="1" height="1"/>
  <tile id="0">
   <image width="16" height="16" source="Platformer - desert/Tileset/bridge1.png"/>
@@ -48,5 +48,23 @@
  </tile>
  <tile id="15">
   <image width="16" height="16" source="Platformer - desert/Tileset/platvariation16.png"/>
+ </tile>
+ <tile id="16">
+  <image width="16" height="16" source="Platformer - desert/Tileset/grass1.png"/>
+ </tile>
+ <tile id="17">
+  <image width="16" height="16" source="Platformer - desert/Tileset/grass3.png"/>
+ </tile>
+ <tile id="18">
+  <image width="16" height="16" source="Platformer - desert/Tileset/grass4.png"/>
+ </tile>
+ <tile id="19">
+  <image width="16" height="16" source="Platformer - desert/Tileset/grass5.png"/>
+ </tile>
+ <tile id="20">
+  <image width="16" height="16" source="Platformer - desert/Tileset/grass6.png"/>
+ </tile>
+ <tile id="21">
+  <image width="16" height="16" source="Platformer - desert/Tileset/grass9.png"/>
  </tile>
 </tileset>
