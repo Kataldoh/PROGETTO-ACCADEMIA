@@ -181,7 +181,7 @@ public class EnemyScript : MonoBehaviour
         }
 
         //controlla se il nemico arriva ad una sporgenza, per poi girarsi
-        if(!Physics.CheckSphere(turnAroundPoint.position, 0.5f, layer))
+        if(!Physics.Raycast(turnAroundPoint.position, -transform.up, 0.3f, layer))
         {
             if (_state != EnemyState.attack)
                 direction = direction * -1;
