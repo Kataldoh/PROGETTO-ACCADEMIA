@@ -14,6 +14,7 @@ namespace FabTiledJsonReader
         public string tiledversion;
         public int tileheight;
         public int tilewidth;
+        public tilesets[] tilesets;
     }
 
     [System.Serializable]
@@ -29,6 +30,13 @@ namespace FabTiledJsonReader
         public int x; // posizione X
         public int y; // posizione Y
         public objects[] objects;
+    }
+
+
+    [System.Serializable]
+    public class tilesets
+    {
+        public int firstgid;
     }
 
     [System.Serializable]

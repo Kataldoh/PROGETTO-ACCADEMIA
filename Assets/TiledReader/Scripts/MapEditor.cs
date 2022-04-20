@@ -48,6 +48,7 @@ public class MapEditor : MonoBehaviour
         // P.s. Il file DEVE risiedere in /Assets/Resources (creare Resources se non esiste)
         tdata = JsonUtility.FromJson<TiledData>(TiledJsonData.text);
         print("Mappa generata con Tiled versione: " + tdata.tiledversion);
+        print("Tilesets:"+tdata.tilesets.Length);
     }
 
 
