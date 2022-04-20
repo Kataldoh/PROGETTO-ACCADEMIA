@@ -7,7 +7,7 @@ public class MapEditor : MonoBehaviour
 {
     //****** Struttura del singolo Tile
     
-    public TileSetSO tiles;
+    public TileSetSO[] tiles;
     // *********************************
 
     //File da caricare in /Assets/Resources
@@ -48,7 +48,7 @@ public class MapEditor : MonoBehaviour
         // P.s. Il file DEVE risiedere in /Assets/Resources (creare Resources se non esiste)
         tdata = JsonUtility.FromJson<TiledData>(TiledJsonData.text);
         print("Mappa generata con Tiled versione: " + tdata.tiledversion);
-        print("Tilesets:"+tdata.tilesets.Length);
+        print("Tilesets:" + tdata.tilesets.Length);
     }
 
 
@@ -93,8 +93,8 @@ public class MapEditor : MonoBehaviour
                     float posy = -y+tdata.layers[ID].height * 0.5f;
 
 
-                        Vector2 tilePosition = new Vector3(posx, posy);
-                        GameObject go = Instantiate(tiles.tileset[t].prefab, tilePosition, Quaternion.identity);
+                    Vector2 tilePosition = new Vector3(posx, posy);
+                    GameObject go = Instantiate(tiles[ID].tileset[t].prefab, tilePosition, Quaternion.identity);
 
                     //Buggato
                     //go.layer = 1 << tiles.tileset[t].layer;

@@ -170,7 +170,8 @@ public class EnemyScript : MonoBehaviour
             velocity += gravity * Time.deltaTime;
         }
 
-        controller.Move(transform.up * velocity * Time.deltaTime);
+        if(!isDead)
+            controller.Move(transform.up * velocity * Time.deltaTime);
         /**/
 
         //controlla se il nemico arriva ad un muro, per poi girarsi
