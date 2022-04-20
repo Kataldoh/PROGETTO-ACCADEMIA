@@ -10,10 +10,10 @@ public class EnemyTurret : MonoBehaviour
     [SerializeField] bool fullcontact;
     [SerializeField] float ClampRotationX;
     [SerializeField] float ClampRotationY;
-    Transform turret;
+    [SerializeField] Transform turret;
     void Start()
     {
-        turret = transform.GetChild(0);
+   
     }
 
     // Update is called once per frame
@@ -28,7 +28,7 @@ public class EnemyTurret : MonoBehaviour
         //calmp degli assi
         target_rot.x=Mathf.Clamp(target_rot.x, -ClampRotationX, ClampRotationX);//x
         target_rot.y = Mathf.Clamp(target_rot.y, -ClampRotationY, ClampRotationY);//y
-        turret.rotation = Quaternion.Lerp(turret.rotation, target_rot, Time.deltaTime * smooth);
+        turret.localRotation = Quaternion.Lerp(turret.localRotation, target_rot, Time.deltaTime * smooth);
         
     }
 }
