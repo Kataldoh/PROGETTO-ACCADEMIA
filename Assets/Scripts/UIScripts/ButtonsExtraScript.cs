@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class ButtonsExtraScript : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler//, ISelectHandler
 {
     //TMPro_EventManager
-    private Text text;
+    [SerializeField] private Text text;
 
     public void Awake()
     {
