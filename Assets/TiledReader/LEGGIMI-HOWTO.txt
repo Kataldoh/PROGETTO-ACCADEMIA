@@ -1,0 +1,23 @@
+TiledReader v0.6a
+
+Configurazione
+- aggiunfere il prefab *MapEditor* nelle gerarchia
+- aggiungere il file JSON generato da Tiled (rinominarlo in .txt) ed inserirlo nella cartella /Assets/Resources/ (se non esiste, crearla)
+
+Generazione dei TileSet.
+Per adesso è macchinosa, non ho tempo per ottimizzare.
+
+- spuntare *Generate Scriptable* nell'inspector del MapEditor
+- mettere il Play il Gioco.
+
+Dovrebbe generare uno o più ScriptableObject nell path definito in MapEditor.cs
+
+- mettere in stop e uncheckare *Generate Scriptable*.
+
+PARTE IMPORTANTE (altrimenti genera errori)
+aggingere a mano il nunero di tiles nei vari scriptableobjects generati precedentemente.
+
+Potete fare Play e non dovrebbe dare alcun errore.
+
+
+P.s. Guardate il video DEMO

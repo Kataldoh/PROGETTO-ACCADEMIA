@@ -37,6 +37,7 @@ namespace FabTiledJsonReader
     public class tilesets
     {
         public int firstgid;
+        public string source;
     }
 
     [System.Serializable]
