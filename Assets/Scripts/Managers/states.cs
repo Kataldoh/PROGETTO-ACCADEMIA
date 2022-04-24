@@ -19,6 +19,7 @@ public enum PlayerState
     dash,
     damage,
     dead,
+    walljump,
     jump,
     sliding
 }

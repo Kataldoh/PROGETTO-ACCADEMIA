@@ -39,6 +39,7 @@ public class MainPlayerScript : MonoBehaviour
     public bool isInvincible;                   //se il player è invincibile
     public bool hasSomethingAbove;
     public bool hasSomethingInFront;
+    public bool invertRotation;
 
     [Header("Unlocked Abilities")]
     public bool dashUnlocked;                   //bool che determina che il dash sia sbloccato
@@ -77,6 +78,7 @@ public class MainPlayerScript : MonoBehaviour
     [Header("Misc checks")]
     
     float rot=90;
+    float rotInvertion = 0;
     float startingZ;
     WeaponMethods aM;                   //variabile usata per utilizzare i metodi delle armi
     
@@ -119,9 +121,9 @@ public class MainPlayerScript : MonoBehaviour
         //Il player non eseguirà alcuna azione se lo stato non è in play
         if (GameController.instance._state == GameState.play)
         {
+            States();       //metodo per la gestione degli stati
             StateIndipendentActionsFIXED_UPDATE();  //metodo per la gestione di azioni indipendenti dagli stati
             AnimationHandler(); //metodo per la gestione delle animazioni
-            States();       //metodo per la gestione degli stati
 
             if (GameObject.Find("Powerups"))
             {
@@ -176,6 +178,9 @@ public class MainPlayerScript : MonoBehaviour
                 break;
             case PlayerState.jump:
                 _Estates.P_Jump();
+                break;
+            case PlayerState.walljump:
+                _Estates.P_WallJump();
                 break;
             case PlayerState.dash:
 
@@ -242,14 +247,19 @@ public class MainPlayerScript : MonoBehaviour
 
         //--------------------
         //determino la direzione nel quale il player guarda
+        if (invertRotation)
+            rotInvertion = -1;
+        else
+            rotInvertion = 1;
+
         if (move.x > 0 || (move.x == 0 && dirX > 0))
         {
-            rot = 90;
+            rot = 90 * rotInvertion;
             dir = 1;
         }
         else if (move.x < 0 || (move.x == 0 && dirX < 0))
         {
-            rot = 270;
+            rot = -90 * rotInvertion;
             dir = -1;
         }
         //--------------------

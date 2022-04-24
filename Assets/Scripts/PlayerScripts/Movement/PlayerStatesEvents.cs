@@ -9,11 +9,15 @@ public class PlayerStatesEvents : MonoBehaviour
     float dashLifetime;
     float damageTimer, slideTimer, jumpTimer;
     int lockedDir = 0;
+    int lockedRot = 0;
     float jumpDelay;
+    float wallJumpTime;
+    float wallJumpVel;
     public void P_Idle()
     {
         //Controlla se si può saltare in questo stato
         CanJump();
+        pInst.invertRotation = false;
 
 
         if (pInst.isDash && pInst.dashUnlocked)
@@ -119,6 +123,7 @@ public class PlayerStatesEvents : MonoBehaviour
     public void P_Jump()
     {
         CanJump();
+        pInst.invertRotation = false;
 
         if (pInst.isDash && pInst.dashUnlocked)
         {
@@ -146,6 +151,11 @@ public class PlayerStatesEvents : MonoBehaviour
             pInst.velocity += pInst.gravity * pInst.gravityArc.Evaluate(-Time.deltaTime * pInst.gravity / 2);
         }
 
+        if(Input.GetButton("Jump") && pInst.hasSomethingInFront && pInst.isJump && !pInst.IsGrounded())
+        {
+            pInst.velocity = 0;
+            pInst._state = PlayerState.walljump;
+        }
 
 
         //Se si è a terra con velocità minore-uguale a 0, metto la velocity al valore di peso, e torna in Idle
@@ -167,6 +177,72 @@ public class PlayerStatesEvents : MonoBehaviour
         pInst.controller.Move(pInst.transform.up * pInst.velocity * Time.deltaTime);    //Applica la velocity sull'asse y (Che sia gravità o salto)
         pInst.controller.Move(pInst.move * pInst.pdata.force * Time.deltaTime);         //Applica forza dagli input ricevuti
 
+    }
+
+    public void P_WallJump()
+    {
+        CanJump();
+
+        if (pInst.isDash && pInst.dashUnlocked)
+        {
+            lockedDir = 0;
+            pInst._state = PlayerState.dash;
+        }
+
+        
+        if (lockedDir == 0)
+        {
+            lockedDir = pInst.dir * -1;
+            wallJumpVel = lockedDir * Mathf.Abs(pInst.move.x);
+        }
+
+        Vector3 dir = new Vector3(wallJumpVel, 0, 0);
+
+        if (!pInst.hasSomethingAbove)
+        {
+            //Se viene rilevato un salto e si è a terra, applica la forza di salto alla velocity
+            if (Input.GetButton("Jump") && pInst.isJump && pInst.hasSomethingInFront)
+            {
+                SoundManager.PlaySound(SoundManager.Sound.Jumping);
+                wallJumpTime = 0;
+                pInst.velocity = pInst.pdata.jumpForce * pInst.jumpArc.Evaluate(Time.deltaTime * pInst.pdata.jumpForce);   
+            }
+            else
+            {
+                pInst.velocity += pInst.gravity * pInst.gravityArc.Evaluate(-Time.deltaTime * pInst.gravity / 2);
+            }
+        }
+        else
+        {
+            pInst.velocity += pInst.gravity * pInst.gravityArc.Evaluate(-Time.deltaTime * pInst.gravity / 2);
+        }
+
+        //Se si è a terra con velocità minore-uguale a 0, metto la velocity al valore di peso, e torna in Idle
+        if (pInst.IsGrounded() && pInst.velocity <= 0)
+        {
+            wallJumpTime = 0;
+            lockedDir = 0;
+            pInst.invertRotation = false;
+            pInst.velocity = pInst.weight;
+            pInst.isJump = false;
+            pInst._state = PlayerState.idle;
+        }
+
+
+        pInst.controller.Move(pInst.transform.up * pInst.velocity * Time.deltaTime);    //Applica la velocity sull'asse y (Che sia gravità o salto)
+
+        wallJumpTime += Time.deltaTime;
+        if (wallJumpTime <= 0.5f)
+        {
+            pInst.invertRotation = true;
+            pInst.controller.Move(dir * pInst.pdata.force * Time.deltaTime);
+        }
+        else
+        {
+            pInst.invertRotation = false;
+            pInst.controller.Move(pInst.move * pInst.pdata.force * Time.deltaTime);
+        }
+           
     }
 
     public void P_Dash()
