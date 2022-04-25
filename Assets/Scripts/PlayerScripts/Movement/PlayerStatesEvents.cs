@@ -18,6 +18,7 @@ public class PlayerStatesEvents : MonoBehaviour
         //Controlla se si può saltare in questo stato
         CanJump();
         pInst.invertRotation = false;
+        pInst.freezeRotation = false;
 
 
         if (pInst.isDash && pInst.dashUnlocked)
@@ -196,7 +197,7 @@ public class PlayerStatesEvents : MonoBehaviour
             wallJumpVel = lockedDir * Mathf.Abs(pInst.move.x);
         }
 
-        Vector3 dir = new Vector3(wallJumpVel, 0, 0);
+        
 
         if (!pInst.hasSomethingAbove)
         {
@@ -205,6 +206,7 @@ public class PlayerStatesEvents : MonoBehaviour
             {
                 SoundManager.PlaySound(SoundManager.Sound.Jumping);
                 wallJumpTime = 0;
+                wallJumpVel = wallJumpVel * -1;
                 pInst.velocity = pInst.pdata.jumpForce * pInst.jumpArc.Evaluate(Time.deltaTime * pInst.pdata.jumpForce);   
             }
             else
@@ -223,23 +225,30 @@ public class PlayerStatesEvents : MonoBehaviour
             wallJumpTime = 0;
             lockedDir = 0;
             pInst.invertRotation = false;
+            pInst.freezeRotation = false;
             pInst.velocity = pInst.weight;
             pInst.isJump = false;
             pInst._state = PlayerState.idle;
         }
 
-
         pInst.controller.Move(pInst.transform.up * pInst.velocity * Time.deltaTime);    //Applica la velocity sull'asse y (Che sia gravità o salto)
 
+        Vector3 dir = new Vector3(wallJumpVel, 0, 0);
         wallJumpTime += Time.deltaTime;
+
         if (wallJumpTime <= 0.5f)
         {
             pInst.invertRotation = true;
+            if (wallJumpTime <= 0.05f)
+                pInst.freezeRotation = false;
+            else
+                pInst.freezeRotation = true;
             pInst.controller.Move(dir * pInst.pdata.force * Time.deltaTime);
         }
         else
         {
             pInst.invertRotation = false;
+            pInst.freezeRotation = false;
             pInst.controller.Move(pInst.move * pInst.pdata.force * Time.deltaTime);
         }
            

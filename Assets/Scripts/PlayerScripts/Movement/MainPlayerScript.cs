@@ -40,6 +40,7 @@ public class MainPlayerScript : MonoBehaviour
     public bool hasSomethingAbove;
     public bool hasSomethingInFront;
     public bool invertRotation;
+    public bool freezeRotation;
 
     [Header("Unlocked Abilities")]
     public bool dashUnlocked;                   //bool che determina che il dash sia sbloccato
@@ -252,16 +253,20 @@ public class MainPlayerScript : MonoBehaviour
         else
             rotInvertion = 1;
 
-        if (move.x > 0 || (move.x == 0 && dirX > 0))
+        if (!freezeRotation)
         {
-            rot = 90 * rotInvertion;
-            dir = 1;
+            if (move.x > 0 || (move.x == 0 && dirX > 0))
+            {
+                rot = 90 * rotInvertion;
+                dir = 1;
+            }
+            else if (move.x < 0 || (move.x == 0 && dirX < 0))
+            {
+                rot = -90 * rotInvertion;
+                dir = -1;
+            }
         }
-        else if (move.x < 0 || (move.x == 0 && dirX < 0))
-        {
-            rot = -90 * rotInvertion;
-            dir = -1;
-        }
+        
         //--------------------
 
         //--------------------
