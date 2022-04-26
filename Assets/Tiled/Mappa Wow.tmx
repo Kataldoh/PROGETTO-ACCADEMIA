@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="110" height="110" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="1">
+<map version="1.5" tiledversion="1.7.0" orientation="orthogonal" renderorder="right-down" width="110" height="110" tilewidth="16" tileheight="16" infinite="0" nextlayerid="3" nextobjectid="1">
  <editorsettings>
   <chunksize width="20" height="20"/>
   <export target="Mappa Wow Test.txt" format="json"/>
  </editorsettings>
- <tileset firstgid="1" source="CortoJason.tsj"/>
- <tileset firstgid="17" source="NemiciBonusJason.tsj"/>
+ <tileset firstgid="1" source="CortoJason.json"/>
+ <tileset firstgid="17" source="NemiciBonusJason.json"/>
  <layer id="1" name="Livello tile 1" width="110" height="110">
   <data encoding="csv">
 0,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
