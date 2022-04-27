@@ -13,7 +13,7 @@ public class EnemyTurret : MonoBehaviour
     [SerializeField] Transform turret;
     void Start()
     {
-   
+        target = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     // Update is called once per frame
