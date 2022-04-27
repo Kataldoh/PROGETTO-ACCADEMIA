@@ -11,6 +11,8 @@ public class GameController : MonoBehaviour
     public GameObject player;
     public GameObject BarraBoss;
 
+    public float[] medikitEnergy;
+
     
     public Vector3 cameraOffset;
     public bool followPlayerX;
