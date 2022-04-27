@@ -194,7 +194,7 @@ public class PlayerStatesEvents : MonoBehaviour
         if (lockedDir == 0)
         {
             lockedDir = pInst.dir * -1;
-            wallJumpVel = lockedDir * Mathf.Abs(pInst.move.x);
+            wallJumpVel = lockedDir * 2f;
         }
 
         
@@ -202,7 +202,7 @@ public class PlayerStatesEvents : MonoBehaviour
         if (!pInst.hasSomethingAbove)
         {
             //Se viene rilevato un salto e si è a terra, applica la forza di salto alla velocity
-            if (Input.GetButton("Jump") && pInst.isJump && pInst.hasSomethingInFront)
+            if (Input.GetButton("Jump") && pInst.isJump && pInst.hasSomethingInFront && pInst.move.x != 0)
             {
                 SoundManager.PlaySound(SoundManager.Sound.Jumping);
                 wallJumpTime = 0;
