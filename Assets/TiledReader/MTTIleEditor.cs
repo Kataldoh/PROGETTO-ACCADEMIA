@@ -9,6 +9,7 @@ public class MTTIleEditor : MonoBehaviour
     // Start is called before the first frame update
     public static MTTIleEditor instance;
 
+    public GameObject MappaLivello;
 
     private void Awake()
     {

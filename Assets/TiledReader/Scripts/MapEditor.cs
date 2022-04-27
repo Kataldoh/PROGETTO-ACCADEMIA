@@ -6,6 +6,8 @@ using FabTiledJsonReader; // mia lib :)
 
 public class MapEditor : MonoBehaviour
 {
+
+    public static MapEditor instance;
     //****** Struttura del singolo Tile
     
     public TileSetSO[] TileDataStruct;
@@ -18,7 +20,8 @@ public class MapEditor : MonoBehaviour
     //Decommentare [serializefield], per mostrare nell'inspector il contenuto del JSON
     
     //[SerializeField]
-    TiledData tdata = new TiledData();
+    [HideInInspector]
+    public TiledData tdata = new TiledData();
 
     [SerializeField] GameObject Placeholder;
 
@@ -26,6 +29,11 @@ public class MapEditor : MonoBehaviour
     int[] MapData;
 
     [SerializeField] bool GenerateScriptable;
+    private void Awake()
+    {
+        instance = this;
+    }
+
 
     void Start()
     {
