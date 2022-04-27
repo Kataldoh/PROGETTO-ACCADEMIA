@@ -5,20 +5,30 @@ using UnityEngine;
 public class HealthPlaceholder : MonoBehaviour
 {
     public bool hit;
-    public float damage;
+    public int damageTowardsPlayer;
+    public float damageTaken;
     [SerializeField] EnemyData eData;
+    [SerializeField] bool destroyWhenHealthBelowZERO;
     public float health;
+
 
     private void Start() 
     {
-        health = eData.health;
+        if(eData != null)
+        {
+            health = eData.health;
+        }
+            
     }
     private void Update()
     {
         if (hit)
         {
-            health -= damage;
+            health -= damageTaken;
             hit = false;
         }
+
+        if (destroyWhenHealthBelowZERO && health <= 0)
+            Destroy(gameObject);
     }
 }

@@ -300,8 +300,10 @@ public class PlayerStatesEvents : MonoBehaviour
         //previene il ricevere danno continuo ogni ciclo
         if(!dmgTook)
         {
-            GameController.instance.TakeDamage(10);
+            print("Damage Taken: " + pInst.damageGot);
+            GameController.instance.TakeDamage(pInst.damageGot);
             dmgTook = true;
+            pInst.damageGot = 0;
         }
 
         pInst.move.x = 0;

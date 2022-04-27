@@ -41,6 +41,7 @@ public class MainPlayerScript : MonoBehaviour
     public bool hasSomethingInFront;
     public bool invertRotation;
     public bool freezeRotation;
+    public int damageGot;
 
     [Header("Unlocked Abilities")]
     public bool dashUnlocked;                   //bool che determina che il dash sia sbloccato
@@ -69,7 +70,7 @@ public class MainPlayerScript : MonoBehaviour
     [SerializeField] public float velocity;
 
     [Header("Ray Lenghts variables")]
-    [SerializeField] float radLenght;       //valore della lunghezza dei raycast ai piedi del player per controllare se è a terra
+    [SerializeField] float groundRayLenght;       //valore della lunghezza dei raycast ai piedi del player per controllare se è a terra
     [SerializeField] float rollCheckLenght; //valore della lunghezza del raycast per controllare se ha qualcosa sopra di se
     [SerializeField] float wallCheckLenght; //valore della lunghezza del raycast per controllare se ha qualcosa sopra di se
 
@@ -449,8 +450,8 @@ public class MainPlayerScript : MonoBehaviour
     {
      
         //Se i 2 raycast posti a destra e a sinistra del player non trovano un oggetto nel layer Ground
-        if (!Physics.Raycast(groundCheck[0].position,-transform.up, radLenght, layer) && 
-                !Physics.Raycast(groundCheck[1].position, -transform.up, radLenght, layer))
+        if (!Physics.Raycast(groundCheck[0].position,-transform.up, groundRayLenght, layer) && 
+                !Physics.Raycast(groundCheck[1].position, -transform.up, groundRayLenght, layer))
         {
             //inizio ad aggiungere tempo all'hangTime
             //un timer per dare al giocatore una finestra di tempo per saltare dopo essere in aria
@@ -482,8 +483,12 @@ public class MainPlayerScript : MonoBehaviour
         if(hit.gameObject.tag == "Nemico" || hit.gameObject.tag == "DamageDealer" 
                         && _state != PlayerState.damage)
         {
-            if(!isInvincible)                   //ed eseguendo un'ultimo controllo per vedere se ha ancora invincibile
-                _state = PlayerState.damage;    //setta lo stato di danno
+            if (!isInvincible)                   //ed eseguendo un'ultimo controllo per vedere se ha ancora invincibile
+            {
+                damageGot = hit.gameObject.GetComponent<HealthPlaceholder>().damageTowardsPlayer;
+                if (damageGot > 0)
+                    _state = PlayerState.damage;    //setta lo stato di danno
+            }
         }
 
         //(PROVVISORIO)
@@ -536,7 +541,12 @@ public class MainPlayerScript : MonoBehaviour
         if (other.gameObject.tag == "Nemico" || other.gameObject.tag == "DamageDealer" && _state != PlayerState.damage && !isInvincible)
         {
             if(!isInvincible)                   //ed eseguendo un'ultimo controllo per vedere se ha ancora invincibile
-                _state = PlayerState.damage;    //setta lo stato di danno
+            {
+                damageGot = other.GetComponent<HealthPlaceholder>().damageTowardsPlayer;
+                if(damageGot > 0)
+                    _state = PlayerState.damage;    //setta lo stato di danno
+            }
+                
         }
 
         //Se si entra in contatto con un trigger presente del layer 10, designato ai SETTAGGI DELLA CAMERA

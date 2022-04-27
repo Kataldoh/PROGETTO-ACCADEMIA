@@ -21,6 +21,7 @@ public class EnemyScript : MonoBehaviour
     float idleTimer, patrolTimer, attackTimer;
     float speedx;
     bool isDead;
+    Collider collider;
 
 
     public Transform target;
@@ -41,6 +42,7 @@ public class EnemyScript : MonoBehaviour
         isDead = false;
         controller = GetComponent<CharacterController>();
         anim = GetComponent<Animator>();
+        collider = GetComponent<Collider>();
         direction = 1;
         target = GameObject.FindGameObjectWithTag("Player").transform;
     }
@@ -120,9 +122,8 @@ public class EnemyScript : MonoBehaviour
 
         direction = _vectorDir();
 
-        if(playerEnemyDistance <= 0.5f)
+        if(playerEnemyDistance <= 0.5f && IsGrounded())
         {
-            print("Attack");
             speedMultiplier = 0;
             speedx = 0;
             attackHitbox.SetActive(true);
@@ -137,7 +138,7 @@ public class EnemyScript : MonoBehaviour
 
         controller.Move(move * edata.force * speedMultiplier * Time.deltaTime);
 
-        if(playerEnemyDistance > targetDistance)
+        if(playerEnemyDistance > targetDistance && IsGrounded())
         {
             attackHitbox.SetActive(false);
             _state = EnemyState.idle;
@@ -149,7 +150,9 @@ public class EnemyScript : MonoBehaviour
         isDead = true;
         SoundManager.PlaySound(SoundManager.Sound.EnemyDie);
         anim.SetBool("death", true);
+        controller.detectCollisions = false;
         controller.enabled = false;
+        collider.enabled = false;
     }
 
     void StatelessChecks()

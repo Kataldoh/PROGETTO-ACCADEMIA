@@ -86,7 +86,7 @@ public class WeaponMethods : MonoBehaviour
                     if (!enemy.GetComponent<HealthPlaceholder>().hit)
                     {
                         enemy.GetComponent<HealthPlaceholder>().hit = true;
-                        enemy.GetComponent<HealthPlaceholder>().damage = wS.damage;
+                        enemy.GetComponent<HealthPlaceholder>().damageTaken = wS.damage;
                         enemy = null;
                     }
                 }
