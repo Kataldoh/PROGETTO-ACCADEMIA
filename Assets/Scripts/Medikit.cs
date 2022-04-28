@@ -11,7 +11,7 @@ public class Medikit: MonoBehaviour
         if (collision.transform.tag == "Player")
         {
             //richiamo il metodo TakeDamage
-            GameController.instance.TakeDamage((int)-GameController.instance.medkitEnery[0]);
+            GameController.instance.TakeDamage((int)-GameController.instance.medikitEnergy[0]);
             Destroy(collision.gameObject);
         }
     }
