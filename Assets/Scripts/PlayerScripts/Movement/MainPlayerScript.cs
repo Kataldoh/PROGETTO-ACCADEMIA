@@ -549,6 +549,14 @@ public class MainPlayerScript : MonoBehaviour
                 
         }
 
+        //Raccogliere un'oggetto curativo
+        if(other.gameObject.tag == "MedKit")
+        {
+            int medKitSize = other.gameObject.GetComponent<Medikit>().medKitSize;
+            GameController.instance.TakeDamage((int)-GameController.instance.medikitEnergy[medKitSize]);
+            Destroy(other.gameObject);
+        }
+
         //Se si entra in contatto con un trigger presente del layer 10, designato ai SETTAGGI DELLA CAMERA
         //Assegna i vari valori della telecamera alle rispettive variabili presenti nel GameController
         if (other.gameObject.layer == 10)

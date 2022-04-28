@@ -18,6 +18,7 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] float gravity;
     [SerializeField] float weight;
     [SerializeField] GameObject attackHitbox;
+    [SerializeField] GameObject spawnOnDeath;
     float idleTimer, patrolTimer, attackTimer;
     float speedx;
     bool isDead;
@@ -150,6 +151,8 @@ public class EnemyScript : MonoBehaviour
         isDead = true;
         SoundManager.PlaySound(SoundManager.Sound.EnemyDie);
         anim.SetBool("death", true);
+        Vector3 healthSpawnPos = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+        Instantiate(spawnOnDeath, healthSpawnPos, spawnOnDeath.transform.rotation);
         controller.detectCollisions = false;
         controller.enabled = false;
         collider.enabled = false;

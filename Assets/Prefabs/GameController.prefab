@@ -48,6 +48,11 @@ MonoBehaviour:
   post_processing: {fileID: 2715178633264719730, guid: 6ca40254b56de1c4c9bddbbe1bea473d, type: 3}
   player: {fileID: 1957355584488687289, guid: 0bc1628cd6bd32f48b5f1ddea978de47, type: 3}
   BarraBoss: {fileID: 8444058628131636622, guid: d14cd04dfc37eb14399626ca2909ce10, type: 3}
+  medikitEnergy:
+  - 10
+  - 20
+  - 35
+  - 45
   cameraOffset: {x: 0, y: -1, z: 15}
   followPlayerX: 1
   followPlayerY: 1
@@ -66,6 +71,8 @@ MonoBehaviour:
   BarraStamina: {fileID: 0}
   barraBoss: {fileID: 0}
   _state: 0
+  eventpowerup: 0
   pannelli:
   - {fileID: 0}
   - {fileID: 0}
+  testievento: []

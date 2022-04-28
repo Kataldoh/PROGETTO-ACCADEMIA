@@ -661,6 +661,8 @@ MonoBehaviour:
   hasSomethingAbove: 0
   hasSomethingInFront: 0
   invertRotation: 0
+  freezeRotation: 0
+  damageGot: 0
   dashUnlocked: 0
   rollUnlocked: 0
   powerups: []
@@ -732,7 +734,7 @@ MonoBehaviour:
   gravity: -4
   weight: -3
   velocity: 0
-  radLenght: 0.16
+  groundRayLenght: 0.16
   rollCheckLenght: 0.35
   wallCheckLenght: 0.22
   lastShotPosition: {x: 0, y: 0, z: 0}

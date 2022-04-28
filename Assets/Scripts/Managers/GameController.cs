@@ -122,7 +122,8 @@ public class GameController : MonoBehaviour
 
         }
 
-
+        if (CurrentHealth > maxHealth)
+            CurrentHealth = maxHealth;
 
       
     }
