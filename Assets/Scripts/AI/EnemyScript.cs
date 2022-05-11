@@ -8,7 +8,7 @@ public class EnemyScript : MonoBehaviour
     public EnemyData edata;
     public EnemyState _state;
     [SerializeField] HealthPlaceholder hp;
-    CharacterController controller;
+    public CharacterController controller;
     [SerializeField] Animator anim;
     [SerializeField] Transform foot, turnAroundPoint;
     [SerializeField] Transform rayhead;
@@ -29,8 +29,7 @@ public class EnemyScript : MonoBehaviour
     Vector3 move;
     float velocity;
     // raccolta di elementi 
-    [SerializeField] LayerMask layer;
-    [SerializeField] LayerMask layer2;
+    [SerializeField] public LayerMask layer;
     float direction;
     Quaternion qrot;
 
@@ -150,10 +149,19 @@ public class EnemyScript : MonoBehaviour
         isDead = true;
         SoundManager.PlaySound(SoundManager.Sound.EnemyDie);
         anim.SetBool("death", true);
-        Vector3 healthSpawnPos = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
-        Instantiate(spawnOnDeath, healthSpawnPos, spawnOnDeath.transform.rotation);
-        controller.detectCollisions = false;
-        controller.enabled = false;
+        Vector3 healthSpawnPos;
+        if (GameController.instance.CurrentHealth < 100)
+        {
+            healthSpawnPos = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+            Instantiate(spawnOnDeath, healthSpawnPos, spawnOnDeath.transform.rotation);
+        }
+
+        if (controller != null)
+        {
+            controller.detectCollisions = false;
+            controller.enabled = false;
+        }
+            
         collider.enabled = false;
     }
 

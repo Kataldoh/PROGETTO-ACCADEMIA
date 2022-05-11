@@ -76,7 +76,7 @@ public class WeaponMethods : MonoBehaviour
         //se si spara
         if(isShoot)
         {
-            trailGO[i].transform.position = Vector3.Lerp(trailGO[i].transform.position, maxShotPosition, Time.deltaTime * wS.weaponRange * wS.shootingInterval_inSeconds * 10);   //imposta la posizione del trailGO puntato
+            trailGO[i].transform.position = Vector3.Lerp(trailGO[i].transform.position, maxShotPosition, Time.deltaTime * wS.shootingInterval_inSeconds * 100);   //imposta la posizione del trailGO puntato
             shootingInterval += Time.deltaTime;
 
             if(Vector3.Distance(trailGO[i].transform.position, pInst.lastShotPosition) <= 0.1f || shootingInterval >= wS.shootingInterval_inSeconds)
@@ -137,6 +137,7 @@ public class WeaponMethods : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(aimStart.position, direction, out hit, 5, ~ignoreLayer))   //Se il raycast colpisce qualcosa 
             {
+                print(Vector3.Angle(hit.normal, Vector3.up));
                 pInst.laserRender.SetPosition(1, hit.point);         //Disegna la fine del raggio sul punto colpito
                 //print("Hit");
                 if(hit.collider.tag == "Nemico")            //Se colpisce un nemico
