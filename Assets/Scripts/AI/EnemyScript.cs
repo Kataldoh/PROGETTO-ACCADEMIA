@@ -14,22 +14,18 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] Transform rayhead;
     [SerializeField] float rayLenght;
     [SerializeField] bool isGrounded;
-    [SerializeField] bool isJump;
+    [SerializeField] bool isJump, hasGameController;
     [SerializeField] float gravity;
     [SerializeField] float weight;
     [SerializeField] GameObject attackHitbox;
     [SerializeField] GameObject spawnOnDeath;
     float idleTimer, patrolTimer, attackTimer;
     float speedx;
-    bool isDead;
+    public bool isDead;
     Collider collider;
-
-
     public Transform target;
     public float targetDistance;
     float playerEnemyDistance;
-
-   
     Vector3 move;
     float velocity;
     // raccolta di elementi 
@@ -41,8 +37,11 @@ public class EnemyScript : MonoBehaviour
     private void Start()
     {
         isDead = false;
-        controller = GetComponent<CharacterController>();
-        anim = GetComponent<Animator>();
+        if (GetComponent<CharacterController>() != null)
+            controller = GetComponent<CharacterController>();
+        if (GetComponent<Animator>() != null)
+            anim = GetComponent<Animator>();
+
         collider = GetComponent<Collider>();
         direction = 1;
         target = GameObject.FindGameObjectWithTag("Player").transform;
@@ -57,7 +56,7 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    void States()
+    public virtual void States()
     {
         switch(_state)
         {
@@ -77,7 +76,7 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    void Idle()
+    public virtual void Idle()
     {
         patrolTimer=0;
         idleTimer += Time.deltaTime;
@@ -90,7 +89,7 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    void Patrol()
+    public virtual void Patrol()
     {
         idleTimer = 0;
         patrolTimer += Time.deltaTime;
@@ -115,7 +114,7 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    void Attack()
+    public virtual void Attack()
     {
         idleTimer = 2.5f;
         patrolTimer = 0;
@@ -146,7 +145,7 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    void Dead()
+    public virtual void Dead()
     {
         isDead = true;
         SoundManager.PlaySound(SoundManager.Sound.EnemyDie);
@@ -158,7 +157,7 @@ public class EnemyScript : MonoBehaviour
         collider.enabled = false;
     }
 
-    void StatelessChecks()
+    public virtual void StatelessChecks()
     {
         playerEnemyDistance = Vector3.Distance(transform.position, target.transform.position);
         isGrounded = IsGrounded();
@@ -207,18 +206,18 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    bool IsInRayCastDireciton(Vector3 direction, float lenght, LayerMask layer, Color color)
+    public bool IsInRayCastDireciton(Vector3 direction, float lenght, LayerMask layer, Color color)
     {
         Debug.DrawRay(rayhead.position, direction * lenght, color);
         return Physics.Raycast(rayhead.position, direction, out RaycastHit hit, lenght, layer);
     }
     
-    bool IsGrounded()
+    public bool IsGrounded()
     {
         return Physics.CheckSphere(foot.position, rayLenght, layer);
     }
 
-    float _vectorDir() {
+    public float _vectorDir() {
         var vettoredir = (target.position - transform.position).normalized;
         var dist = vettoredir.magnitude;
         Vector3 direction = (vettoredir / dist);
