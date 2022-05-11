@@ -23,7 +23,5 @@ public class MainMenu : MonoBehaviour
     public void BacktoMenu()
     {
         SceneManager.LoadScene("MainMenu");
-        //savedata.player_health = gamecontroller.CurrentHealth; 
     }
-
 }
