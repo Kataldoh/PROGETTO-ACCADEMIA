@@ -429,7 +429,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1524655764
+--- !u!1001 &1767214482
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -442,7 +442,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8126256319904951761, guid: ea32f5dc7f7589a4fba52eb4ebca3549, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 22.806892
+      value: 20.052113
       objectReference: {fileID: 0}
     - target: {fileID: 8126256319904951761, guid: ea32f5dc7f7589a4fba52eb4ebca3549, type: 3}
       propertyPath: m_LocalPosition.y
@@ -450,7 +450,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8126256319904951761, guid: ea32f5dc7f7589a4fba52eb4ebca3549, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 64.11272
+      value: 62.98642
       objectReference: {fileID: 0}
     - target: {fileID: 8126256319904951761, guid: ea32f5dc7f7589a4fba52eb4ebca3549, type: 3}
       propertyPath: m_LocalRotation.w
@@ -484,21 +484,13 @@ PrefabInstance:
       propertyPath: m_Name
       value: Nemico (C2)
       objectReference: {fileID: 0}
-    - target: {fileID: 8130875157784792716, guid: ea32f5dc7f7589a4fba52eb4ebca3549, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8130875157784792719, guid: ea32f5dc7f7589a4fba52eb4ebca3549, type: 3}
       propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8180219314779285879, guid: ea32f5dc7f7589a4fba52eb4ebca3549, type: 3}
-      propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9082237592151641632, guid: ea32f5dc7f7589a4fba52eb4ebca3549, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ea32f5dc7f7589a4fba52eb4ebca3549, type: 3}

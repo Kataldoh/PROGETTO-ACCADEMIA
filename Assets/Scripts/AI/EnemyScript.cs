@@ -44,6 +44,9 @@ public class EnemyScript : MonoBehaviour
         collider = GetComponent<Collider>();
         direction = 1;
         target = GameObject.FindGameObjectWithTag("Player").transform;
+
+        setRigidbodyState(true);
+        setColliderState(false);
     }
 
     private void FixedUpdate() 
@@ -163,6 +166,12 @@ public class EnemyScript : MonoBehaviour
         }
             
         collider.enabled = false;
+
+        Destroy(gameObject, 3f);
+        GetComponent<Animator>().enabled = false;
+        setRigidbodyState(false);
+        setColliderState(true);
+
     }
 
     public virtual void StatelessChecks()
@@ -244,4 +253,29 @@ public class EnemyScript : MonoBehaviour
             direction *= -1;
         }
     }
+
+    //RAGDOLL
+    void setRigidbodyState(bool state)
+    {
+        Rigidbody[] rigidbodies = GetComponentsInChildren<Rigidbody>();
+
+        foreach(Rigidbody rigidbody in rigidbodies)
+        {
+            rigidbody.isKinematic = state;
+        }
+
+        GetComponent<Rigidbody>().isKinematic = !state;
+    }
+
+    void setColliderState(bool state)
+    {
+        Collider[] colliders = GetComponentsInChildren<Collider>();
+        foreach(Collider collider in colliders)
+        {
+            collider.enabled = state;
+        }
+
+        GetComponent<Collider>().enabled = !state;
+    }
+
 }
