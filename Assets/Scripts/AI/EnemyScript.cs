@@ -55,6 +55,7 @@ public class EnemyScript : MonoBehaviour
         {
             StatelessChecks();
             States();
+            
         }
     }
 
@@ -158,14 +159,13 @@ public class EnemyScript : MonoBehaviour
             healthSpawnPos = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
             Instantiate(spawnOnDeath, healthSpawnPos, spawnOnDeath.transform.rotation);
         }
-
+            
+        collider.enabled = false;
         if (controller != null)
         {
             controller.detectCollisions = false;
             controller.enabled = false;
         }
-            
-        collider.enabled = false;
 
         Destroy(gameObject, 3f);
         GetComponent<Animator>().enabled = false;
@@ -221,6 +221,11 @@ public class EnemyScript : MonoBehaviour
         {
             _state = EnemyState.dead;
         }
+
+        if (!isDead)
+            controller.enabled = true;
+        else
+            controller.enabled = false;
     }
 
     public bool IsInRayCastDireciton(Vector3 direction, float lenght, LayerMask layer, Color color)
@@ -264,7 +269,7 @@ public class EnemyScript : MonoBehaviour
             rigidbody.isKinematic = state;
         }
 
-        GetComponent<Rigidbody>().isKinematic = !state;
+        controller.enabled = !state;
     }
 
     void setColliderState(bool state)

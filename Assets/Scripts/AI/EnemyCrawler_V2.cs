@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class EnemyCrawler_V2 : EnemyScript
 {
-    [SerializeField] Transform crawlingRaycasts;
-    Quaternion qrot;
-    bool spawnedWithNoContact = true;
+    [SerializeField] Transform groundRaycast;
+    [SerializeField] Transform frontRaycast;
+    [SerializeField] Transform fallRaycast;
+    [SerializeField] bool startTurning;
     public override void States()
     {
         switch (_state)
@@ -23,21 +24,23 @@ public class EnemyCrawler_V2 : EnemyScript
 
     public override void Patrol()
     {
-        Debug.DrawRay(crawlingRaycasts.position, transform.up * 0.3f, Color.red);
-        RaycastHit hit;
-        if (Physics.Raycast(crawlingRaycasts.position, -transform.up, out hit, 0.3f, layer))
+        Debug.DrawRay(groundRaycast.position, transform.up * 0.5f, Color.red);
+        RaycastHit hit, hit2;
+        bool GroundCast = Physics.Raycast(groundRaycast.position, -transform.up, out hit, 0.5f, layer);
+        bool FallCast = Physics.Raycast(fallRaycast.position, -transform.up, out hit2, 0.5f, layer);
+        if (GroundCast || FallCast)
         {
-            controller.Move(transform.right * edata.force);
+            controller.Move(-transform.right * edata.force);
             float normalAngle = Vector3.Angle(hit.normal, Vector3.up);
-            qrot = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0, 0, normalAngle), Time.deltaTime * edata.speedRot);
+            Quaternion qrot;
+            qrot = Quaternion.Euler(0, 0, normalAngle);
             transform.rotation = qrot;
         }
-        /*
-        else 
+        else
         {
-            transform.Rotate(new Vector3(0, 0, -2));
+            transform.Rotate(new Vector3(0, 0, 2));
         }
-        */
+        
 
     }
     public override void StatelessChecks()
