@@ -45,6 +45,7 @@ public class EnemyScript : MonoBehaviour
         direction = 1;
         target = GameObject.FindGameObjectWithTag("Player").transform;
 
+        //Ragdoll Rigidboy&Collider
         setRigidbodyState(true);
         setColliderState(false);
     }
@@ -167,10 +168,11 @@ public class EnemyScript : MonoBehaviour
             controller.enabled = false;
         }
 
-        Destroy(gameObject, 3f);
-        GetComponent<Animator>().enabled = false;
-        setRigidbodyState(false);
-        setColliderState(true);
+        //      !!!!!!RAGDOLL!!!
+        Destroy(gameObject, 3f);//distruggo il gameObject dopo 3 secondi
+        GetComponent<Animator>().enabled = false; //disabilito l'animator
+        setRigidbodyState(false);//richiamo il metodo Rigidobody
+        setColliderState(true);//richiamo il metodo Collider
 
     }
 
@@ -260,8 +262,11 @@ public class EnemyScript : MonoBehaviour
     }
 
     //RAGDOLL
+
+    //abilito lo stato dei rigidbodies
     void setRigidbodyState(bool state)
     {
+        //Decido per ogni componente del collider quando abilitarlo/disabilitarlo
         Rigidbody[] rigidbodies = GetComponentsInChildren<Rigidbody>();
 
         foreach(Rigidbody rigidbody in rigidbodies)
@@ -272,8 +277,10 @@ public class EnemyScript : MonoBehaviour
         controller.enabled = !state;
     }
 
+    //abilito lo stato dei colliders
     void setColliderState(bool state)
     {
+        //Decido per ogni componente del collider quando abilitarlo/disabilitarlo
         Collider[] colliders = GetComponentsInChildren<Collider>();
         foreach(Collider collider in colliders)
         {
