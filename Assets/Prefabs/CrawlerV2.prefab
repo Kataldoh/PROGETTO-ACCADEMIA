@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2574319749647347570}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.338, y: 0, z: 0}
+  m_LocalPosition: {x: 0.226, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2840513865558343193}
@@ -42,6 +42,7 @@ GameObject:
   - component: {fileID: 2840513865558343196}
   - component: {fileID: 2840513865558343199}
   - component: {fileID: 2840513865558343198}
+  - component: {fileID: 7513824256710975543}
   m_Layer: 9
   m_Name: CrawlerV2
   m_TagString: Nemico
@@ -62,7 +63,7 @@ Transform:
   m_Children:
   - {fileID: 7066495815531181270}
   - {fileID: 2840513866926662443}
-  - {fileID: 3782250021578756574}
+  - {fileID: 1377986604382942580}
   - {fileID: 4374154746823016946}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -79,9 +80,9 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 0
-  m_Radius: 0.38
+  m_Radius: 0.2
   m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_StepOffset: 0
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
@@ -119,10 +120,12 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 521
-  groundRaycast: {fileID: 2840513866926662443}
+  groundRaycast:
+  - {fileID: 2840513866926662443}
+  - {fileID: 1377986604382942580}
   frontRaycast: {fileID: 4374154746823016946}
-  fallRaycast: {fileID: 3782250021578756574}
-  startTurning: 0
+  rotateMesh: {fileID: 0}
+  hasTurned: 0
 --- !u!114 &2840513865558343198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -139,8 +142,21 @@ MonoBehaviour:
   damageTowardsPlayer: 1
   damageTaken: 0
   eData: {fileID: 0}
-  destroyWhenHealthBelowZERO: 0
+  destroyWhenHealthBelowZERO: 1
   health: 3
+--- !u!135 &7513824256710975543
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2840513865558343192}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.3
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2840513866926662442
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,13 +181,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2840513866926662442}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.3, y: -0.335, z: 0}
+  m_LocalPosition: {x: -0.402, y: -0.335, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2840513865558343193}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &6252377091949793847
+--- !u!1 &6610184387369272464
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -179,23 +195,23 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3782250021578756574}
+  - component: {fileID: 1377986604382942580}
   m_Layer: 0
-  m_Name: FarGroundCheck
+  m_Name: GroundCheck2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3782250021578756574
+--- !u!4 &1377986604382942580
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6252377091949793847}
+  m_GameObject: {fileID: 6610184387369272464}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.3, y: -0.335, z: 0}
+  m_LocalPosition: {x: 0.402, y: -0.335, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2840513865558343193}

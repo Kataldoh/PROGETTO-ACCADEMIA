@@ -225,9 +225,16 @@ public class EnemyScript : MonoBehaviour
         }
 
         if (!isDead)
+        {
             controller.enabled = true;
+            GetComponent<Collider>().enabled = true;
+        }
         else
+        {
             controller.enabled = false;
+            GetComponent<Collider>().enabled = false;
+        }
+            
     }
 
     public bool IsInRayCastDireciton(Vector3 direction, float lenght, LayerMask layer, Color color)

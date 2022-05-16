@@ -4,15 +4,16 @@ using UnityEngine;
 
 public class EnemyCrawler_V2 : EnemyScript
 {
-    [SerializeField] Transform groundRaycast;
+    [SerializeField] Transform[] groundRaycast;
     [SerializeField] Transform frontRaycast;
-    [SerializeField] Transform fallRaycast;
-    [SerializeField] bool startTurning;
+    [SerializeField] GameObject rotateMesh;
+    [SerializeField] bool hasTurned;
     public override void States()
     {
         switch (_state)
         {
             case EnemyState.patrol:
+                GetComponent<Collider>().enabled = true;
                 Patrol();
                 break;
             case EnemyState.dead:
@@ -24,24 +25,31 @@ public class EnemyCrawler_V2 : EnemyScript
 
     public override void Patrol()
     {
-        Debug.DrawRay(groundRaycast.position, transform.up * 0.5f, Color.red);
-        RaycastHit hit, hit2;
-        bool GroundCast = Physics.Raycast(groundRaycast.position, -transform.up, out hit, 0.5f, layer);
-        bool FallCast = Physics.Raycast(fallRaycast.position, -transform.up, out hit2, 0.5f, layer);
-        if (GroundCast || FallCast)
+        RaycastHit hit, hit2, hit3;
+        bool GroundCast = Physics.Raycast(groundRaycast[0].position, -transform.up, out hit, 0.5f, layer);
+        bool GroundCast2 = Physics.Raycast(groundRaycast[1].position, -transform.up, out hit2, 0.5f, layer);
+        bool WallCast = Physics.Raycast(frontRaycast.position, transform.right, out hit3, 0.2f, layer);
+        if (!GroundCast && !GroundCast2)
         {
-            controller.Move(-transform.right * edata.force);
-            float normalAngle = Vector3.Angle(hit.normal, Vector3.up);
-            Quaternion qrot;
-            qrot = Quaternion.Euler(0, 0, normalAngle);
-            transform.rotation = qrot;
+            if (!hasTurned)
+            {
+                transform.Rotate(0, 0, -90);
+            }
+            hasTurned = true;
         }
         else
-        {
-            transform.Rotate(new Vector3(0, 0, 2));
-        }
-        
+            hasTurned = false;
 
+        if (WallCast)
+            transform.Rotate(0, 0, 90);
+
+
+        controller.Move(transform.right * edata.force);
+    }
+
+    void Dead()
+    {
+        
     }
     public override void StatelessChecks()
     {
