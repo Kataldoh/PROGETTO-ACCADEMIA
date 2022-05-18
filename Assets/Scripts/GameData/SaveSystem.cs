@@ -5,7 +5,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaveSystem 
 {
-    //save method
+    /*//save method
     public static void SaveDataPlayer(MainPlayerScript player)
     {
         BinaryFormatter bf = new BinaryFormatter();
@@ -34,5 +34,6 @@ public static class SaveSystem
         {
             return null;
         }
-    }
+    }*/
 }
+    

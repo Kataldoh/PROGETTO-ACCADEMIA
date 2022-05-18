@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
+
+
+//In questa classe verranno inserite tutte le variabili che verranno trattentute prima che vengano salvate
 public class PlayerDataforSave 
 {
     public float[] playerposition;

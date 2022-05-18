@@ -17,6 +17,7 @@ public class MainPlayerScript : MonoBehaviour
     public PlayerState _state;                      // Stati del player
     [SerializeField] PlayerStatesEvents _Estates;
     [SerializeField] public Vector3 move;           //Vector3 che contiene gli input di movimento
+    [SerializeField] public Vector3 pp; //contiene la posizione del Player
     [SerializeField] TrailRenderer dashTrail;       
     public float speed;                             //velocità del player
     public CharacterController controller;
@@ -374,11 +375,11 @@ public class MainPlayerScript : MonoBehaviour
         //Sistema di salvataggio
         if (Input.GetKey(KeyCode.O))
         {
-            SavePlayer();
+            //SavePlayer();
         }
         if (Input.GetKey(KeyCode.L))
         {
-            LoadPlayer();
+            //LoadPlayer();
         }
     }
 
@@ -571,21 +572,22 @@ public class MainPlayerScript : MonoBehaviour
         }
     }
 
-    //Loadand Save System
+    /*//Loadand Save System
     public void SavePlayer()
     {
-        SaveSystem.SaveDataPlayer(this);
+        SaveManager.SaveGame();
     }
 
     public void LoadPlayer()
     {
-        PlayerDataforSave data = SaveSystem.LoadPlayer();
-        Vector3 playerposition;
-        playerposition.x = data.playerposition[0];
-        playerposition.y = data.playerposition[1];
-        playerposition.z = data.playerposition[2];
-        transform.position = playerposition;
-    }
+        PlayerDataforSave dataplayerposition;
+
+        pp.x = dataplayerposition.playerposition[0];
+        pp.y = dataplayerposition.playerposition[1];
+        pp.z = dataplayerposition.playerposition[2];
+
+        transform.position = pp;
+    }*/
 
     public void Powerups()
     { 
