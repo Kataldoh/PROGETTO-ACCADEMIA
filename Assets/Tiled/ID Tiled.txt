@@ -1,15 +1,15 @@
 LAYER MAPPA
 
-0 Cubo/Piattaforma
-1 Passaggio con Slide
-2 Entrance/exit
-3 Slope Sx
-4 Slope Dx
-5 Muro distruttibile
-6 Piattaforma bassa
-7 Acqua
-8 Spawn
-9 Cubo scuro (non toccabile oltre i muri)
+00 Cubo/Piattaforma
+01 Passaggio con Slide
+02 Entrance/exit
+03 Slope Sx
+04 Slope Dx
+05 Muro distruttibile
+06 Piattaforma bassa
+07 Acqua
+08 Spawn
+09 Cubo scuro (non toccabile oltre i muri)
 10 ???
 11 Muro sx
 12 Muro dx
@@ -18,11 +18,11 @@ LAYER MAPPA
 15 Pavimento base
 
 LAYER NEMICI/BONUS
-16 Bonus Vita
-17 ???
-18 Bonus Generico (soldi??)
-19 ???
-20 ???
-21 ???
-22 Nemico Normale
-23 Nemico Crawler
+00 Medkit medio
+01 Medkit grande
+02 Medkit max
+03 ???
+04 ???
+05 Nemico debole
+06 Nemico Normale
+07 Nemico Crawler
