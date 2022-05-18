@@ -3,37 +3,42 @@ using System;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 
-public static class SaveSystem 
+public class SaveSystem : MonoBehaviour
 {
-    /*//save method
-    public static void SaveDataPlayer(MainPlayerScript player)
-    {
-        BinaryFormatter bf = new BinaryFormatter();
-        string location = Application.persistentDataPath + "/Resources";
-        Debug.Log(location);
+    public static SaveSystem instance;
+    public float[] playerposition; //nota: i Vector3 non si possono trasformare in codice binario perciò è necessario introdurre un array di float
 
-        FileStream stream = new FileStream(location, FileMode.Create);
-        PlayerDataforSave data = new PlayerDataforSave(player);
-        bf.Serialize(stream, data);
-        stream.Close();
-    }
-
-    //load method
-    public static PlayerDataforSave LoadPlayer()
+    private void Awake()
     {
-        string path = Application.persistentDataPath + "/Resources";
-        if(File.Exists(path))
+        // Distruggi eventuali copie del gamepbject che verranno caricate
+        if (instance != null && instance != this)
         {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream stream = new FileStream(path, FileMode.Open);
-            PlayerDataforSave data =bf.Deserialize(stream) as PlayerDataforSave;
-            stream.Close();
-            return data;
+            Destroy(gameObject);
         }
         else
         {
-            return null;
+            instance = this;
         }
-    }*/
+
+        DontDestroyOnLoad(gameObject);
+    }
+    private void Update()
+    {
+        //Sistema di salvataggio
+        if (Input.GetKey(KeyCode.O))
+        {
+            playerposition[0] = MainPlayerScript.pInstance.transform.position.x;
+            playerposition[1] = MainPlayerScript.pInstance.transform.position.y;
+            playerposition[2] = MainPlayerScript.pInstance.transform.position.z;
+            SaveManager.instance.SaveGame();
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        { 
+            MainPlayerScript.pInstance.transform.position = new Vector3(playerposition[0], playerposition[1], playerposition[2]);
+            SaveManager.instance.LoadGame();
+           
+        }
+    }
 }
     

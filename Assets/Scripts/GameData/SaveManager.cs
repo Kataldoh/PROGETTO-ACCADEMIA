@@ -9,7 +9,7 @@ public class SaveManager : MonoBehaviour
     public static SaveManager instance { get; private set; }
 
     //variabili da salvare
-    public float[] playerposition; //nota: i Vector3 non si possono trasformare in codice binario perciò è necessario introdurre un array di float
+    //public float[] playerposition; //nota: i Vector3 non si possono trasformare in codice binario perciò è necessario introdurre un array di float
 
     private void Awake()
     {
@@ -24,27 +24,22 @@ public class SaveManager : MonoBehaviour
         }
 
         DontDestroyOnLoad(gameObject);
-         
     }
 
     //Metodo per salvare la partita
-    public void SaveGame(MainPlayerScript player)
+    public void SaveGame()
     {
-        playerposition[0] = player.pp.x;
-        playerposition[1] = player.pp.y;
-        playerposition[2] = player.pp.z;
-
         //Salva le coordinate del Player
-        PlayerPrefs.SetFloat("Coordinatax", playerposition[0]);
-        PlayerPrefs.SetFloat("Coordinatay", playerposition[1]);
-        PlayerPrefs.SetFloat("Coordinataz", playerposition[2]);
+        PlayerPrefs.SetFloat("Coordinatax", SaveSystem.instance.playerposition[0]);
+        PlayerPrefs.SetFloat("Coordinatay", SaveSystem.instance.playerposition[1]);
+        PlayerPrefs.SetFloat("Coordinataz", SaveSystem.instance.playerposition[2]);
     }
     
     //Metodo per caricare la partita
-    public void LoadGame(MainPlayerScript player)
+    public void LoadGame()
     {
-        PlayerPrefs.GetFloat("Coordinatax");
-        PlayerPrefs.GetFloat("Coordinatay");
-        PlayerPrefs.GetFloat("Coordinataz");
+        SaveSystem.instance.playerposition[0]=PlayerPrefs.GetFloat("Coordinatax");
+        SaveSystem.instance.playerposition[1]=PlayerPrefs.GetFloat("Coordinatay");
+        SaveSystem.instance.playerposition[2]=PlayerPrefs.GetFloat("Coordinataz");
     }
 }

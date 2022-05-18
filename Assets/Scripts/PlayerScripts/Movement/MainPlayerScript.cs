@@ -17,7 +17,6 @@ public class MainPlayerScript : MonoBehaviour
     public PlayerState _state;                      // Stati del player
     [SerializeField] PlayerStatesEvents _Estates;
     [SerializeField] public Vector3 move;           //Vector3 che contiene gli input di movimento
-    [SerializeField] public Vector3 pp; //contiene la posizione del Player
     [SerializeField] TrailRenderer dashTrail;       
     public float speed;                             //velocità del player
     public CharacterController controller;
@@ -115,7 +114,8 @@ public class MainPlayerScript : MonoBehaviour
         {
             StateIndipendentActionsUPDATE();
         }
-            
+
+        
     }
 
 
@@ -371,16 +371,6 @@ public class MainPlayerScript : MonoBehaviour
         //---------------------------
         aM.GeneralWeaponHandler(weapons_SO[0], rayhead, endSpark, projectiles, shootingIgnoreLayer);
 
-
-        //Sistema di salvataggio
-        if (Input.GetKey(KeyCode.O))
-        {
-            //SavePlayer();
-        }
-        if (Input.GetKey(KeyCode.L))
-        {
-            //LoadPlayer();
-        }
     }
 
     //-------------------------------------------------------
