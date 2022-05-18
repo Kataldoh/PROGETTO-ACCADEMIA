@@ -53,12 +53,12 @@ public class PlayerStatesEvents : MonoBehaviour
             if(pInst.move.y < 0)        //controlla l'altezza del player quando si alza e abbassa
             {
                 pInst.controller.height = pInst.height/3;
-                pInst.controller.center = new Vector3(0, 0.3f, 0);
+                pInst.controller.center = new Vector3(0, 0.4f, 0);
             } 
             else                        //resetta l'altezza del player
             {
                 pInst.controller.height = pInst.height;
-                pInst.controller.center = new Vector3(0, 0.5f, 0);
+                pInst.controller.center = new Vector3(0, 0.8f, 0);
             }
         }
 
@@ -91,7 +91,7 @@ public class PlayerStatesEvents : MonoBehaviour
         if (slideTimer <= 0.5f && !pInst.hasSomethingInFront)
         {
             pInst.controller.height = pInst.height / 3;
-            pInst.controller.center = new Vector3(0, 0.15f, 0);
+            pInst.controller.center = new Vector3(0, 0.4f, 0);
 
             pInst.controller.Move(dir * pInst.pdata.force * 2 * Time.deltaTime);         //Applica forza dagli input ricevuti
 
@@ -100,14 +100,14 @@ public class PlayerStatesEvents : MonoBehaviour
                 lockedDir = 0;
                 pInst._state = PlayerState.jump;
                 pInst.controller.height = pInst.height;
-                pInst.controller.center = new Vector3(0, 0.5f, 0);
+                pInst.controller.center = new Vector3(0, 0.8f, 0);
             }
                 
         }
         else
         {
             pInst.controller.height = pInst.height;
-            pInst.controller.center = new Vector3(0, 0.5f, 0);
+            pInst.controller.center = new Vector3(0, 0.8f, 0);
 
             if (!pInst.IsGrounded())
                 pInst._state = PlayerState.jump;
