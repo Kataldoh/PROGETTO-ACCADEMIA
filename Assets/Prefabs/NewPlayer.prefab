@@ -600,13 +600,13 @@ CharacterController:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Height: 1.3
+  m_Height: 0.65
   m_Radius: 0.2
   m_SlopeLimit: 55
   m_StepOffset: 0.3
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 0.8, z: 0}
+  m_Center: {x: 0, y: 0.4, z: 0}
 --- !u!114 &4075672834401231214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -647,7 +647,6 @@ MonoBehaviour:
   controller: {fileID: 7710950240493196346}
   dirX: 0
   dir: 0
-  height: 0
   hangTime: 0
   dashRechargeTime: 1
   dashTimer: 0
@@ -731,6 +730,8 @@ MonoBehaviour:
   anim: {fileID: 0}
   laserRender: {fileID: 0}
   endSpark: {fileID: 3357014892148384219, guid: cb650988ba0eeb74eb5718d0845cde35, type: 3}
+  ccHeight: 0
+  ccCenter: {x: 0, y: 0, z: 0}
   JumpForce: 4
   gravity: -4
   weight: -3

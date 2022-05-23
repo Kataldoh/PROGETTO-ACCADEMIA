@@ -22,7 +22,6 @@ public class MainPlayerScript : MonoBehaviour
     public CharacterController controller;
     public float dirX;                  
     public int dir;                     //direzione nella quale il character si gira
-    public float height;                //altezza del CharacterController
     public float hangTime;              //un timer per dare al giocatore una finestra di tempo per saltare dopo essere in aria
     public float dashRechargeTime;      //variabile utilizzata per il controllo del tempo di ricarica del dash
     public float dashTimer;             //variabile contenente il timer del dash
@@ -62,6 +61,8 @@ public class MainPlayerScript : MonoBehaviour
     public Animator anim;
     public LineRenderer laserRender;    
     public GameObject endSpark;
+    public float ccHeight;                //altezza del CharacterController
+    public Vector3 ccCenter;              //centro del CharacterController
 
     [Header("Jump Physics variables")]
     [SerializeField] float JumpForce;       //forza del salto
@@ -104,7 +105,8 @@ public class MainPlayerScript : MonoBehaviour
         anim = GetComponent<Animator>();
         laserRender = GetComponent<LineRenderer>();
         startingZ = transform.position.z;
-        height = controller.height;
+        ccHeight = controller.height;
+        ccCenter = controller.center;
     }
 
 
