@@ -580,7 +580,7 @@ Animator:
   m_GameObject: {fileID: 1260597861999642}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: b6c33e1d6632025468fb37a04e312606, type: 3}
-  m_Controller: {fileID: 9100000, guid: 9ef0317ed1a31a94183e123fef7e2637, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5ed8680e0f9be224fac6528c766225ec, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -736,7 +736,7 @@ MonoBehaviour:
   gravity: -4
   weight: -3
   velocity: 0
-  groundRayLenght: 0.16
+  groundRayLenght: 0.11
   rollCheckLenght: 0.35
   wallCheckLenght: 0.22
   lastShotPosition: {x: 0, y: 0, z: 0}
