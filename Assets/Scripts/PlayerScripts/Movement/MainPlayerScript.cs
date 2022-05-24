@@ -429,12 +429,14 @@ public class MainPlayerScript : MonoBehaviour
     //Controlla se il player ha qualcosa al disopra di se
     bool RollCheck()
     {
+        Debug.DrawRay(rollCheck.position, transform.up * rollCheckLenght, Color.red);
         return Physics.Raycast(rollCheck.position, transform.up, rollCheckLenght, layer);
     }
 
     //Controlla se il player ha qualcosa al disopra di se
     bool WallCheck()
     {
+        Debug.DrawRay(wallCheck.position, transform.forward * wallCheckLenght, Color.red);
         return Physics.Raycast(wallCheck.position, transform.forward, wallCheckLenght, layer);
     }
 
