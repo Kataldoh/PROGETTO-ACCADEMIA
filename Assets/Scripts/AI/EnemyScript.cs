@@ -8,44 +8,48 @@ public class EnemyScript : MonoBehaviour
     public EnemyData edata;
     public EnemyState _state;
     [SerializeField] HealthPlaceholder hp;
-    CharacterController controller;
+    public CharacterController controller;
     [SerializeField] Animator anim;
     [SerializeField] Transform foot, turnAroundPoint;
     [SerializeField] Transform rayhead;
     [SerializeField] float rayLenght;
     [SerializeField] bool isGrounded;
-    [SerializeField] bool isJump;
+    [SerializeField] bool isJump, hasGameController;
     [SerializeField] float gravity;
     [SerializeField] float weight;
     [SerializeField] GameObject attackHitbox;
     [SerializeField] GameObject spawnOnDeath;
     float idleTimer, patrolTimer, attackTimer;
     float speedx;
-    bool isDead;
+    public bool isDead;
     Collider collider;
-
-
     public Transform target;
     public float targetDistance;
     float playerEnemyDistance;
-
-   
     Vector3 move;
     float velocity;
     // raccolta di elementi 
-    [SerializeField] LayerMask layer;
-    [SerializeField] LayerMask layer2;
+    [SerializeField] public LayerMask layer;
     float direction;
     Quaternion qrot;
 
     private void Start()
     {
         isDead = false;
-        controller = GetComponent<CharacterController>();
-        anim = GetComponent<Animator>();
+        if (GetComponent<CharacterController>() != null)
+            controller = GetComponent<CharacterController>();
+        if (GetComponent<Animator>() != null)
+            anim = GetComponent<Animator>();
+
+        //transform.Rotate(0, 90, 0);
         collider = GetComponent<Collider>();
         direction = 1;
         target = GameObject.FindGameObjectWithTag("Player").transform;
+
+        //Ragdoll Rigidboy&Collider
+
+        //setRigidbodyState(true);
+        //setColliderState(false);
     }
 
     private void FixedUpdate() 
@@ -54,10 +58,19 @@ public class EnemyScript : MonoBehaviour
         {
             StatelessChecks();
             States();
+            
         }
     }
 
-    void States()
+    private void Update()
+    {
+        if (GameController.instance._state == GameState.play)
+        {
+            StatesNOPhys();
+        }
+    }
+
+    public virtual void States()
     {
         switch(_state)
         {
@@ -76,8 +89,12 @@ public class EnemyScript : MonoBehaviour
                 break; 
         }
     }
+    public virtual void StatesNOPhys()
+    {
 
-    void Idle()
+    }
+
+    public virtual void Idle()
     {
         patrolTimer=0;
         idleTimer += Time.deltaTime;
@@ -90,7 +107,7 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    void Patrol()
+    public virtual void Patrol()
     {
         idleTimer = 0;
         patrolTimer += Time.deltaTime;
@@ -115,7 +132,7 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    void Attack()
+    public virtual void Attack()
     {
         idleTimer = 2.5f;
         patrolTimer = 0;
@@ -146,19 +163,34 @@ public class EnemyScript : MonoBehaviour
         }
     }
 
-    void Dead()
+    public virtual void Dead()
     {
         isDead = true;
         SoundManager.PlaySound(SoundManager.Sound.EnemyDie);
         anim.SetBool("death", true);
-        Vector3 healthSpawnPos = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
-        Instantiate(spawnOnDeath, healthSpawnPos, spawnOnDeath.transform.rotation);
-        controller.detectCollisions = false;
-        controller.enabled = false;
+        Vector3 healthSpawnPos;
+        if (GameController.instance.CurrentHealth < 100)
+        {
+            healthSpawnPos = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
+            Instantiate(spawnOnDeath, healthSpawnPos, spawnOnDeath.transform.rotation);
+        }
+            
         collider.enabled = false;
+        if (controller != null)
+        {
+            controller.detectCollisions = false;
+            controller.enabled = false;
+        }
+
+        //      !!!!!!RAGDOLL!!!
+        Destroy(gameObject, 3f);//distruggo il gameObject dopo 3 secondi
+        GetComponent<Animator>().enabled = false; //disabilito l'animator
+        setRigidbodyState(false);//richiamo il metodo Rigidobody
+        setColliderState(true);//richiamo il metodo Collider
+
     }
 
-    void StatelessChecks()
+    public virtual void StatelessChecks()
     {
         playerEnemyDistance = Vector3.Distance(transform.position, target.transform.position);
         isGrounded = IsGrounded();
@@ -205,20 +237,32 @@ public class EnemyScript : MonoBehaviour
         {
             _state = EnemyState.dead;
         }
+
+        if (!isDead)
+        {
+            controller.enabled = true;
+            GetComponent<Collider>().enabled = true;
+        }
+        else
+        {
+            controller.enabled = false;
+            GetComponent<Collider>().enabled = false;
+        }
+            
     }
 
-    bool IsInRayCastDireciton(Vector3 direction, float lenght, LayerMask layer, Color color)
+    public bool IsInRayCastDireciton(Vector3 direction, float lenght, LayerMask layer, Color color)
     {
         Debug.DrawRay(rayhead.position, direction * lenght, color);
         return Physics.Raycast(rayhead.position, direction, out RaycastHit hit, lenght, layer);
     }
     
-    bool IsGrounded()
+    public bool IsGrounded()
     {
         return Physics.CheckSphere(foot.position, rayLenght, layer);
     }
 
-    float _vectorDir() {
+    public float _vectorDir() {
         var vettoredir = (target.position - transform.position).normalized;
         var dist = vettoredir.magnitude;
         Vector3 direction = (vettoredir / dist);
@@ -237,4 +281,34 @@ public class EnemyScript : MonoBehaviour
             direction *= -1;
         }
     }
+
+    //RAGDOLL
+
+    //abilito lo stato dei rigidbodies
+    void setRigidbodyState(bool state)
+    {
+        //Decido per ogni componente del collider quando abilitarlo/disabilitarlo
+        Rigidbody[] rigidbodies = GetComponentsInChildren<Rigidbody>();
+
+        foreach(Rigidbody rigidbody in rigidbodies)
+        {
+            rigidbody.isKinematic = state;
+        }
+
+        controller.enabled = !state;
+    }
+
+    //abilito lo stato dei colliders
+    void setColliderState(bool state)
+    {
+        //Decido per ogni componente del collider quando abilitarlo/disabilitarlo
+        Collider[] colliders = GetComponentsInChildren<Collider>();
+        foreach(Collider collider in colliders)
+        {
+            collider.enabled = state;
+        }
+
+        GetComponent<Collider>().enabled = !state;
+    }
+
 }

@@ -13,7 +13,6 @@ public class PlayerStatesEvents : MonoBehaviour
     float jumpDelay;
     float wallJumpTime;
     float wallJumpVel;
-
     public void P_Idle()
     {
         //Controlla se si può saltare in questo stato
@@ -91,7 +90,7 @@ public class PlayerStatesEvents : MonoBehaviour
 
         if (slideTimer <= 0.5f && !pInst.hasSomethingInFront)
         {
-            pInst.controller.height = pInst.ccHeight / 3;
+            pInst.controller.height = pInst.ccHeight/3;
             pInst.controller.center = new Vector3(0, 0.275f, 0);
 
             pInst.controller.Move(dir * pInst.pdata.force * 2 * Time.deltaTime);         //Applica forza dagli input ricevuti
@@ -108,7 +107,7 @@ public class PlayerStatesEvents : MonoBehaviour
         else
         {
             pInst.controller.height = pInst.ccHeight;
-            pInst.controller.center = pInst.ccCenter;
+                pInst.controller.center = pInst.ccCenter;
 
             if (!pInst.IsGrounded())
                 pInst._state = PlayerState.jump;

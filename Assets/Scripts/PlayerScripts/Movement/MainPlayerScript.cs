@@ -61,7 +61,7 @@ public class MainPlayerScript : MonoBehaviour
     public Animator anim;
     public LineRenderer laserRender;    
     public GameObject endSpark;
-    public float ccHeight;                //altezza del CharacterController
+	public float ccHeight;                //altezza del CharacterController
     public Vector3 ccCenter;              //centro del CharacterController
 
     [Header("Jump Physics variables")]
@@ -116,8 +116,7 @@ public class MainPlayerScript : MonoBehaviour
         {
             StateIndipendentActionsUPDATE();
         }
-
-        
+            
     }
 
 
@@ -373,6 +372,17 @@ public class MainPlayerScript : MonoBehaviour
         //---------------------------
         aM.GeneralWeaponHandler(weapons_SO[0], rayhead, endSpark, projectiles, shootingIgnoreLayer);
 
+        /*
+        //Sistema di salvataggio
+        if (Input.GetKey(KeyCode.O))
+        {
+            SavePlayer();
+        }
+        if (Input.GetKey(KeyCode.L))
+        {
+            LoadPlayer();
+        }
+        */
     }
 
     //-------------------------------------------------------
@@ -429,14 +439,12 @@ public class MainPlayerScript : MonoBehaviour
     //Controlla se il player ha qualcosa al disopra di se
     bool RollCheck()
     {
-        Debug.DrawRay(rollCheck.position, transform.up * rollCheckLenght, Color.red);
         return Physics.Raycast(rollCheck.position, transform.up, rollCheckLenght, layer);
     }
 
     //Controlla se il player ha qualcosa al disopra di se
     bool WallCheck()
     {
-        Debug.DrawRay(wallCheck.position, transform.forward * wallCheckLenght, Color.red);
         return Physics.Raycast(wallCheck.position, transform.forward, wallCheckLenght, layer);
     }
 
