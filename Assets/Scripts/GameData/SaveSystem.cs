@@ -33,6 +33,7 @@ public class SaveSystem : MonoBehaviour
             SaveManager.instance.SaveGame();
         }
 
+        //SISTEMA DI CARICAMENTO
         if (Input.GetKeyDown(KeyCode.L))
         { 
             MainPlayerScript.pInstance.transform.position = new Vector3(playerposition[0], playerposition[1], playerposition[2]);
