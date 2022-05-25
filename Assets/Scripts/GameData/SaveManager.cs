@@ -7,7 +7,6 @@ public class SaveManager : MonoBehaviour
 {
     //Istanzia questo codice 
     public static SaveManager instance { get; private set; }
-
     //variabili da salvare
     //public float[] playerposition; //nota: i Vector3 non si possono trasformare in codice binario perciò è necessario introdurre un array di float
 

@@ -223,24 +223,5 @@ public class GameController : MonoBehaviour
             BarraStamina.SetStamina(CurrentStamina);
         }
     }
-
-    /*public void SavePlayer()
-    {
-        SaveSystem.SaveDataPlayer(this);
-    }
-
-    public void LoadPlayer()
-    {
-        PlayerDataforSave data = SaveSystem.LoadPlayer();
-
-        Player.position.x = playerposition.x;
-        Vector3 playerposition;
-        playerposition.x = data.playerposition[0];
-        playerposition.y = data.playerposition[1];
-        playerposition.z = data.playerposition[2];
-        transform.position = playerposition;
-    }*/
-
-
 }
 
