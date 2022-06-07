@@ -14,10 +14,9 @@ public class BarraVita : MonoBehaviour
     }
 
     public void SetMaxHealth(int Health)
-    {
+    { 
         slider.maxValue = Health;
         slider.value = Health;
-
     }
 
     public void SetHealth(int Health)
