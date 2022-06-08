@@ -13,6 +13,8 @@ public class PlayerStatesEvents : MonoBehaviour
     float jumpDelay;
     float wallJumpTime;
     float wallJumpVel;
+
+    //STATO DI IDLE
     public void P_Idle()
     {
         //Controlla se si può saltare in questo stato
@@ -39,6 +41,7 @@ public class PlayerStatesEvents : MonoBehaviour
         
     }
 
+    //STATO DI MOVIMENTO A TERRA
     public void P_Move()
     {
         CanJump();
@@ -79,6 +82,7 @@ public class PlayerStatesEvents : MonoBehaviour
         
     }
 
+    //STATO DI ROTOLATA/SLIDE
     public void P_Slide()
     {
         if (lockedDir == 0)
@@ -120,7 +124,7 @@ public class PlayerStatesEvents : MonoBehaviour
         }
     }
 
-
+    //STATO DI SALTO
     public void P_Jump()
     {
         CanJump();
@@ -180,6 +184,7 @@ public class PlayerStatesEvents : MonoBehaviour
 
     }
 
+    //STATO DI SALTO A MURO
     public void P_WallJump()
     {
         CanJump();
@@ -254,6 +259,7 @@ public class PlayerStatesEvents : MonoBehaviour
            
     }
 
+    //STATO DI DASH
     public void P_Dash()
     {
         if (lockedDir == 0)
@@ -265,14 +271,7 @@ public class PlayerStatesEvents : MonoBehaviour
 
         if(dashLifetime <=0.25f && !pInst.hasSomethingInFront)
         {
-            if(pInst.move.y == 0)
-            {
-                pInst.controller.Move(dir * pInst.pdata.force * 4 * Time.deltaTime);         //Applica forza dagli input ricevuti
-            }
-            else if(!pInst.IsGrounded())
-            {
-                pInst.controller.Move(-pInst.transform.up * pInst.pdata.force * 4 * Time.deltaTime);
-            }
+            pInst.controller.Move(dir * pInst.pdata.force * 4 * Time.deltaTime);         //Applica forza dagli input ricevuti
             
             GameController.instance.BarraStamina.SetStamina(0);
             pInst.velocity = 0;
@@ -293,6 +292,8 @@ public class PlayerStatesEvents : MonoBehaviour
            
 
     }
+
+    //STATO DI DANNO
     public void P_Damage()
     {
         pInst.controller.detectCollisions = false;
@@ -325,11 +326,15 @@ public class PlayerStatesEvents : MonoBehaviour
         }
     }   
 
-
+    //STATO DI MORTE
     public void P_Death()
     {
         
     }
+
+    //---------------------------------
+    //--------     METODI    ----------
+    //---------------------------------
 
     public void CanJump()
     {

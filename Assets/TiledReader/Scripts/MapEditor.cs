@@ -24,6 +24,7 @@ public class MapEditor : MonoBehaviour
     public TiledData tdata = new TiledData();
 
     [SerializeField] GameObject Placeholder;
+    public bool hasFinishedRendering;
 
     //[SerializeField] int LayerID;
     int[] MapData;
@@ -110,6 +111,7 @@ public class MapEditor : MonoBehaviour
     /// <param name="ID"> Id Layer</param>
     void RenderMap(int ID) {
 
+        hasFinishedRendering = false;
         MapData = tdata.layers[ID].data;
 
         //Creo un GameObject vuoto e gli passo il nome del layer
@@ -154,6 +156,8 @@ public class MapEditor : MonoBehaviour
 
         //attivo o disattivo il layer, come specificato da tiled
         _layer.gameObject.SetActive(tdata.layers[ID].visible);
+        hasFinishedRendering = true;
+        GameController.instance.SpawnPlayer();
     }
 
     void GenerateTileStruct(int t)

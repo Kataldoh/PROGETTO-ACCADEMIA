@@ -96,9 +96,6 @@ public class MainPlayerScript : MonoBehaviour
 
     void Start()
     {
-        if (GameObject.FindGameObjectWithTag("Respawn") != null)
-            transform.position = GameObject.FindGameObjectWithTag("Respawn").transform.position;
-
         aM = new WeaponMethods();
         _Estates = new PlayerStatesEvents();
         controller = GetComponent<CharacterController>();

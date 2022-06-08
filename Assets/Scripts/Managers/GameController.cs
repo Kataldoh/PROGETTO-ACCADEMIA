@@ -223,5 +223,11 @@ public class GameController : MonoBehaviour
             BarraStamina.SetStamina(CurrentStamina);
         }
     }
+
+    public void SpawnPlayer()
+    {
+        if (GameObject.FindGameObjectWithTag("Respawn") != null)
+            player.transform.position = GameObject.FindGameObjectWithTag("Respawn").transform.position;
+    }
 }
 
