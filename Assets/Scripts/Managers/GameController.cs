@@ -99,35 +99,35 @@ public class GameController : MonoBehaviour
         if (puntatore = null)
         {
             puntatore = GameObject.FindGameObjectWithTag("Puntatore");
-
         }
 
         States();
 
-        
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if(GameController.instance._state == GameState.pause)
-            {
-                GameController.instance._state = GameState.play;
-                Debug.Log("RESUMING");
-
-            }
-            else
-            {
-                GameController.instance._state = GameState.pause;
-
-            }
-
-        }
+        Pausa();
 
         if (CurrentHealth > maxHealth)
             CurrentHealth = maxHealth;
-
-      
     }
 
+
+    //Pausa
+    public void Pausa()
+    {
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (_state == GameState.pause)
+            {
+                _state = GameState.play;
+                Debug.Log("RESUMING");
+            }
+            else
+            {
+                _state = GameState.pause;
+            }
+        }
+    }
     public void EnableBossBar(bool a)
     {
         BarraBoss.SetActive(a);
@@ -136,6 +136,7 @@ public class GameController : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SaveSystem.instance.loading = true;
     }
     public void Resume()
     {

@@ -141,7 +141,6 @@ public class PlayerStatesEvents : MonoBehaviour
             if (Input.GetButton("Jump") && pInst.IsGrounded() && pInst.isJump)
             {
                 SoundManager.PlaySound(SoundManager.Sound.Jumping);
-
                 pInst.velocity = pInst.pdata.jumpForce * pInst.jumpArc.Evaluate(Time.deltaTime * pInst.pdata.jumpForce);
             }
             //Se il salto viene rilasciato in aria (Velocity>0), applica in anticipo la gravità
@@ -203,7 +202,6 @@ public class PlayerStatesEvents : MonoBehaviour
         }
 
         
-
         if (!pInst.hasSomethingAbove)
         {
             //Se viene rilevato un salto e si è a terra, applica la forza di salto alla velocity
@@ -211,7 +209,7 @@ public class PlayerStatesEvents : MonoBehaviour
             {
                 SoundManager.PlaySound(SoundManager.Sound.Jumping);
                 wallJumpTime = 0;
-                wallJumpVel = wallJumpVel * -1;
+                //wallJumpVel = wallJumpVel * -1;
                 pInst.velocity = pInst.pdata.jumpForce * pInst.jumpArc.Evaluate(Time.deltaTime * pInst.pdata.jumpForce);   
             }
             else
