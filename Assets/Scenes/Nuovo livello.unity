@@ -1091,7 +1091,7 @@ RectTransform:
   m_Children:
   - {fileID: 2036451053}
   m_Father: {fileID: 6425425368825156716}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2409,7 +2409,7 @@ RectTransform:
   m_Children:
   - {fileID: 1942291081}
   m_Father: {fileID: 6425425368825156716}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -2473,7 +2473,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6425425368817321478}
+      - m_Target: {fileID: 6425425368825156718}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: BacktoMenu
         m_Mode: 1
@@ -2797,7 +2797,7 @@ RectTransform:
   m_LocalScale: {x: 1.0359, y: 1.0359, z: 1.0359}
   m_Children: []
   m_Father: {fileID: 6425425368825156716}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3166,7 +3166,7 @@ GameObject:
   - component: {fileID: 6425425368694978742}
   - component: {fileID: 6425425368694978736}
   m_Layer: 5
-  m_Name: Dead
+  m_Name: DeadText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3218,7 +3218,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6425425368825156716}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -3474,10 +3474,10 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0.57}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 6425425367941819259}
   - {fileID: 6425425368694978743}
   - {fileID: 308696247}
   - {fileID: 2100650481}
-  - {fileID: 6425425367941819259}
   m_Father: {fileID: 6425425368360478133}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3495,6 +3495,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6425425368825156716}
+  - component: {fileID: 6425425368825156718}
   m_Layer: 5
   m_Name: Dead
   m_TagString: Untagged
@@ -3502,6 +3503,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
+--- !u!114 &6425425368825156718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6425425368825156717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f484bc735b39d5843840f50480d459b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6425425369069164169
 PrefabInstance:
   m_ObjectHideFlags: 0

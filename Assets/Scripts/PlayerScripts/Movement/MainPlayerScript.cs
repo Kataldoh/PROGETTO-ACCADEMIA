@@ -336,10 +336,11 @@ public class MainPlayerScript : MonoBehaviour
         }
 
         //Se la vita del player è a 0
-        if (GameController.instance.CurrentHealth == 0)
+        if (GameController.instance.CurrentHealth <= 0)
         {
             _state = PlayerState.dead;
             GameController.instance._state = GameState.dead;
+            SaveSystem.instance.loading = true;
         }
 
         //--------------------
