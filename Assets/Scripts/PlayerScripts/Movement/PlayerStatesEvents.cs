@@ -197,7 +197,7 @@ public class PlayerStatesEvents : MonoBehaviour
         
         if (lockedDir == 0)
         {
-            lockedDir = pInst.dir * -1;
+            lockedDir = pInst.dir;
             wallJumpVel = lockedDir * 2f;
         }
 
@@ -209,7 +209,7 @@ public class PlayerStatesEvents : MonoBehaviour
             {
                 SoundManager.PlaySound(SoundManager.Sound.Jumping);
                 wallJumpTime = 0;
-                //wallJumpVel = wallJumpVel * -1;
+                wallJumpVel = wallJumpVel * -1;
                 pInst.velocity = pInst.pdata.jumpForce * pInst.jumpArc.Evaluate(Time.deltaTime * pInst.pdata.jumpForce);   
             }
             else

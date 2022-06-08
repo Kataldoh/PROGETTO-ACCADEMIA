@@ -86,7 +86,7 @@ public class EnemyScript : MonoBehaviour
             case EnemyState.dead:
                 if (!isDead)
                 {
-                    anim.SetBool("death", true);
+                    
                     Dead();
                 }
                     
@@ -172,8 +172,14 @@ public class EnemyScript : MonoBehaviour
         isDead = true;
         SoundManager.PlaySound(SoundManager.Sound.EnemyDie);
 
+        if(direction == 1)
+            anim.SetBool("flipDeath", false);
+        else
+            anim.SetBool("flipDeath", true);
+        anim.SetBool("death", true);
+
         Vector3 healthSpawnPos;
-        if (GameController.instance.CurrentHealth < 100)
+        if (GameController.instance.CurrentHealth < 65)
         {
             healthSpawnPos = new Vector3(transform.position.x, transform.position.y + 1, transform.position.z);
             Instantiate(spawnOnDeath, healthSpawnPos, spawnOnDeath.transform.rotation);

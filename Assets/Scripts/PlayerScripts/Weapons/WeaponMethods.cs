@@ -138,11 +138,6 @@ public class WeaponMethods : MonoBehaviour
             if (Physics.Raycast(aimStart.position, direction, out hit, 5, ~ignoreLayer))   //Se il raycast colpisce qualcosa 
             {
                 pInst.laserRender.SetPosition(1, hit.point);         //Disegna la fine del raggio sul punto colpito
-                //print("Hit");
-                if(hit.collider.tag == "Nemico")            //Se colpisce un nemico
-                {
-                    print("Hit Enemy");
-                }
                 
                 return hit.point;
             }
