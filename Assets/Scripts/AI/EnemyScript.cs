@@ -172,10 +172,7 @@ public class EnemyScript : MonoBehaviour
         isDead = true;
         SoundManager.PlaySound(SoundManager.Sound.EnemyDie);
 
-        if(direction == 1)
-            anim.SetBool("flipDeath", false);
-        else
-            anim.SetBool("flipDeath", true);
+        anim.SetBool("flipDeath", !System.Convert.ToBoolean((int)direction + 1));
         anim.SetBool("death", true);
 
         Vector3 healthSpawnPos;
