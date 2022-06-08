@@ -84,8 +84,12 @@ public class EnemyScript : MonoBehaviour
                 Patrol();
                 break; 
             case EnemyState.dead:
-                if(!isDead)
+                if (!isDead)
+                {
+                    anim.SetBool("death", true);
                     Dead();
+                }
+                    
                 break; 
         }
     }
@@ -167,7 +171,6 @@ public class EnemyScript : MonoBehaviour
     {
         isDead = true;
         SoundManager.PlaySound(SoundManager.Sound.EnemyDie);
-        anim.SetBool("death", true);
 
         Vector3 healthSpawnPos;
         if (GameController.instance.CurrentHealth < 100)
@@ -183,12 +186,12 @@ public class EnemyScript : MonoBehaviour
             controller.enabled = false;
         }
 
-        //      !!!!!!RAGDOLL!!!
-        Destroy(gameObject, 3f);//distruggo il gameObject dopo 3 secondi
-        GetComponent<Animator>().enabled = false; //disabilito l'animator
+
         setRigidbodyState(false);//richiamo il metodo Rigidobody
         setColliderState(true);//richiamo il metodo Collider
 
+        
+        Destroy(gameObject, 3f);//distruggo il gameObject dopo 3 secondi
     }
 
     public virtual void StatelessChecks()

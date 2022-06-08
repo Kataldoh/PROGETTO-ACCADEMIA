@@ -40,9 +40,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2840513865558343193}
   - component: {fileID: 2840513865558343199}
-  - component: {fileID: 2840513865558343198}
   - component: {fileID: 7513824256710975543}
   - component: {fileID: 7779131523575195766}
+  - component: {fileID: 7988582092948939877}
   m_Layer: 9
   m_Name: CrawlerV2
   m_TagString: Nemico
@@ -81,7 +81,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   edata: {fileID: 11400000, guid: 647d27cacc1bb6d4ab9844af848f8e74, type: 2}
   _state: 2
-  hp: {fileID: 2840513865558343198}
+  hp: {fileID: 0}
   controller: {fileID: 0}
   anim: {fileID: 0}
   foot: {fileID: 0}
@@ -104,24 +104,6 @@ MonoBehaviour:
   groundRaycast:
   - {fileID: 2840513866926662443}
   frontRaycast: {fileID: 4374154746823016946}
---- !u!114 &2840513865558343198
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2840513865558343192}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32715fa65ef83684fb3c061940f2bdf8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hit: 0
-  damageTowardsPlayer: 1
-  damageTaken: 0
-  eData: {fileID: 0}
-  destroyWhenHealthBelowZERO: 1
-  health: 3
 --- !u!135 &7513824256710975543
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -154,6 +136,24 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7988582092948939877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2840513865558343192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32715fa65ef83684fb3c061940f2bdf8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hit: 0
+  damageTowardsPlayer: 1
+  damageTaken: 0
+  eData: {fileID: 11400000, guid: 647d27cacc1bb6d4ab9844af848f8e74, type: 2}
+  destroyWhenHealthBelowZERO: 0
+  health: 0
 --- !u!1 &2840513866926662442
 GameObject:
   m_ObjectHideFlags: 0
