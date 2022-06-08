@@ -6,6 +6,7 @@ public class EnemyCrawler_V2 : EnemyScript
 {
     [SerializeField] Transform[] groundRaycast;
     [SerializeField] Transform frontRaycast;
+    [SerializeField] bool bottomHit;
     int rotateDir;
     public override void StatesNOPhys()
     {
@@ -25,24 +26,15 @@ public class EnemyCrawler_V2 : EnemyScript
 
     public override void Patrol()
     {
-        
-        RaycastHit hit, hit2, hit3;
+
+        RaycastHit hit;
         Debug.DrawRay(groundRaycast[0].position, -transform.up * 0.75f, Color.red);
         Debug.DrawRay(frontRaycast.position, transform.right * 0.25f, Color.blue);
         bool GroundCast = Physics.Raycast(groundRaycast[0].position, -transform.up, out hit, 0.75f, layer);
-        //bool GroundCast2 = Physics.Raycast(groundRaycast[1].position, -transform.up, out hit2, 0.2f, layer);
-        bool WallCast = Physics.Raycast(frontRaycast.position, transform.right, out hit3, 0.25f, layer);
+        bool WallCast = Physics.Raycast(frontRaycast.position, transform.right, 0.25f, layer);
         if (!GroundCast)
         {
-            /*
-            if (!hasTurned)
-            {
-                transform.Rotate(0, 0, -90);
-                hasTurned = true;
-            }
-            */
-            transform.Rotate(0, 0, -0.2f);
-
+            transform.Rotate(0, 0, -edata.speedRot * Time.deltaTime);
         }
         else
         {
