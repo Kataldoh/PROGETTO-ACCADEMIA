@@ -85,10 +85,7 @@ public class EnemyScript : MonoBehaviour
                 break; 
             case EnemyState.dead:
                 if (!isDead)
-                {
-                    
                     Dead();
-                }
                     
                 break; 
         }

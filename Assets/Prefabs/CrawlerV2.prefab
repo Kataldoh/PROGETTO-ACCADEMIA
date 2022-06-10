@@ -104,6 +104,7 @@ MonoBehaviour:
   groundRaycast:
   - {fileID: 2840513866926662443}
   frontRaycast: {fileID: 4374154746823016946}
+  bottomHit: 0
 --- !u!135 &7513824256710975543
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -149,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hit: 0
-  damageTowardsPlayer: 1
+  damageTowardsPlayer: 10
   damageTaken: 0
   eData: {fileID: 11400000, guid: 647d27cacc1bb6d4ab9844af848f8e74, type: 2}
   destroyWhenHealthBelowZERO: 0
