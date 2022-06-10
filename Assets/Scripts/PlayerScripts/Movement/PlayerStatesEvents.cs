@@ -239,7 +239,7 @@ public class PlayerStatesEvents : MonoBehaviour
         Vector3 dir = new Vector3(wallJumpVel, 0, 0);
         wallJumpTime += Time.deltaTime;
 
-        if (wallJumpTime <= 0.5f)
+        if (wallJumpTime <= pInst.wallJumpTime)
         {
             pInst.invertRotation = true;
             if (wallJumpTime <= 0.05f)

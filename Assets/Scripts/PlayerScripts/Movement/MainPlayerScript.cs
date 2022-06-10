@@ -69,6 +69,7 @@ public class MainPlayerScript : MonoBehaviour
     [SerializeField] public float gravity;  //variabile della gravità
     [SerializeField] public float weight;   //peso a terra del player
     [SerializeField] public float velocity;
+    public float wallJumpTime;
 
     [Header("Ray Lenghts variables")]
     [SerializeField] float groundRayLenght;       //valore della lunghezza dei raycast ai piedi del player per controllare se è a terra
