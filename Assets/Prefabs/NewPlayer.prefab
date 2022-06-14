@@ -651,7 +651,7 @@ MonoBehaviour:
   dashTimer: 0
   invincibilityTimer: 0
   invincibilityDuration: 2
-  mesh: {fileID: 4408529143413910321}
+  mesh: {fileID: 235217774038744288}
   isGrounded: 0
   isJump: 0
   isSliding: 0
@@ -735,6 +735,7 @@ MonoBehaviour:
   gravity: -4
   weight: -3
   velocity: 0
+  wallJumpTime: 0
   groundRayLenght: 0.32
   rollCheckLenght: 0.35
   wallCheckLenght: 0.22

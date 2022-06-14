@@ -13,7 +13,7 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] Transform foot, turnAroundPoint;
     [SerializeField] Transform rayhead;
     [SerializeField] float rayLenght;
-    [SerializeField] bool isGrounded;
+    [SerializeField] bool isGrounded, isAgainstWall;
     [SerializeField] bool isJump, hasGameController;
     [SerializeField] float gravity;
     [SerializeField] float weight;
@@ -82,7 +82,10 @@ public class EnemyScript : MonoBehaviour
                 break;
             case EnemyState.patrol:
                 Patrol();
-                break; 
+                break;
+            case EnemyState.jump:
+                Jump();
+                break;
             case EnemyState.dead:
                 if (!isDead)
                     Dead();
@@ -111,11 +114,7 @@ public class EnemyScript : MonoBehaviour
     {
         idleTimer = 0;
         patrolTimer += Time.deltaTime;
-        move = new Vector3(
-            direction,
-            0,
-            0
-        );
+        
 
         speedx = Vector3.Dot(move * edata.force, transform.forward);
 
@@ -126,7 +125,7 @@ public class EnemyScript : MonoBehaviour
             _state = EnemyState.idle;
         }
 
-        if(playerEnemyDistance <= targetDistance)
+        if(playerEnemyDistance <= targetDistance && !isAgainstWall)
         {
             _state = EnemyState.attack;
         }
@@ -139,6 +138,7 @@ public class EnemyScript : MonoBehaviour
         float speedMultiplier = 0;
 
         direction = _vectorDir();
+        print("Direction: " + direction);
 
         if(playerEnemyDistance <= 0.5f && IsGrounded())
         {
@@ -149,18 +149,33 @@ public class EnemyScript : MonoBehaviour
         }
         else
         {
-            speedMultiplier = 2.5f;
+            speedMultiplier = 3;
             speedx = Vector3.Dot(move * edata.force * speedMultiplier, transform.forward);
             attackHitbox.SetActive(false);
+            controller.Move(move * edata.force * speedMultiplier * Time.deltaTime);
         }
 
-        controller.Move(move * edata.force * speedMultiplier * Time.deltaTime);
+        
 
-        if(playerEnemyDistance > targetDistance && IsGrounded())
+        if(playerEnemyDistance > targetDistance && IsGrounded() 
+            && isAgainstWall)
         {
             attackHitbox.SetActive(false);
             _state = EnemyState.idle;
         }
+    }
+
+    public virtual void Jump()
+    {
+        anim.SetBool("jump", true);
+
+        if (IsGrounded())
+        {
+            anim.SetBool("jump", false);
+            _state = EnemyState.idle;
+        }
+            
+
     }
 
     public virtual void Dead()
@@ -195,9 +210,16 @@ public class EnemyScript : MonoBehaviour
 
     public virtual void StatelessChecks()
     {
+        move = new Vector3(
+            direction,
+            0,
+            0
+        );
+
         playerEnemyDistance = Vector3.Distance(transform.position, target.transform.position);
         isGrounded = IsGrounded();
-        
+        isAgainstWall = IsInRayCastDireciton(transform.forward, 0.45f, layer, Color.green);
+
         //controllo la velocità dell'animazione;
         anim.SetFloat("posx", speedx, 0.2f, Time.deltaTime);
 
@@ -216,7 +238,7 @@ public class EnemyScript : MonoBehaviour
         /**/
 
         //controlla se il nemico arriva ad un muro, per poi girarsi
-        if (IsInRayCastDireciton(transform.forward, 0.45f, layer, Color.green))
+        if (isAgainstWall)
         {
             if (_state != EnemyState.attack)
                 direction = direction * -1;
@@ -262,10 +284,18 @@ public class EnemyScript : MonoBehaviour
     
     public bool IsGrounded()
     {
-        return Physics.CheckSphere(foot.position, rayLenght, layer);
+        return Physics.Raycast(foot.position, -transform.up, out RaycastHit hit, rayLenght, layer);
     }
 
     public float _vectorDir() {
+
+        if (target.position.x > transform.position.x)
+            return 1;
+        else
+            return -1;
+
+
+        /*
         var vettoredir = (target.position - transform.position).normalized;
         var dist = vettoredir.magnitude;
         Vector3 direction = (vettoredir / dist);
@@ -275,6 +305,7 @@ public class EnemyScript : MonoBehaviour
         else {
             return 1;
         }
+        */
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit) 

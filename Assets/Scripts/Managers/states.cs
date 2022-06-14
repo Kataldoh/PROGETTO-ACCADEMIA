@@ -29,6 +29,7 @@ public enum EnemyState
 {
     idle,
     attack,
+    jump,
     patrol,
     defence,
     dead

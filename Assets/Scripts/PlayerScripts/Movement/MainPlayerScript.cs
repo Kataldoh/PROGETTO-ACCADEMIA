@@ -142,6 +142,7 @@ public class MainPlayerScript : MonoBehaviour
         //Fà sfarfallare la texture quando si è invincibili
         if(isInvincible)
         {
+            controller.detectCollisions = false;
             if(mesh.activeSelf)
             {
                 mesh.SetActive(false);
@@ -154,6 +155,7 @@ public class MainPlayerScript : MonoBehaviour
         else    //al termine dell'invincibilità si riattiva la mesh
         {
             mesh.SetActive(true);
+            controller.detectCollisions = true;
         }
     }
 
@@ -491,6 +493,14 @@ public class MainPlayerScript : MonoBehaviour
                 if (damageGot > 0)
                     _state = PlayerState.damage;    //setta lo stato di danno
             }
+            else
+            {
+                Physics.IgnoreCollision(this.GetComponent<Collider>(), hit.collider, true);
+            }
+        }
+        else
+        {
+            Physics.IgnoreCollision(this.GetComponent<Collider>(), hit.collider, false);
         }
 
         //(PROVVISORIO)

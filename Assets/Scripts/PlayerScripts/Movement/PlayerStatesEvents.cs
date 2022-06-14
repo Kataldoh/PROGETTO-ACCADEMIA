@@ -315,7 +315,7 @@ public class PlayerStatesEvents : MonoBehaviour
         pInst.controller.Move(pInst.transform.up * pInst.velocity * Time.deltaTime);
 
         //Se a terra, torna in idle e resetta il danno
-        if(pInst.IsGrounded() && damageTimer >= 0.15f)
+        if(damageTimer >= 0.25f)
         {
             damageTimer = 0;
             pInst.isInvincible = true;
