@@ -201,6 +201,7 @@ public class PlayerStatesEvents : MonoBehaviour
             wallJumpVel = lockedDir * 2f;
         }
 
+        print("LockedDir: " + lockedDir);
         
         if (!pInst.hasSomethingAbove)
         {
@@ -238,6 +239,7 @@ public class PlayerStatesEvents : MonoBehaviour
 
         Vector3 dir = new Vector3(wallJumpVel, 0, 0);
         wallJumpTime += Time.deltaTime;
+
 
         if (wallJumpTime <= pInst.wallJumpTime)
         {

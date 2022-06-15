@@ -143,7 +143,6 @@ public class EnemyScript : MonoBehaviour
         float speedMultiplier = 0;
 
         direction = _vectorDir();
-        print("Direction: " + direction);
 
         if(playerEnemyDistance <= 0.5f && IsGrounded())
         {
