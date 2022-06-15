@@ -51,4 +51,9 @@ public class SaveManager : MonoBehaviour
 
         }
     }
+
+    public void DeleteSaving()
+    {
+        PlayerPrefs.DeleteAll();
+    }
 }

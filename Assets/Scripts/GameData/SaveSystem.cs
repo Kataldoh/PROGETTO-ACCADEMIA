@@ -62,7 +62,6 @@ public class SaveSystem : MonoBehaviour
         //QUANDO SALVA
         if (/*Input.GetKey(KeyCode.O)*/saving)
         {
-
             saving = false;
         }
 

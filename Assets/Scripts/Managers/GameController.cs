@@ -56,6 +56,7 @@ public class GameController : MonoBehaviour
         instance = this;
 
         SaveSystem.instance.LoadPositions();
+
         //**************** SAVE DATA TO PLAYER PREFS;
         //PlayerPrefs.SetInt("quality", 3);
         //DontDestroyOnLoad(this.gameObject);
@@ -105,6 +106,19 @@ public class GameController : MonoBehaviour
 
 
         Pausa();
+
+        //sistema provvisorio loading
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            SaveSystem.instance.LoadPositions();
+        }
+
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            SaveManager.instance.DeleteSaving();
+        }
+
+
 
         if (CurrentHealth > maxHealth)
             CurrentHealth = maxHealth;

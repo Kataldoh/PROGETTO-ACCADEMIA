@@ -157,6 +157,8 @@ public class MapEditor : MonoBehaviour
         //attivo o disattivo il layer, come specificato da tiled
         _layer.gameObject.SetActive(tdata.layers[ID].visible);
         hasFinishedRendering = true;
+
+        //
         GameController.instance.SpawnPlayer();
     }
 
