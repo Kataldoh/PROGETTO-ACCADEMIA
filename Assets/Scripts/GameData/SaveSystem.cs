@@ -24,10 +24,11 @@ public class SaveSystem : MonoBehaviour
 
         DontDestroyOnLoad(gameObject);
     }
-    private void Update()
-    {
-        //QUANDO SALVA
-        if (/*Input.GetKey(KeyCode.O)*/saving)
+
+
+
+    public void SavePositions() {
+        try
         {
             playerposition[0] = MainPlayerScript.pInstance.transform.position.x;
             playerposition[1] = MainPlayerScript.pInstance.transform.position.y;
@@ -35,14 +36,40 @@ public class SaveSystem : MonoBehaviour
             healthplayer = GameController.instance.CurrentHealth;
 
             SaveManager.instance.SaveGame();
+            print("Salvataggio effettuato");
+        }
+        catch {
+            print("NON RIESCO A SALVARE!!!!");
+            return;
+                }
+    }
+
+    public void LoadPositions() {
+        try
+        {
+            MainPlayerScript.pInstance.transform.position = new Vector3(playerposition[0], playerposition[1], playerposition[2]);
+            SaveManager.instance.LoadGame();
+            print("Caricamento corretto");
+        }
+        catch {
+            print("Errore di caricamento...");
+            return;
+        }
+    }
+
+    private void Update()
+    {
+        //QUANDO SALVA
+        if (/*Input.GetKey(KeyCode.O)*/saving)
+        {
+
             saving = false;
         }
 
         //QUANDO CARICA
         if (/*Input.GetKeyDown(KeyCode.L)*/loading)
         { 
-            MainPlayerScript.pInstance.transform.position = new Vector3(playerposition[0], playerposition[1], playerposition[2]);
-            SaveManager.instance.LoadGame();
+        
             loading = false;
         }
     }

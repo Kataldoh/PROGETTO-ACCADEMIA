@@ -38,9 +38,17 @@ public class SaveManager : MonoBehaviour
     //Metodo per caricare la partita
     public void LoadGame()
     {
-        SaveSystem.instance.playerposition[0]=PlayerPrefs.GetFloat("Coordinatax");
-        SaveSystem.instance.playerposition[1]=PlayerPrefs.GetFloat("Coordinatay");
-        SaveSystem.instance.playerposition[2]=PlayerPrefs.GetFloat("Coordinataz");
-        SaveSystem.instance.healthplayer = PlayerPrefs.GetInt("HealthPlayer");
+        try
+        {
+            SaveSystem.instance.playerposition[0] = PlayerPrefs.GetFloat("Coordinatax");
+            SaveSystem.instance.playerposition[1] = PlayerPrefs.GetFloat("Coordinatay");
+            SaveSystem.instance.playerposition[2] = PlayerPrefs.GetFloat("Coordinataz");
+            SaveSystem.instance.healthplayer = PlayerPrefs.GetInt("HealthPlayer");
+        }
+        catch
+        {
+            return;
+
+        }
     }
 }

@@ -55,7 +55,7 @@ public class GameController : MonoBehaviour
         puntatore = GameObject.FindGameObjectWithTag("Puntatore");
         instance = this;
 
-
+        SaveSystem.instance.LoadPositions();
         //**************** SAVE DATA TO PLAYER PREFS;
         //PlayerPrefs.SetInt("quality", 3);
         //DontDestroyOnLoad(this.gameObject);
@@ -136,7 +136,7 @@ public class GameController : MonoBehaviour
     public void Restart()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        SaveSystem.instance.loading = true;
+       // SaveSystem.instance.loading = true;
     }
     public void Resume()
     {

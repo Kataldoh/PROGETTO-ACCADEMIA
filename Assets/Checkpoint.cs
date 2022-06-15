@@ -8,7 +8,8 @@ public class Checkpoint : MonoBehaviour
     {
         if(other.gameObject.tag=="Player")
         {
-            SaveSystem.instance.saving = true;
+            // SaveSystem.instance.saving = true;
+            SaveSystem.instance.SavePositions();
         }
         //Sistrema DI morte Assente
         //Da aggiungere pe Caricamento
