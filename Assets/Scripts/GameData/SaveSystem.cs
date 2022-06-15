@@ -48,6 +48,7 @@ public class SaveSystem : MonoBehaviour
         try
         {
             MainPlayerScript.pInstance.transform.position = new Vector3(playerposition[0], playerposition[1], playerposition[2]);
+            GameController.instance.CurrentHealth = healthplayer;
             SaveManager.instance.LoadGame();
             print("Caricamento corretto");
         }

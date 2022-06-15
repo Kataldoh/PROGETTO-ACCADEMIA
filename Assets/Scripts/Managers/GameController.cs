@@ -55,8 +55,6 @@ public class GameController : MonoBehaviour
         puntatore = GameObject.FindGameObjectWithTag("Puntatore");
         instance = this;
 
-        SaveSystem.instance.LoadPositions();
-
         //**************** SAVE DATA TO PLAYER PREFS;
         //PlayerPrefs.SetInt("quality", 3);
         //DontDestroyOnLoad(this.gameObject);
@@ -73,7 +71,6 @@ public class GameController : MonoBehaviour
         CurrentStamina = maxStamina;
         CurrentHealthBoss = maxHealthBoss;
 
-       
 
 
         //***************** LOAD DATA FROM PlayerPrefs;
@@ -104,10 +101,6 @@ public class GameController : MonoBehaviour
 
         States();
 
-
-        Pausa();
-
-        //sistema provvisorio loading
         if(Input.GetKeyDown(KeyCode.L))
         {
             SaveSystem.instance.LoadPositions();
@@ -115,10 +108,10 @@ public class GameController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.M))
         {
-            SaveManager.instance.DeleteSaving();
+            PlayerPrefs.DeleteAll();
         }
 
-
+        Pausa();
 
         if (CurrentHealth > maxHealth)
             CurrentHealth = maxHealth;
@@ -149,14 +142,17 @@ public class GameController : MonoBehaviour
 
     public void Restart()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-       // SaveSystem.instance.loading = true;
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        _state = GameState.play;
+        MainPlayerScript.pInstance._state = PlayerState.idle;
+        SaveSystem.instance.LoadPositions();
+
     }
     public void Resume()
     {
         Debug.Log("RESUMING");
 
-        GameController.instance._state = GameState.play;
+        _state = GameState.play;
 
     }
 
