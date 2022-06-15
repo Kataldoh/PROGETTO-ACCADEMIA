@@ -58,10 +58,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32715fa65ef83684fb3c061940f2bdf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID_entity: 0
   hit: 0
   damageTowardsPlayer: 10
   damageTaken: 0
-  eData: {fileID: 0}
+  eData: {fileID: 11400000, guid: 60fd2ca3ca8e22349a1a0dac27e7f1e6, type: 2}
   destroyWhenHealthBelowZERO: 0
   health: 0
 --- !u!1001 &9006369223782399967

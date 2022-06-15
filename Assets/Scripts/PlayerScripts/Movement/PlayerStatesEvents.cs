@@ -205,7 +205,7 @@ public class PlayerStatesEvents : MonoBehaviour
         if (!pInst.hasSomethingAbove)
         {
             //Se viene rilevato un salto e si è a terra, applica la forza di salto alla velocity
-            if (Input.GetButton("Jump") && pInst.isJump && pInst.hasSomethingInFront && pInst.move.x != 0)
+            if (Input.GetButton("Jump") && pInst.isJump && pInst.hasSomethingInFront)
             {
                 SoundManager.PlaySound(SoundManager.Sound.Jumping);
                 wallJumpTime = 0;

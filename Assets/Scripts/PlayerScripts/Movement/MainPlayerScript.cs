@@ -176,7 +176,6 @@ public class MainPlayerScript : MonoBehaviour
                 if (!hasSomethingInFront)
                 {
                     SoundManager.PlaySound(SoundManager.Sound.PlayerSteps);
-
                 }
                 _Estates.P_Move();
                 break;

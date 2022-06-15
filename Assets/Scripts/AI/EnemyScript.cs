@@ -5,7 +5,9 @@ using UnityEngine.AI;
 
 public class EnemyScript : MonoBehaviour
 {
-    public EnemyData edata;
+    public int ID;
+    public EnemyProprietyList _enemyData;
+    protected EnemyData edata;
     public EnemyState _state;
     [SerializeField] HealthPlaceholder hp;
     public CharacterController controller;
@@ -41,7 +43,10 @@ public class EnemyScript : MonoBehaviour
         if (GetComponent<Animator>() != null)
             anim = GetComponent<Animator>();
 
-        //transform.Rotate(0, 90, 0);
+
+        //Prendi i dati dei nemici
+        edata = _enemyData.enemyDataList[ID];
+
         collider = GetComponent<Collider>();
         direction = 1;
         target = GameObject.FindGameObjectWithTag("Player").transform;

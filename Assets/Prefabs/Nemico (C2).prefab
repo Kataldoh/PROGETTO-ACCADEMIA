@@ -138,10 +138,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32715fa65ef83684fb3c061940f2bdf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID_entity: 2
   hit: 0
-  damageTowardsPlayer: 10
+  damageTowardsPlayer: 0
   damageTaken: 0
-  eData: {fileID: 0}
+  eData: {fileID: 11400000, guid: 60fd2ca3ca8e22349a1a0dac27e7f1e6, type: 2}
   destroyWhenHealthBelowZERO: 0
   health: 0
 --- !u!1 &5618405489526728088
@@ -1732,7 +1733,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 708d374d6b0b6f64bb5a0cf5c255a9f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  edata: {fileID: 11400000, guid: afc9aacab1c35be46b3e0f2889e49cf1, type: 2}
+  ID: 2
+  _enemyData: {fileID: 11400000, guid: 60fd2ca3ca8e22349a1a0dac27e7f1e6, type: 2}
   _state: 0
   hp: {fileID: 9082237592151641632}
   controller: {fileID: 0}
@@ -1742,6 +1744,7 @@ MonoBehaviour:
   rayhead: {fileID: 8130875157224237461}
   rayLenght: 0.15
   isGrounded: 0
+  isAgainstWall: 0
   isJump: 0
   hasGameController: 0
   gravity: -9.81
@@ -1766,10 +1769,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32715fa65ef83684fb3c061940f2bdf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ID_entity: 2
   hit: 0
-  damageTowardsPlayer: 15
+  damageTowardsPlayer: 0
   damageTaken: 0
-  eData: {fileID: 11400000, guid: afc9aacab1c35be46b3e0f2889e49cf1, type: 2}
+  eData: {fileID: 11400000, guid: 60fd2ca3ca8e22349a1a0dac27e7f1e6, type: 2}
   destroyWhenHealthBelowZERO: 0
   health: 10
 --- !u!1 &8129807583774559725

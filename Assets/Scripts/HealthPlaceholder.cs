@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class HealthPlaceholder : MonoBehaviour
 {
+    public int ID_entity;
     public bool hit;
     public int damageTowardsPlayer;
     public float damageTaken;
-    [SerializeField] EnemyData eData;
+    [SerializeField] EnemyProprietyList eData;
     [SerializeField] bool destroyWhenHealthBelowZERO;
     public float health;
 
@@ -16,7 +17,8 @@ public class HealthPlaceholder : MonoBehaviour
     {
         if(eData != null)
         {
-            health = eData.health;
+            health = eData.enemyDataList[ID_entity].health;
+            damageTowardsPlayer = eData.enemyDataList[ID_entity].damage;
         }
             
     }
