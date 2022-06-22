@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &9220596
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4993,7 +4993,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1417459626
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6213,7 +6213,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 79.534}
-  m_SizeDelta: {x: 1204.853, y: 1597.224}
+  m_SizeDelta: {x: 2341.477, y: 1597.224}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &1694335947
 MeshRenderer:
@@ -6289,8 +6289,10 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Main Programmers\n\nBondi Federico\nIurillo Aldo\nPavanello Elisa \nSantochi
-    Riccardo\n\nUI and Graphics\n\nCremasco Francesco\nPalludo Chiara\n\n\n\n"
+  m_Text: "Main Programmers\n\nBondi Federico (Level Design)\nIurillo Aldo (Programming)\nPavanello
+    Elisa (Characters and enemies)\nSantochi Riccardo (Documentation and miscellanious)\n\nUI
+    and Graphics\n\nCremasco Francesco (Men\xF9 and UI)\nPalludo Chiara (Documentation
+    and Graphic)\n\n\n\n"
 --- !u!222 &1694335949
 CanvasRenderer:
   m_ObjectHideFlags: 0
