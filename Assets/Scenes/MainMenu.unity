@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &9220596
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4993,7 +4993,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1417459626
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6336,8 +6336,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 2469.757, y: 1021.875}
+  m_AnchoredPosition: {x: 0, y: -77.219}
+  m_SizeDelta: {x: 2469.757, y: 1176.308}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &1713886282
 MeshRenderer:
@@ -6415,7 +6415,7 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: "MAIN PROBLEM\n\nBlob cannot damage the player,\nSound volume cannot be
     changed,\nWall jump isn't smooth,\nBoss fight contain bugs that can \nsoft lock
-    the player."
+    the player.\nSave System is not working properly."
 --- !u!222 &1713886284
 CanvasRenderer:
   m_ObjectHideFlags: 0
